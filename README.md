@@ -1,2 +1,2 @@
-# MonopolyGroup3J
+# MonopolyGroup2J
 Monopoly Game
