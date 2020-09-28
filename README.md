@@ -10,7 +10,7 @@
 
 ### Description of the Project
 * The project is an implementation of the  original version of the Monopoly game with some extra features
-* We are to learn the principles of object oriented programing
+* We are to learn the principles of object oriented programming
 
 ### Description of the Game
 
