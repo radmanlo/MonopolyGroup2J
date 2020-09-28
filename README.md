@@ -36,5 +36,5 @@ We have decided to make some feature changes to the classical version of the gam
 - The ability to transfer money/property between players (the player has to pay a tax to the bank for every transaction)
 - The ability to invest money in the bank and get the benefit back after X number of rounds
 
-### Referances:
+### References:
 [1] : [https://www.britannica.com/sports/Monopoly-board-game], Access Date: 28/09/2020
