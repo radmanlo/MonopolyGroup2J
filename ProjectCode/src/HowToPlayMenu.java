@@ -7,12 +7,7 @@ public class HowToPlayMenu extends Menu {
 	private JTextArea instructionDisplayer;
 	
 	public HowToPlayMenu() {
-		panel = new JPanel();
-	}
-	
-	@Override
-	public void goBackPanel() {
-		
+
 	}
 
 }

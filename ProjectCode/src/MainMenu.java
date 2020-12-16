@@ -3,6 +3,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import java.awt.Color;
+import javax.swing.UIManager;
+import javax.swing.JTextPane;
 
 public class MainMenu extends Menu {
 
@@ -14,9 +19,9 @@ public class MainMenu extends Menu {
 	private JButton howToPlayBtn;
 	
 	public MainMenu() {
-		panel = new JPanel();
-		panel.setLayout(null);
-		panel.setBounds(10, 11, 1460, 839);
+		setLayout(null);
+		setBounds(0, 0, 1500, 900);
+		remove(backBtn);
 		
 		newGameBtn = new JButton("New Game");
 		newGameBtn.addActionListener(new ActionListener() {
@@ -26,7 +31,7 @@ public class MainMenu extends Menu {
 		});
 		newGameBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		newGameBtn.setBounds(600, 50, 300, 100);
-		panel.add(newGameBtn);
+		add(newGameBtn);
 		
 		loadGameBtn = new JButton("Load Game");
 		loadGameBtn.addActionListener(new ActionListener() {
@@ -36,7 +41,7 @@ public class MainMenu extends Menu {
 		});
 		loadGameBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		loadGameBtn.setBounds(600, 160, 300, 100);
-		panel.add(loadGameBtn);
+		add(loadGameBtn);
 		
 		JButton howToPlayBtn = new JButton("How To Play");
 		howToPlayBtn.addActionListener(new ActionListener() {
@@ -46,7 +51,7 @@ public class MainMenu extends Menu {
 		});
 		howToPlayBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		howToPlayBtn.setBounds(600, 270, 300, 100);
-		panel.add(howToPlayBtn);
+		add(howToPlayBtn);
 		
 		JButton settingsBtn = new JButton("Settings");
 		settingsBtn.addActionListener(new ActionListener() {
@@ -56,7 +61,7 @@ public class MainMenu extends Menu {
 		});
 		settingsBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		settingsBtn.setBounds(600, 380, 300, 100);
-		panel.add(settingsBtn);
+		add(settingsBtn);
 		
 		JButton creditsBtn = new JButton("Credits");
 		creditsBtn.addActionListener(new ActionListener() {
@@ -66,7 +71,7 @@ public class MainMenu extends Menu {
 		});
 		creditsBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		creditsBtn.setBounds(600, 490, 300, 100);
-		panel.add(creditsBtn);
+		add(creditsBtn);
 		
 		JButton quitBtn = new JButton("Quit");
 		quitBtn.addActionListener(new ActionListener() {
@@ -76,7 +81,7 @@ public class MainMenu extends Menu {
 		});
 		quitBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
 		quitBtn.setBounds(600, 600, 300, 100);
-		panel.add(quitBtn);
+		add(quitBtn);
 	}
 	
 	@Override

@@ -8,12 +8,7 @@ public class SettingsMenu extends Menu{
 	JButton applyButton;
 	
 	public SettingsMenu() {
-		panel = new JPanel();
-	}
-	
-	@Override
-	public void goBackPanel() {
-		
+		super();
 	}
 	
 	private void applyMusicVolume() {

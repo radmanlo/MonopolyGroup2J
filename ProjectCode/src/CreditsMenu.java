@@ -6,11 +6,6 @@ public class CreditsMenu extends Menu{
 	private JTextArea creditDisplayer;
 	
 	public CreditsMenu() {
-		panel = new JPanel();
-	}
-	
-	@Override
-	public void goBackPanel() {
-		
+
 	}
 }

@@ -9,12 +9,7 @@ public class LoadGameMenu extends Menu{
 	private JButton deleteGameBtn;
 	
 	public LoadGameMenu() {
-		panel = new JPanel();
-	}
-	
-	@Override
-	public void goBackPanel() {
-		
+
 	}
 	
 	private boolean initializeLoadGame() {

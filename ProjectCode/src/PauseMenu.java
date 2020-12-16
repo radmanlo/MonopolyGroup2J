@@ -9,7 +9,7 @@ public class PauseMenu extends Menu{
 	private JTextField saveNameTxtField; 
 	
 	public PauseMenu() {
-		panel = new JPanel();
+
 	}
 	
 	@Override

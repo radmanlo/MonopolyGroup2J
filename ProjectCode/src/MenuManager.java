@@ -3,7 +3,7 @@ import java.awt.EventQueue;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
-public class MenuManager { //should be finished -G
+public class MenuManager { //it is finished -G
 	private static MenuManager menuManager = null;
 	
 	private AppFrame appFrame;
@@ -34,23 +34,23 @@ public class MenuManager { //should be finished -G
 		appFrame.setVisible(true);
 		
 		mainMenu = new MainMenu();
-		mainMenu.panel.setBounds(0, 0, 1500, 900);
-		appFrame.contentPane.add(mainMenu.panel);
+		mainMenu.setBounds(0, 0, 1500, 900);
+		appFrame.contentPane.add(mainMenu);
 		
 		newGameMenu = new NewGameMenu();
-		newGameMenu.panel.setBounds(0, 0, 1500, 900);
+		newGameMenu.setBounds(0, 0, 1500, 900);
 		
 		loadGameMenu = new LoadGameMenu();
-		loadGameMenu.panel.setBounds(0, 0, 1500, 900);
+		loadGameMenu.setBounds(0, 0, 1500, 900);
 		
 		howToPlayMenu = new HowToPlayMenu();
-		howToPlayMenu.panel.setBounds(0, 0, 1500, 900);
+		howToPlayMenu.setBounds(0, 0, 1500, 900);
 		
 		settingsMenu = new SettingsMenu();
-		settingsMenu.panel.setBounds(0, 0, 1500, 900);
+		settingsMenu.setBounds(0, 0, 1500, 900);
 		
 		creditsMenu = new CreditsMenu();
-		creditsMenu.panel.setBounds(0, 0, 1500, 900);
+		creditsMenu.setBounds(0, 0, 1500, 900);
 	}
 	
 	public static MenuManager getInstance() {
@@ -63,24 +63,32 @@ public class MenuManager { //should be finished -G
 	public void openMenu( int indexOfMenu) {
 		switch ( indexOfMenu ) {
 		case 0: 
-			appFrame.contentPane.remove(mainMenu.panel);
-			appFrame.contentPane.add(newGameMenu.panel);
+			appFrame.contentPane.remove(mainMenu);
+			appFrame.contentPane.add(newGameMenu);
 			break;
 		case 1:
-			appFrame.contentPane.remove(mainMenu.panel);
-			appFrame.contentPane.add(loadGameMenu.panel);
+			appFrame.contentPane.remove(mainMenu);
+			appFrame.contentPane.add(loadGameMenu);
 			break;
 		case 2:
-			appFrame.contentPane.remove(mainMenu.panel);
-			appFrame.contentPane.add(howToPlayMenu.panel);
+			appFrame.contentPane.remove(mainMenu);
+			appFrame.contentPane.add(howToPlayMenu);
 			break;
 		case 3:
-			appFrame.contentPane.remove(mainMenu.panel);
-			appFrame.contentPane.add(settingsMenu.panel);
+			appFrame.contentPane.remove(mainMenu);
+			appFrame.contentPane.add(settingsMenu);
 			break;
 		case 4:
-			appFrame.contentPane.remove(mainMenu.panel);
-			appFrame.contentPane.add(creditsMenu.panel);
+			appFrame.contentPane.remove(mainMenu);
+			appFrame.contentPane.add(creditsMenu);
+			break;
+		case 5: 
+			appFrame.contentPane.remove(newGameMenu);
+			appFrame.contentPane.remove(loadGameMenu);
+			appFrame.contentPane.remove(howToPlayMenu);
+			appFrame.contentPane.remove(settingsMenu);
+			appFrame.contentPane.remove(creditsMenu);
+			appFrame.contentPane.add(mainMenu);
 			break;
 		default:
 			System.out.println("An error occurred on openMenu(int)");
