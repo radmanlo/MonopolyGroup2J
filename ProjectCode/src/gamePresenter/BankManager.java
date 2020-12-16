@@ -1,0 +1,58 @@
+package gamePresenter;
+
+import java.util.ArrayList;
+
+import models.BankAccount;
+import models.Player;
+
+public class BankManager {
+	
+	private static BankManager bank = null;
+	private final double INTEREST_RATE = 0.10;
+	private ArrayList<BankAccount> accounts;
+	
+	public BankManager() {
+		accounts = new ArrayList<BankAccount>();
+	}
+	
+	private static BankManager getInstance() {
+		if( bank == null ) {
+			bank = new BankManager();
+		}
+		return bank;
+	}
+	
+	public void depositMoney(Player plyr, int money) {
+		for(int i = 0; i < accounts.size(); i++) {
+			if(accounts.get(i).getId() == plyr.getId()) {
+				accounts.get(i).setMoneyAmount(accounts.get(i).getMoneyAmount() + money);
+				plyr.setUsableMoney(plyr.getUsableMoney() - money);
+				// COOLDOWN COUNT AFTER DEPOSIT MONEY
+				accounts.get(i).setCooldownCount(3);
+			}
+		}
+	}
+	public boolean withdrawMoney(Player plyr, int money) {
+		for(int i = 0; i < accounts.size(); i++) {
+			if(accounts.get(i).getId() == plyr.getId()) {
+				if(accounts.get(i).getMoneyAmount() < money) {
+					return false;
+				}
+				accounts.get(i).setMoneyAmount(accounts.get(i).getMoneyAmount() - money);
+				plyr.setUsableMoney(plyr.getUsableMoney() + money);
+			}
+		}
+		return false;
+	}
+	public void applyInterest(Player plyr) {
+		for(int i = 0; i < accounts.size(); i++) {
+			if(accounts.get(i).getId() == plyr.getId()) {
+				accounts.get(i).setMoneyAmount((int)((double)accounts.get(i).getMoneyAmount()*(1+INTEREST_RATE)));
+			}
+		}
+	}
+	public void openAccount(Player plyr) {
+		BankAccount nwBnkAccnt = new BankAccount(plyr.getId(), 0, 0);
+		accounts.add(nwBnkAccnt);
+	}
+}
