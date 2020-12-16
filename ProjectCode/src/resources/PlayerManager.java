@@ -1,4 +1,4 @@
-package bilopoly;
+package resources;
 
 import java.util.ArrayList;
 

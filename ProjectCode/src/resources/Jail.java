@@ -1,4 +1,4 @@
-package bilopoly.location;
+package resources;
 
 public class Jail {
 }

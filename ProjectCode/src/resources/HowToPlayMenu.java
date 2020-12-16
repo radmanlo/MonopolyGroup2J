@@ -1,5 +1,4 @@
-package bilopoly;
-
+package resources;
 import javax.swing.JTextArea;
 
 public class HowToPlayMenu extends Menu {

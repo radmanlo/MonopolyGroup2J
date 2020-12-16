@@ -1,7 +1,6 @@
-package bilopoly.location;
+package resources;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
-import bilopoly.*;
 
 public class Location {
     // Properties

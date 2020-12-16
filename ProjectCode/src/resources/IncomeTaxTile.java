@@ -1,4 +1,3 @@
-package bilopoly.location;
-
+package resources;
 public class IncomeTaxTile {
 }

@@ -1,4 +1,4 @@
-package bilopoly;
+package resources;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

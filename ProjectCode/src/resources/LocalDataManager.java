@@ -1,5 +1,4 @@
-package bilopoly;
-
+package resources;
 import java.util.ArrayList;
 
 public class LocalDataManager {

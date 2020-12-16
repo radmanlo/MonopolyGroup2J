@@ -1,4 +1,4 @@
-package bilopoly;
+package resources;
 
 public class Property {
 	private int value;

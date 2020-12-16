@@ -1,4 +1,4 @@
-package bilopoly;
+package resources;
 
 public class SoundManager {
 	private static SoundManager soundManager = null;

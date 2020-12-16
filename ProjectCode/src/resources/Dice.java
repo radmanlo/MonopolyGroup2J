@@ -1,4 +1,4 @@
-package bilopoly;
+package resources;
 
 public class Dice {
 	private int firstDiceResult, secondDiceResult, totalResult;

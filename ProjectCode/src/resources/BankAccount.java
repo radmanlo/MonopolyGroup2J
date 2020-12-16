@@ -1,5 +1,4 @@
-package bilopoly;
-
+package resources;
 public class BankAccount {
 	//Attributes
 	private int id, moneyAmount, cooldownCount;
