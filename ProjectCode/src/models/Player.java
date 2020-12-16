@@ -1,3 +1,4 @@
+package models;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -17,13 +18,14 @@ public class Player {
 	private int location; // TODO: Change type to Location
 	private int inJailCount;
 	private boolean isInJail;
-
+	private int id;
+	
 	public Player() {
 	}
 
 	public Player(String name, Token token, PlayerColor colorId, ArrayList<Property> ownedLocations,
 			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, int location, int inJailCount,
-			boolean isInJail) {
+			boolean isInJail, int id) {
 		this.name = name;
 		this.token = token;
 		this.colorId = colorId;
@@ -34,6 +36,15 @@ public class Player {
 		this.location = location;
 		this.inJailCount = inJailCount;
 		this.isInJail = isInJail;
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {
