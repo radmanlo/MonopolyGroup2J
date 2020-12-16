@@ -60,19 +60,38 @@ public class LocationManager {
         return this.buyableLocations;
     }
 
-//    public boolean groupHasSameOwner(int groupId){
-//        HashMap<String, Integer> owners = new HashMap<String, Integer>();
-//
-//        for (BuyableLocation loc : buyableLocations){
-//            Integer propertyCount = owners.get(loc.getOwner().getName());
-//            if (propertyCount == null)
-//                propertyCount = 0;
-//
-//            owners.put(loc.getOwner().getName(), propertyCount+1);
-//        }
-//    }
+    public boolean groupHasSameOwner(BuyableLocation.GroupColor groupId){
+        HashMap<String, Integer> owners = new HashMap<String, Integer>();
+        String ownerName = "";
 
-    public int noOfOwnerByPlayerInGroup(Player player, int groupId){
-        return 0;
+        for (BuyableLocation loc : buyableLocations){
+            if (loc.getGroupId() == groupId){
+                Integer propertyCount = owners.get(loc.getOwner().getName());
+                if (propertyCount == null)
+                    propertyCount = 0;
+                ownerName = loc.getOwner().getName();
+
+                owners.put(ownerName, propertyCount+1);
+            }
+        }
+
+        if (owners.size() ==1 && owners.get(ownerName) > 3){ // TODO not always 3!!
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int noOfOwnedByPlayerInGroup(Player player, BuyableLocation.GroupColor groupId){
+        String playerName = player.getName();
+        int count = 0;
+
+        for (BuyableLocation loc : buyableLocations){
+            if (loc.getGroupId() == groupId && loc.getOwner().getName() == playerName){
+                count ++;
+            }
+        }
+
+        return count;
     }
 }

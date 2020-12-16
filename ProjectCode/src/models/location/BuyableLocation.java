@@ -21,6 +21,14 @@ public class BuyableLocation extends Location{
         return owner;
     }
 
+    public GroupColor getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(GroupColor groupId) {
+        this.groupId = groupId;
+    }
+
     public void setOwner(Player owner) {
         this.owner = owner;
     }
