@@ -22,6 +22,6 @@ public class IncomeTaxTile extends Location{
      * @param player
      */
     public void deductTax(Player player){
-        player.setMoney(player.getMoney() - this.TAX_VALUE);
+        player.setUsableMoney(player.getUsableMoney() - this.TAX_VALUE);
     }
 }

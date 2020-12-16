@@ -2,9 +2,6 @@ package models;
 import java.util.ArrayList;
 import java.util.Objects;
 
-enum PlayerColor {
-	RED, GREEN, BLUE, YELLOW, PURPLE, WHITE, BLACK
-}
 
 public class Player {
 

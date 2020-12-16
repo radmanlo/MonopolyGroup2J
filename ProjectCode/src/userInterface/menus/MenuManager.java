@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JButton;
 
+import gamePresenter.BoardManager;
+
 public class MenuManager { //it is finished -G
 	private static MenuManager menuManager = null;
 	
@@ -61,7 +63,7 @@ public class MenuManager { //it is finished -G
 		return menuManager;
 	}
 	
-	public void openMenu( int indexOfMenu) {
+	public void openMenu( int indexOfMenu) {  //TODO should convert the indexes to enum -G
 		switch ( indexOfMenu ) {
 		case 0: 
 			appFrame.contentPane.remove(mainMenu);

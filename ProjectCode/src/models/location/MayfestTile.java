@@ -18,7 +18,7 @@ public class MayfestTile extends Location{
     }
 
     public void giveTaxMoney(Player player){ // TODO Should not get player as param
-        player.setMoney(player.getMoney()+this.collectedTax);
+        player.setUsableMoney(player.getUsableMoney()+this.collectedTax);
         this.collectedTax = 0;
     }
 }
