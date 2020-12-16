@@ -1,10 +1,10 @@
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-interface Menu { // should be abstract class -G -new
-	JPanel panel = new JPanel();
-	JButton backButton = new JButton();
+abstract class Menu {
+	public JPanel panel;
+	JButton backButton;
 	
-	public void goBackPanel(); //diagram needs to change, private isn't
-	//allowed in interfaces, we have them in diagram -G
+	public abstract void goBackPanel(); //was private in class diagram but
+	//does not work when private -G
 }

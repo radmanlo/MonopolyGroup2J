@@ -2,7 +2,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 
-public class BoardManager extends JPanel { //changed to JPanel -G
+public class BoardManager extends JPanel {
 	private Map map;
 	private InteractionArea interactionArea;
 	

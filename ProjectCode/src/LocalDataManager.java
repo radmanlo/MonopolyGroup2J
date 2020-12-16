@@ -7,19 +7,19 @@ public class LocalDataManager {
 		
 	}
 	
-	public ArrayList<Integer> getStoredGamesIds(){ //private on diagram, I think should be public -G
+	public ArrayList<Integer> getStoredGamesIds(){ 
 		return null;
 	}
 	
-	public boolean deleteSavedGames(int id) { //private on diagram, I think should be public -G
+	public boolean deleteSavedGames(int id) {
 		return false;
 	}
 	
-	public String getSavedGameNameById(int id) { //private on diagram, I think should be public -G
+	public String getSavedGameNameById(int id) { 
 		return "";
 	}
 	
-	public boolean saveGame() { //private on diagram, I think should be public -G
+	public boolean saveGame() {
 		return false;
 	}
 }

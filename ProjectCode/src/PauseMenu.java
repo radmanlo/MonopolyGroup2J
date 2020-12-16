@@ -1,14 +1,15 @@
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class PauseMenu implements Menu{
-	private JButton saveBtn; //changed name for consistency -G
-	private JButton goSettingsBtn; //changed name for consistency -G
-	private JButton quitBtn; //changed name for consistency -G
-	private JTextField saveNameTxtField; //changed name for consistency -G
+public class PauseMenu extends Menu{
+	private JButton saveBtn; 
+	private JButton goSettingsBtn;
+	private JButton quitBtn;
+	private JTextField saveNameTxtField; 
 	
 	public PauseMenu() {
-		
+		panel = new JPanel();
 	}
 	
 	@Override

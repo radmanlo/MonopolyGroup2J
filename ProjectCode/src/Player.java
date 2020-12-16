@@ -8,7 +8,7 @@ public class Player {
 	private String name;
 	private ArrayList<Card> cards;
 	private ArrayList<Property> properties;
-	Token token; //Should include Token class
+	Token token;
 	
 	public Player() {
 		

@@ -1,11 +1,12 @@
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
-public class NewGameMenu implements Menu{
+public class NewGameMenu extends Menu{
 
 	JButton initializeGameButton;
 	
 	public NewGameMenu() {
-		
+		panel = new JPanel();
 	}
 	
 	@Override

@@ -1,5 +1,5 @@
-public class GameManager {   //made singleton -G
-	private static GameManager gameManager = null;//made singleton -G
+public class GameManager { 
+	private static GameManager gameManager = null;
 	
 	private PlayerManager playerMngr;
 	private BoardManager boardMngr;
@@ -51,7 +51,7 @@ public class GameManager {   //made singleton -G
 		
 	}
 
-	public BoardManager getBoardMngr() { //added -G
+	public BoardManager getBoardMngr() {
 		return boardMngr;
 	}
 	

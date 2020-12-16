@@ -4,7 +4,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-public class Map extends JPanel{ //changed to JPanel -G
+public class Map extends JPanel{ 
 	Image mapImage;
 	
 	public Map() {
