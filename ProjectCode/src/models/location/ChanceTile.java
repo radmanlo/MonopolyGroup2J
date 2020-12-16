@@ -2,7 +2,7 @@ package models.location;
 
 public class ChanceTile extends Location{
     ChanceTile(){
-
+        super();
     }
 
     @Override

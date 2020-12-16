@@ -4,6 +4,7 @@ public class StartTile extends Location{
     private final int PRIZE_VALUE = 500; // TODO change this number
 
     StartTile(){
+        super();
     }
 
     @Override

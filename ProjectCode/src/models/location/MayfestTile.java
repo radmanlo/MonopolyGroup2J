@@ -5,7 +5,7 @@ public class MayfestTile extends Location{
     private int collectedTax;
 
     MayfestTile(){
-
+        super();
     }
 
     @Override

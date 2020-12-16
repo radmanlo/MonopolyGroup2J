@@ -6,6 +6,7 @@ public class IncomeTaxTile extends Location{
     private final int TAX_VALUE = 20; //TODO change it
 
     IncomeTaxTile(){
+        super();
     }
 
     /**

@@ -13,7 +13,7 @@ public class Location {
 
     // Constructor
     Location(){
-
+        super();
     }
 
     // Methods

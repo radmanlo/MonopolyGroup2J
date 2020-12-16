@@ -8,7 +8,7 @@ public class Jail extends Location{
     private ArrayList<Player> prisoners;
 
     Jail(){
-
+        super();
     }
 
     @Override
