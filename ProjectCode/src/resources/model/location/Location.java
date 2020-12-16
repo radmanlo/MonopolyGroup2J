@@ -1,4 +1,6 @@
-package resources;
+package resources.model.location;
+import resources.Player;
+
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
@@ -16,7 +18,7 @@ public class Location {
 
     // Methods
     public void activate(){
-
+        // To be implemented
     }
 
     public int getLocationId() {
