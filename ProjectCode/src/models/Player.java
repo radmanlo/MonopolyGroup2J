@@ -1,68 +1,142 @@
-package models;
-
 import java.util.ArrayList;
+import java.util.Objects;
+
+enum PlayerColor {
+	RED, GREEN, BLUE, YELLOW, PURPLE, WHITE, BLACK
+}
 
 public class Player {
-	private int turnCount;
-	private int money;
-	private int colorId;
-	private int location;
+
 	private String name;
-	private ArrayList<Card> cards;
-	private ArrayList<Property> properties;
 	Token token;
-	
+	private PlayerColor colorId;
+	private ArrayList<Property> ownedLocations;
+	private ArrayList<Card> cards;
+	private int usableMoney;
+	private BankAccount bankAccount;
+	private int location; // TODO: Change type to Location
+	private int inJailCount;
+	private boolean isInJail;
+
 	public Player() {
-		
-	}
-	
-	public void setMoney(int money) {
-		this.money = money;
 	}
 
-	public int getTurnCount() {
-		return turnCount;
+	public Player(String name, Token token, PlayerColor colorId, ArrayList<Property> ownedLocations,
+			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, int location, int inJailCount,
+			boolean isInJail) {
+		this.name = name;
+		this.token = token;
+		this.colorId = colorId;
+		this.ownedLocations = ownedLocations;
+		this.cards = cards;
+		this.usableMoney = usableMoney;
+		this.bankAccount = bankAccount;
+		this.location = location;
+		this.inJailCount = inJailCount;
+		this.isInJail = isInJail;
 	}
 
-	public void increaseTurnCount() {
-		turnCount++;
+	public String getName() {
+		return this.name;
+	}
+
+	public Token getToken() {
+		return this.token;
+	}
+
+	public PlayerColor getColorId() {
+		return this.colorId;
+	}
+
+
+	public ArrayList<Property> getOwnedLocations() {
+		return this.ownedLocations;
+	}
+
+	public void addOwnedLocation(Property property) { // TODO: Change to Buyable
+		this.ownedLocations.add(property);
+	}
+
+	public void removeOwnedLocation(Property property) { // TODO: Change to Buyable
+		this.ownedLocations.remove(property);
+	}
+
+	public ArrayList<Card> getCards() {
+		return this.cards;
+	}
+
+	public void addCard(Card card) {
+		this.cards.add(card);
+	}
+
+	public void removeCard(Card card) {
+		this.cards.remove(card);
+	}
+
+	public int getUsableMoney() {
+		return this.usableMoney;
+	}
+
+	public void setUsableMoney(int usableMoney) {
+		this.usableMoney = usableMoney;
+	}
+
+	public BankAccount getBankAccount() {
+		return this.bankAccount;
 	}
 
 	public int getLocation() {
-		return location;
+		return this.location;
 	}
 
 	public void setLocation(int location) {
 		this.location = location;
 	}
-	
-	public ArrayList<Card> getCards() {
-		return cards;
+
+	public int getInJailCount() {
+		return this.inJailCount;
 	}
 
-	public void setCards(ArrayList<Card> cards) {
-		this.cards = cards;
+	public void setInJailCount(int inJailCount) {
+		this.inJailCount = inJailCount;
 	}
 
-	public ArrayList<Property> getProperties() {
-		return properties;
+	public boolean getIsInJail() {
+		return this.isInJail;
 	}
 
-	public void setProperties(ArrayList<Property> properties) {
-		this.properties = properties;
-	}
-
-	public int getMoney() {
-		return money;
-	}
-
-	public Token getToken() {
-		return token;
-	}
-
-	public void setToken(Token token) {
-		this.token = token;
+	public void setIsInJail(boolean isInJail) {
+		this.isInJail = isInJail;
 	}
 	
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this)
+			return true;
+		if (!(o instanceof Player)) {
+			return false;
+		}
+		Player player = (Player) o;
+		return Objects.equals(name, player.name) && Objects.equals(token, player.token)
+				&& Objects.equals(colorId, player.colorId) && Objects.equals(ownedLocations, player.ownedLocations)
+				&& Objects.equals(cards, player.cards) && usableMoney == player.usableMoney
+				&& Objects.equals(bankAccount, player.bankAccount) && location == player.location
+				&& inJailCount == player.inJailCount && isInJail == player.isInJail;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, token, colorId, ownedLocations, cards, usableMoney, bankAccount, location,
+				inJailCount, isInJail);
+	}
+
+	@Override
+	public String toString() {
+		return "{" + " name='" + getName() + "'" + ", token='" + getToken() + "'" + ", colorId='" + getColorId() + "'"
+				+ ", ownedLocations='" + getOwnedLocations() + "'" + ", cards='" + getCards() + "'" + ", usableMoney='"
+				+ getUsableMoney() + "'" + ", bankAccount='" + getBankAccount() + "'" + ", location='" + getLocation()
+				+ "'" + ", inJailCount='" + getInJailCount() + "'" + ", isInJail='" + "'" + "}";
+	}
 
 }
