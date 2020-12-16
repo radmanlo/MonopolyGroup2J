@@ -1,29 +1,29 @@
 
 public class Card {
-	private String name;
-	private int id;
+	// Attributes
+	private int cardId;
 	private String description;
-	
-	public Card( String name, int id, String description) {
-		this.name = name;
-		this.id = id;
+	private boolean storable;
+
+	//Constructor
+	public Card(int cardId, String description, boolean storable) {
+		this.cardId = cardId;
 		this.description = description;
-		}
+		this.storable = storable;
+	}
 	
+	//Methods
+
+	public int getCardId() {
+		return cardId;
+	}
+
 	public String getDescription() {
 		return description;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public boolean isStorable() {
+		return storable;
 	}
 	
 }
