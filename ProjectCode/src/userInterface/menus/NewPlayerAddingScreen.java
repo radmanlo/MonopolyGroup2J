@@ -7,6 +7,8 @@ import models.Player;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+
+import java.awt.Color;
 import java.awt.Font;
 
 public class NewPlayerAddingScreen extends JPanel{
@@ -17,23 +19,26 @@ public class NewPlayerAddingScreen extends JPanel{
 	
 	public NewPlayerAddingScreen() {
 		setLayout(null);
+		setBounds(400, 300, 1040, 70);
 		
 		nameField = new JTextField();
-		nameField.setBounds(25, 11, 195, 20);
+		nameField.setBounds(47, 15, 529, 28);
 		add(nameField);
 		nameField.setColumns(10);
 		
 		colorComboBox = new JComboBox();
-		colorComboBox.setBounds(257, 11, 38, 20);
+		colorComboBox.setBounds(626, 11, 87, 36);
 		add(colorComboBox);
 		
 		tokenComboBox = new JComboBox();
-		tokenComboBox.setBounds(326, 11, 66, 20);
+		tokenComboBox.setBounds(744, 11, 156, 36);
 		add(tokenComboBox);
 		
-		removePlayerBtn = new JButton("X");
+		removePlayerBtn = new JButton("X"); //I want to make it rounded -G
+		removePlayerBtn.setBackground(Color.RED);
+		removePlayerBtn.setOpaque(true);
 		removePlayerBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		removePlayerBtn.setBounds(402, 10, 35, 29);
+		removePlayerBtn.setBounds(941, 11, 66, 36);
 		add(removePlayerBtn);
 	}
 	
