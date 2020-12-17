@@ -57,7 +57,11 @@ public class MenuManager { //it is finished -G
 		creditsMenu = new CreditsMenu();
 		creditsMenu.setBounds(0, 0, 1500, 900);
 
-		SoundManager.getInstance().playBackgroundSound();
+		SoundManager soundManager = SoundManager.getInstance();
+		soundManager.playBackgroundSound();
+		soundManager.setVolumeLevel(50);
+		System.out.println(soundManager.getVolumeLevel());
+//		System.out.println(soundManager.setVolumeLevel(100));
 	}
 	
 	public static MenuManager getInstance() {

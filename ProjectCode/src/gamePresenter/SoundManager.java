@@ -3,6 +3,7 @@ package gamePresenter;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import java.io.File;
 
 public class SoundManager {
@@ -13,10 +14,18 @@ public class SoundManager {
 
 	private static SoundManager soundManager = null;
 	private int volumeLevel;
+	private int sfxVolume;
+
+	// New varaibles
+	private Clip backgroundMusicClip;
 
 	
 	private SoundManager() {
-		
+		this.volumeLevel = 40;
+		this.sfxVolume = 40;
+		// Create a Clip for playing the music
+		this.backgroundMusicClip = playMusic(this.BACKGROUND_SOUND_PATH);
+		this.setVolumeLevel(this.volumeLevel);
 	}
 	
 	public static SoundManager getInstance() {
@@ -27,14 +36,32 @@ public class SoundManager {
 	}
 
 	public int getVolumeLevel() {
-		return volumeLevel;
+		FloatControl volumeController = (FloatControl) this.backgroundMusicClip.getControl(FloatControl.Type.MASTER_GAIN);
+		return (int) Math.pow(10f, volumeController.getValue() / 20f);
 	}
 
-	public void setVolumeLevel(int volumeLevel) {
-		this.volumeLevel = volumeLevel;
+	/**
+	 * Set background music volume.
+	 * @param volume
+	 */
+	public void setVolumeLevel(int volume) {
+		if (volume < 0 || volume > 100)
+			throw new IllegalArgumentException("Invalid volume: " + volume);
+
+		// Update volume
+		this.volumeLevel = volume;
+		FloatControl volumeContoller = (FloatControl) this.backgroundMusicClip.getControl(FloatControl.Type.MASTER_GAIN);
+		double gain = this.volumeLevel / 100.0;
+		// Calculate equivalent decibels
+		float DB =  (float) (Math.log(gain) / Math.log(10.0) * 20.0);
+		volumeContoller.setValue(DB);
 	}
 
-
+	/**
+	 * Creates a Clip object and loads the audio from the given path
+	 * @param path path of the audio to be played
+	 * @return
+	 */
 	private Clip playMusic(String path ) { // No need to be public (public in class diagram thou)
 		Clip musicPlayer  = null;
 		try {
@@ -53,10 +80,10 @@ public class SoundManager {
 		}
 		return musicPlayer;
 	}
-	
+
+
 	public void playDiceSound() {
 		Clip musicPlayer = playMusic(DICE_SOUND_PATH);
-		musicPlayer.loop(Clip.LOOP_CONTINUOUSLY);
 		musicPlayer.start();
 	}
 	
@@ -65,9 +92,7 @@ public class SoundManager {
 	}
 	
 	public void playBackgroundSound() {
-		Clip musicPlayer = playMusic(BACKGROUND_SOUND_PATH);
-		musicPlayer.loop(Clip.LOOP_CONTINUOUSLY);
-		musicPlayer.start();
+		backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
 	private void applyChanges() {
