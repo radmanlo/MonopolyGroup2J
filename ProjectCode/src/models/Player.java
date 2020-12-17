@@ -18,9 +18,6 @@ public class Player {
 	private int inJailCount;
 	private boolean isInJail;
 	private int id;
-	
-	public Player() {
-	}
 
 	public Player(String name, Token token, PlayerColor colorId, ArrayList<BuyableLocation> ownedLocations,
 			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, int location, int inJailCount,

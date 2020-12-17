@@ -62,4 +62,7 @@ public class PlayerManager {
 			}
 		}
 	}
+	public void addPlayer(Player plyr) {
+		players.add(plyr);
+	}
 }

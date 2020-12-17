@@ -11,7 +11,7 @@ public class GameManager {
 	private SoundManager soundMngr;
 
 	private GameManager() {
-		boardMngr = BoardManager.getInstance();
+		boardMngr = new BoardManager();
 	}
 	
 	public static GameManager getInstance() {

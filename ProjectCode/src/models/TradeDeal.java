@@ -16,10 +16,6 @@ public class TradeDeal {
     private ArrayList<Card> requestedCards; 
     private int requestedMoney;
 
-
-    public TradeDeal() {
-    }
-
     public TradeDeal(Player offerer, Player receiver, ArrayList<BuyableLocation> offeredBuyables, ArrayList<Card> offeredCards, int offeredMoney, ArrayList<BuyableLocation> requestedBuyables, ArrayList<Card> requestedCards, int requestedMoney) {
         this.offerer = offerer;
         this.receiver = receiver;

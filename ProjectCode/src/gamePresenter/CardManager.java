@@ -46,4 +46,8 @@ public class CardManager {
 	public void getOutOfJail() {
 		System.out.println("Getting out of Jail Dummy");
 	}
+	
+	public void addCard(Card card) {
+		cardDeck.add(card);
+	}
 }
