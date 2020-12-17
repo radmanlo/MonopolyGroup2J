@@ -19,48 +19,34 @@ public class MenuManager { //it is finished -G
 	private HowToPlayMenu howToPlayMenu;
 	private JButton quitBtn;
 	
-	public static void main(String[] args) { //probably needs its own file
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuManager.getInstance();
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
 	
 	private MenuManager() {
 		appFrame = new AppFrame();
 		appFrame.setVisible(true);
-		appFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//appFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		mainMenu = new MainMenu();
-		mainMenu.setBounds(0, 0, 1500, 900);
+		mainMenu.setBounds(100, 100, 1900, 1000);
 		appFrame.contentPane.add(mainMenu);
 		
 		newGameMenu = new NewGameMenu();
-		newGameMenu.setBounds(0, 0, 1500, 900);
+		newGameMenu.setBounds(100, 100, 1900, 1000);
 		
 		loadGameMenu = new LoadGameMenu();
-		loadGameMenu.setBounds(0, 0, 1500, 900);
+		loadGameMenu.setBounds(100, 100, 1900, 1000);
 		
 		howToPlayMenu = new HowToPlayMenu();
-		howToPlayMenu.setBounds(0, 0, 1500, 900);
+		howToPlayMenu.setBounds(100, 100, 1900, 1000);
 		
 		settingsMenu = new SettingsMenu();
-		settingsMenu.setBounds(0, 0, 1500, 900);
+		settingsMenu.setBounds(100, 100, 1900, 1000);
 		
 		creditsMenu = new CreditsMenu();
-		creditsMenu.setBounds(0, 0, 1500, 900);
+		creditsMenu.setBounds(100, 100, 1900, 1000);
 
 		SoundManager soundManager = SoundManager.getInstance();
 		soundManager.playBackgroundSound();
-		soundManager.setVolumeLevel(50);
-		System.out.println(soundManager.getVolumeLevel());
+		soundManager.setVolumeLevel(10);
 //		System.out.println(soundManager.setVolumeLevel(100));
 	}
 	
@@ -79,7 +65,8 @@ public class MenuManager { //it is finished -G
 			break;
 		case 1:
 			appFrame.contentPane.remove(mainMenu);
-			appFrame.contentPane.add(loadGameMenu);
+			BoardManager board = BoardManager.getInstance();
+			//appFrame.contentPane.add(loadGameMenu); //temporary change to test Board
 			break;
 		case 2:
 			appFrame.contentPane.remove(mainMenu);

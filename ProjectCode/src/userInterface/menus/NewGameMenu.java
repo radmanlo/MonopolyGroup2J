@@ -29,7 +29,7 @@ public class NewGameMenu extends Menu{
 	private ArrayList<PotentialPlayer> potentialPlayers;
 	final int SPACE_BETWEEN_FIELDS = 90;
 	final int FIRST_FIELD_Y = 100;
-	final int FIELDS_X = 400;
+	final int FIELDS_X = 600;
 
 	public NewGameMenu() {
 
@@ -56,7 +56,7 @@ public class NewGameMenu extends Menu{
 		newPlayerAddingScreens = new ArrayList<NewPlayerAddingScreen>();
 		potentialPlayers = new ArrayList<PotentialPlayer>();
 		setLayout(null);
-		setBounds(0, 0, 1500, 900);
+		setBounds(100, 100, 1900, 1000);
 
 		backBtn.setText("Go Back");
 		backBtn.setBounds(33, 379, 289, 91);
