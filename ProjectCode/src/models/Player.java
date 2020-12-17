@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import models.location.BuyableLocation;
+import models.location.Location;
 
 
 public class Player {
@@ -14,13 +15,13 @@ public class Player {
 	private ArrayList<Card> cards;
 	private int usableMoney;
 	private BankAccount bankAccount;
-	private int location; // TODO: Change type to Location
+	private Location location; // TODO: Change type to Location
 	private int inJailCount;
 	private boolean isInJail;
 	private int id;
 
 	public Player(String name, Token token, PlayerColor colorId, ArrayList<BuyableLocation> ownedLocations,
-			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, int location, int inJailCount,
+			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, Location location, int inJailCount,
 			boolean isInJail, int id) {
 		this.name = name;
 		this.token = token;
@@ -92,11 +93,11 @@ public class Player {
 		return this.bankAccount;
 	}
 
-	public int getLocation() {
+	public Location getLocation() {
 		return this.location;
 	}
 
-	public void setLocation(int location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 
@@ -142,7 +143,7 @@ public class Player {
 	public String toString() {
 		return "{" + " name='" + getName() + "'" + ", token='" + getToken() + "'" + ", colorId='" + getColorId() + "'"
 				+ ", ownedLocations='" + getOwnedLocations() + "'" + ", cards='" + getCards() + "'" + ", usableMoney='"
-				+ getUsableMoney() + "'" + ", bankAccount='" + getBankAccount() + "'" + ", location='" + getLocation()
+				+ getUsableMoney() + "'" + ", bankAccount='" + getBankAccount() + "'" + ", location name='" + getLocation().getName()
 				+ "'" + ", inJailCount='" + getInJailCount() + "'" + ", isInJail='" + "'" + "}";
 	}
 
