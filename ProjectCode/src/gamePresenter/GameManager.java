@@ -1,20 +1,25 @@
 package gamePresenter;
 
 import models.Dice;
+import models.Player;
 import models.Property;
 
 public class GameManager {
 	private static GameManager gameManager = null;
 	
-	private PlayerManager playerMngr;
+	private PlayerManager playerMngr = PlayerManager.getInstance();
 	private BoardManager boardMngr;
-	private Dice dice;
-	private SoundManager soundMngr;
-	private CardDeck cardDeck;
-	private InventoryManager inventoryMngr;
+	private Dice dice = new Dice();
+	private SoundManager soundMngr = SoundManager.getInstance();
+	private CardDeck cardDeck = new CardDeck();
+	private LocationManager locationManager = LocationManager.getInstance();
 
 	private GameManager() {
 		boardMngr = new BoardManager();
+	}
+
+	public void initGame(){
+
 	}
 	
 	public static GameManager getInstance() {
@@ -40,7 +45,7 @@ public class GameManager {
 		return false;
 	}
 	
-	public static InventoryManager getInventoryManager() {
+	public static LocationManager getInventoryManager() {
 		return null;
 	}
 	
