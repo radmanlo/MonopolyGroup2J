@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import models.Token;
 import models.PlayerColor;
@@ -23,7 +25,19 @@ public class NewGameMenu extends Menu{
 	public NewGameMenu() {
 
 		choosableTokens = new ArrayList<Token>();
+		choosableTokens.add(new Token("./resources/Token1.jpg"));
+		choosableTokens.add(new Token("./resources/Token2.jpg"));
+		choosableTokens.add(new Token("./resources/Token3.jpg"));
+		
 		choosableColors = new ArrayList<PlayerColor>();
+		choosableColors.add(PlayerColor.RED);
+		choosableColors.add(PlayerColor.GREEN);
+		choosableColors.add(PlayerColor.BLUE);
+		choosableColors.add(PlayerColor.YELLOW);
+		choosableColors.add(PlayerColor.PURPLE);
+		choosableColors.add(PlayerColor.WHITE);
+		choosableColors.add(PlayerColor.BLACK);
+		
 		potentialNewPlayers = new ArrayList<NewPlayerAddingScreen>();
 
 		setLayout(null);
@@ -33,16 +47,14 @@ public class NewGameMenu extends Menu{
 		backBtn.setBounds(33, 379, 289, 91);
 
 
-		NewPlayerAddingScreen s1 = new NewPlayerAddingScreen();
-		s1.setBounds(FIELDS_X, FIRST_FIELD_Y, 1040, 70);
+		NewPlayerAddingScreen s1 = new NewPlayerAddingScreen(this);
 		potentialNewPlayers.add(s1);
 		add(s1);
 
-		NewPlayerAddingScreen s2 = new NewPlayerAddingScreen();
-		s2.setBounds(FIELDS_X, FIRST_FIELD_Y + SPACE_BETWEEN_FIELDS * potentialNewPlayers.size() , 1040, 70);
+		NewPlayerAddingScreen s2 = new NewPlayerAddingScreen(this);
 		potentialNewPlayers.add(s2);
 		add(s2);	
-
+		
 		addNewPlayerBtn = new JButton("+");
 		addNewPlayerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -50,12 +62,13 @@ public class NewGameMenu extends Menu{
 			}
 		});
 		addNewPlayerBtn.setFont(new Font("Tahoma", Font.BOLD, 16));
-		addNewPlayerBtn.setBounds(830, FIRST_FIELD_Y + SPACE_BETWEEN_FIELDS * potentialNewPlayers.size() , 51, 42);
 		add(addNewPlayerBtn);
 
 		initializeGameBtn = new JButton("Start Game");
 		initializeGameBtn.setBounds(33, 247, 289, 106);
 		add(initializeGameBtn);
+		
+		redrawPotentialPlayers();
 	}
 
 
@@ -64,12 +77,20 @@ public class NewGameMenu extends Menu{
 	}
 
 	public void addPotentialPlayer() {
-		NewPlayerAddingScreen sTemp = new NewPlayerAddingScreen();
-		sTemp.setBounds(FIELDS_X, FIRST_FIELD_Y + SPACE_BETWEEN_FIELDS * potentialNewPlayers.size() , 1040, 70);
-		potentialNewPlayers.add(sTemp);
-		add(sTemp);	
-		
-		addNewPlayerBtn.setBounds(830, FIRST_FIELD_Y + SPACE_BETWEEN_FIELDS * potentialNewPlayers.size(), 51, 42);
+		if( potentialNewPlayers.size() < 8 ) {
+			
+			NewPlayerAddingScreen sTemp = new NewPlayerAddingScreen(this);
+			potentialNewPlayers.add(sTemp);
+			add(sTemp);
+			
+			redrawPotentialPlayers();
+			
+			if(potentialNewPlayers.size() != 8  )
+				addNewPlayerBtn.setBounds(830, FIRST_FIELD_Y + SPACE_BETWEEN_FIELDS * potentialNewPlayers.size(), 51, 42);
+			else
+				addNewPlayerBtn.setVisible(false);
+			
+		}
 		
 		revalidate();
 		repaint();
@@ -77,11 +98,32 @@ public class NewGameMenu extends Menu{
 	}
 
 	public void removePotentialPlayer(NewPlayerAddingScreen toRemove) {
-
+		remove(toRemove);
+		potentialNewPlayers.remove(toRemove);
+		redrawPotentialPlayers();
 	}
+	
+	public void redrawPotentialPlayers() {
+		for( int i = 0; i < potentialNewPlayers.size(); ++i) {
+			potentialNewPlayers.get(i).setBounds(FIELDS_X, FIRST_FIELD_Y + SPACE_BETWEEN_FIELDS * i, 1040, 80);
+		}
 
+		addNewPlayerBtn.setBounds(830, FIRST_FIELD_Y + SPACE_BETWEEN_FIELDS * potentialNewPlayers.size(), 51, 42);
+		
+		if(potentialNewPlayers.size() != 8  )
+			addNewPlayerBtn.setVisible(true);
+		else
+			addNewPlayerBtn.setVisible(false);
+
+		
+		revalidate();
+		repaint();	
+	}
+	
 	public void updateComboBoxesForPotentialPlayers() {
-
+		for( int i = 0; i < potentialNewPlayers.size(); ++i) {
+			potentialNewPlayers.get(i).updateComboBoxes();
+		}
 	}
 
 	public ArrayList<Token> getChoosableTokens() {
