@@ -18,7 +18,7 @@ public class BoardManager extends JPanel {    //needs to change eventually to no
 	private EndTurnPrompt endturnPrompt;
 	
 	private BoardManager() {
-		setBounds(100, 100, 1900, 1000);
+		setBounds(0, 0, 1900, 1000);
 		setLayout(null);
 		map = new Map();
 		add(map);

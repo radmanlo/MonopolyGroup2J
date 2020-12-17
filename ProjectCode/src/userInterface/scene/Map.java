@@ -11,7 +11,7 @@ public class Map extends JPanel{
 	
 	public Map() {
 		mapImage = new ImageIcon("./resources/Board.jpg").getImage();
-		setBounds(50, 50, 700, 800);
+		setBounds(950, 50, 900, 900);
 	
 	}
 	

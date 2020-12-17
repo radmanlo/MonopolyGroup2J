@@ -66,6 +66,7 @@ public class MenuManager { //it is finished -G
 		case 1:
 			appFrame.contentPane.remove(mainMenu);
 			BoardManager board = BoardManager.getInstance();
+			appFrame.contentPane.add(board);
 			//appFrame.contentPane.add(loadGameMenu); //temporary change to test Board
 			break;
 		case 2:
