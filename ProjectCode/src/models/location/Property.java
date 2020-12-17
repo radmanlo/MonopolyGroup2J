@@ -31,7 +31,7 @@ public class Property extends BuyableLocation{
     public int getVendingMachinesNo() {
         return vendingMachinesNo;
     }
-
+	
     public boolean hasStarbucks() {
         return ownsStarbucks;
     }
