@@ -11,6 +11,11 @@ public class Token {
 		image = new ImageIcon(path).getImage();
 	}
 	
+	public Token(Image i) {
+		image = i;
+		
+	}
+	
 	public Image getImage() {
 		return image;
 	}

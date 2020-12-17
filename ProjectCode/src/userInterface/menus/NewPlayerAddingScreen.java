@@ -75,9 +75,9 @@ public class NewPlayerAddingScreen extends JPanel{
 	}
 	
 	public void updateChosens() {
-		chosenToken = (Token) tokenComboBox.getSelectedItem();
-		chosenColor = (PlayerColor) colorComboBox.getSelectedItem();
-		chosenName = nameField.getSelectedText();
+		chosenToken = new Token(((ImageIcon) tokenComboBox.getSelectedItem()).getImage());
+		//chosenColor = (PlayerColor) colorComboBox.getSelectedItem();
+		chosenName = nameField.getText();
 	}
 	
 	public Token getChosenToken() {

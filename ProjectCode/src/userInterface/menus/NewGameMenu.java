@@ -1,4 +1,5 @@
 package userInterface.menus;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -18,9 +19,7 @@ import models.Token;
 import models.PlayerColor;
 
 public class NewGameMenu extends Menu{
-	private JPanel warningPrompt;
-	private JLabel warningLbl;
-	private JButton warningOkBtn;
+
 	private JButton initializeGameBtn;
 	private JButton addNewPlayerBtn;
 	private ArrayList<Token> choosableTokens;
@@ -82,77 +81,59 @@ public class NewGameMenu extends Menu{
 		initializeGameBtn = new JButton("Start Game");
 		initializeGameBtn.setBounds(33, 247, 289, 106);
 		initializeGameBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				initializeNewGame();
 			}
 		});
 		add(initializeGameBtn);
-		
-		warningPrompt = new JPanel();
-		warningPrompt.setBounds(376, 322, 849, 493);
-		add(warningPrompt);
-		warningPrompt.setLayout(null);
-		
-		warningLbl = new JLabel("<html>The game cannot be initialized with the current selections!<br/> Please make sure that the same Name/Color/Token is not selected for different players!</html>", SwingConstants.CENTER);
-		warningLbl.setBounds(149, 79, 550, 91);
-		warningPrompt.add(warningLbl);
-		warningLbl.setFont(new Font("Tahoma", Font.BOLD, 14));
-		warningLbl.setHorizontalTextPosition(SwingConstants.LEFT);
-		warningLbl.setAlignmentY(Component.TOP_ALIGNMENT);
-		warningLbl.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		warningOkBtn = new JButton("OK");
-		warningOkBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				warningPrompt.setVisible(false);
-			}
-		});
-		warningOkBtn.setFont(new Font("Tahoma", Font.BOLD, 16));
-		warningOkBtn.setBounds(323, 300, 177, 73);
-		warningPrompt.add(warningOkBtn);
-		warningPrompt.setVisible(false);
-		warningPrompt.setOpaque(true);
-		warningPrompt.setBackground(Color.LIGHT_GRAY);
-		warningPrompt.setBorder(UIManager.getBorder("OptionPane.messageAreaBorder"));
+
 		redrawPotentialPlayers();
 	}
 
 
 	public void initializeNewGame() {
-		
-		
-		
-		
-		
-		
-		warningPrompt.setVisible(true);
+
+		if(areAllPlayersUnique() == false) {
+			
+			showMessageDialog(null, "Herkes farklı değil!");
+
+
+		}else {
+			System.out.println("True Döndüm Areallplayersunieque ");
+
+		}
 	}
 	
 	private boolean areAllPlayersUnique() {
-		
-		for( int i = 0; i < potentialNewPlayers.size(); ++i) {
+
+		for( int i = 0; i < potentialNewPlayers.size(); i++) {
 			potentialNewPlayers.get(i).updateChosens();
 		}
 		
 		for( int i = 0; i < potentialNewPlayers.size(); ++i) {
-			for( int j = 0; j < potentialNewPlayers.size(); ++j) {
-				if( i != j && potentialNewPlayers.get(i).getChosenName() ==  potentialNewPlayers.get(j).getChosenName())
+			for( int j = i+1; j < potentialNewPlayers.size(); j++) {
+				if( potentialNewPlayers.get(i).getChosenName().equalsIgnoreCase( potentialNewPlayers.get(j).getChosenName())) {
 					return false;
+				}
 			}
 		}
 		
-		for( int i = 0; i < potentialNewPlayers.size(); ++i) {
-			for( int j = 0; j < potentialNewPlayers.size(); ++j) {
-				
+		for( int i = 0; i < potentialNewPlayers.size(); i++) {
+			for( int j = i+1; j < potentialNewPlayers.size(); j++) {
+				if( potentialNewPlayers.get(i).getChosenToken().getImage().equals( potentialNewPlayers.get(j).getChosenToken().getImage()) ){
+					//return false;
+					System.out.println("Equal Comp. Of Images Doesnt Work On New Game Menu Class");
+
+				}
 			}
 		}
 		
-		for( int i = 0; i < potentialNewPlayers.size(); ++i) {
-			for( int j = 0; j < potentialNewPlayers.size(); ++j) {
-				
+		for( int i = 0; i < potentialNewPlayers.size(); i++) {
+			for( int j = 0; j < potentialNewPlayers.size(); j++) {
+				//if( i != j && potentialNewPlayers.get(i).getChosenColor() ==  potentialNewPlayers.get(j).getChosenColor())
+				//	return false;
 			}
 		}
-		
 		return true;
 	}
 
