@@ -2,13 +2,15 @@ package models;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import models.location.BuyableLocation;
+
 
 public class Player {
 
 	private String name;
 	Token token;
 	private PlayerColor colorId;
-	private ArrayList<Property> ownedLocations;
+	private ArrayList<BuyableLocation> ownedLocations;
 	private ArrayList<Card> cards;
 	private int usableMoney;
 	private BankAccount bankAccount;
@@ -20,7 +22,7 @@ public class Player {
 	public Player() {
 	}
 
-	public Player(String name, Token token, PlayerColor colorId, ArrayList<Property> ownedLocations,
+	public Player(String name, Token token, PlayerColor colorId, ArrayList<BuyableLocation> ownedLocations,
 			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, int location, int inJailCount,
 			boolean isInJail, int id) {
 		this.name = name;
@@ -57,15 +59,15 @@ public class Player {
 	}
 
 
-	public ArrayList<Property> getOwnedLocations() {
+	public ArrayList<BuyableLocation> getOwnedLocations() {
 		return this.ownedLocations;
 	}
 
-	public void addOwnedLocation(Property property) { // TODO: Change to Buyable
+	public void addOwnedLocation(BuyableLocation property) { // TODO: Change to Buyable
 		this.ownedLocations.add(property);
 	}
 
-	public void removeOwnedLocation(Property property) { // TODO: Change to Buyable
+	public void removeOwnedLocation(BuyableLocation property) { // TODO: Change to Buyable
 		this.ownedLocations.remove(property);
 	}
 

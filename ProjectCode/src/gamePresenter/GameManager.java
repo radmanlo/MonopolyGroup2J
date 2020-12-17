@@ -1,7 +1,6 @@
 package gamePresenter;
 
 import models.Dice;
-import models.Property;
 
 public class GameManager {
 	private static GameManager gameManager = null;
@@ -10,8 +9,6 @@ public class GameManager {
 	private BoardManager boardMngr;
 	private Dice dice;
 	private SoundManager soundMngr;
-	private CardDeck cardDeck;
-	private InventoryManager inventoryMngr;
 
 	private GameManager() {
 		boardMngr = new BoardManager();
@@ -32,17 +29,6 @@ public class GameManager {
 		
 	}
 	
-	public static void tradeRequest(Property property, int value) {
-		
-	}
-	
-	public static boolean upgradeProperty(Property property) {
-		return false;
-	}
-	
-	public static InventoryManager getInventoryManager() {
-		return null;
-	}
 	
 	public void handleNewTurn() {
 		

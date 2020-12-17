@@ -10,12 +10,7 @@ public class Token {
 	public Token(String path) {
 		image = new ImageIcon(path).getImage();
 	}
-	
-	public Token(Image i) {
-		image = i;
-		
-	}
-	
+
 	public Image getImage() {
 		return image;
 	}
