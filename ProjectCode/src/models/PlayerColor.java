@@ -1,5 +1,5 @@
 package models;
 
 public enum PlayerColor {
-	RED, GREEN, BLUE, YELLOW, PURPLE, WHITE, BLACK
+	WHITE, RED, GREEN, BLUE, YELLOW, PURPLE, ORANGE , BLACK
 }

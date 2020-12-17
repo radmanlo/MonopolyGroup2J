@@ -35,12 +35,13 @@ public class NewGameMenu extends Menu{
 		choosableTokens.add(new Token("./resources/Token8.jpg"));
 		
 		choosableColors = new ArrayList<PlayerColor>();
+		choosableColors.add(PlayerColor.WHITE);
 		choosableColors.add(PlayerColor.RED);
 		choosableColors.add(PlayerColor.GREEN);
 		choosableColors.add(PlayerColor.BLUE);
 		choosableColors.add(PlayerColor.YELLOW);
 		choosableColors.add(PlayerColor.PURPLE);
-		choosableColors.add(PlayerColor.WHITE);
+		choosableColors.add(PlayerColor.ORANGE);
 		choosableColors.add(PlayerColor.BLACK);
 		
 		potentialNewPlayers = new ArrayList<NewPlayerAddingScreen>();
@@ -137,10 +138,12 @@ public class NewGameMenu extends Menu{
 
 	public void addChoosableToken(Token toAdd) {
 		choosableTokens.add(toAdd);
+		updateComboBoxesForPotentialPlayers();
 	}
 
 	public void removeChoosableToken(Token toRemove) {
 		choosableTokens.remove(toRemove);
+		updateComboBoxesForPotentialPlayers();
 	}
 
 	public ArrayList<PlayerColor> getChoosableColors() {
@@ -149,10 +152,22 @@ public class NewGameMenu extends Menu{
 
 	public void addChoosableColor(PlayerColor toAdd) {
 		choosableColors.add(toAdd);
+		for( int i = 0; i < potentialNewPlayers.size(); ++i) {
+			potentialNewPlayers.get(i).colorComboBox.addItem(toAdd);
+		}
+		revalidate();
+		repaint();	
+		//updateComboBoxesForPotentialPlayers();
 	}
 
 	public void removeChoosableColor(PlayerColor toRemove) {
 		choosableColors.remove(toRemove);
+		for( int i = 0; i < potentialNewPlayers.size(); ++i) {
+			potentialNewPlayers.get(i).colorComboBox.removeItem(toRemove);
+		}
+		revalidate();
+		repaint();	
+		//updateComboBoxesForPotentialPlayers();
 	}
 
 }

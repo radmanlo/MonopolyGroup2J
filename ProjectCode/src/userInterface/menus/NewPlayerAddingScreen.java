@@ -14,27 +14,54 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class NewPlayerAddingScreen extends JPanel{
 	private JTextField nameField;
-	private JComboBox colorComboBox;
+	public JComboBox colorComboBox; //public as temp
 	private JComboBox tokenComboBox;
 	private JButton removePlayerBtn;
 	private NewGameMenu parentMenu;
-	
-	public NewPlayerAddingScreen(NewGameMenu parentMenu) {
 
+	private Token chosenToken;
+	private PlayerColor chosenColor;
+
+	public NewPlayerAddingScreen(NewGameMenu parentMenu) {
 		this.parentMenu = parentMenu;
+		chosenToken = null;
+		chosenColor = PlayerColor.WHITE;
 		setLayout(null);
 		setBounds(400, 300, 1040, 80);
+		
+		ArrayList<PlayerColor> choosableColors = parentMenu.getChoosableColors();
+		colorComboBox = new JComboBox();
+		colorComboBox.setBounds(626, 11, 90, 40);
+		for(int i = 0; i < choosableColors.size(); ++i) {
+			colorComboBox.addItem( new ImageIcon("./resources/" + choosableColors.get(i).toString() + ".jpg"));
+		}
+		
+		colorComboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				if( chosenColor != PlayerColor.WHITE)
+					parentMenu.addChoosableColor(chosenColor);
+				chosenColor = PlayerColor.values()[colorComboBox.getSelectedIndex()];
+				parentMenu.removeChoosableColor(chosenColor);
+			}
+		});
+		
+		add(colorComboBox);
+		
 		
 		nameField = new JTextField();
 		nameField.setBounds(47, 15, 529, 28);
 		add(nameField);
 		nameField.setColumns(10);
-		
+
 		NewPlayerAddingScreen copyOfThis = this;
-		
+
 		removePlayerBtn = new JButton("X"); //I want to make it rounded -G
 		removePlayerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -46,29 +73,27 @@ public class NewPlayerAddingScreen extends JPanel{
 		removePlayerBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		removePlayerBtn.setBounds(941, 11, 66, 36);
 		add(removePlayerBtn);
-		
+
 		updateComboBoxes();
 	}
-	
+
 	public Player createPlayer() {
 		return null;
 	}
-	
+
 	public void updateComboBoxes() {
 		ArrayList<PlayerColor> choosableColors = parentMenu.getChoosableColors();
-		
-		Object[] items = new Object[choosableColors.size()];
-		
+		/*
 		for(int i = 0; i < choosableColors.size(); ++i) {
-			items[i] = new ImageIcon("./resources/" + choosableColors.get(i).toString() + ".jpg");
+			
+			colorComboBox.addItem( new ImageIcon("./resources/" + choosableColors.get(i).toString() + ".jpg"));
 		}
-		colorComboBox = new JComboBox(items);
-		colorComboBox.setBounds(626, 11, 90, 40);
-		add(colorComboBox);
+		*/
 		
+
 		ArrayList<Token> choosableTokens = parentMenu.getChoosableTokens();
-		
-		items = new Object[choosableTokens.size()];
+
+		Object[] items = new Object[choosableTokens.size()];
 		for(int i = 0; i < choosableTokens.size(); ++i) {
 			items[i] = new ImageIcon( choosableTokens.get(i).getImage());
 		}
