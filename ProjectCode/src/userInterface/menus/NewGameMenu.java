@@ -92,15 +92,10 @@ public class NewGameMenu extends Menu{
 
 
 	public void initializeNewGame() {
-
-		if(areAllPlayersUnique() == false) {
-			
-			showMessageDialog(null, "Herkes farklı değil!");
-
-
+		if(areAllPlayersUnique() == false) {	
+			showMessageDialog(null, "//TODO Write correct Definition. Im in New Game Menu.");
 		}else {
-			System.out.println("True Döndüm Areallplayersunieque ");
-
+			return;
 		}
 	}
 	
@@ -120,18 +115,17 @@ public class NewGameMenu extends Menu{
 		
 		for( int i = 0; i < potentialNewPlayers.size(); i++) {
 			for( int j = i+1; j < potentialNewPlayers.size(); j++) {
-				if( potentialNewPlayers.get(i).getChosenToken().getImage().equals( potentialNewPlayers.get(j).getChosenToken().getImage()) ){
-					//return false;
-					System.out.println("Equal Comp. Of Images Doesnt Work On New Game Menu Class");
-
+				if( potentialNewPlayers.get(i).getChosenTokenIndex() == potentialNewPlayers.get(j).getChosenTokenIndex()){
+					return false;
 				}
 			}
 		}
 		
 		for( int i = 0; i < potentialNewPlayers.size(); i++) {
-			for( int j = 0; j < potentialNewPlayers.size(); j++) {
-				//if( i != j && potentialNewPlayers.get(i).getChosenColor() ==  potentialNewPlayers.get(j).getChosenColor())
-				//	return false;
+			for( int j = i+1; j < potentialNewPlayers.size(); j++) {
+				if( potentialNewPlayers.get(i).getChosenColorIndex() == potentialNewPlayers.get(j).getChosenColorIndex()){
+					return false;
+				}
 			}
 		}
 		return true;

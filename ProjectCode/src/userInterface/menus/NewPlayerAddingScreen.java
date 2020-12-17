@@ -25,6 +25,11 @@ public class NewPlayerAddingScreen extends JPanel{
 	private JComboBox tokenComboBox;
 	private JButton removePlayerBtn;
 	private NewGameMenu parentMenu;
+	private int chosenTokenIndex;
+	private int chosenColorIndex;
+	public int getChosenColorIndex() {
+		return chosenColorIndex;
+	}
 
 	private Token chosenToken;
 	private PlayerColor chosenColor;
@@ -75,8 +80,9 @@ public class NewPlayerAddingScreen extends JPanel{
 	}
 	
 	public void updateChosens() {
-		chosenToken = new Token(((ImageIcon) tokenComboBox.getSelectedItem()).getImage());
-		//chosenColor = (PlayerColor) colorComboBox.getSelectedItem();
+		chosenTokenIndex = tokenComboBox.getSelectedIndex();
+		//chosenToken = new Token(((ImageIcon) tokenComboBox.getSelectedItem()).getImage());
+		chosenColorIndex = colorComboBox.getSelectedIndex();
 		chosenName = nameField.getText();
 	}
 	
@@ -94,5 +100,9 @@ public class NewPlayerAddingScreen extends JPanel{
 
 	public Player createPlayer() {
 		return null;
+	}
+
+	public int getChosenTokenIndex() {
+		return chosenTokenIndex;
 	}
 }
