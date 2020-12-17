@@ -1,6 +1,8 @@
 .metadata
 bin/
 tmp/
+out/
+*.class
 *.tmp
 *.bak
 *.swp
