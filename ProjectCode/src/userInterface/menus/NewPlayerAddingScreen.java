@@ -28,6 +28,7 @@ public class NewPlayerAddingScreen extends JPanel{
 
 	private Token chosenToken;
 	private PlayerColor chosenColor;
+	private String chosenName;
 
 	public NewPlayerAddingScreen(NewGameMenu parentMenu) {
 		this.parentMenu = parentMenu;
@@ -35,24 +36,22 @@ public class NewPlayerAddingScreen extends JPanel{
 		chosenColor = PlayerColor.WHITE;
 		setLayout(null);
 		setBounds(400, 300, 1040, 80);
-		
+
 		ArrayList<PlayerColor> choosableColors = parentMenu.getChoosableColors();
 		colorComboBox = new JComboBox();
 		colorComboBox.setBounds(626, 11, 90, 40);
 		for(int i = 0; i < choosableColors.size(); ++i) {
 			colorComboBox.addItem( new ImageIcon("./resources/" + choosableColors.get(i).toString() + ".jpg"));
 		}
-		
-		colorComboBox.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
-				if( chosenColor != PlayerColor.WHITE)
-					parentMenu.addChoosableColor(chosenColor);
-				chosenColor = PlayerColor.values()[colorComboBox.getSelectedIndex()];
-				parentMenu.removeChoosableColor(chosenColor);
-			}
-		});
-		
 		add(colorComboBox);
+		
+		ArrayList<Token> choosableTokens = parentMenu.getChoosableTokens();
+		tokenComboBox = new JComboBox();
+		for(int i = 0; i < choosableTokens.size(); ++i) {
+			tokenComboBox.addItem( new ImageIcon( choosableTokens.get(i).getImage()));
+		}
+		tokenComboBox.setBounds(775, 6, 90, 65);
+		add(tokenComboBox);
 		
 		
 		nameField = new JTextField();
@@ -73,32 +72,27 @@ public class NewPlayerAddingScreen extends JPanel{
 		removePlayerBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		removePlayerBtn.setBounds(941, 11, 66, 36);
 		add(removePlayerBtn);
+	}
+	
+	public void updateChosens() {
+		chosenToken = (Token) tokenComboBox.getSelectedItem();
+		chosenColor = (PlayerColor) colorComboBox.getSelectedItem();
+		chosenName = nameField.getSelectedText();
+	}
+	
+	public Token getChosenToken() {
+		return chosenToken;
+	}
 
-		updateComboBoxes();
+	public PlayerColor getChosenColor() {
+		return chosenColor;
+	}
+
+	public String getChosenName() {
+		return chosenName;
 	}
 
 	public Player createPlayer() {
 		return null;
-	}
-
-	public void updateComboBoxes() {
-		ArrayList<PlayerColor> choosableColors = parentMenu.getChoosableColors();
-		/*
-		for(int i = 0; i < choosableColors.size(); ++i) {
-			
-			colorComboBox.addItem( new ImageIcon("./resources/" + choosableColors.get(i).toString() + ".jpg"));
-		}
-		*/
-		
-
-		ArrayList<Token> choosableTokens = parentMenu.getChoosableTokens();
-
-		Object[] items = new Object[choosableTokens.size()];
-		for(int i = 0; i < choosableTokens.size(); ++i) {
-			items[i] = new ImageIcon( choosableTokens.get(i).getImage());
-		}
-		tokenComboBox = new JComboBox(items);
-		tokenComboBox.setBounds(775, 6, 90, 65);
-		add(tokenComboBox);
 	}
 }
