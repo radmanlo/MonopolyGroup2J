@@ -1,6 +1,6 @@
 package gamePresenter;
 
-import com.sun.javafx.image.IntPixelGetter;
+//import com.sun.javafx.image.IntPixelGetter;
 import models.location.BuyableLocation;
 import models.location.Location;
 import models.*;
