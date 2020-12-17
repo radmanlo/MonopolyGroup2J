@@ -28,6 +28,11 @@ public class NewGameMenu extends Menu{
 		choosableTokens.add(new Token("./resources/Token1.jpg"));
 		choosableTokens.add(new Token("./resources/Token2.jpg"));
 		choosableTokens.add(new Token("./resources/Token3.jpg"));
+		choosableTokens.add(new Token("./resources/Token4.jpg"));
+		choosableTokens.add(new Token("./resources/Token5.jpg"));
+		choosableTokens.add(new Token("./resources/Token6.jpg"));
+		choosableTokens.add(new Token("./resources/Token7.jpg"));
+		choosableTokens.add(new Token("./resources/Token8.jpg"));
 		
 		choosableColors = new ArrayList<PlayerColor>();
 		choosableColors.add(PlayerColor.RED);

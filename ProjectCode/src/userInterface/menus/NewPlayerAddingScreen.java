@@ -33,14 +33,6 @@ public class NewPlayerAddingScreen extends JPanel{
 		add(nameField);
 		nameField.setColumns(10);
 		
-		//colorComboBox = new JComboBox();
-		//colorComboBox.setBounds(626, 11, 90, 40);
-		//add(colorComboBox);
-		
-		//tokenComboBox = new JComboBox();
-		//tokenComboBox.setBounds(775, 6, 90, 65);
-		//add(tokenComboBox);
-		
 		NewPlayerAddingScreen copyOfThis = this;
 		
 		removePlayerBtn = new JButton("X"); //I want to make it rounded -G
