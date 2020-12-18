@@ -65,4 +65,9 @@ public class PlayerManager {
 	public void addPlayer(Player plyr) {
 		players.add(plyr);
 	}
+	
+	public void setInitialCurrentPlayer() {
+		currentPlayerIndex = 0;
+		currentPlayer = players.get(currentPlayerIndex);
+	}
 }

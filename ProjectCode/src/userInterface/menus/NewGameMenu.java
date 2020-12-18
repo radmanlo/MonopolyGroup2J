@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import gamePresenter.BoardManager;
+import gamePresenter.CardManager;
+import gamePresenter.GameManager;
+import gamePresenter.LocationManager;
 import models.Token;
 import models.PlayerColor;
 import models.PotentialPlayer;
@@ -99,7 +103,7 @@ public class NewGameMenu extends Menu{
 
 	public void initializeNewGame() {
 		if(areAllPlayersUnique() == false) {	
-			showMessageDialog(null, "//TODO Write correct Definition. Im in New Game Menu.");
+			showMessageDialog(null, "Tokens, names or colors can not be same! \nName can not be empty");
 		}else {
 			for(int i = 0; i < newPlayerAddingScreens.size(); i++) {
 				Token plyrToken = tokenMatch(i);
@@ -108,6 +112,7 @@ public class NewGameMenu extends Menu{
 				PotentialPlayer player = new PotentialPlayer(plyrToken, plyrClr, plyrName);
 				potentialPlayers.add(player);
 			}
+			GameManager.getInstance().initializeNewGame(potentialPlayers);
 			return;
 		}
 	}

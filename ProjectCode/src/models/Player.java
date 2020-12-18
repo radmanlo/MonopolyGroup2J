@@ -20,6 +20,19 @@ public class Player {
 	private boolean isInJail;
 	private int id;
 
+	public Player(String name, Token token, PlayerColor colorId, int playerId) {
+		this.name = name;
+		this.token = token;
+		this.colorId = colorId;
+		this.ownedLocations = new ArrayList<BuyableLocation>();
+		this.cards = new ArrayList<Card>();
+		this.usableMoney = 200; // DEFAULT INITIAL MONEY
+		this.bankAccount = new BankAccount(playerId, 0, 0);
+		this.location = new Location();
+		this.inJailCount = 0; // Default
+		this.isInJail = false;
+		this.id = playerId;
+	}
 	public Player(String name, Token token, PlayerColor colorId, ArrayList<BuyableLocation> ownedLocations,
 			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, Location location, int inJailCount,
 			boolean isInJail, int id) {

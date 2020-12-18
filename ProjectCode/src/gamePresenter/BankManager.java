@@ -15,7 +15,7 @@ public class BankManager {
 		accounts = new ArrayList<BankAccount>();
 	}
 	
-	private static BankManager getInstance() {
+	public static BankManager getInstance() {
 		if( bank == null ) {
 			bank = new BankManager();
 		}

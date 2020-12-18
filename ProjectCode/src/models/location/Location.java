@@ -12,7 +12,7 @@ public class Location {
     private ArrayList<Player> playersHere;
 
     // Constructor
-    Location(){
+    public Location(){
         super();
     }
 

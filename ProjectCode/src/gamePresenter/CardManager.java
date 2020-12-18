@@ -16,7 +16,7 @@ public class CardManager {
 		takenCardCount = 0;
 	}
 	
-	private static CardManager getInstance() {
+	public static CardManager getInstance() {
 		if( cardMngr == null ) {
 			cardMngr = new CardManager();
 		}
