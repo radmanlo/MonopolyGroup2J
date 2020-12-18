@@ -90,10 +90,6 @@ public class Player {
 		this.cards.add(card);
 	}
 
-	public void removeCard(Card card) {
-		this.cards.remove(card);
-	}
-
 	public int getUsableMoney() {
 		return this.usableMoney;
 	}
@@ -130,6 +126,12 @@ public class Player {
 		this.isInJail = isInJail;
 	}
 	
+	public void removeCard(Card card) {
+		for(int i = 0; i < cards.size(); i++) {
+			if(cards.get(i).getCardId() == card.getCardId())
+				cards.remove(i);
+		}
+	}
 
 	@Override
 	public boolean equals(Object o) {

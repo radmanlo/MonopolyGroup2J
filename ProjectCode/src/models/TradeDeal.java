@@ -9,10 +9,10 @@ public class TradeDeal {
     
     private Player offerer;
     private Player receiver;
-    private ArrayList<BuyableLocation> offeredBuyables; // TODO: Change Property to Buyable when Buyable is added    
+    private ArrayList<BuyableLocation> offeredBuyables; 
     private ArrayList<Card> offeredCards; 
     private int offeredMoney;
-    private ArrayList<BuyableLocation> requestedBuyables; // TODO: Change Property to Buyable when Buyable is added    
+    private ArrayList<BuyableLocation> requestedBuyables; 
     private ArrayList<Card> requestedCards; 
     private int requestedMoney;
 
@@ -28,42 +28,76 @@ public class TradeDeal {
     }
 
     public void execute() {
-        
+       transferMoney();
+       transferCards();
+       transferBuyables();
     }
     public void transferMoney() {
-
+    	int money = offeredMoney- requestedMoney;
+    	offerer.setUsableMoney(offerer.getUsableMoney() - money);
+    	receiver.setUsableMoney(offerer.getUsableMoney() + money);
     }
     public void transferCards() {
-
+    	for(int i = 0; i < offeredCards.size(); i++) {
+    		offerer.removeCard(offeredCards.get(i));
+    		receiver.addCard(offeredCards.get(i));
+    	}
+    	for(int i = 0; i < requestedCards.size(); i++) {
+    		receiver.removeCard(offeredCards.get(i));
+    		offerer.addCard(offeredCards.get(i));
+    	}
     }
     public void transferBuyables() {
-
+    	for(int i = 0; i < offeredBuyables.size(); i++) {
+    		offerer.removeOwnedLocation(offeredBuyables.get(i));
+    		receiver.addOwnedLocation(offeredBuyables.get(i));
+    	}
+    	for(int i = 0; i < requestedBuyables.size(); i++) {
+    		receiver.removeOwnedLocation(offeredBuyables.get(i));
+    		offerer.addOwnedLocation(offeredBuyables.get(i));
+    	}
     }
 
-    public void addBuyableToOffered(BuyableLocation item) { // TODO: Change to Buyable
-
+    public void addBuyableToOffered(BuyableLocation item) {
+    	offeredBuyables.add(item);
     }
-    public void removeBuyableFromOffered(BuyableLocation item) { // TODO: Change to Buyable
-
+    public void removeBuyableFromOffered(BuyableLocation item) { 
+    	for(int i = 0; i < offeredBuyables.size(); i++) {
+    		if(offeredBuyables.get(i).getName() == item.getName()) {
+    			offeredBuyables.remove(i);
+    		}
+    	}
     }
-    public void addCardToOffered(Card card) { // TODO: Change to Buyable
-
+    public void addCardToOffered(Card card) { 
+    	offeredCards.add(card);
     }
-    public void removeCardFromOffered(Card card) { // TODO: Change to Buyable
-
+    public void removeCardFromOffered(Card card) { 
+    	for(int i = 0; i < offeredCards.size(); i++) {
+    		if(offeredCards.get(i).getCardId() == card.getCardId()) {
+    			offeredBuyables.remove(i);
+    		}
+    	}
     }
 
-    public void addBuyableToRequested(BuyableLocation item) { // TODO: Change to Buyable
-
+    public void addBuyableToRequested(BuyableLocation item) { 
+    	requestedBuyables.add(item);
     }
-    public void removeBuyableFromRequested(BuyableLocation item) { // TODO: Change to Buyable
-
+    public void removeBuyableFromRequested(BuyableLocation item) { 
+    	for(int i = 0; i < requestedBuyables.size(); i++) {
+    		if(requestedBuyables.get(i).getName() == item.getName()) {
+    			requestedBuyables.remove(i);
+    		}
+    	}
     }
-    public void addCardToRequested(Card card) { // TODO: Change to Buyable
-
+    public void addCardToRequested(Card card) { 
+    	requestedCards.add(card);
     }
-    public void removeCardFromRequested(Card card) { // TODO: Change to Buyable
-
+    public void removeCardFromRequested(Card card) { 
+    	for(int i = 0; i < requestedCards.size(); i++) {
+    		if(requestedCards.get(i).getCardId() == card.getCardId()) {
+    			requestedCards.remove(i);
+    		}
+    	}
     }
 
     public Player getOfferer() {
