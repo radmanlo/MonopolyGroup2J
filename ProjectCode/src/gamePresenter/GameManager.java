@@ -42,6 +42,7 @@ public class GameManager {
 		BoardManager.getInstance();
 		LocationManager.getInstance();
 		CardManager.getInstance();
+		TradeManager.getInstance();
 	}
 	
 	public static void executePurchase() {
