@@ -19,18 +19,18 @@ public class MenuManager { //it is finished -G
 	private HowToPlayMenu howToPlayMenu;
 	private JButton quitBtn;
 	
-	public static void main(String[] args) { //probably needs its own file
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuManager.getInstance();
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) { //probably needs its own file
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					MenuManager.getInstance();
+//
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	
 	
 	private MenuManager() {

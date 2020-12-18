@@ -15,8 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import gamePresenter.GameManager;
+import gamePresenter.PlayerManager;
 import models.Token;
 import models.PlayerColor;
+import org.w3c.dom.Document;
+import settingsPresenter.LocalDataManager;
 
 public class NewGameMenu extends Menu{
 
@@ -95,6 +99,13 @@ public class NewGameMenu extends Menu{
 		if(areAllPlayersUnique() == false) {	
 			showMessageDialog(null, "//TODO Write correct Definition. Im in New Game Menu.");
 		}else {
+			// Ask the local data manager to get the default values' document
+			LocalDataManager ldm = LocalDataManager.getInstance();
+			Document doc = ldm.getDefaultValues();
+			doc.getDocumentElement().normalize();
+
+			// Pass the document to the game manager alongside the players array // TODO pass potential players array as well
+			GameManager.getInstance().initDefaultGame(doc);
 			return;
 		}
 	}
