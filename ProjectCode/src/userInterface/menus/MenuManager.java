@@ -26,23 +26,23 @@ public class MenuManager { //it is finished -G
 		//appFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
 		mainMenu = new MainMenu();
-		mainMenu.setBounds(100, 100, 1900, 1000);
+		mainMenu.setBounds(0, 0, 1900, 1000);
 		appFrame.contentPane.add(mainMenu);
 		
 		newGameMenu = new NewGameMenu();
-		newGameMenu.setBounds(100, 100, 1900, 1000);
+		newGameMenu.setBounds(0, 0, 1900, 1000);
 		
 		loadGameMenu = new LoadGameMenu();
-		loadGameMenu.setBounds(100, 100, 1900, 1000);
+		loadGameMenu.setBounds(0, 0, 1900, 1000);
 		
 		howToPlayMenu = new HowToPlayMenu();
-		howToPlayMenu.setBounds(100, 100, 1900, 1000);
+		howToPlayMenu.setBounds(0, 0, 1900, 1000);
 		
 		settingsMenu = new SettingsMenu();
-		settingsMenu.setBounds(100, 100, 1900, 1000);
+		settingsMenu.setBounds(0, 0, 1900, 1000);
 		
 		creditsMenu = new CreditsMenu();
-		creditsMenu.setBounds(100, 100, 1900, 1000);
+		creditsMenu.setBounds(0, 0, 1900, 1000);
 
 		SoundManager soundManager = SoundManager.getInstance();
 		soundManager.playBackgroundSound();

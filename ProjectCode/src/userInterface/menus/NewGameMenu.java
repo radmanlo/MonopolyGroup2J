@@ -32,7 +32,7 @@ public class NewGameMenu extends Menu{
 	final int FIELDS_X = 600;
 
 	public NewGameMenu() {
-
+		super("./resources/NewGameMenu.jpg");
 		choosableTokens = new ArrayList<Token>();
 		choosableTokens.add(new Token("./resources/Token1.jpg"));
 		choosableTokens.add(new Token("./resources/Token2.jpg"));

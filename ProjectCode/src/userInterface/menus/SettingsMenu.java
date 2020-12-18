@@ -13,7 +13,7 @@ public class SettingsMenu extends Menu {
 	JButton applyButton;
 	
 	public SettingsMenu() {
-		super();
+		super("./resources/SettingsMenu.jpg");
 		this.sliderMusicVolume = new JSlider(0, 100, 40);
 		this.sliderMusicVolume.setMajorTickSpacing(10);
 		this.sliderMusicVolume.setMinorTickSpacing(1);

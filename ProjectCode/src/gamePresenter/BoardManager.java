@@ -33,7 +33,7 @@ public class BoardManager extends JPanel {    //needs to change eventually to no
 		return boardManager;
 	}
 	
-	public void updateMap(PlayerManager playerMngr) {
+	public void updateMap() {
 		
 	}
 	

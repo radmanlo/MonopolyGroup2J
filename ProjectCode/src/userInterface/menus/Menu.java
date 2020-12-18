@@ -18,12 +18,15 @@ abstract class Menu extends JPanel{ //instead of it having a panel attribute, I 
 	
 	public JButton backBtn;
     private BufferedImage img;
-
-	public Menu() {
+    private String backgroundImagePath;
+    
+    
+	public Menu(String path) {
+		backgroundImagePath = path;
 		setLayout(null);
         try {
 
-            img = ImageIO.read(new File("./resources/background.jpg"));
+            img = ImageIO.read(new File(backgroundImagePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
