@@ -50,7 +50,7 @@ public class LocationManager implements Serializable {
 
         // get the current location of the player
         Location currentLocation = getPlayerLocation(playerToMove);
-
+        System.out.println("current:" + currentLocation.getName());
         // calculate the next location
         int curLocId = currentLocation.getLocationId();
         int nextLocId = (curLocId + distance) % 40; // There are 40 locations in total with ids: 0-39
@@ -60,8 +60,8 @@ public class LocationManager implements Serializable {
 
         // add player to new location
         newLocation = getLocationById(nextLocId);
+        System.out.println("new:" + newLocation.getName());
         newLocation.addPlayerHere(playerToMove);
-
         return newLocation;
     }
 

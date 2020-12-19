@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import gamePresenter.LocationManager;
 import models.location.BuyableLocation;
 import models.location.Location;
 
@@ -33,7 +34,7 @@ public class Player implements Serializable{
 		this.cards = new ArrayList<Card>();
 		this.usableMoney = 200; // DEFAULT INITIAL MONEY
 		this.bankAccount = new BankAccount(playerId, 0, 0);
-		this.location = null;
+		this.location = LocationManager.getInstance().getLocationList().get(0);
 		this.inJailCount = 0; // Default
 		this.isInJail = false;
 		this.id = playerId;

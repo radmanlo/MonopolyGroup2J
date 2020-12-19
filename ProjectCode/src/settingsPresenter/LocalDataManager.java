@@ -158,7 +158,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             TradeManager mngr = TradeManager.getInstance();
             mngr= (TradeManager)in.readObject(); 
-  
+            
             in.close(); 
             file.close(); 
             System.out.println("Trade Object has been deserialized\n"); 

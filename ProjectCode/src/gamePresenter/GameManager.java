@@ -27,7 +27,11 @@ public class GameManager implements Serializable {
 		return gameManager;
 	}
 	
+	
+	
 	public void initializeNewGame(ArrayList<PotentialPlayer> pL, Document doc) {
+		LocalDataManager.getInstance().initialize(doc);
+		
 		for(int i = 0; i< pL.size(); i++) {
 			String name = pL.get(i).getName();
 			Token token = pL.get(i).getToken();
@@ -36,14 +40,15 @@ public class GameManager implements Serializable {
 			Player newPlayer = new Player(name, token, color, playerId);
 			PlayerManager.getInstance().addPlayer(newPlayer);
 			BankManager.getInstance().openAccount(newPlayer);
+			LocationManager.getInstance().getLocationList().get(0).addPlayerHere(newPlayer);
 		}
 
-		LocalDataManager.getInstance().initialize(doc);
+		
 
-//		PlayerManager.getInstance().setInitialCurrentPlayer();
+		PlayerManager.getInstance().setInitialCurrentPlayer();
 		BoardManager.getInstance();
-//		LocationManager.getInstance();
-//		CardManager.getInstance();
+		LocationManager.getInstance();
+		CardManager.getInstance();
 		TradeManager.getInstance();
 	}
 
@@ -76,6 +81,7 @@ public class GameManager implements Serializable {
 
 		// Activate the new Location
 		newLocation.activate();
+		BoardManager.getInstance().updateMap();
 	}
 
 	/**
