@@ -18,7 +18,7 @@ public class MainMenu extends Menu {
 	private JButton howToPlayBtn;
 	
 	public MainMenu() {
-		super("./resources/MainMenu.jpg");
+		super("./resources/MainBG.png");
 		
 		setLayout(null);
 		setBounds(0, 0, 1500, 900);
