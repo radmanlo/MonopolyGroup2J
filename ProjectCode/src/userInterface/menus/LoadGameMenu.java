@@ -21,23 +21,6 @@ public class LoadGameMenu extends Menu{
 	
 	public LoadGameMenu() {
 		super("./resources/LoadMenu.jpg");
-		JTextField loadField = new JTextField();
-		loadField.setBounds(284, 454, 86, 20);
-		add(loadField);
-		loadField.setColumns(10);
-		
-		
-		JButton diceRollButtons = new JButton("LoadGame");
-		diceRollButtons.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				LocalDataManager.getInstance().loadGame(loadField.getText());
-				
-				MenuManager.getInstance().openMenu(6);
-				BoardManager.getInstance().updateMap();
-			}
-		});
-		diceRollButtons.setBounds(300, 50, 89, 23);
-		add(diceRollButtons);
 	}
 	
 	private boolean initializeLoadGame() {

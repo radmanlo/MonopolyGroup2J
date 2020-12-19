@@ -157,7 +157,7 @@ public class LocalDataManager implements Serializable{
   
             // Method for deserialization of object 
             TradeManager mngr = TradeManager.getInstance();
-            mngr= (TradeManager)in.readObject(); 
+            mngr= (TradeManager)in.readObject();
             
             in.close(); 
             file.close(); 
@@ -302,7 +302,11 @@ public class LocalDataManager implements Serializable{
             in.close(); 
             file.close(); 
             System.out.println("Location Object has been deserialized\n"); 
-
+            
+            for( Player plyr : mngr.getLocationList().get(0).getAllPlayersHere()) {
+            	System.out.println(plyr.getName());
+            }
+            
         } 
   
         catch (IOException ex) { 

@@ -31,7 +31,12 @@ public class LocationManager implements Serializable {
 	private static LocationManager locationManager = null;
     private ArrayList<BuyableLocation> buyableLocations;
     private ArrayList<Location> nonBuyableLocations;
-
+    
+    
+    private LocationManager( LocationManager copy) {
+    	
+    }
+    
     private LocationManager(){
         this.buyableLocations = new ArrayList<BuyableLocation>();
         this.nonBuyableLocations = new ArrayList<Location>();

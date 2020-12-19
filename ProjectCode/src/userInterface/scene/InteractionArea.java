@@ -10,6 +10,8 @@ import gamePresenter.BoardManager;
 import gamePresenter.GameManager;
 import gamePresenter.PlayerManager;
 import settingsPresenter.LocalDataManager;
+import userInterface.menus.MenuManager;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
@@ -33,6 +35,23 @@ public class InteractionArea extends JPanel{
 		diceRollButton.setBounds(155, 50, 89, 23);
 		add(diceRollButton);
 		
+		JTextField loadField = new JTextField();
+		loadField.setBounds(284, 454, 86, 20);
+		add(loadField);
+		loadField.setColumns(10);
+		
+		
+		JButton diceRollButtons = new JButton("LoadGame");
+		diceRollButtons.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LocalDataManager.getInstance().loadGame(loadField.getText());
+				
+				MenuManager.getInstance().openMenu(6);
+				BoardManager.getInstance().updateMap();
+			}
+		});
+		diceRollButtons.setBounds(300, 50, 89, 23);
+		add(diceRollButtons);
 		
 		JButton buyBtn = new JButton("Buy");
 		buyBtn.setBounds(36, 208, 89, 23);
