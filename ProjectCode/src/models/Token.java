@@ -1,17 +1,23 @@
 package models;
 
 import java.awt.Image;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 
-public class Token {
-	private Image image;
+public class Token implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1858717624870311197L;
+	String path;
 	
 	public Token(String path) {
-		image = new ImageIcon(path).getImage();
+		this.path = path;
 	}
 
 	public Image getImage() {
+		Image image = new ImageIcon(path).getImage();
 		return image;
 	}
 }

@@ -1,6 +1,7 @@
 package gamePresenter;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import models.*;
@@ -12,14 +13,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class GameManager {
+public class GameManager implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5272580467727107668L;
+
 	private static GameManager gameManager = null;
 
-	private PlayerManager playerMngr = PlayerManager.getInstance();
-	private BoardManager boardMngr;
+	//private BoardManager boardMngr;
 	private Dice dice = new Dice();
-	private SoundManager soundMngr = SoundManager.getInstance();
-	private LocationManager locationManager = LocationManager.getInstance();
 	//private PlayerManager playerMngr;
 	//private BoardManager boardMngr;
 	//private SoundManager soundMngr;
@@ -56,7 +59,9 @@ public class GameManager {
 		TradeManager.getInstance();
 	}
 
-
+	public void saveGame(String name) {
+		LocalDataManager.getInstance().saveGame(name);
+	}
 
 	public static void executePurchase() {
 		

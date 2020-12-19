@@ -1,13 +1,18 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import models.location.BuyableLocation;
 
-public class TradeDeal {
+public class TradeDeal implements Serializable {
     
-    private Player offerer;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4290603540863062321L;
+	private Player offerer;
     private Player receiver;
     private ArrayList<BuyableLocation> offeredBuyables; 
     private ArrayList<Card> offeredCards; 

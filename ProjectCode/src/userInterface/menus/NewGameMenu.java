@@ -94,7 +94,6 @@ public class NewGameMenu extends Menu{
 		initializeGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				initializeNewGame();
-				MenuManager.getInstance().openMenu(6);
 			}
 		});
 		add(initializeGameBtn);
@@ -128,6 +127,7 @@ public class NewGameMenu extends Menu{
 
 			// Pass the document to the game manager alongside the potential players array
 			GameManager.getInstance().initializeNewGame(potentialPlayers, doc);
+			MenuManager.getInstance().openMenu(6);
 
 			return;
 		}

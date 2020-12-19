@@ -1,4 +1,5 @@
 package models;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -6,8 +7,12 @@ import models.location.BuyableLocation;
 import models.location.Location;
 
 
-public class Player {
+public class Player implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6142234477945059588L;
 	private String name;
 	Token token;
 	private PlayerColor colorId;

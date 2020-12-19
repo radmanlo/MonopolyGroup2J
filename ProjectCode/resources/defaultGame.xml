@@ -20,7 +20,7 @@
     <chance id="8" name="Chance Tile" x="390" y="949"/>
     <property id="8" name="Dorm 56" x="316" y="949" groupClr="LightBlue" price="100" rentValues="6,12,30,90,270" upgradeCost="50" mortgage="50" breakMortgage="70"/>
     <property id="9" name="Dorm 55" x="243" y="949" groupClr="LightBlue" price="100" rentValues="8,16,40,100,300" upgradeCost="50" mortgage="60" breakMortgage="80"/>
-	
+
     <disciplinary id="11" name="Disciplinary" x="50" y="949"></disciplinary><property id="12" name="Health Center Main" x="50" y="828" groupClr="Purple" price="140" rentValues="10,20,50,150,450" upgradeCost="100" mortgage="70" breakMortgage="100"/>
     <utility id="13" name="Marmara" x="50" y="755" groupClr="utility" price="140" rentValues="4,10" mortgage="75" breakMortgage="105"/>
     <property id="14" name="G building" x="50" y="682" groupClr="Purple" price="140" rentValues="10,20,50,150,450" upgradeCost="100" mortgage="70" breakMortgage="100"/>

@@ -1,11 +1,16 @@
 package gamePresenter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import models.Card;
 
-public class CardManager {
+public class CardManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5617304288178342343L;
 	private ArrayList<Card> cardDeck;
 	private int takenCardCount;
 	private static CardManager cardMngr = null;

@@ -1,12 +1,18 @@
 package gamePresenter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import models.*;
 //import models.Player;
 
-public class BankManager {
+public class BankManager implements Serializable {
 	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2031025429409145348L;
 	private static BankManager bank = null;
 	private double INTEREST_RATE = 0.10;
 	private ArrayList<BankAccount> accounts;

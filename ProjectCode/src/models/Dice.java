@@ -1,6 +1,12 @@
 package models;
 
-public class Dice {
+import java.io.Serializable;
+
+public class Dice implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7701328154586915869L;
 	private int firstDiceResult, secondDiceResult, totalResult;
 	
 	public Dice() {

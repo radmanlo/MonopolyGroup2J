@@ -15,6 +15,7 @@ import models.location.Utility;
 import models.*;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,8 +23,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class LocationManager {
-    private static LocationManager locationManager = null;
+public class LocationManager implements Serializable {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -9040597026391464212L;
+	private static LocationManager locationManager = null;
     private ArrayList<BuyableLocation> buyableLocations;
     private ArrayList<Location> nonBuyableLocations;
 

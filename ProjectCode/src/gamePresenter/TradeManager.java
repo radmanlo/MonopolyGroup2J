@@ -1,11 +1,16 @@
 package gamePresenter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import models.Player;
 import models.TradeDeal;
 
-public class TradeManager {
+public class TradeManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7017738273559935287L;
 	private static TradeManager tradeMngr = null;
 	private ArrayList<TradeDeal> tradeDeals;
 	public TradeManager() {
