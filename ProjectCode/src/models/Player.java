@@ -26,6 +26,26 @@ public class Player implements Serializable{
 	private boolean isInJail;
 	private int id;
 
+	public Player (Player copy) {
+		//TODO LOCATION AND BUYABLELOCATION LIST HARD COPY
+		this.name = copy.name;
+		this.token = new Token(copy.token);
+		this.colorId = copy.getColorId();
+		this.ownedLocations = new ArrayList<BuyableLocation>();
+		this.cards = new ArrayList<Card>();
+		for(int i = 0; i < copy.ownedLocations.size();i++) {
+			this.ownedLocations.add(copy.ownedLocations.get(i));
+		}
+		for(int i = 0; i < copy.cards.size(); i++ ) {
+			this.cards.add(copy.cards.get(i));
+		}
+		this.usableMoney = copy.usableMoney;
+		this.bankAccount = new BankAccount(copy.bankAccount);
+		this.location = copy.location;
+		this.inJailCount = copy.inJailCount;
+		this.isInJail = copy.isInJail;
+		this.id = copy.id;
+	}
 	public Player(String name, Token token, PlayerColor colorId, int playerId) {
 		this.name = name;
 		this.token = token;
@@ -54,7 +74,7 @@ public class Player implements Serializable{
 		this.isInJail = isInJail;
 		this.id = id;
 	}
-
+	
 	public int getId() {
 		return id;
 	}

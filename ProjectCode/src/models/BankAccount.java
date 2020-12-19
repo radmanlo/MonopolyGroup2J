@@ -10,6 +10,11 @@ public class BankAccount implements Serializable {
 	//Attributes
 	private int id, moneyAmount, cooldownCount;
 	//Constructor
+	public BankAccount( BankAccount copy) {
+		this.id = copy.id;
+		this.moneyAmount = copy.moneyAmount;
+		this.cooldownCount = copy.cooldownCount;
+	}
 	public BankAccount(int id, int moneyAmount, int cooldownCount) {
 		this.id = id;
 		this.setMoneyAmount(moneyAmount);
