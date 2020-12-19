@@ -91,10 +91,10 @@ public class Map extends JPanel{
 		}
 		
 		//testing
-		ImageToDraw vendingMachine = new ImageToDraw();
-		vendingMachine.image = Utils.scaleImage(30,30,"./resources/Starbucks.jpg");
-		vendingMachine.orgPoint = new Point2D.Double(147, 190);
-		imagesToDraw.add(vendingMachine);	
+		//ImageToDraw vendingMachine = new ImageToDraw();
+		//vendingMachine.image = Utils.scaleImage(30,30,"./resources/Starbucks.jpg");
+		//vendingMachine.orgPoint = new Point2D.Double(147, 190);
+		//imagesToDraw.add(vendingMachine);	
 
 		for( ImageToDraw imgO : imagesToDraw)
 			g.drawImage(imgO.image,(int) imgO.orgPoint.getX(),(int) imgO.orgPoint.getY(), this);

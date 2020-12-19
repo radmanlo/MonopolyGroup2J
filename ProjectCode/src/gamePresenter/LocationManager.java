@@ -51,17 +51,16 @@ public class LocationManager implements Serializable {
 
         // get the current location of the player
         Location currentLocation = getPlayerLocation(playerToMove);
-        System.out.println("current:" + currentLocation.getName());
         // calculate the next location
         int curLocId = currentLocation.getLocationId();
         int nextLocId = (curLocId + distance) % 40; // There are 40 locations in total with ids: 0-39
-
+        if(nextLocId == 0)
+        	nextLocId = 40;
         // remove player from current location
         currentLocation.removePlayerFromHere(playerToMove);
 
         // add player to new location
         newLocation = getLocationById(nextLocId);
-        System.out.println("new:" + newLocation.getName());
         newLocation.addPlayerHere(playerToMove);
         return newLocation;
     }
@@ -100,13 +99,13 @@ public class LocationManager implements Serializable {
         }
 
         // Try the nonBuyable ones
-        if (tmp == null){
+        //if (tmp == null){
             for (Location loc : nonBuyableLocations){
                 if (loc.getLocationId() == id){
                     tmp = loc;
                 }
             }
-        }
+        //}
 
         return tmp;
     }

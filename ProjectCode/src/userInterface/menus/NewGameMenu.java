@@ -100,7 +100,7 @@ public class NewGameMenu extends Menu{
 		add(initializeGameBtn);
 
 		drawInitPlayers();
-
+		redrawPotentialPlayers();
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class NewGameMenu extends Menu{
 		addPlayerPanel.repaint();
 
 		addNewPlayerBtn.setBounds(50, 50, 50, 50);
-		add(addNewPlayerBtn);
+		addPlayerPanel.add(addNewPlayerBtn);
 	}
 
 	/***
@@ -337,8 +337,9 @@ public class NewGameMenu extends Menu{
 			// (ADD_PLAYER_ITEM_WIDTH - 40) to get horizontal padding
 			newPlayerAddingScreens.get(i).setBounds(20, i * ADD_PLAYER_ITEM_HEIGHT + SPACE_BETWEEN_FIELDS, ADD_PLAYER_PANEL_WIDTH - 40, ADD_PLAYER_ITEM_HEIGHT);
 		}
+		addNewPlayerBtn.setBounds(300, SPACE_BETWEEN_FIELDS + ADD_PLAYER_ITEM_HEIGHT * newPlayerAddingScreens.size() + 10 , 51, 42);
 
-		if(newPlayerAddingScreens.size() <= 8 )
+		if(newPlayerAddingScreens.size() < 8 )
 			addNewPlayerBtn.setVisible(true);
 		else
 			addNewPlayerBtn.setVisible(false);
