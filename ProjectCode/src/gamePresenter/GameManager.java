@@ -62,38 +62,48 @@ public class GameManager implements Serializable {
 	public void saveGame(String name) {
 		LocalDataManager.getInstance().saveGame(name);
 	}
-
-	public static void executePurchase() {
-		
-	}
 	
 	public static void rollDice() {
-		
+		// Get current player
+		// roll the dice
+		// move player's token
+		// Activate the new Location
 	}
 
 	public static void tradeRequest(Property property, int value) {
 		
 	}
-	
-	public static boolean upgradeProperty(Property property) {
-		return false;
-	}
-	
-	public static LocationManager getInventoryManager() {
-		return null;
+
+
+	public void handleNewTurn() { // Initializing a new turn
+		// get the current player
+		// view the player
+		// view player's offers
 	}
 
-	public void handleNewTurn() {
-		
+	public void getOfferInfo(){
+		// return the offer's information
 	}
+
+//	public static void executePurchase() { // Let's have it in location's activate() method
+//
+//	}
 	
-	private boolean payRent() {
-		return false;
-	}
+//	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
+//		return false;
+//	}
 	
-	private void getAllTaxesFromMayfest() {
-		
-	}
+//	public static LocationManager getInventoryManager() { // What does it do?
+//		return null;
+//	}
+	
+//	private boolean payRent() { // Let's have it in location's activate() method
+//		return false;
+//	}
+	
+//	private void getAllTaxesFromMayfest() { // Let's have it in location's activate() method
+//
+//	}
 	
 	
 }
