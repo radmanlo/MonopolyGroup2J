@@ -2,26 +2,39 @@ package models;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import models.location.BuyableLocation;
+import models.location.Location;
+
 
 public class Player {
 
 	private String name;
 	Token token;
 	private PlayerColor colorId;
-	private ArrayList<Property> ownedLocations;
+	private ArrayList<BuyableLocation> ownedLocations;
 	private ArrayList<Card> cards;
 	private int usableMoney;
 	private BankAccount bankAccount;
-	private int location; // TODO: Change type to Location
+	private Location location; // TODO: Change type to Location
 	private int inJailCount;
 	private boolean isInJail;
 	private int id;
-	
-	public Player() {
-	}
 
-	public Player(String name, Token token, PlayerColor colorId, ArrayList<Property> ownedLocations,
-			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, int location, int inJailCount,
+	public Player(String name, Token token, PlayerColor colorId, int playerId) {
+		this.name = name;
+		this.token = token;
+		this.colorId = colorId;
+		this.ownedLocations = new ArrayList<BuyableLocation>();
+		this.cards = new ArrayList<Card>();
+		this.usableMoney = 200; // DEFAULT INITIAL MONEY
+		this.bankAccount = new BankAccount(playerId, 0, 0);
+		this.location = null;
+		this.inJailCount = 0; // Default
+		this.isInJail = false;
+		this.id = playerId;
+	}
+	public Player(String name, Token token, PlayerColor colorId, ArrayList<BuyableLocation> ownedLocations,
+			ArrayList<Card> cards, int usableMoney, BankAccount bankAccount, Location location, int inJailCount,
 			boolean isInJail, int id) {
 		this.name = name;
 		this.token = token;
@@ -57,15 +70,15 @@ public class Player {
 	}
 
 
-	public ArrayList<Property> getOwnedLocations() {
+	public ArrayList<BuyableLocation> getOwnedLocations() {
 		return this.ownedLocations;
 	}
 
-	public void addOwnedLocation(Property property) { // TODO: Change to Buyable
+	public void addOwnedLocation(BuyableLocation property) { // TODO: Change to Buyable
 		this.ownedLocations.add(property);
 	}
 
-	public void removeOwnedLocation(Property property) { // TODO: Change to Buyable
+	public void removeOwnedLocation(BuyableLocation property) { // TODO: Change to Buyable
 		this.ownedLocations.remove(property);
 	}
 
@@ -75,10 +88,6 @@ public class Player {
 
 	public void addCard(Card card) {
 		this.cards.add(card);
-	}
-
-	public void removeCard(Card card) {
-		this.cards.remove(card);
 	}
 
 	public int getUsableMoney() {
@@ -93,11 +102,11 @@ public class Player {
 		return this.bankAccount;
 	}
 
-	public int getLocation() {
+	public Location getLocation() {
 		return this.location;
 	}
 
-	public void setLocation(int location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 
@@ -117,6 +126,12 @@ public class Player {
 		this.isInJail = isInJail;
 	}
 	
+	public void removeCard(Card card) {
+		for(int i = 0; i < cards.size(); i++) {
+			if(cards.get(i).getCardId() == card.getCardId())
+				cards.remove(i);
+		}
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -143,7 +158,7 @@ public class Player {
 	public String toString() {
 		return "{" + " name='" + getName() + "'" + ", token='" + getToken() + "'" + ", colorId='" + getColorId() + "'"
 				+ ", ownedLocations='" + getOwnedLocations() + "'" + ", cards='" + getCards() + "'" + ", usableMoney='"
-				+ getUsableMoney() + "'" + ", bankAccount='" + getBankAccount() + "'" + ", location='" + getLocation()
+				+ getUsableMoney() + "'" + ", bankAccount='" + getBankAccount() + "'" + ", location name='" + getLocation().getName()
 				+ "'" + ", inJailCount='" + getInJailCount() + "'" + ", isInJail='" + "'" + "}";
 	}
 

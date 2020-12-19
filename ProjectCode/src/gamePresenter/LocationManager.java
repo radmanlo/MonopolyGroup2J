@@ -13,7 +13,10 @@ public class LocationManager {
     private ArrayList<BuyableLocation> buyableLocations;
     private ArrayList<Location> nonBuyableLocations;
 
-    private LocationManager(){ }
+    private LocationManager(){
+        this.buyableLocations = new ArrayList<BuyableLocation>();
+        this.nonBuyableLocations = new ArrayList<Location>();
+    }
 
     public static LocationManager getInstance(){
         if (locationManager == null){
@@ -60,12 +63,12 @@ public class LocationManager {
         return this.buyableLocations;
     }
 
-    public boolean groupHasSameOwner(BuyableLocation.GroupColor groupId){
+    public boolean groupHasSameOwner(BuyableLocation.GroupColor groupColor){
         HashMap<String, Integer> owners = new HashMap<String, Integer>();
         String ownerName = "";
 
         for (BuyableLocation loc : buyableLocations){
-            if (loc.getGroupId() == groupId){
+            if (loc.getGroupColor() == groupColor){
                 Integer propertyCount = owners.get(loc.getOwner().getName());
                 if (propertyCount == null)
                     propertyCount = 0;
@@ -82,16 +85,32 @@ public class LocationManager {
         }
     }
 
-    public int noOfOwnedByPlayerInGroup(Player player, BuyableLocation.GroupColor groupId){
+    public int noOfOwnedByPlayerInGroup(Player player, BuyableLocation.GroupColor groupColor){
         String playerName = player.getName();
         int count = 0;
 
         for (BuyableLocation loc : buyableLocations){
-            if (loc.getGroupId() == groupId && loc.getOwner().getName() == playerName){
+            if (loc.getGroupColor() == groupColor && loc.getOwner().getName() == playerName){
                 count ++;
             }
         }
 
         return count;
+    }
+
+    public void addBuyable(BuyableLocation aBuyable){
+        this.buyableLocations.add(aBuyable);
+    }
+
+    public void addNonBuyable(Location aNonBuyable){
+        this.nonBuyableLocations.add(aNonBuyable);
+    }
+
+    @Override
+    public String toString() {
+        return "LocationManager{" +
+                "buyableLocations=" + buyableLocations.toString() +
+                ", nonBuyableLocations=" + nonBuyableLocations.toString() +
+                '}';
     }
 }

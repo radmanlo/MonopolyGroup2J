@@ -8,14 +8,14 @@ import models.*;
 public class BankManager {
 	
 	private static BankManager bank = null;
-	private final double INTEREST_RATE = 0.10;
+	private double INTEREST_RATE = 0.10;
 	private ArrayList<BankAccount> accounts;
 	
 	public BankManager() {
 		accounts = new ArrayList<BankAccount>();
 	}
 	
-	private static BankManager getInstance() {
+	public static BankManager getInstance() {
 		if( bank == null ) {
 			bank = new BankManager();
 		}
@@ -54,5 +54,8 @@ public class BankManager {
 	public void openAccount(Player plyr) {
 		BankAccount nwBnkAccnt = new BankAccount(plyr.getId(), 0, 0);
 		accounts.add(nwBnkAccnt);
+	}
+	public void setINTEREST_RATE(double iNTEREST_RATE) {
+		INTEREST_RATE = iNTEREST_RATE;
 	}
 }

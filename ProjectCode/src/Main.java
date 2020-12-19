@@ -1,3 +1,5 @@
+import java.awt.EventQueue;
+
 import gamePresenter.SoundManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -6,14 +8,26 @@ import org.w3c.dom.NodeList;
 import settingsPresenter.LocalDataManager;
 import java.io.File;
 import java.io.FileInputStream;
+import userInterface.menus.MenuManager;
 
 public class Main {
 
     public static void main(String[] args) {
-        String path = "resources/sounds/bg-music.wav";
+    		EventQueue.invokeLater(new Runnable() {
+    			public void run() {
+    				try {
+    					MenuManager.getInstance();
+    					
+    				} catch (Exception e) {
+    					e.printStackTrace();
+    				}
+    			}
+    		});
+    	
+       // String path = "resources/sounds/bg-music.wav"; //needs to be initialized somewhere else -G
 
-        SoundManager soundManager = SoundManager.getInstance();
-        soundManager.playDiceSound();
-        soundManager.playBackgroundSound();
+    //   SoundManager soundManager = SoundManager.getInstance();
+       // soundManager.playDiceSound();
+       // soundManager.playBackgroundSound();
     }
 }

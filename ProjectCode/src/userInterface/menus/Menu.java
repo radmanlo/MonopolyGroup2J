@@ -1,19 +1,35 @@
 package userInterface.menus;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import models.Token;
+
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 
 abstract class Menu extends JPanel{ //instead of it having a panel attribute, I made it directly extend JPanel
 	//to make working with windowBuilder easier
 	
 	public JButton backBtn;
-	
-	public Menu() {
+    private BufferedImage img;
+    private String backgroundImagePath;
+    
+    
+	public Menu(String path) {
+		backgroundImagePath = path;
 		setLayout(null);
-		
+        try {
+
+            img = ImageIO.read(new File(backgroundImagePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 		backBtn = new JButton("Back");
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -24,8 +40,17 @@ abstract class Menu extends JPanel{ //instead of it having a panel attribute, I 
 		add(backBtn);
 	}
 	
-
-	
+//	public void paintComponent( Graphics g )
+//	{
+//	  super.paintComponent( g );
+//	  Graphics2D g2d = (Graphics2D) g;
+	  // use g2d.drawImage methods to paint your background …
+	   @Override
+	    protected void paintComponent(Graphics g) {
+	        super.paintComponent(g);
+	        // paint the background image and scale it to fill the entire space
+	        g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+	    }
 	public void goBackPanel() {
 		MenuManager.getInstance().openMenu(5);//was private in class diagram but does not work when private -G
 	}

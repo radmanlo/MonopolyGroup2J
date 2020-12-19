@@ -3,22 +3,20 @@ package models;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import models.location.BuyableLocation;
+
 public class TradeDeal {
     
     private Player offerer;
     private Player receiver;
-    private ArrayList<Property> offeredBuyables; // TODO: Change Property to Buyable when Buyable is added    
+    private ArrayList<BuyableLocation> offeredBuyables; 
     private ArrayList<Card> offeredCards; 
     private int offeredMoney;
-    private ArrayList<Property> requestedBuyables; // TODO: Change Property to Buyable when Buyable is added    
+    private ArrayList<BuyableLocation> requestedBuyables; 
     private ArrayList<Card> requestedCards; 
     private int requestedMoney;
 
-
-    public TradeDeal() {
-    }
-
-    public TradeDeal(Player offerer, Player receiver, ArrayList<Property> offeredBuyables, ArrayList<Card> offeredCards, int offeredMoney, ArrayList<Property> requestedBuyables, ArrayList<Card> requestedCards, int requestedMoney) {
+    public TradeDeal(Player offerer, Player receiver, ArrayList<BuyableLocation> offeredBuyables, ArrayList<Card> offeredCards, int offeredMoney, ArrayList<BuyableLocation> requestedBuyables, ArrayList<Card> requestedCards, int requestedMoney) {
         this.offerer = offerer;
         this.receiver = receiver;
         this.offeredBuyables = offeredBuyables;
@@ -30,42 +28,76 @@ public class TradeDeal {
     }
 
     public void execute() {
-        
+       transferMoney();
+       transferCards();
+       transferBuyables();
     }
     public void transferMoney() {
-
+    	int money = offeredMoney- requestedMoney;
+    	offerer.setUsableMoney(offerer.getUsableMoney() - money);
+    	receiver.setUsableMoney(offerer.getUsableMoney() + money);
     }
     public void transferCards() {
-
+    	for(int i = 0; i < offeredCards.size(); i++) {
+    		offerer.removeCard(offeredCards.get(i));
+    		receiver.addCard(offeredCards.get(i));
+    	}
+    	for(int i = 0; i < requestedCards.size(); i++) {
+    		receiver.removeCard(offeredCards.get(i));
+    		offerer.addCard(offeredCards.get(i));
+    	}
     }
     public void transferBuyables() {
-
+    	for(int i = 0; i < offeredBuyables.size(); i++) {
+    		offerer.removeOwnedLocation(offeredBuyables.get(i));
+    		receiver.addOwnedLocation(offeredBuyables.get(i));
+    	}
+    	for(int i = 0; i < requestedBuyables.size(); i++) {
+    		receiver.removeOwnedLocation(offeredBuyables.get(i));
+    		offerer.addOwnedLocation(offeredBuyables.get(i));
+    	}
     }
 
-    public void addBuyableToOffered(Property item) { // TODO: Change to Buyable
-
+    public void addBuyableToOffered(BuyableLocation item) {
+    	offeredBuyables.add(item);
     }
-    public void removeBuyableFromOffered(Property item) { // TODO: Change to Buyable
-
+    public void removeBuyableFromOffered(BuyableLocation item) { 
+    	for(int i = 0; i < offeredBuyables.size(); i++) {
+    		if(offeredBuyables.get(i).getName() == item.getName()) {
+    			offeredBuyables.remove(i);
+    		}
+    	}
     }
-    public void addCardToOffered(Card card) { // TODO: Change to Buyable
-
+    public void addCardToOffered(Card card) { 
+    	offeredCards.add(card);
     }
-    public void removeCardFromOffered(Card card) { // TODO: Change to Buyable
-
+    public void removeCardFromOffered(Card card) { 
+    	for(int i = 0; i < offeredCards.size(); i++) {
+    		if(offeredCards.get(i).getCardId() == card.getCardId()) {
+    			offeredBuyables.remove(i);
+    		}
+    	}
     }
 
-    public void addBuyableToRequested(Property item) { // TODO: Change to Buyable
-
+    public void addBuyableToRequested(BuyableLocation item) { 
+    	requestedBuyables.add(item);
     }
-    public void removeBuyableFromRequested(Property item) { // TODO: Change to Buyable
-
+    public void removeBuyableFromRequested(BuyableLocation item) { 
+    	for(int i = 0; i < requestedBuyables.size(); i++) {
+    		if(requestedBuyables.get(i).getName() == item.getName()) {
+    			requestedBuyables.remove(i);
+    		}
+    	}
     }
-    public void addCardToRequested(Card card) { // TODO: Change to Buyable
-
+    public void addCardToRequested(Card card) { 
+    	requestedCards.add(card);
     }
-    public void removeCardFromRequested(Card card) { // TODO: Change to Buyable
-
+    public void removeCardFromRequested(Card card) { 
+    	for(int i = 0; i < requestedCards.size(); i++) {
+    		if(requestedCards.get(i).getCardId() == card.getCardId()) {
+    			requestedCards.remove(i);
+    		}
+    	}
     }
 
     public Player getOfferer() {
@@ -84,11 +116,11 @@ public class TradeDeal {
         this.receiver = receiver;
     }
 
-    public ArrayList<Property> getOfferedBuyables() {
+    public ArrayList<BuyableLocation> getOfferedBuyables() {
         return this.offeredBuyables;
     }
 
-    public void setOfferedBuyables(ArrayList<Property> offeredBuyables) {
+    public void setOfferedBuyables(ArrayList<BuyableLocation> offeredBuyables) {
         this.offeredBuyables = offeredBuyables;
     }
 
@@ -108,11 +140,11 @@ public class TradeDeal {
         this.offeredMoney = offeredMoney;
     }
 
-    public ArrayList<Property> getRequestedBuyables() {
+    public ArrayList<BuyableLocation> getRequestedBuyables() {
         return this.requestedBuyables;
     }
 
-    public void setRequestedBuyables(ArrayList<Property> requestedBuyables) {
+    public void setRequestedBuyables(ArrayList<BuyableLocation> requestedBuyables) {
         this.requestedBuyables = requestedBuyables;
     }
 
@@ -142,7 +174,7 @@ public class TradeDeal {
         return this;
     }
 
-    public TradeDeal offeredBuyables(ArrayList<Property> offeredBuyables) {
+    public TradeDeal offeredBuyables(ArrayList<BuyableLocation> offeredBuyables) {
         this.offeredBuyables = offeredBuyables;
         return this;
     }
@@ -157,7 +189,7 @@ public class TradeDeal {
         return this;
     }
 
-    public TradeDeal requestedBuyables(ArrayList<Property> requestedBuyables) {
+    public TradeDeal requestedBuyables(ArrayList<BuyableLocation> requestedBuyables) {
         this.requestedBuyables = requestedBuyables;
         return this;
     }

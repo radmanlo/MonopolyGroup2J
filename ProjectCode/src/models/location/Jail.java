@@ -1,5 +1,6 @@
 package models.location;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import models.Player;
@@ -7,8 +8,9 @@ import models.Player;
 public class Jail extends Location{
     private ArrayList<Player> prisoners;
 
-    Jail(){
-        super();
+    public Jail(int locationId, String name, Point2D point, ArrayList<Player> playersHere, ArrayList<Player> prisoners) {
+        super(locationId, name, point, playersHere);
+        this.prisoners = prisoners;
     }
 
     @Override

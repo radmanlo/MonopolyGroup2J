@@ -1,10 +1,16 @@
 package models.location;
 
-public class StartTile extends Location{
-    private final int PRIZE_VALUE = 500; // TODO change this number
+import models.Player;
 
-    StartTile(){
-        super();
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+
+public class StartTile extends Location{
+    private int prizeValue;
+
+    public StartTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere, int prizeValue) {
+        super(locationId, name, point, playersHere);
+        this.prizeValue = prizeValue;
     }
 
     @Override
@@ -13,6 +19,6 @@ public class StartTile extends Location{
     }
 
     public int getPrize(){
-        return this.PRIZE_VALUE;
+        return this.prizeValue;
     }
 }

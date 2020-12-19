@@ -1,4 +1,8 @@
 package userInterface.menus;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JTextArea;
 
 public class HowToPlayMenu extends Menu {
@@ -7,7 +11,7 @@ public class HowToPlayMenu extends Menu {
 	private JTextArea instructionDisplayer;
 	
 	public HowToPlayMenu() {
-
+		super("./resources/HowToPlayMenu.jpg");
 	}
 
 }

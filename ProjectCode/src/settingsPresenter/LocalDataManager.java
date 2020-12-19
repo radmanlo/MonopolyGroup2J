@@ -6,6 +6,8 @@ import org.w3c.dom.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.StringReader;
+import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class LocalDataManager {
@@ -69,7 +71,8 @@ public class LocalDataManager {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
 		try {
-			xmlString = readFileToString("D:/data/file.xml");
+//			Path xmlPath = Paths.get("..", "..", "resources", "defaultGame.xml");
+			xmlString = readFileToString("D:\\data\\defaultGame.xml");
 
 			try {
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();

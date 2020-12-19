@@ -10,7 +10,7 @@ public class PauseMenu extends Menu{
 	private JTextField saveNameTxtField; 
 	
 	public PauseMenu() {
-
+		super("./resources/Background.jpg");
 	}
 	
 	@Override

@@ -1,7 +1,10 @@
 package userInterface.menus;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -15,6 +18,8 @@ public class MainMenu extends Menu {
 	private JButton howToPlayBtn;
 	
 	public MainMenu() {
+		super("./resources/MainMenu.jpg");
+		
 		setLayout(null);
 		setBounds(0, 0, 1500, 900);
 		remove(backBtn);

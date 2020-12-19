@@ -16,7 +16,7 @@ public class CardManager {
 		takenCardCount = 0;
 	}
 	
-	private static CardManager getInstance() {
+	public static CardManager getInstance() {
 		if( cardMngr == null ) {
 			cardMngr = new CardManager();
 		}
@@ -45,5 +45,17 @@ public class CardManager {
 	//TODO GET OUT OF JAIL IMPLEMENTATION
 	public void getOutOfJail() {
 		System.out.println("Getting out of Jail Dummy");
+	}
+	
+	public void addCard(Card card) {
+		cardDeck.add(card);
+	}
+
+	@Override
+	public String toString() {
+		return "CardManager{" +
+				"cardDeck=" + cardDeck.toString() +
+				", takenCardCount=" + takenCardCount +
+				'}';
 	}
 }
