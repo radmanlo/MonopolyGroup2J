@@ -9,10 +9,14 @@ public class IncomeTaxTile extends Location{
     private int taxValue;
 
     public IncomeTaxTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere, int taxValue) {
-        super(locationId, name, point, playersHere, LOCATION_TYPES.INCOME_TAX);
+        super(locationId, name, point, playersHere);
         this.taxValue = taxValue;
     }
 
+    public IncomeTaxTile( IncomeTaxTile copy) {
+    	super(copy);
+    	this.taxValue = copy.taxValue;
+    }
     public int getTaxValue(){
         return this.taxValue;
     }

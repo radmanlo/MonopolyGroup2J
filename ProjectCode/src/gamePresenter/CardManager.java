@@ -26,7 +26,8 @@ public class CardManager implements Serializable{
 		this.cardDeck = new ArrayList<Card>();
 		this.takenCardCount = mngr.takenCardCount;
 		for(int i = 0; i < cardDeck.size(); i++) {
-			this.cardDeck.add(mngr.cardDeck.get(i));
+			Card cr = new Card(mngr.cardDeck.get(i));
+			this.cardDeck.add(cr);
 		}		
 	}
 

@@ -11,13 +11,24 @@ public class Property extends BuyableLocation{
     private int upgradeCost;
 
     public Property(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, int vendingMachinesNo, boolean ownsStarbucks, int upgradeCost) {
-        super(locationId, name, point, playersHere, groupColor, owner, price, currentRentValue, mortgageValue, breakMortgageValue, underMortgage, rentValues, LOCATION_TYPES.PROPERTY);
+        super(locationId, name, point, playersHere, groupColor, owner, price, currentRentValue, mortgageValue, breakMortgageValue, underMortgage, rentValues);
         this.vendingMachinesNo = vendingMachinesNo;
         this.ownsStarbucks = ownsStarbucks;
         this.upgradeCost = upgradeCost;
     }
 
-    @Override
+    public Property(Property copy) {
+        super(copy);
+        this.vendingMachinesNo = copy.vendingMachinesNo;
+        this.ownsStarbucks = copy.ownsStarbucks;
+        this.upgradeCost = copy.upgradeCost;
+		// TODO Auto-generated constructor stub
+	}
+
+    public Property clone() {
+        return new Property(this);
+    }
+	@Override
     public void activate() {
         super.activate();
     }

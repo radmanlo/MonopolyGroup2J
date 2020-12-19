@@ -30,7 +30,7 @@ public class PlayerManager implements Serializable{
 			Player plyr = new Player(mngr.players.get(i));
 			this.players.add(plyr);
 		}
-		currentPlayer = players.get(currentPlayerIndex);
+		currentPlayer = new Player(mngr.getCurrentPlayer());
 	}
 
 	// Operational methods
