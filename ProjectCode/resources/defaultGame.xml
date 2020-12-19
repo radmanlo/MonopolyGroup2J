@@ -10,29 +10,29 @@
     <card storable="false" id="119" name="Fell asleep" description="You fell asleep in class and missed your turn."/>
     <card storable="false" id="120" name="Friend's HW" description="You got caught doing your friend's homework. Pay 500."/>
 
-    <startLoc id="1" name="Start Location" x="0" y="0" prizeValue="250"/>
+    <startLoc id="1" name="Start Location" x="600" y="600" prizeValue="250"/>
     <property id="2" name="Odeon" x="0" y="0" groupClr="Brown" price="60" rentValues="2,4,10,30,90" upgradeCost="50" mortgage="30" breakMortgage="50"/>
-    <chance id="3" name="Chance Tile" x="0" y="0"/>    
+    <chance id="3" name="Chance Tile" x="0" y="0"/>
     <property id="4" name="C Building" x="0" y="0" groupClr="Brown" price="60" rentValues="2,4,10,30,90" upgradeCost="50" mortgage="30" breakMortgage="50"/>
-    <incomeTax id="5" name="Income Tax" x="0" y="0" tax="200"/>    
+    <incomeTax id="5" name="Income Tax" x="0" y="0" tax="200"/>
     <bus id="6" name="SMD Line" x="0" y="0" groupClr="Bus" price="200" rentValues="25,50,100,200" mortgage="100" breakMortgage="125"/>
     <property id="7" name="Dorm 57" x="0" y="0" groupClr="LightBlue" price="120" rentValues="6,12,30,90,270" upgradeCost="50" mortgage="50" breakMortgage="70"/>
-    <chance id="8" name="Chance Tile" x="0" y="0"/>    
+    <chance id="8" name="Chance Tile" x="0" y="0"/>
     <property id="8" name="Dorm 56" x="0" y="0" groupClr="LightBlue" price="100" rentValues="6,12,30,90,270" upgradeCost="50" mortgage="50" breakMortgage="70"/>
     <property id="9" name="Dorm 55" x="0" y="0" groupClr="LightBlue" price="100" rentValues="8,16,40,100,300" upgradeCost="50" mortgage="60" breakMortgage="80"/>
-    <jail id="11" name="Jail" x="0" y="0"/>
+    <jail id="11" name="Disciplinary" x="0" y="0"/>
     <property id="12" name="Health Center Main" x="0" y="0" groupClr="Purple" price="140" rentValues="10,20,50,150,450" upgradeCost="100" mortgage="70" breakMortgage="100"/>
     <utility id="13" name="Marmara" x="0" y="0" groupClr="utility" price="140" rentValues="4,10" mortgage="75" breakMortgage="105"/>
     <property id="14" name="G building" x="0" y="0" groupClr="Purple" price="140" rentValues="10,20,50,150,450" upgradeCost="100" mortgage="70" breakMortgage="100"/>
     <property id="15" name="Register's Office" x="0" y="0" groupClr="Purple" price="160" rentValues="12,24,60,180,500" upgradeCost="100" mortgage="80" breakMortgage="110"/>
     <bus id="16" name="TMD Line" x="0" y="0" groupClr="Bus" price="200" rentValues="25,50,100,200" mortgage="100" breakMortgage="125"/>
     <property id="17" name="Nanotam" x="0" y="0" groupClr="orange" price="180" rentValues="14,28,70,200,550" upgradeCost="100" mortgage="90" breakMortgage="120"/>
-    <chance id="18" name="Chance Tile" x="0" y="0"/>    
+    <chance id="18" name="Chance Tile" x="0" y="0"/>
     <property id="19" name="Sport Center Main" x="0" y="0" groupClr="orange" price="180" rentValues="14,28,70,200,550" upgradeCost="100" mortgage="90" breakMortgage="120"/>
     <property id="20" name="School Of Turizm" x="0" y="0" groupClr="orange" price="200" rentValues="16,32,80,220,600" upgradeCost="100" mortgage="100" breakMortgage="130"/>
-    <mayfest id="21" name="Mayfest" x="0" y="0"/>    
+    <mayfest id="21" name="Mayfest" x="0" y="0"/>
     <property id="22" name="Faculty Of Music" x="0" y="0" groupClr="red" price="220" rentValues="18,36,90,250,700" upgradeCost="150" mortgage="110" breakMortgage="140"/>
-    <chance id="23" name="Chance Tile" x="0" y="0"/>    
+    <chance id="23" name="Chance Tile" x="0" y="0"/>
     <property id="24" name="M Building" x="0" y="0" groupClr="red" price="220" rentValues="18,36,90,250,700" upgradeCost="150" mortgage="110" breakMortgage="140"/>
     <property id="25" name="H Building" x="0" y="0" groupClr="red" price="240" rentValues="20,40,100,300,750" upgradeCost="150" mortgage="120" breakMortgage="150"/>
     <bus id="26" name="CAY Line" x="0" y="0" groupClr="Bus" price="200" rentValues="25,50,100,200" mortgage="100" breakMortgage="125"/>
@@ -40,13 +40,13 @@
     <property id="28" name="F Building" x="0" y="0" groupClr="yellow" price="260" rentValues="22,44,110,330,800" upgradeCost="150" mortgage="130" breakMortgage="160"/>
     <utility id="29" name="WC" x="0" y="0" groupClr="utility" price="150" rentValues="4,10" mortgage="75" breakMortgage="105"/>
     <property id="30" name="Library" x="0" y="0" groupClr="yellow" price="280" rentValues="24,48,120,360,850" upgradeCost="150" mortgage="140" breakMortgage="170"/>
-    <disciplinary id="31" name="Disciplinary" x="0" y="0"/> 
+    <disciplinary id="31" name="GoToDisciplinaryTile" x="0" y="0"/>
     <property id="32" name="A Building" x="0" y="0" groupClr="green" price="300" rentValues="26,52,130,390,900" upgradeCost="200" mortgage="150" breakMortgage="190"/>
     <property id="33" name="S Building" x="0" y="0" groupClr="green" price="300" rentValues="26,52,130,390,900" upgradeCost="200" mortgage="150" breakMortgage="190"/>
-    <chance id="34" name="Chance Tile" x="0" y="0"/>    
+    <chance id="34" name="Chance Tile" x="0" y="0"/>
     <property id="35" name="EA Building" x="0" y="0" groupClr="green" price="320" rentValues="28,56,150,450,1000" upgradeCost="200" mortgage="160" breakMortgage="200"/>
     <bus id="36" name="BAH Line" x="0" y="0" groupClr="Bus" price="200" rentValues="25,50,100,200" mortgage="100" breakMortgage="125"/>
-    <chance id="37" name="Chance Tile" x="0" y="0"/>    
+    <chance id="37" name="Chance Tile" x="0" y="0"/>
     <property id="38" name="EE Building" x="0" y="0" groupClr="darkBlue" price="350" rentValues="35,70,175,500,1100" upgradeCost="200" mortgage="175" breakMortgage="220"/>
     <incomeTax id="39" name="Smoking Fine"  x="0" y="0" tax="200"/>
     <property id="40" name="Meteksan Bookstore" x="0" y="0" groupClr="darkBlue" price="400" rentValues="50,100,200,600,1400" upgradeCost="200" mortgage="200" breakMortgage="250"/>
