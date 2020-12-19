@@ -62,8 +62,12 @@ public class GameManager implements Serializable {
 		Location newLocation = null;
 
 		// roll the dice
-		this.dice.rollDices();
-		int moveDistance = this.dice.getTotalResult();
+		int moveDistance = 0;
+
+		do {
+			this.dice.rollDices();
+			moveDistance += this.dice.getTotalResult();
+		}while(this.dice.isDoubleDice());
 
 		// move player's token
 		newLocation = LocationManager.getInstance().movePlayer(currentPlayer, moveDistance);
