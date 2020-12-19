@@ -36,7 +36,7 @@ public class NewPlayerAddingScreen extends JPanel{
 	private PlayerColor chosenColor;
 	private String chosenName;
 
-	public NewPlayerAddingScreen(NewGameMenu parentMenu) {
+	public NewPlayerAddingScreen(NewGameMenu parentMenu, int indexNumber) {
 		this.parentMenu = parentMenu;
 		chosenToken = null;
 		chosenColor = PlayerColor.WHITE;
@@ -69,17 +69,20 @@ public class NewPlayerAddingScreen extends JPanel{
 
 		NewPlayerAddingScreen copyOfThis = this;
 
-		removePlayerBtn = new RoundedButton("X", 20, 20, Color.red); //I want to make it rounded -G
+		removePlayerBtn = new RoundedButton("X", 20, 20, Color.red);
 		removePlayerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				parentMenu.removePotentialPlayer(copyOfThis);
 			}
 		});
 		removePlayerBtn.setBackground(Color.RED);
-//		removePlayerBtn.se(true);
 		removePlayerBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		removePlayerBtn.setBounds(941, 11, 66, 36);
 		add(removePlayerBtn);
+		
+		nameField.setText("Player " + indexNumber);
+		colorComboBox.setSelectedIndex(indexNumber - 1);
+		tokenComboBox.setSelectedIndex(indexNumber - 1);
 	}
 	
 	public void updateChosens() {

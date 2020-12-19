@@ -75,10 +75,10 @@ public class NewGameMenu extends Menu{
 		backBtn.setBounds(33, 379, 289, 90);
 
 		// Initialize the first two players
-		NewPlayerAddingScreen s1 = new NewPlayerAddingScreen(this);
+		NewPlayerAddingScreen s1 = new NewPlayerAddingScreen(this, 1);
 		newPlayerAddingScreens.add(s1);
 
-		NewPlayerAddingScreen s2 = new NewPlayerAddingScreen(this);
+		NewPlayerAddingScreen s2 = new NewPlayerAddingScreen(this, 2);
 		newPlayerAddingScreens.add(s2);
 
 		addNewPlayerBtn = new RoundedButton("+");
@@ -306,7 +306,7 @@ public class NewGameMenu extends Menu{
 	public void addPotentialPlayer() {
 		if( newPlayerAddingScreens.size() < 8 ) {
 
-			NewPlayerAddingScreen sTemp = new NewPlayerAddingScreen(this);
+			NewPlayerAddingScreen sTemp = new NewPlayerAddingScreen(this, newPlayerAddingScreens.size() + 1);
 			newPlayerAddingScreens.add(sTemp);
 			addPlayerPanel.add(sTemp);
 

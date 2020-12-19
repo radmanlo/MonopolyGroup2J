@@ -96,14 +96,13 @@ public class Map extends JPanel{
 		//vendingMachine.orgPoint = new Point2D.Double(147, 190);
 		//imagesToDraw.add(vendingMachine);	
 
-		for( ImageToDraw imgO : imagesToDraw)
-			g.drawImage(imgO.image,(int) imgO.orgPoint.getX(),(int) imgO.orgPoint.getY(), this);
-
 		for( RectToDraw rectO : rectsToDraw) {
 			Color color = getUsableColor(rectO.color);
 			g.setColor(color);
 			g.fillRect((int)rectO.orgPoint.getX(), (int)rectO.orgPoint.getY(), rectO.width, rectO.heigth);
 		}
+		for( ImageToDraw imgO : imagesToDraw)
+			g.drawImage(imgO.image,(int) imgO.orgPoint.getX(),(int) imgO.orgPoint.getY(), this);
 	}
 
 	private Color getUsableColor(PlayerColor playerColor) {
@@ -185,7 +184,7 @@ public class Map extends JPanel{
 		BoardSide sideOfLoc = getBoardSideById(loc.getLocationId()); 
 		
 		for(int i=0; i< playersHere.size(); ++i) {
-			Image playerToken = playersHere.get(i).getToken().getImage();
+			String playerTokenPath = playersHere.get(i).getToken().getPath();
 
 			if( i > 4)
 				secondOffset = TOKEN_OFFSETFOR4PLAYERS;
@@ -193,20 +192,20 @@ public class Map extends JPanel{
 			int xPoint = 0;
 			int yPoint = 0;
 			if( sideOfLoc == BoardSide.DOWN) {
-				xPoint = (int) orgPoint.getX() - TOKEN_OFFSET * i;
-				yPoint = (int) orgPoint.getY() + TOKEN_OFFSETFOR4PLAYERS;
+				xPoint = (int) orgPoint.getX() - 20 - TOKEN_OFFSET * i;
+				yPoint = (int) orgPoint.getY() - 20 + TOKEN_OFFSETFOR4PLAYERS;
 			}else if(sideOfLoc == BoardSide.LEFT) {
 				xPoint = (int) orgPoint.getX() - TOKEN_OFFSETFOR4PLAYERS;
-				yPoint = (int) orgPoint.getY() - TOKEN_OFFSET * i;
+				yPoint = (int) orgPoint.getY() - 20 -TOKEN_OFFSET * i;
 			}else if(sideOfLoc == BoardSide.UP) {
 				xPoint = (int) orgPoint.getX() + TOKEN_OFFSET * i;
 				yPoint = (int) orgPoint.getY() - TOKEN_OFFSETFOR4PLAYERS;
 			}else if(sideOfLoc == BoardSide.RIGHT) {
-				xPoint = (int) orgPoint.getX() + TOKEN_OFFSETFOR4PLAYERS;
+				xPoint = (int) orgPoint.getX() -20 + TOKEN_OFFSETFOR4PLAYERS;
 				yPoint = (int) orgPoint.getY() + TOKEN_OFFSET * i;
 			}
 			ImageToDraw token = new ImageToDraw();
-			token.image = playerToken;
+			token.image = Utils.scaleImage(20,20,playerTokenPath);
 			token.orgPoint = new Point2D.Double(xPoint, yPoint);
 			imagesToDraw.add(token);
 		}
@@ -215,6 +214,10 @@ public class Map extends JPanel{
 	private void drawOwnerOfHere(BuyableLocation loc) {
 		final int OWNER_RECT_WIDTH = 20; 
 		
+		Point2D orgPoint = loc.getPoint();
+		int xPoint = (int) orgPoint.getX();
+		int yPoint = (int) orgPoint.getY();
+		
 		if( loc.getOwner() == null)
 			return;
 		
@@ -222,15 +225,26 @@ public class Map extends JPanel{
 		
 		BoardSide sideOfLoc = getBoardSideById(loc.getLocationId()); 
 		
-		if( sideOfLoc == BoardSide.DOWN || sideOfLoc == BoardSide.UP) {
+		
+		if( sideOfLoc == BoardSide.DOWN) {
 			rect.heigth = OWNER_RECT_WIDTH;
 			rect.width = NORMAL_TILE_WIDTH;
-		}else{
+			xPoint -= NORMAL_TILE_WIDTH;
+		}else if(sideOfLoc == BoardSide.LEFT) {
+			rect.heigth = NORMAL_TILE_WIDTH;
+			rect.width = OWNER_RECT_WIDTH;
+			xPoint -= OWNER_RECT_WIDTH;
+			yPoint -= NORMAL_TILE_WIDTH;
+		}else if(sideOfLoc == BoardSide.UP) {
+			rect.heigth = OWNER_RECT_WIDTH;
+			rect.width = NORMAL_TILE_WIDTH;
+			yPoint -= OWNER_RECT_WIDTH;
+		}else if(sideOfLoc == BoardSide.RIGHT) {
 			rect.heigth = NORMAL_TILE_WIDTH;
 			rect.width = OWNER_RECT_WIDTH;
 		}
 		
-		rect.orgPoint = loc.getPoint();
+		rect.orgPoint = new Point2D.Double(xPoint,yPoint);
 		rect.color = loc.getOwner().getColorId();
 		rectsToDraw.add(rect);
 	}
