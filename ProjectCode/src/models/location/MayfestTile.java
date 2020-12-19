@@ -12,6 +12,10 @@ public class MayfestTile extends Location{
         this.collectedTax = collectedTax;
     }
 
+    public int getCollectedTax(){
+        return this.collectedTax;
+    }
+
     @Override
     public void activate() {
         super.activate();

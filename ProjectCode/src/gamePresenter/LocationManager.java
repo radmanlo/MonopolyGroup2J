@@ -1,27 +1,12 @@
 package gamePresenter;
 
-import models.location.BusStop;
 //import com.sun.javafx.image.IntPixelGetter;
-import models.location.BuyableLocation;
-import models.location.ChanceTile;
-import models.location.Disciplinary;
-import models.location.GoToDisciplinaryTile;
-import models.location.IncomeTaxTile;
-import models.location.Location;
-import models.location.MayfestTile;
-import models.location.Property;
-import models.location.StartTile;
-import models.location.Utility;
+import models.location.*;
 import models.*;
 
-import java.awt.geom.Point2D;
-import java.io.Serializable;
+        import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class LocationManager implements Serializable {
     /**
@@ -217,12 +202,18 @@ public class LocationManager implements Serializable {
         int rentValue = ((BuyableLocation)busLoc).getCurrentRentValue();
 
         if (busStationOwner == null){
-            // Check money if enough
-            // Prompt to buy property
+            if (currentPlayer.getUsableMoney() >= ((BuyableLocation) busLoc).getPrice()){
+                // TODO Prompt to buy location
 
-            // if OK Buy the property
-            buyProperty(busLoc, currentPlayer);
-        } else if (busStationOwner.getName() != currentPlayer.getName()){
+                // if OK Buy the property
+                boolean boughtTheBusStation = buyLocation(busLoc, currentPlayer);
+                if (boughtTheBusStation){
+                    busStationOwner = currentPlayer; // Current player bought it successfully
+                }
+            }
+        }
+
+        if (busStationOwner.getName() != currentPlayer.getName()){ // Rent the bus station
             deductRentValue(busStationOwner, currentPlayer, rentValue);
         }
     }
@@ -231,55 +222,88 @@ public class LocationManager implements Serializable {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player propertyOwner = ((BuyableLocation)propertyLoc).getOwner();
         int rentValue = ((BuyableLocation)propertyLoc).getCurrentRentValue();
-        int upgradeValue = ((Property)propertyLoc).getUpgradeCost();
 
         if (propertyOwner == null){ // Buy property
             // Check money if enough
-            if (currentPlayer.getUsableMoney() > ((Property) propertyLoc).getPrice()){
-                // Prompt to buy property
+            if (currentPlayer.getUsableMoney() >= ((Property) propertyLoc).getPrice()){
+                // TODO Prompt to buy property
 
                 // if OK Buy the property
-                buyProperty(propertyLoc, currentPlayer);
+                boolean boughtTheProperty = buyLocation(propertyLoc, currentPlayer);
+                if (boughtTheProperty){
+                    propertyOwner = currentPlayer;
+                }
             }
-        } else if (propertyOwner.getName() != currentPlayer.getName()){ // Pay rent
-            deductRentValue(propertyOwner, currentPlayer, rentValue);
         } else { // Upgrade property
             if (isPropertyUpgradeable((Property)propertyLoc)){
-                // Yes, then Suggest to upgrade
+                // TODO Yes, then Suggest to upgrade by prompt
                 // If accepts upgrade
                 ((Property) propertyLoc).upgrade();
             }
         }
+
+        if (propertyOwner.getName() != currentPlayer.getName()){ // Pay rent
+            deductRentValue(propertyOwner, currentPlayer, rentValue);
+        }
     }
 
     public void activateUtility(Location utilityLoc){
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        Player utilityOwner = ((BuyableLocation)utilityLoc).getOwner();
+        int rentValue = ((BuyableLocation)utilityLoc).getCurrentRentValue();
 
+        if (utilityOwner == null){ // Buy the utility
+            if (currentPlayer.getUsableMoney() >= ((BuyableLocation) utilityLoc).getPrice()){
+                // TODO Prompt to buy property
+
+                // if OK Buy the property
+                boolean boughtTheUtility = buyLocation(utilityLoc, currentPlayer);
+                if (boughtTheUtility){
+                    utilityOwner = currentPlayer;
+                }
+            }
+        }
+
+        if (utilityOwner.getName() != currentPlayer.getName()){ // Rent the utility
+            deductRentValue(utilityOwner, currentPlayer, rentValue);
+        }
     }
 
     public void activateChance(Location chanceLoc){
-
+        // TODO give a chance card
     }
 
     public void activateDisciplinary(Location disciplinaryLoc){
-
+        // TODO don't know
     }
 
     public void activateGoToDisciplinary(Location goToDisciplinaryLoc){
-
+        // TODO send player to disciplinary
     }
 
     public void activateIncomeTax(Location incomeTaxLoc){
+        int taxValue = ((IncomeTaxTile)incomeTaxLoc).getTaxValue();
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
+        this.deductIncomeTax(currentPlayer, taxValue);
     }
 
     public void activateMayfest(Location mayfestLoc){
+        int collectedTax = ((MayfestTile)mayfestLoc).getCollectedTax();
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
+        this.deductIncomeTax(currentPlayer, collectedTax);
     }
 
     public void activateStart(Location startLoc){
-
+        // TODO don't know
     }
 
+    /**
+     * Checks if a certain property is upgradeable using the fact that the user has enough money and owns all group color
+     * @param property
+     * @return
+     */
     public boolean isPropertyUpgradeable(Property property){
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         boolean upgradeable = false;
@@ -301,10 +325,18 @@ public class LocationManager implements Serializable {
      */
     public void deductRentValue(Player owner, Player visitor, int amount){
         visitor.setUsableMoney(visitor.getUsableMoney() - amount);
-        owner.setUsableMoney(owner.getUsableMoney() + amount);
+
+        if (owner != null)
+            owner.setUsableMoney(owner.getUsableMoney() + amount);
     }
 
-    public boolean buyProperty(Location location, Player buyer){
+    /**
+     * Buys a buyable location
+     * @param location
+     * @param buyer
+     * @return
+     */
+    public boolean buyLocation(Location location, Player buyer){
         int price = ((BuyableLocation)location).getPrice();
         boolean successful = false;
 
@@ -316,6 +348,15 @@ public class LocationManager implements Serializable {
 
         return successful;
     }
+
+    public void deductIncomeTax(Player player, int amount){
+        player.setUsableMoney(player.getUsableMoney() - amount);
+    }
+
+    public void giveCollectedTax(Player player, int amount){
+        player.setUsableMoney(player.getUsableMoney() + amount);
+    }
+
 
     @Override
     public String toString() {
