@@ -32,9 +32,7 @@ public class GameManager implements Serializable {
 		}
 		return gameManager;
 	}
-	
-	
-	
+
 	public void initializeNewGame(ArrayList<PotentialPlayer> pL, Document doc) {
 		LocalDataManager.getInstance().initialize(doc);
 		
@@ -48,8 +46,6 @@ public class GameManager implements Serializable {
 			BankManager.getInstance().openAccount(newPlayer);
 			LocationManager.getInstance().getLocationList().get(36).addPlayerHere(newPlayer);
 		}
-
-		
 
 		PlayerManager.getInstance().setInitialCurrentPlayer();
 		BoardManager.getInstance();
@@ -95,11 +91,11 @@ public class GameManager implements Serializable {
 	 * Gets all the information about the current player and passes them to the view
 	 */
 	public void handleNewTurn() { // Initializing a new turn Basically view players info on the screen
-		// get the current player
+		// TODO get the current player
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		// view the player
+		// TODO view the player
 		System.out.println(currentPlayer);
-		// view player's offers
+		// TODO view player's offers
 		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(currentPlayer);
 	}
 
