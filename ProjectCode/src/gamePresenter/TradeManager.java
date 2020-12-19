@@ -17,6 +17,14 @@ public class TradeManager implements Serializable{
 		tradeDeals = new ArrayList<TradeDeal>();
 	}
 	
+	public TradeManager(TradeManager mngr) {
+		// TODO Auto-generated constructor stub
+		tradeDeals = new ArrayList<TradeDeal>();
+		for(int i = 0; i < mngr.tradeDeals.size(); i++) {
+			this.tradeDeals.add(mngr.tradeDeals.get(i));
+		}
+	}
+
 	public static TradeManager getInstance() {
 		if( tradeMngr == null ) {
 			tradeMngr = new TradeManager();
@@ -51,5 +59,10 @@ public class TradeManager implements Serializable{
 			}
 		}
 		return trade;
+	}
+
+	public void create(TradeManager mngr) {
+		// TODO Auto-generated method stub
+		tradeMngr = new TradeManager(mngr);
 	}
 }

@@ -34,7 +34,14 @@ public class LocationManager implements Serializable {
     
     
     private LocationManager( LocationManager copy) {
-    	
+        this.buyableLocations = new ArrayList<BuyableLocation>();
+        this.nonBuyableLocations = new ArrayList<Location>();
+    	for(int i = 0; i < copy.buyableLocations.size(); i++ ) {
+    		buyableLocations.add(copy.buyableLocations.get(i));
+    	}
+    	for(int i = 0; i < copy.nonBuyableLocations.size(); i++ ) {
+    		nonBuyableLocations.add(copy.nonBuyableLocations.get(i));
+    	}
     }
     
     private LocationManager(){
@@ -48,6 +55,10 @@ public class LocationManager implements Serializable {
         }
 
         return locationManager;
+    }
+    
+    public void create(LocationManager copy) {
+    	locationManager = new LocationManager(copy);
     }
     
     public Location movePlayer(Player playerToMove, int distance){

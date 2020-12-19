@@ -21,6 +21,17 @@ public class PlayerManager implements Serializable{
 		currentPlayerIndex = 0;
 	}
 	
+	public PlayerManager(PlayerManager mngr) {
+		players = new ArrayList<Player>();
+		currentPlayer = null;
+		currentPlayerIndex = mngr.currentPlayerIndex;
+		// TODO Auto-generated constructor stub
+		for(int i = 0; i < mngr.players.size(); i++) {
+			this.players.add(mngr.players.get(i));
+		}
+		currentPlayer = players.get(currentPlayerIndex);
+	}
+
 	public static PlayerManager getInstance() {
 		if( playerManager == null ) {
 			playerManager = new PlayerManager();
@@ -70,5 +81,10 @@ public class PlayerManager implements Serializable{
 	public void setInitialCurrentPlayer() {
 		currentPlayerIndex = 0;
 		currentPlayer = players.get(currentPlayerIndex);
+	}
+
+	public void create(PlayerManager mngr) {
+		// TODO Auto-generated method stub
+		playerManager = new PlayerManager(mngr);
 	}
 }

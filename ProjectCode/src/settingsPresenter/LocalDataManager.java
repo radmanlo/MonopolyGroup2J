@@ -158,7 +158,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             TradeManager mngr = TradeManager.getInstance();
             mngr= (TradeManager)in.readObject();
-            
+            TradeManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Trade Object has been deserialized\n"); 
@@ -186,7 +186,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             PlayerManager mngr = PlayerManager.getInstance();
             mngr= (PlayerManager)in.readObject(); 
-  
+            PlayerManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Player Object has been deserialized\n"); 
@@ -214,7 +214,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             GameManager mngr = GameManager.getInstance();
             mngr= (GameManager)in.readObject(); 
-  
+            GameManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("GameMngr Object has been deserialized\n"); 
@@ -242,7 +242,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             CardManager mngr = CardManager.getInstance();
             mngr= (CardManager)in.readObject(); 
-  
+            CardManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Cards Object has been deserialized\n"); 
@@ -270,7 +270,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             BankManager mngr = BankManager.getInstance();
             mngr= (BankManager)in.readObject(); 
-  
+            BankManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Bankmngr Object has been deserialized\n"); 
@@ -298,7 +298,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             LocationManager mngr = LocationManager.getInstance();
             mngr= (LocationManager)in.readObject(); 
-  
+            LocationManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Location Object has been deserialized\n"); 

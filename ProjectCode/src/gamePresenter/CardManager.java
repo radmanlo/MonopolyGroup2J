@@ -21,6 +21,15 @@ public class CardManager implements Serializable{
 		takenCardCount = 0;
 	}
 	
+	public CardManager(CardManager mngr) {
+		// TODO Auto-generated constructor stub
+		this.cardDeck = new ArrayList<Card>();
+		this.takenCardCount = mngr.takenCardCount;
+		for(int i = 0; i < cardDeck.size(); i++) {
+			this.cardDeck.add(mngr.cardDeck.get(i));
+		}		
+	}
+
 	public static CardManager getInstance() {
 		if( cardMngr == null ) {
 			cardMngr = new CardManager();
@@ -62,5 +71,10 @@ public class CardManager implements Serializable{
 				"cardDeck=" + cardDeck.toString() +
 				", takenCardCount=" + takenCardCount +
 				'}';
+	}
+
+	public void create(CardManager mngr) {
+		// TODO Auto-generated method stub
+		cardMngr = new CardManager(mngr);
 	}
 }

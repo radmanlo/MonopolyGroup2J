@@ -19,6 +19,12 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance();
 	}
 
+	public GameManager(GameManager mngr) {
+		// TODO Auto-generated constructor stub
+		// TODO ADD MAYBE NEEDED
+	
+	}
+
 	// Operational Methods
 	public static GameManager getInstance() {
 		if( gameManager == null ) {
@@ -120,6 +126,11 @@ public class GameManager implements Serializable {
 	 */
 	public void getOfferInfo(){
 		// return the offer's information
+	}
+
+	public void create(GameManager mngr) {
+		// TODO Auto-generated method stub
+		gameManager = new GameManager(mngr);
 	}
 
 
