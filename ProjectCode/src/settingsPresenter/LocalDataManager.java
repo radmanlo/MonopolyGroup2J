@@ -72,7 +72,11 @@ public class LocalDataManager implements Serializable{
 			FileWriter myWriter = new FileWriter("./resources/saves/savedGames.txt", true);
 			name = name + "_D"+ java.time.Clock.systemUTC().instant().atOffset(ZoneOffset.ofHours(3)).with(ChronoField.NANO_OF_SECOND, 0);
 			name = name.substring(0, name.length() - 9);
-
+			String offset = name.substring(name.length() - 2);
+			offset = "_"+offset;
+			name = name.substring(0, name.length() - 3);
+			name = name + offset;
+			//System.out.println(name);
 		    myWriter.write(name);
 		    myWriter.write("\n");
 		    myWriter.close();
