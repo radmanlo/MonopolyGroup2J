@@ -39,11 +39,7 @@ abstract class Menu extends JPanel{ //instead of it having a panel attribute, I 
 		backBtn.setBounds(10, 10, 89, 34);
 		add(backBtn);
 	}
-	
-//	public void paintComponent( Graphics g )
-//	{
-//	  super.paintComponent( g );
-//	  Graphics2D g2d = (Graphics2D) g;
+
 	  // use g2d.drawImage methods to paint your background …
 	   @Override
 	    protected void paintComponent(Graphics g) {

@@ -18,18 +18,19 @@ public class MainMenu extends Menu {
 		super("./resources/MainBG1.png");
 		
 		setLayout(null);
+		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+		setBounds(0, 0, (int) size.getWidth(), (int) size.getHeight());
 		// Get device resolution
-		setBounds(0, 0, 1500, 900);
 		remove(backBtn);
 
-		RoundedButton newGameButton = new RoundedButton("New Game");
-		newGameButton.addActionListener(new ActionListener() {
+		newGameBtn = new RoundedButton("New Game");
+		newGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				newGame();
 			}
 		});
-		newGameButton.setBounds(150, 100, 500, 70);
-		add(newGameButton);
+		newGameBtn.setBounds(150, 100, 500, 70);
+		add(newGameBtn);
 
 		loadGameBtn = new RoundedButton("Load Game");
 		loadGameBtn.addActionListener(new ActionListener() {
@@ -40,7 +41,7 @@ public class MainMenu extends Menu {
 		loadGameBtn.setBounds(150, 190, 500, 70);
 		add(loadGameBtn);
 		
-		RoundedButton howToPlayBtn = new RoundedButton("How To Play");
+		howToPlayBtn = new RoundedButton("How To Play");
 		howToPlayBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				howToPlay();
@@ -49,7 +50,7 @@ public class MainMenu extends Menu {
 		howToPlayBtn.setBounds(150, 280, 500, 70);
 		add(howToPlayBtn);
 		
-		RoundedButton settingsBtn = new RoundedButton("Settings");
+		settingsBtn = new RoundedButton("Settings");
 		settingsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				settings();
@@ -58,7 +59,7 @@ public class MainMenu extends Menu {
 		settingsBtn.setBounds(150, 370, 500, 70);
 		add(settingsBtn);
 		
-		RoundedButton creditsBtn = new RoundedButton("Credits");
+		creditsBtn = new RoundedButton("Credits");
 		creditsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				credits();
@@ -67,7 +68,7 @@ public class MainMenu extends Menu {
 		creditsBtn.setBounds(150, 460, 500, 70);
 		add(creditsBtn);
 		
-		RoundedButton quitBtn = new RoundedButton("Quit");
+		quitBtn = new RoundedButton("Quit");
 		quitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				goBackPanel();
