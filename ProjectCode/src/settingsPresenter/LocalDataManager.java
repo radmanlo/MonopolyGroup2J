@@ -32,6 +32,7 @@ import java.io.StringReader;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LocalDataManager implements Serializable{
 	/**
@@ -63,6 +64,17 @@ public class LocalDataManager implements Serializable{
 	
 	public boolean saveGame(String name) {
         // Serialization 
+	    try {
+	    	//Writing game name
+			FileWriter myWriter = new FileWriter("./resources/saves/savedGames.txt");
+		    myWriter.write(name);
+		    myWriter.write("\n");
+		    myWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    //Saving managers
 		String filename = "./resources/saves/"+ name+ "location.txt";
         saveLocation(filename);
         
@@ -84,7 +96,27 @@ public class LocalDataManager implements Serializable{
         
         return true;
 	}
+	public ArrayList<String> getSavedNames(){
+		ArrayList<String> savedNames = new ArrayList<String>();
+	    try {
+	        File myObj = new File("./resources/saves/savedGames.txt");
+	        Scanner myReader = new Scanner(myObj);
+	        while (myReader.hasNextLine()) {
+	          String data = myReader.nextLine();
+	          savedNames.add(data);
+	        }
+	        myReader.close();
+	      } catch (FileNotFoundException e) {
+	        System.out.println("An error occurred.");
+	        e.printStackTrace();
+	      }
+	    for(int i = 0; i < savedNames.size(); i++)
+	    	System.out.println(savedNames.get(i));
+		return savedNames;
+	}
+	
 	public void loadGame(String name) {
+		ArrayList<String> savedGames = getSavedNames();
 		String filename = "./resources/saves/"+ name+ "location.txt";
         loadLocation(filename);
         

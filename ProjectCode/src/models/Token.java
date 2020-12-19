@@ -12,14 +12,14 @@ public class Token implements Serializable {
 	 */
 	private static final long serialVersionUID = -1858717624870311197L;
 	String path;
-	private Image image;
 	
 	public Token(String path) {
-		image = Utils.scaleImage(90, 65, path);
 		this.path = path;
 	}
 
+	//Changing it and giving image as attribute of token crashes serialization please dont make changes.
 	public Image getImage() {
+		Image image = image = Utils.scaleImage(90, 65, path);
 		return image;
 	}
 
