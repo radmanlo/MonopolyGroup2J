@@ -12,8 +12,21 @@ public class Location {
     private ArrayList<Player> playersHere;
 
     // Constructor
-    public Location(){
-        super();
+    public Location(int locationId, String name, Point2D point, ArrayList<Player> playersHere) {
+        this.locationId = locationId;
+        this.name = name;
+        this.point = point;
+        this.playersHere = playersHere;
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "locationId=" + locationId +
+                ", name='" + name + '\'' +
+                ", point=" + point +
+                ", playersHere=" + playersHere +
+                '}';
     }
 
     // Methods

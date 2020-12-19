@@ -17,8 +17,7 @@ public class MenuManager { //it is finished -G
 	private MainMenu mainMenu;
 	private HowToPlayMenu howToPlayMenu;
 	private JButton quitBtn;
-	
-	
+
 	private MenuManager() {
 		appFrame = new AppFrame();
 		appFrame.setVisible(true);

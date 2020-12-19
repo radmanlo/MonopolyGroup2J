@@ -15,6 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
+import gamePresenter.GameManager;
+import gamePresenter.PlayerManager;
+import models.Token;
+import models.PlayerColor;
+import org.w3c.dom.Document;
+import settingsPresenter.LocalDataManager;
 import gamePresenter.BoardManager;
 import gamePresenter.CardManager;
 import gamePresenter.GameManager;
@@ -105,6 +111,12 @@ public class NewGameMenu extends Menu{
 		if(areAllPlayersUnique() == false) {	
 			showMessageDialog(null, "Tokens, names or colors can not be same! \nName can not be empty");
 		}else {
+
+			// Ask the local data manager to get the default values' document
+			LocalDataManager ldm = LocalDataManager.getInstance();
+			Document doc = ldm.getDefaultValues();
+			doc.getDocumentElement().normalize();
+
 			for(int i = 0; i < newPlayerAddingScreens.size(); i++) {
 				Token plyrToken = tokenMatch(i);
 				PlayerColor plyrClr = colorMatch(i);
@@ -112,7 +124,10 @@ public class NewGameMenu extends Menu{
 				PotentialPlayer player = new PotentialPlayer(plyrToken, plyrClr, plyrName);
 				potentialPlayers.add(player);
 			}
-			GameManager.getInstance().initializeNewGame(potentialPlayers);
+
+			// Pass the document to the game manager alongside the potential players array
+			GameManager.getInstance().initializeNewGame(potentialPlayers, doc);
+
 			return;
 		}
 	}

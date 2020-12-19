@@ -1,5 +1,5 @@
 package models.location;
-
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import models.Player;
@@ -7,8 +7,8 @@ import models.Player;
 public class Disciplinary extends Location{
     private ArrayList<Player> prisoners;
 
-    Disciplinary(){
-        super();
+    public Disciplinary(int locationId, String name, Point2D point, ArrayList<Player> playersHere) {
+        super(locationId, name, point, playersHere);
     }
 
     @Override
@@ -28,4 +28,5 @@ public class Disciplinary extends Location{
     public void arrestPlayer(Player player){
         prisoners.add(player);
     }
+
 }

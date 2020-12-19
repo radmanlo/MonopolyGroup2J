@@ -50,4 +50,12 @@ public class CardManager {
 	public void addCard(Card card) {
 		cardDeck.add(card);
 	}
+
+	@Override
+	public String toString() {
+		return "CardManager{" +
+				"cardDeck=" + cardDeck.toString() +
+				", takenCardCount=" + takenCardCount +
+				'}';
+	}
 }

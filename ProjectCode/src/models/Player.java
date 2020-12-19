@@ -28,7 +28,7 @@ public class Player {
 		this.cards = new ArrayList<Card>();
 		this.usableMoney = 200; // DEFAULT INITIAL MONEY
 		this.bankAccount = new BankAccount(playerId, 0, 0);
-		this.location = new Location();
+		this.location = null;
 		this.inJailCount = 0; // Default
 		this.isInJail = false;
 		this.id = playerId;

@@ -2,11 +2,15 @@ package models.location;
 
 import models.Player;
 
-public class IncomeTaxTile extends Location{
-    private final int TAX_VALUE = 20; //TODO change it
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
-    IncomeTaxTile(){
-        super();
+public class IncomeTaxTile extends Location{
+    private int taxValue;
+
+    public IncomeTaxTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere, int taxValue) {
+        super(locationId, name, point, playersHere);
+        this.taxValue = taxValue;
     }
 
     /**
@@ -22,6 +26,6 @@ public class IncomeTaxTile extends Location{
      * @param player
      */
     public void deductTax(Player player){
-        player.setUsableMoney(player.getUsableMoney() - this.TAX_VALUE);
+        player.setUsableMoney(player.getUsableMoney() - this.taxValue);
     }
 }
