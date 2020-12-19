@@ -111,11 +111,17 @@ public class CardManager implements Serializable{
 	}
 
 	public void pladiarismPunishment(){
+		final int PLAGIARISM_FINE = 500;
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
+		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, PLAGIARISM_FINE);
 	}
 
 	public void goWc(){
-
+		final int WC_ID = 28;
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		
+		LocationManager.getInstance().movePlayer(curPlayer, WC_ID);
 	}
 
 	public void aInCs319(){

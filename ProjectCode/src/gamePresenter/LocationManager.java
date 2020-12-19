@@ -240,9 +240,11 @@ public class LocationManager implements Serializable {
             }
         } else { // Upgrade property
             if (isPropertyUpgradeable((Property)propertyLoc)){
-                // TODO Yes, then Suggest to upgrade by prompt
-                // If accepts upgrade
-                ((Property) propertyLoc).upgrade();
+                if (((Property)propertyLoc).getUpgradeCost() <= currentPlayer.getUsableMoney()) { //Player has enough money
+                    // TODO Yes, then Suggest to upgrade by prompt
+                    // If accepts upgrade
+                    ((Property) propertyLoc).upgrade();
+                }
             }
         }
 
@@ -320,10 +322,8 @@ public class LocationManager implements Serializable {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         boolean upgradeable = false;
 
-        if (property.getUpgradeCost() <= currentPlayer.getUsableMoney()){ //Player has enough money
-            if (groupHasSameOwner(property.getGroupColor()).getName() == currentPlayer.getName()){ // Player is the owner of the whole group
-                upgradeable = true;
-            }
+        if (groupHasSameOwner(property.getGroupColor()).getName() == currentPlayer.getName()){ // Player is the owner of the whole group
+            upgradeable = true;
         }
 
         return upgradeable;
