@@ -9,15 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LocationManager implements Serializable {
-    /**
-	 * 
-	 */
+    // Properties
 	private static final long serialVersionUID = -9040597026391464212L;
 	private static LocationManager locationManager = null;
     private ArrayList<BuyableLocation> buyableLocations;
     private ArrayList<Location> nonBuyableLocations;
-    
-    
+
+    // Copy constructor
     private LocationManager( LocationManager copy) {
         this.buyableLocations = new ArrayList<BuyableLocation>();
         this.nonBuyableLocations = new ArrayList<Location>();
@@ -28,12 +26,14 @@ public class LocationManager implements Serializable {
     		nonBuyableLocations.add(copy.nonBuyableLocations.get(i));
     	}
     }
-    
+
+    // Constructor
     private LocationManager(){
         this.buyableLocations = new ArrayList<BuyableLocation>();
         this.nonBuyableLocations = new ArrayList<Location>();
     }
 
+    // Operational Methods
     public static LocationManager getInstance(){
         if (locationManager == null){
             locationManager = new LocationManager();
@@ -45,7 +45,16 @@ public class LocationManager implements Serializable {
     public void create(LocationManager copy) {
     	locationManager = new LocationManager(copy);
     }
-    
+
+    public void addBuyable(BuyableLocation aBuyable){
+        this.buyableLocations.add(aBuyable);
+    }
+
+    public void addNonBuyable(Location aNonBuyable){
+        this.nonBuyableLocations.add(aNonBuyable);
+    }
+
+    // Game Logic Methods
     public Location movePlayer(Player playerToMove, int distance){
         Location newLocation = null;
 
@@ -165,14 +174,6 @@ public class LocationManager implements Serializable {
         return count;
     }
 
-    public void addBuyable(BuyableLocation aBuyable){
-        this.buyableLocations.add(aBuyable);
-    }
-
-    public void addNonBuyable(Location aNonBuyable){
-        this.nonBuyableLocations.add(aNonBuyable);
-    }
-
     public void activateLocation(Location locationToActivate){
         // Check the location type
         if (locationToActivate.getType() == Location.LOCATION_TYPES.BUS){
@@ -269,8 +270,30 @@ public class LocationManager implements Serializable {
         }
     }
 
+    public void activateIncomeTax(Location incomeTaxLoc){
+        int taxValue = ((IncomeTaxTile)incomeTaxLoc).getTaxValue();
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+
+        PlayerManager.getInstance().deductMoneyFromPlayer(currentPlayer, taxValue);
+    }
+
+    public void activateMayfest(Location mayfestLoc){
+        int collectedTax = ((MayfestTile)mayfestLoc).getCollectedTax();
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+
+        PlayerManager.getInstance().addMoneyToPlayer(currentPlayer, collectedTax);
+    }
+
     public void activateChance(Location chanceLoc){
         // TODO give a chance card
+
+        // Get a random card
+
+        // check if storable
+
+        // if not activate now
+
+        // if storable store it
     }
 
     public void activateDisciplinary(Location disciplinaryLoc){
@@ -279,20 +302,6 @@ public class LocationManager implements Serializable {
 
     public void activateGoToDisciplinary(Location goToDisciplinaryLoc){
         // TODO send player to disciplinary
-    }
-
-    public void activateIncomeTax(Location incomeTaxLoc){
-        int taxValue = ((IncomeTaxTile)incomeTaxLoc).getTaxValue();
-        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-
-        this.deductIncomeTax(currentPlayer, taxValue);
-    }
-
-    public void activateMayfest(Location mayfestLoc){
-        int collectedTax = ((MayfestTile)mayfestLoc).getCollectedTax();
-        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-
-        this.deductIncomeTax(currentPlayer, collectedTax);
     }
 
     public void activateStart(Location startLoc){
@@ -324,10 +333,10 @@ public class LocationManager implements Serializable {
      * @param amount
      */
     public void deductRentValue(Player owner, Player visitor, int amount){
-        visitor.setUsableMoney(visitor.getUsableMoney() - amount);
+        PlayerManager.getInstance().deductMoneyFromPlayer(visitor, amount);
 
         if (owner != null)
-            owner.setUsableMoney(owner.getUsableMoney() + amount);
+            PlayerManager.getInstance().addMoneyToPlayer(owner, amount);
     }
 
     /**
@@ -341,22 +350,13 @@ public class LocationManager implements Serializable {
         boolean successful = false;
 
         if (buyer.getUsableMoney() > price){
-            buyer.setUsableMoney(buyer.getUsableMoney() - price);
+            PlayerManager.getInstance().deductMoneyFromPlayer(buyer, price);
             ((BuyableLocation)location).setOwner(buyer);
             successful = true;
         }
 
         return successful;
     }
-
-    public void deductIncomeTax(Player player, int amount){
-        player.setUsableMoney(player.getUsableMoney() - amount);
-    }
-
-    public void giveCollectedTax(Player player, int amount){
-        player.setUsableMoney(player.getUsableMoney() + amount);
-    }
-
 
     @Override
     public String toString() {
