@@ -104,7 +104,15 @@ public class GameManager implements Serializable {
 	 */
 	public void handleEndTurn(){
 		PlayerManager.getInstance().changeCurrentPlayer();
-		this.handleNewTurn();
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+
+		if (curPlayer.getIsInJail() && curPlayer.getInJailCount() < 3){
+			curPlayer.setInJailCount(curPlayer.getInJailCount() + 1);
+			this.handleEndTurn(); // To move forward with the next player
+		} else {
+			curPlayer.setIsInJail(false);
+			this.handleNewTurn();
+		}
 	}
 
 	/**
