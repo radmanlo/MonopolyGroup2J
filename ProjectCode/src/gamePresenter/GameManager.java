@@ -1,37 +1,25 @@
 package gamePresenter;
 
-import java.awt.geom.Point2D;
 import java.io.Serializable;
 import java.util.ArrayList;
-
 import models.*;
 import models.location.*;
 import settingsPresenter.LocalDataManager;
-
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class GameManager implements Serializable {
-	/**
-	 * 
-	 */
+
+	// Properties
 	private static final long serialVersionUID = -5272580467727107668L;
-
 	private static GameManager gameManager = null;
-
-	//private BoardManager boardMngr;
 	private Dice dice = new Dice();
-	//private PlayerManager playerMngr;
-	//private BoardManager boardMngr;
-	//private SoundManager soundMngr;
-	//private BankManager bankMngr;
 
+	// Constructor
 	private GameManager() {
 		BoardManager.getInstance();
 	}
-	
+
+	// Operational Methods
 	public static GameManager getInstance() {
 		if( gameManager == null ) {
 			gameManager = new GameManager();
@@ -62,7 +50,12 @@ public class GameManager implements Serializable {
 	public void saveGame(String name) {
 		LocalDataManager.getInstance().saveGame(name);
 	}
-	
+
+	// Game Logic Methods
+	/**
+	 * When player press RollDice this gets executed
+	 * it moves the token and activates the new location
+	 */
 	public void rollDice() {
 		// Get current player
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -75,15 +68,16 @@ public class GameManager implements Serializable {
 		// move player's token
 		newLocation = LocationManager.getInstance().movePlayer(currentPlayer, moveDistance);
 
+		// Update the view
+
 		// Activate the new Location
 		newLocation.activate();
 	}
 
-	public void tradeRequest(Property property, int value) {
-		
-	}
-
-
+	/**
+	 * Gets called when the game just started or when player presses EndTurn
+	 * Gets all the information about the current player and passes them to the view
+	 */
 	public void handleNewTurn() { // Initializing a new turn Basically view players info on the screen
 		// get the current player
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -94,9 +88,30 @@ public class GameManager implements Serializable {
 
 	}
 
+	/**
+	 * Handles the EndTurn button, change the turn and handles new turn
+	 */
+	public void handleEndTurn(){
+		PlayerManager.getInstance().changeCurrentPlayer();
+		this.handleNewTurn();
+	}
+
+	/**
+	 * Create a trade request
+	 * @param property
+	 * @param value
+	 */
+	public void tradeRequest(Property property, int value) {
+
+	}
+
+	/**
+	 * Gets the information about a particular trade
+	 */
 	public void getOfferInfo(){
 		// return the offer's information
 	}
+
 
 //	public static void executePurchase() { // Let's have it in location's activate() method
 //

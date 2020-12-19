@@ -34,13 +34,9 @@ public class PlayerManager implements Serializable{
 	
 	public void changeCurrentPlayer() {
 		int nOfPlayers = players.size();
-//If last player in the list is played and needs change
-		if(currentPlayerIndex == nOfPlayers) {
-			currentPlayerIndex = 0;
-		}else {
-// If current player was not last player 
-			currentPlayerIndex++;
-		}
+
+		currentPlayerIndex = (currentPlayerIndex + 1) % nOfPlayers;
+		currentPlayer = players.get(currentPlayerIndex); // update the current player
 	}
 	
 	public ArrayList<Player> getPlayers(){
