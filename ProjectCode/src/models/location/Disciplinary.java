@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import models.Player;
 
-public class Jail extends Location{
+public class Disciplinary extends Location{
     private ArrayList<Player> prisoners;
 
-    Jail(){
+    Disciplinary(){
         super();
     }
 

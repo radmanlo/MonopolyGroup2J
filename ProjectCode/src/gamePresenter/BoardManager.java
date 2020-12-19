@@ -1,8 +1,12 @@
 package gamePresenter;
 
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 import models.*;
+import models.location.BuyableLocation;
+import models.location.Location;
 import userInterface.menus.MenuManager;
 import userInterface.scene.EndTurnPrompt;
 import userInterface.scene.InteractionArea;
@@ -34,7 +38,9 @@ public class BoardManager extends JPanel {    //needs to change eventually to no
 	}
 	
 	public void updateMap() {
-		
+		ArrayList<Location> locationsList;
+		locationsList = LocationManager.getInstance().getLocationList();
+		map.update(locationsList);
 	}
 	
 	public void updateInteractionArea(PlayerManager playerMngr) {
