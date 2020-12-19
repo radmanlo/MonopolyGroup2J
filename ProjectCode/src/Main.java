@@ -16,7 +16,6 @@ public class Main {
     				}
     			}
     		});
-    	
        // String path = "resources/sounds/bg-music.wav"; //needs to be initialized somewhere else -G
 
     //   SoundManager soundManager = SoundManager.getInstance();
