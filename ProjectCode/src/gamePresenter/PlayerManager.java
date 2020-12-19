@@ -1,10 +1,15 @@
 package gamePresenter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import models.Player;
 
-public class PlayerManager {
+public class PlayerManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4520295908155611891L;
 	private Player currentPlayer;
 	private ArrayList<Player> players;
 	private int currentPlayerIndex;

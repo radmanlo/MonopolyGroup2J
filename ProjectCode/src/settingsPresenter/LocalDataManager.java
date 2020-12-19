@@ -2,6 +2,7 @@ package settingsPresenter;
 import javax.xml.parsers.*;
 import org.xml.sax.*;
 
+import gamePresenter.*;
 import gamePresenter.CardManager;
 import gamePresenter.LocationManager;
 import models.Card;
@@ -22,12 +23,21 @@ import org.w3c.dom.*;
 import java.awt.geom.Point2D;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.*;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.io.StringReader;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-public class LocalDataManager {
+public class LocalDataManager implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6228221915237073759L;
 	private String localPath;
 	private static LocalDataManager localManager = null;
 
@@ -51,7 +61,402 @@ public class LocalDataManager {
 		return "";
 	}
 	
-	public boolean saveGame() {
+	public boolean saveGame(String name) {
+        // Serialization 
+		String filename = "./resources/saves/"+ name+ "location.txt";
+        saveLocation(filename);
+        
+        filename = "./resources/saves/"+ name+ "bank.txt";
+        saveBank(filename);
+
+        filename = "./resources/saves/"+ name+ "card.txt";
+        saveCard(filename);
+
+        filename = "./resources/saves/"+ name+ "gamemngr.txt";
+        saveGameMngr(filename);
+
+        filename = "./resources/saves/"+ name+ "player.txt";
+        savePlayer(filename);
+
+        filename = "./resources/saves/"+ name+ "trade.txt";
+        saveTrade(filename);
+
+        
+        return true;
+	}
+	public void loadGame(String name) {
+		String filename = "./resources/saves/"+ name+ "location.txt";
+        loadLocation(filename);
+        
+        filename = "./resources/saves/"+ name+ "bank.txt";
+        loadBank(filename);
+
+        filename = "./resources/saves/"+ name+ "card.txt";
+        loadCard(filename);
+
+        filename = "./resources/saves/"+ name+ "gamemngr.txt";
+        loadGameMngr(filename);
+
+        filename = "./resources/saves/"+ name+ "player.txt";
+        loadPlayer(filename);
+
+        filename = "./resources/saves/"+ name+ "trade.txt";
+        loadTrade(filename);
+	}
+	public void loadTrade(String string) {
+		// TODO Auto-generated method stub
+		String filename = string;
+		try { 
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream 
+                                         (filename); 
+            ObjectInputStream in = new ObjectInputStream 
+                                         (file); 
+  
+            // Method for deserialization of object 
+            TradeManager mngr = TradeManager.getInstance();
+            mngr= (TradeManager)in.readObject(); 
+  
+            in.close(); 
+            file.close(); 
+            System.out.println("Trade Object has been deserialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("IOException is caught " + ex.getMessage()); 
+        } 
+  
+        catch (ClassNotFoundException ex) { 
+            System.out.println("ClassNotFoundException" + 
+                                " is caught"); }
+	}
+	public void loadPlayer(String string) {
+		// TODO Auto-generated method stub
+		String filename = string;
+		try { 
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream 
+                                         (filename); 
+            ObjectInputStream in = new ObjectInputStream 
+                                         (file); 
+  
+            // Method for deserialization of object 
+            PlayerManager mngr = PlayerManager.getInstance();
+            mngr= (PlayerManager)in.readObject(); 
+  
+            in.close(); 
+            file.close(); 
+            System.out.println("Player Object has been deserialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("IOException is caught " + ex.getMessage()); 
+        } 
+  
+        catch (ClassNotFoundException ex) { 
+            System.out.println("ClassNotFoundException" + 
+                                " is caught"); }
+	}
+	public void loadGameMngr(String string) {
+		// TODO Auto-generated method stub
+		String filename = string;
+		try { 
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream 
+                                         (filename); 
+            ObjectInputStream in = new ObjectInputStream 
+                                         (file); 
+  
+            // Method for deserialization of object 
+            GameManager mngr = GameManager.getInstance();
+            mngr= (GameManager)in.readObject(); 
+  
+            in.close(); 
+            file.close(); 
+            System.out.println("GameMngr Object has been deserialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("IOException is caught " + ex.getMessage()); 
+        } 
+  
+        catch (ClassNotFoundException ex) { 
+            System.out.println("ClassNotFoundException" + 
+                                " is caught"); }
+	}
+	public void loadCard(String string) {
+		// TODO Auto-generated method stub
+		String filename = string;
+		try { 
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream 
+                                         (filename); 
+            ObjectInputStream in = new ObjectInputStream 
+                                         (file); 
+  
+            // Method for deserialization of object 
+            CardManager mngr = CardManager.getInstance();
+            mngr= (CardManager)in.readObject(); 
+  
+            in.close(); 
+            file.close(); 
+            System.out.println("Cards Object has been deserialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("IOException is caught " + ex.getMessage()); 
+        } 
+  
+        catch (ClassNotFoundException ex) { 
+            System.out.println("ClassNotFoundException" + 
+                                " is caught"); }
+	}
+	public void loadBank(String string) {
+		// TODO Auto-generated method stub
+		String filename = string;
+		try { 
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream 
+                                         (filename); 
+            ObjectInputStream in = new ObjectInputStream 
+                                         (file); 
+  
+            // Method for deserialization of object 
+            BankManager mngr = BankManager.getInstance();
+            mngr= (BankManager)in.readObject(); 
+  
+            in.close(); 
+            file.close(); 
+            System.out.println("Bankmngr Object has been deserialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("IOException is caught " + ex.getMessage()); 
+        } 
+  
+        catch (ClassNotFoundException ex) { 
+            System.out.println("ClassNotFoundException" + 
+                                " is caught"); }
+	}
+	public void loadLocation(String string) {
+		// TODO Auto-generated method stub
+		String filename = string;
+		try { 
+            // Reading the object from a file 
+            FileInputStream file = new FileInputStream 
+                                         (filename); 
+            ObjectInputStream in = new ObjectInputStream 
+                                         (file); 
+  
+            // Method for deserialization of object 
+            LocationManager mngr = LocationManager.getInstance();
+            mngr= (LocationManager)in.readObject(); 
+  
+            in.close(); 
+            file.close(); 
+            System.out.println("Location Object has been deserialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("IOException is caught " + ex.getMessage()); 
+        } 
+  
+        catch (ClassNotFoundException ex) { 
+            System.out.println("ClassNotFoundException" + 
+                                " is caught"); }
+	}
+
+	
+	public boolean saveTrade(String way) {
+		String filename = way;
+        try { 
+  
+            // Saving of object in a file 
+            FileOutputStream file = new FileOutputStream 
+                                           (filename); 
+            ObjectOutputStream out = new ObjectOutputStream 
+                                           (file); 
+  
+            // Method for serialization of object 
+            out.writeObject(TradeManager.getInstance());  //// CHANGE oNE
+  
+            out.close(); 
+            file.close(); 
+  
+            System.out.println("Trade Object has been serialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("Trade IOException is caught"); 
+        } 
+  
+		return false;
+	}
+	
+	public boolean savePlayer(String way) {
+		String filename = way;
+        try { 
+  
+            // Saving of object in a file 
+            FileOutputStream file = new FileOutputStream 
+                                           (filename); 
+            ObjectOutputStream out = new ObjectOutputStream 
+                                           (file); 
+  
+            // Method for serialization of object 
+            out.writeObject(PlayerManager.getInstance());  //// CHANGE oNE
+  
+            out.close(); 
+            file.close(); 
+  
+            System.out.println("Player Object has been serialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+        	
+            System.out.println("Player IOException is caught " + ex.getMessage()); 
+        } 
+  
+		return false;
+	}
+	public boolean saveGameMngr(String way) {
+		String filename = way;
+        try { 
+  
+            // Saving of object in a file 
+            FileOutputStream file = new FileOutputStream 
+                                           (filename); 
+            ObjectOutputStream out = new ObjectOutputStream 
+                                           (file); 
+  
+            // Method for serialization of object 
+            out.writeObject(GameManager.getInstance());  //// CHANGE oNE
+  
+            out.close(); 
+            file.close(); 
+  
+            System.out.println("Game Manager Object has been serialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("GameManager IOException is caught" + ex.getMessage()); 
+        } 
+  
+		return false;
+	}
+	public boolean saveCard(String way) {
+		String filename = way;
+        try { 
+  
+            // Saving of object in a file 
+            FileOutputStream file = new FileOutputStream 
+                                           (filename); 
+            ObjectOutputStream out = new ObjectOutputStream 
+                                           (file); 
+  
+            // Method for serialization of object 
+            out.writeObject(CardManager.getInstance());  //// CHANGE oNE
+  
+            out.close(); 
+            file.close(); 
+  
+            System.out.println("Card Object has been serialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("Card IOException is caught"); 
+        } 
+  
+		return false;
+	}
+	public boolean saveBoard(String way) {
+		String filename = way;
+        try { 
+  
+            // Saving of object in a file 
+            FileOutputStream file = new FileOutputStream 
+                                           (filename); 
+            ObjectOutputStream out = new ObjectOutputStream 
+                                           (file); 
+  
+            // Method for serialization of object 
+            out.writeObject(BoardManager.getInstance());  //// CHANGE oNE
+  
+            out.close(); 
+            file.close(); 
+  
+            System.out.println("Board Object has been serialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("Board IOException is caught"); 
+        } 
+  
+		return false;
+	}
+	
+	public boolean saveBank(String way) {
+		String filename = way;
+        try { 
+  
+            // Saving of object in a file 
+            FileOutputStream file = new FileOutputStream 
+                                           (filename); 
+            ObjectOutputStream out = new ObjectOutputStream 
+                                           (file); 
+  
+            // Method for serialization of object 
+            out.writeObject(BankManager.getInstance());  //// CHANGE oNE
+  
+            out.close(); 
+            file.close(); 
+  
+            System.out.println("Bank Object has been serialized\n"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("Bank IOException is caught"); 
+        } 
+  
+		return false;
+	}
+	
+	public boolean saveLocation(String way) {
+		String filename = way;
+        try { 
+  
+            // Saving of object in a file 
+            FileOutputStream file = new FileOutputStream 
+                                           (filename); 
+            ObjectOutputStream out = new ObjectOutputStream 
+                                           (file); 
+  
+            // Method for serialization of object 
+            out.writeObject(LocationManager.getInstance());  //// CHANGE oNE
+  
+            out.close(); 
+            file.close(); 
+  
+            System.out.println("Location Object has been serialized"); 
+
+        } 
+  
+        catch (IOException ex) { 
+            System.out.println("Location IOException is caught"); 
+        } 
+  
 		return false;
 	}
 
@@ -163,7 +568,6 @@ public void addCardsToCardManager(NodeList cards){
 		}
 	}
 }
-
 
 /**
  * Parse the contents of properties nodeList into Properties and add them to LocationManager
@@ -430,4 +834,6 @@ private String getTagValue(String tag, Element element) {
 	Node node = (Node) nodeList.item(0);
 	return node.getNodeValue();
 	}
+
+
 }

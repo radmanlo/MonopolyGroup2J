@@ -1,11 +1,16 @@
 package models.location;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import models.Player;
 
-public class Location {
-    // Properties
+public class Location implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1454862449987284592L;
+	// Properties
     private int locationId;
     private String name;
     private Point2D point;

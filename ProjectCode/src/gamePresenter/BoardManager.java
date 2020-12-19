@@ -1,5 +1,6 @@
 package gamePresenter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -13,7 +14,14 @@ import userInterface.scene.InteractionArea;
 import userInterface.scene.Map;
 import userInterface.scene.RentChoicePrompt;
 
-public class BoardManager extends JPanel {    //needs to change eventually to not extend JPanel
+public class BoardManager extends JPanel implements Serializable{    
+
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5498787588296943523L;
+
+//needs to change eventually to not extend JPanel
 	private static BoardManager boardManager = null;
 	
 	private Map map;

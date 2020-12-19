@@ -1,6 +1,7 @@
 package gamePresenter;
 
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import models.*;
@@ -12,14 +13,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class GameManager {
+public class GameManager implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5272580467727107668L;
+
 	private static GameManager gameManager = null;
 
-	private PlayerManager playerMngr = PlayerManager.getInstance();
-	private BoardManager boardMngr;
+	//private BoardManager boardMngr;
 	private Dice dice = new Dice();
-	private SoundManager soundMngr = SoundManager.getInstance();
-	private LocationManager locationManager = LocationManager.getInstance();
 	//private PlayerManager playerMngr;
 	//private BoardManager boardMngr;
 	//private SoundManager soundMngr;
@@ -56,39 +59,51 @@ public class GameManager {
 		TradeManager.getInstance();
 	}
 
-
-
-	public static void executePurchase() {
-		
+	public void saveGame(String name) {
+		LocalDataManager.getInstance().saveGame(name);
 	}
 	
 	public static void rollDice() {
-		
+		// Get current player
+		// roll the dice
+		// move player's token
+		// Activate the new Location
 	}
 
 	public static void tradeRequest(Property property, int value) {
 		
 	}
-	
-	public static boolean upgradeProperty(Property property) {
-		return false;
-	}
-	
-	public static LocationManager getInventoryManager() {
-		return null;
+
+
+	public void handleNewTurn() { // Initializing a new turn
+		// get the current player
+		// view the player
+		// view player's offers
 	}
 
-	public void handleNewTurn() {
-		
+	public void getOfferInfo(){
+		// return the offer's information
 	}
+
+//	public static void executePurchase() { // Let's have it in location's activate() method
+//
+//	}
 	
-	private boolean payRent() {
-		return false;
-	}
+//	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
+//		return false;
+//	}
 	
-	private void getAllTaxesFromMayfest() {
-		
-	}
+//	public static LocationManager getInventoryManager() { // What does it do?
+//		return null;
+//	}
+	
+//	private boolean payRent() { // Let's have it in location's activate() method
+//		return false;
+//	}
+	
+//	private void getAllTaxesFromMayfest() { // Let's have it in location's activate() method
+//
+//	}
 	
 	
 }

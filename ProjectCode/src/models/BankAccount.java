@@ -1,5 +1,12 @@
 package models;
-public class BankAccount {
+
+import java.io.Serializable;
+
+public class BankAccount implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1902277139686464403L;
 	//Attributes
 	private int id, moneyAmount, cooldownCount;
 	//Constructor
