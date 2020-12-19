@@ -94,6 +94,7 @@ public class NewGameMenu extends Menu{
 		initializeGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				initializeNewGame();
+				MenuManager.getInstance().openMenu(6);
 			}
 		});
 		add(initializeGameBtn);

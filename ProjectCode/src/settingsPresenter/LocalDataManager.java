@@ -116,7 +116,7 @@ public class LocalDataManager {
 				NodeList utilities = doc.getElementsByTagName("utility");
 
 				Node startLoc = doc.getElementsByTagName("startLoc").item(0);
-				Node jail = doc.getElementsByTagName("jail").item(0);
+				Node goToDisciplinaryTile = doc.getElementsByTagName("goToDisciplinaryTile").item(0);
 				Node mayfest = doc.getElementsByTagName("mayfest").item(0);
 				Node disciplinary = doc.getElementsByTagName("disciplinary").item(0);
 
@@ -127,9 +127,9 @@ public class LocalDataManager {
 				addBusLocsToLocationsManager(busLines);
 				addUtilitiesToLocationManager(utilities);
 				addStartTileToLocationManager(startLoc);
-				addJailTileToLocationManager(jail);
-				addMayfestTileToLocationManager(mayfest);
 				addDisciplinaryTileToLocationManager(disciplinary);
+				addMayfestTileToLocationManager(mayfest);
+				addGoToDisciplinaryTileToLocationManager(goToDisciplinaryTile);
 
 				System.out.println(LocationManager.getInstance().toString());
 				System.out.println(CardManager.getInstance().toString());		
@@ -383,7 +383,7 @@ public void addMayfestTileToLocationManager(Node mayfestNode){
 	}
 }
 
-public void addJailTileToLocationManager(Node jailNode){
+public void addDisciplinaryTileToLocationManager(Node jailNode){
 	// Variables
 	Disciplinary jailTile = null;
 	int id = 0;
@@ -404,7 +404,7 @@ public void addJailTileToLocationManager(Node jailNode){
 	}
 }
 
-public void addDisciplinaryTileToLocationManager(Node disciplinaryNode){
+public void addGoToDisciplinaryTileToLocationManager(Node disciplinaryNode){
 	// Variables
 	GoToDisciplinaryTile thedisciplinary = null;
 	int id = 0;
