@@ -46,7 +46,7 @@ public class GameManager implements Serializable {
 			Player newPlayer = new Player(name, token, color, playerId);
 			PlayerManager.getInstance().addPlayer(newPlayer);
 			BankManager.getInstance().openAccount(newPlayer);
-			LocationManager.getInstance().getLocationList().get(0).addPlayerHere(newPlayer);
+			LocationManager.getInstance().getLocationList().get(36).addPlayerHere(newPlayer);
 		}
 
 		

@@ -18,10 +18,10 @@
     <bus id="6" name="SMD Line" x="536" y="949" groupClr="Bus" price="200" rentValues="25,50,100,200" mortgage="100" breakMortgage="125"/>
     <property id="7" name="Dorm 57" x="463" y="949" groupClr="LightBlue" price="120" rentValues="6,12,30,90,270" upgradeCost="50" mortgage="50" breakMortgage="70"/>
     <chance id="8" name="Chance Tile" x="390" y="949"/>
-    <property id="8" name="Dorm 56" x="316" y="949" groupClr="LightBlue" price="100" rentValues="6,12,30,90,270" upgradeCost="50" mortgage="50" breakMortgage="70"/>
-    <property id="9" name="Dorm 55" x="243" y="949" groupClr="LightBlue" price="100" rentValues="8,16,40,100,300" upgradeCost="50" mortgage="60" breakMortgage="80"/>
-
-    <disciplinary id="11" name="Disciplinary" x="50" y="949"></disciplinary><property id="12" name="Health Center Main" x="50" y="828" groupClr="Purple" price="140" rentValues="10,20,50,150,450" upgradeCost="100" mortgage="70" breakMortgage="100"/>
+    <property id="9" name="Dorm 56" x="316" y="949" groupClr="LightBlue" price="100" rentValues="6,12,30,90,270" upgradeCost="50" mortgage="50" breakMortgage="70"/>
+    <property id="10" name="Dorm 55" x="243" y="949" groupClr="LightBlue" price="100" rentValues="8,16,40,100,300" upgradeCost="50" mortgage="60" breakMortgage="80"/>
+    <disciplinary id="11" name="Disciplinary" x="50" y="949"/>
+    <property id="12" name="Health Center Main" x="50" y="828" groupClr="Purple" price="140" rentValues="10,20,50,150,450" upgradeCost="100" mortgage="70" breakMortgage="100"/>
     <utility id="13" name="Marmara" x="50" y="755" groupClr="utility" price="140" rentValues="4,10" mortgage="75" breakMortgage="105"/>
     <property id="14" name="G building" x="50" y="682" groupClr="Purple" price="140" rentValues="10,20,50,150,450" upgradeCost="100" mortgage="70" breakMortgage="100"/>
     <property id="15" name="Register's Office" x="50" y="608" groupClr="Purple" price="160" rentValues="12,24,60,180,500" upgradeCost="100" mortgage="80" breakMortgage="110"/>
@@ -40,7 +40,8 @@
     <property id="28" name="F Building" x="610" y="50" groupClr="yellow" price="260" rentValues="22,44,110,330,800" upgradeCost="150" mortgage="130" breakMortgage="160"/>
     <utility id="29" name="WC" x="683" y="50" groupClr="utility" price="150" rentValues="4,10" mortgage="75" breakMortgage="105"/>
     <property id="30" name="Library" x="757" y="50" groupClr="yellow" price="280" rentValues="24,48,120,360,850" upgradeCost="150" mortgage="140" breakMortgage="170"/>
-    <goToDisciplinaryTile id="31" name="GoToDisciplinaryTile" x="950" y="50"></goToDisciplinaryTile><property id="32" name="A Building" x="950" y="170" groupClr="green" price="300" rentValues="26,52,130,390,900" upgradeCost="200" mortgage="150" breakMortgage="190"/>
+    <goToDisciplinaryTile id="31" name="GoToDisciplinaryTile" x="950" y="50"/>
+    <property id="32" name="A Building" x="950" y="170" groupClr="green" price="300" rentValues="26,52,130,390,900" upgradeCost="200" mortgage="150" breakMortgage="190"/>
     <property id="33" name="S Building" x="950" y="243" groupClr="green" price="300" rentValues="26,52,130,390,900" upgradeCost="200" mortgage="150" breakMortgage="190"/>
     <chance id="34" name="Chance Tile" x="950" y="317"/>
     <property id="35" name="EA Building" x="950" y="390" groupClr="green" price="320" rentValues="28,56,150,450,1000" upgradeCost="200" mortgage="160" breakMortgage="200"/>

@@ -8,7 +8,10 @@ import javax.swing.JPanel;
 
 import gamePresenter.BoardManager;
 import gamePresenter.GameManager;
+import gamePresenter.LocationManager;
 import gamePresenter.PlayerManager;
+import models.Player;
+import models.location.Location;
 import settingsPresenter.LocalDataManager;
 import userInterface.menus.MenuManager;
 
@@ -67,6 +70,12 @@ public class InteractionArea extends JPanel{
 		add(rollBtn);
 		
 		JButton move1Btn = new JButton("Move Player 1 Forward");
+		move1Btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(), 1);
+				 BoardManager.getInstance().updateMap();
+			}
+		});
 		move1Btn.setBounds(300, 202, 199, 34);
 		add(move1Btn);
 		
@@ -123,10 +132,32 @@ public class InteractionArea extends JPanel{
 		JButton updateBtn = new JButton("Update");
 		updateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				System.out.println(PlayerManager.getInstance().getCurrentPlayer().getName());
+				//System.out.println(LocationManager.getInstance().getLocationList().size() + "");
+				
+				//for( Location loc: LocationManager.getInstance().getLocationList())
+					//System.out.println(loc.getLocationId());
+				
+				
 				BoardManager.getInstance().updateMap();
 			}
 		});
 		updateBtn.setBounds(25, 731, 89, 23);
 		add(updateBtn);
+		
+		JButton setOwnerBtn = new JButton("setOwnerHereFromCurrent");
+		setOwnerBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+				//LocationManager.getInstance().getLocationById(currentPlayer.getLocation)
+				//LocationManager.getInstance().getBuyableList().get();
+				
+				
+			}
+		});
+		setOwnerBtn.setBounds(347, 562, 232, 23);
+		add(setOwnerBtn);
 	}
 }

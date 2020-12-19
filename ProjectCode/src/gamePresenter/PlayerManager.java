@@ -27,7 +27,8 @@ public class PlayerManager implements Serializable{
 		currentPlayerIndex = mngr.currentPlayerIndex;
 		// TODO Auto-generated constructor stub
 		for(int i = 0; i < mngr.players.size(); i++) {
-			this.players.add(mngr.players.get(i));
+			Player plyr = new Player(mngr.players.get(i));
+			this.players.add(plyr);
 		}
 		currentPlayer = players.get(currentPlayerIndex);
 	}
