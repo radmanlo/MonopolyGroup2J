@@ -90,7 +90,10 @@ public class GameManager implements Serializable {
 	 * Gets called when the game just started or when player presses EndTurn
 	 * Gets all the information about the current player and passes them to the view
 	 */
-	public void handleNewTurn() { // Initializing a new turn Basically view players info on the screen
+	public void handleNewTurn(boolean canRoolDice) { // Initializing a new turn Basically view players info on the screen
+		// TODO Disable dice if player is in Jail (canRollDice == false)
+		// TODO when player uses outOfJail card rollDice is enabled
+
 		// TODO get the current player
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		// TODO view the player
@@ -101,6 +104,7 @@ public class GameManager implements Serializable {
 
 	/**
 	 * Handles the EndTurn button, change the turn and handles new turn
+	 * checks if a player is in jail and update their jail status
 	 */
 	public void handleEndTurn(){
 		PlayerManager.getInstance().changeCurrentPlayer();
@@ -108,10 +112,10 @@ public class GameManager implements Serializable {
 
 		if (curPlayer.getIsInJail() && curPlayer.getInJailCount() < 3){
 			curPlayer.setInJailCount(curPlayer.getInJailCount() + 1);
-			this.handleEndTurn(); // To move forward with the next player
+			this.handleNewTurn(false);
 		} else {
 			curPlayer.setIsInJail(false);
-			this.handleNewTurn();
+			this.handleNewTurn(true);
 		}
 	}
 
