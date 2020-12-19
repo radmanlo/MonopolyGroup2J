@@ -133,7 +133,7 @@ public class NewGameMenu extends Menu{
 		JLabel color = createLabel("Color");
 		JLabel token = createLabel("Token");
 
-		// 290 is calculated from the width of namefiled
+		// 290 is calculated from the width of namefield
 		name.setBounds(290, 5, 60, 30);
 		addPlayerPanel.add(name);
 

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import models.BankAccount;
+import models.location.BuyableLocation;
+import models.location.Location;
 import models.*;
 //import models.Player;
 
@@ -18,6 +20,12 @@ public class BankManager implements Serializable {
 	private double INTEREST_RATE = 0.10;
 	private ArrayList<BankAccount> accounts;
 	
+    private BankManager( BankManager copy) {
+        this.accounts = new ArrayList<BankAccount>();
+    	for(int i = 0; i < copy.accounts.size(); i++ ) {
+    		this.accounts.add(copy.accounts.get(i));
+    	}
+    }
 	public BankManager() {
 		accounts = new ArrayList<BankAccount>();
 	}
@@ -28,7 +36,9 @@ public class BankManager implements Serializable {
 		}
 		return bank;
 	}
-	
+    public void create(BankManager copy) {
+    	bank = new BankManager(copy);
+    }
 	public void depositMoney(Player plyr, int money) {
 		for(int i = 0; i < accounts.size(); i++) {
 			if(accounts.get(i).getId() == plyr.getId()) {

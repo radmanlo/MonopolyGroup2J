@@ -19,6 +19,12 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance();
 	}
 
+	public GameManager(GameManager mngr) {
+		// TODO Auto-generated constructor stub
+		// TODO ADD MAYBE NEEDED
+	
+	}
+
 	// Operational Methods
 	public static GameManager getInstance() {
 		if( gameManager == null ) {
@@ -27,7 +33,11 @@ public class GameManager implements Serializable {
 		return gameManager;
 	}
 	
+	
+	
 	public void initializeNewGame(ArrayList<PotentialPlayer> pL, Document doc) {
+		LocalDataManager.getInstance().initialize(doc);
+		
 		for(int i = 0; i< pL.size(); i++) {
 			String name = pL.get(i).getName();
 			Token token = pL.get(i).getToken();
@@ -36,14 +46,15 @@ public class GameManager implements Serializable {
 			Player newPlayer = new Player(name, token, color, playerId);
 			PlayerManager.getInstance().addPlayer(newPlayer);
 			BankManager.getInstance().openAccount(newPlayer);
+			LocationManager.getInstance().getLocationList().get(0).addPlayerHere(newPlayer);
 		}
 
-		LocalDataManager.getInstance().initialize(doc);
+		
 
-//		PlayerManager.getInstance().setInitialCurrentPlayer();
+		PlayerManager.getInstance().setInitialCurrentPlayer();
 		BoardManager.getInstance();
-//		LocationManager.getInstance();
-//		CardManager.getInstance();
+		LocationManager.getInstance();
+		CardManager.getInstance();
 		TradeManager.getInstance();
 	}
 
@@ -62,8 +73,12 @@ public class GameManager implements Serializable {
 		Location newLocation = null;
 
 		// roll the dice
-		this.dice.rollDices();
-		int moveDistance = this.dice.getTotalResult();
+		int moveDistance = 0;
+
+		do {
+			this.dice.rollDices();
+			moveDistance += this.dice.getTotalResult();
+		}while(this.dice.isDoubleDice());
 
 		// move player's token
 		newLocation = LocationManager.getInstance().movePlayer(currentPlayer, moveDistance);
@@ -71,7 +86,8 @@ public class GameManager implements Serializable {
 		// todo Update the view
 
 		// Activate the new Location
-		LocationManager.getInstance().activateLocation(newLocation);
+		newLocation.activate();
+		BoardManager.getInstance().updateMap();
 	}
 
 	/**
@@ -109,6 +125,11 @@ public class GameManager implements Serializable {
 	 */
 	public void getOfferInfo(){
 		// return the offer's information
+	}
+
+	public void create(GameManager mngr) {
+		// TODO Auto-generated method stub
+		gameManager = new GameManager(mngr);
 	}
 
 

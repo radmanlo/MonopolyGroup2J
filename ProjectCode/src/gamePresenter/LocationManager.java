@@ -31,7 +31,19 @@ public class LocationManager implements Serializable {
 	private static LocationManager locationManager = null;
     private ArrayList<BuyableLocation> buyableLocations;
     private ArrayList<Location> nonBuyableLocations;
-
+    
+    
+    private LocationManager( LocationManager copy) {
+        this.buyableLocations = new ArrayList<BuyableLocation>();
+        this.nonBuyableLocations = new ArrayList<Location>();
+    	for(int i = 0; i < copy.buyableLocations.size(); i++ ) {
+    		buyableLocations.add(copy.buyableLocations.get(i));
+    	}
+    	for(int i = 0; i < copy.nonBuyableLocations.size(); i++ ) {
+    		nonBuyableLocations.add(copy.nonBuyableLocations.get(i));
+    	}
+    }
+    
     private LocationManager(){
         this.buyableLocations = new ArrayList<BuyableLocation>();
         this.nonBuyableLocations = new ArrayList<Location>();
@@ -45,12 +57,16 @@ public class LocationManager implements Serializable {
         return locationManager;
     }
     
+    public void create(LocationManager copy) {
+    	locationManager = new LocationManager(copy);
+    }
+    
     public Location movePlayer(Player playerToMove, int distance){
         Location newLocation = null;
 
         // get the current location of the player
         Location currentLocation = getPlayerLocation(playerToMove);
-
+        System.out.println("current:" + currentLocation.getName());
         // calculate the next location
         int curLocId = currentLocation.getLocationId();
         int nextLocId = (curLocId + distance) % 40; // There are 40 locations in total with ids: 0-39
@@ -60,8 +76,8 @@ public class LocationManager implements Serializable {
 
         // add player to new location
         newLocation = getLocationById(nextLocId);
+        System.out.println("new:" + newLocation.getName());
         newLocation.addPlayerHere(playerToMove);
-
         return newLocation;
     }
 
