@@ -27,5 +27,8 @@ public class Token implements Serializable {
 		Image image = image = Utils.scaleImage(90, 65, path);
 		return image;
 	}
-
+	
+	public String getPath() {
+		return path;
+	}
 }

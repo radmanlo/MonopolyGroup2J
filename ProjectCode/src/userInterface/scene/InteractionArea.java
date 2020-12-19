@@ -11,6 +11,7 @@ import gamePresenter.GameManager;
 import gamePresenter.LocationManager;
 import gamePresenter.PlayerManager;
 import models.Player;
+import models.location.BuyableLocation;
 import models.location.Location;
 import settingsPresenter.LocalDataManager;
 import userInterface.menus.MenuManager;
@@ -134,13 +135,6 @@ public class InteractionArea extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				
 				
-				System.out.println(PlayerManager.getInstance().getCurrentPlayer().getName());
-				//System.out.println(LocationManager.getInstance().getLocationList().size() + "");
-				
-				//for( Location loc: LocationManager.getInstance().getLocationList())
-					//System.out.println(loc.getLocationId());
-				
-				
 				BoardManager.getInstance().updateMap();
 			}
 		});
@@ -151,6 +145,9 @@ public class InteractionArea extends JPanel{
 		setOwnerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+				for( BuyableLocation loc: LocationManager.getInstance().getBuyableList()) {
+					loc.setOwner(currentPlayer);
+				}
 				//LocationManager.getInstance().getLocationById(currentPlayer.getLocation)
 				//LocationManager.getInstance().getBuyableList().get();
 				
