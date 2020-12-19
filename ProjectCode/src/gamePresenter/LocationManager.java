@@ -173,6 +173,10 @@ public class LocationManager implements Serializable {
         return count;
     }
 
+    /**
+     * Decides what to do based on the location type
+     * @param locationToActivate
+     */
     public void activateLocation(Location locationToActivate){
         // Check the location type
         if (locationToActivate.getType() == Location.LOCATION_TYPES.BUS){
