@@ -45,6 +45,13 @@ public class PlayerManager implements Serializable{
 	public Player getCurrentPlayer() {
 		return currentPlayer;
 	}
+
+	public Player getNextPlayer(){
+		int nOfPlayers = players.size();
+		int nextPlayerIndex = (currentPlayerIndex + 1) % nOfPlayers;
+
+		return players.get(nextPlayerIndex); // update the current player
+	}
 	
 	public void changeCurrentPlayer() {
 		int nOfPlayers = players.size();
