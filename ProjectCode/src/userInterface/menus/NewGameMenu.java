@@ -28,11 +28,12 @@ import gamePresenter.LocationManager;
 import models.Token;
 import models.PlayerColor;
 import models.PotentialPlayer;
+import userInterface.components.RoundedButton;
 
 public class NewGameMenu extends Menu{
 
-	private JButton initializeGameBtn;
-	private JButton addNewPlayerBtn;
+	private RoundedButton initializeGameBtn;
+	private RoundedButton addNewPlayerBtn;
 	private ArrayList<Token> choosableTokens;
 	private ArrayList<PlayerColor> choosableColors;
 	private ArrayList<NewPlayerAddingScreen> newPlayerAddingScreens;
@@ -42,16 +43,18 @@ public class NewGameMenu extends Menu{
 	final int FIELDS_X = 600;
 
 	public NewGameMenu() {
-		super("./resources/NewGameMenu.jpg");
+//		super("./resources/NewGameMenu.jpg");
+		super(null);
+		setBackground(new Color(93, 51, 52));
 		choosableTokens = new ArrayList<Token>();
-		choosableTokens.add(new Token("./resources/Token1.jpg"));
-		choosableTokens.add(new Token("./resources/Token2.jpg"));
-		choosableTokens.add(new Token("./resources/Token3.jpg"));
-		choosableTokens.add(new Token("./resources/Token4.jpg"));
-		choosableTokens.add(new Token("./resources/Token5.jpg"));
-		choosableTokens.add(new Token("./resources/Token6.jpg"));
-		choosableTokens.add(new Token("./resources/Token7.jpg"));
-		choosableTokens.add(new Token("./resources/Token8.jpg"));
+		choosableTokens.add(new Token("./resources/piece1.png"));
+		choosableTokens.add(new Token("./resources/piece2.png"));
+		choosableTokens.add(new Token("./resources/piece3.png"));
+		choosableTokens.add(new Token("./resources/piece4.png"));
+		choosableTokens.add(new Token("./resources/piece5.png"));
+		choosableTokens.add(new Token("./resources/piece6.png"));
+		choosableTokens.add(new Token("./resources/piece7.png"));
+		choosableTokens.add(new Token("./resources/piece8.png"));
 
 		choosableColors = new ArrayList<PlayerColor>();
 		choosableColors.add(PlayerColor.WHITE);
@@ -66,10 +69,10 @@ public class NewGameMenu extends Menu{
 		newPlayerAddingScreens = new ArrayList<NewPlayerAddingScreen>();
 		potentialPlayers = new ArrayList<PotentialPlayer>();
 		setLayout(null);
-		setBounds(100, 100, 1900, 1000);
+		setBounds(100, 100, getWidth(), getHeight());
 
-		backBtn.setText("Go Back");
-		backBtn.setBounds(33, 379, 289, 91);
+		backBtn.setLabel("Go Back");
+		backBtn.setBounds(33, 379, 289, 90);
 
 
 		NewPlayerAddingScreen s1 = new NewPlayerAddingScreen(this);
@@ -80,7 +83,7 @@ public class NewGameMenu extends Menu{
 		newPlayerAddingScreens.add(s2);
 		add(s2);	
 
-		addNewPlayerBtn = new JButton("+");
+		addNewPlayerBtn = new RoundedButton("+");
 		addNewPlayerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addPotentialPlayer();
@@ -89,8 +92,8 @@ public class NewGameMenu extends Menu{
 		addNewPlayerBtn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(addNewPlayerBtn);
 
-		initializeGameBtn = new JButton("Start Game");
-		initializeGameBtn.setBounds(33, 247, 289, 106);
+		initializeGameBtn = new RoundedButton("Start Game");
+		initializeGameBtn.setBounds(33, 247, 289, 90);
 		initializeGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				initializeNewGame();
@@ -109,7 +112,7 @@ public class NewGameMenu extends Menu{
 
 
 	public void initializeNewGame() {
-		if(areAllPlayersUnique() == false) {	
+		if(areAllPlayersUnique() == false) {
 			showMessageDialog(null, "Tokens, names or colors can not be same! \nName can not be empty");
 		}else {
 
@@ -138,42 +141,42 @@ public class NewGameMenu extends Menu{
 		Token token;
 		if(newPlayerAddingScreens.get(index).getChosenTokenIndex() == 0)
 		{
-			token = new Token("./resources/Token1.jpg");
+			token = new Token("./resources/piece1.png");
 			return token;
 		}
 		if(newPlayerAddingScreens.get(index).getChosenTokenIndex() == 1)
 		{
-			token = new Token("./resources/Token2.jpg");
+			token = new Token("./resources/piece2.png");
 			return token;
 		}
 		if(newPlayerAddingScreens.get(index).getChosenTokenIndex() == 2)
 		{
-			token = new Token("./resources/Token3.jpg");
+			token = new Token("./resources/piece3.png");
 			return token;
 		}
 		if(newPlayerAddingScreens.get(index).getChosenTokenIndex() == 3)
 		{
-			token = new Token("./resources/Token4.jpg");
+			token = new Token("./resources/piece4.png");
 			return token;
 		}
 		if(newPlayerAddingScreens.get(index).getChosenTokenIndex() == 4)
 		{
-			token = new Token("./resources/Token5.jpg");
+			token = new Token("./resources/piece5.png");
 			return token;
 		}
 		if(newPlayerAddingScreens.get(index).getChosenTokenIndex() == 5)
 		{
-			token = new Token("./resources/Token6.jpg");
+			token = new Token("./resources/piece6.png");
 			return token;
 		}
 		if(newPlayerAddingScreens.get(index).getChosenTokenIndex() == 6)
 		{
-			token = new Token("./resources/Token7.jpg");
+			token = new Token("./resources/piece7.png");
 			return token;
 		}
 		if(newPlayerAddingScreens.get(index).getChosenTokenIndex() == 7)
 		{
-			token = new Token("./resources/Token8.jpg");
+			token = new Token("./resources/piece8.png");
 			return token;
 		}
 		return null;

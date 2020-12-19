@@ -1,17 +1,18 @@
 package models;
 
-import java.awt.Image;
+import utilities.Utils;
 
-import javax.swing.ImageIcon;
+import java.awt.*;
 
 public class Token {
 	private Image image;
 	
 	public Token(String path) {
-		image = new ImageIcon(path).getImage();
+		image = Utils.scaleImage(90, 65, path);
 	}
 
 	public Image getImage() {
 		return image;
 	}
+
 }
