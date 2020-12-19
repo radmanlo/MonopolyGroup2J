@@ -49,8 +49,8 @@ public class BuyableLocation extends Location{
         }
     }
 
-    public BuyableLocation(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, LOCATION_TYPES type) {
-        super(locationId, name, point, playersHere, type);
+    public BuyableLocation(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues) {
+        super(locationId, name, point, playersHere);
         this.groupColor = groupColor;
         this.owner = owner;
         this.price = price;
@@ -62,7 +62,20 @@ public class BuyableLocation extends Location{
         this.rentValues = rentValues;
     }
 
-    public Player getOwner() {
+    public BuyableLocation(BuyableLocation copy) {
+    	super(copy);
+        this.groupColor = copy.groupColor;
+        this.owner = copy.owner;
+        this.price = copy.price;
+        this.currentRentValue = copy.currentRentValue;
+        this.currentRentIndex = copy.currentRentIndex;
+        this.mortgageValue = copy.mortgageValue;
+        this.breakMortgageValue = copy.breakMortgageValue;
+        this.underMortgage = copy.underMortgage;
+        this.rentValues = copy.rentValues;
+    }
+
+	public Player getOwner() {
         return owner;
     }
 

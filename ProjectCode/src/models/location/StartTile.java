@@ -9,11 +9,17 @@ public class StartTile extends Location{
     private int prizeValue;
 
     public StartTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere, int prizeValue) {
-        super(locationId, name, point, playersHere, LOCATION_TYPES.START);
+        super(locationId, name, point, playersHere);
         this.prizeValue = prizeValue;
     }
 
-    @Override
+    public StartTile(StartTile startTile) {
+		// TODO Auto-generated constructor stub
+    	super(startTile);
+    	this.prizeValue = prizeValue;
+	}
+
+	@Override
     public void activate() { // TODO to be implemented
         super.activate();
     }

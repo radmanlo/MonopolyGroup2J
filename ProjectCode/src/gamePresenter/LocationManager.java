@@ -25,6 +25,58 @@ public class LocationManager implements Serializable {
     	for(int i = 0; i < copy.nonBuyableLocations.size(); i++ ) {
     		nonBuyableLocations.add(copy.nonBuyableLocations.get(i));
     	}
+		for(int i = 0; i < copy.buyableLocations.size();i++) {
+			//this.ownedLocations.add(copy.ownedLocations.get(i));
+			Location loc = copy.buyableLocations.get(i);
+			switch(loc.getClass().toString()) {
+			case "class models.location.Property":
+				Property pr = new Property((Property)copy.buyableLocations.get(i));
+				this.buyableLocations.add(pr);
+				break;
+			case "class models.location.Utility":
+				Utility ut = new Utility((Utility)copy.buyableLocations.get(i));
+				this.buyableLocations.add(ut);
+				break;
+			case "class models.location.BusStop":
+				BusStop bs = new BusStop((BusStop)copy.buyableLocations.get(i));
+				this.buyableLocations.add(bs);
+				break;	
+			default:
+			}
+		}
+		for(int i = 0; i < copy.nonBuyableLocations.size(); i++) {
+			Location loc = copy.nonBuyableLocations.get(i);
+			switch(loc.getClass().toString()) {
+			
+			case "class models.location.StartTile":
+				StartTile bs = new StartTile((StartTile)copy.nonBuyableLocations.get(i));
+				this.nonBuyableLocations.add(bs);
+				break;
+			case "class models.location.Disciplinary":
+				Disciplinary dc = new Disciplinary((Disciplinary)copy.nonBuyableLocations.get(i));
+				this.nonBuyableLocations.add(dc);
+				break;
+			case "class models.location.GoToDisciplinaryTile":
+				GoToDisciplinaryTile gdc = new GoToDisciplinaryTile((GoToDisciplinaryTile)copy.nonBuyableLocations.get(i));
+				this.nonBuyableLocations.add(gdc);
+				break;
+
+			case "class models.location.MayfestTile":
+				MayfestTile mft = new MayfestTile((MayfestTile)copy.nonBuyableLocations.get(i));
+				this.nonBuyableLocations.add(mft);
+				break;
+			case "class models.location.ChanceTile":
+				ChanceTile cht = new ChanceTile((ChanceTile)copy.nonBuyableLocations.get(i));
+				this.nonBuyableLocations.add(cht);
+				break;
+			case "class models.location.IncomeTaxTile":
+				IncomeTaxTile itt = new IncomeTaxTile((IncomeTaxTile)copy.nonBuyableLocations.get(i));
+				this.nonBuyableLocations.add(itt);
+				break;	
+			default:
+				System.out.println("An error occurred on Map.paint()");
+			}
+		}
     }
 
     // Constructor

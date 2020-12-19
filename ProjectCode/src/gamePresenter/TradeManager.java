@@ -21,7 +21,8 @@ public class TradeManager implements Serializable{
 		// TODO Auto-generated constructor stub
 		tradeDeals = new ArrayList<TradeDeal>();
 		for(int i = 0; i < mngr.tradeDeals.size(); i++) {
-			this.tradeDeals.add(mngr.tradeDeals.get(i));
+			TradeDeal td = new TradeDeal(mngr.tradeDeals.get(i));
+			this.tradeDeals.add(td);
 		}
 	}
 

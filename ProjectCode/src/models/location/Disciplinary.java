@@ -8,12 +8,19 @@ public class Disciplinary extends Location{
     private ArrayList<Player> prisoners;
 
     public Disciplinary(int locationId, String name, Point2D point, ArrayList<Player> playersHere,ArrayList<Player> prisoners) {
-		super(locationId, name, point, playersHere, LOCATION_TYPES.DISCIPLINARY);
+		super(locationId, name, point, playersHere);
         this.prisoners = prisoners;
 
 		// TODO Auto-generated constructor stub
 	}
 
+    public Disciplinary(Disciplinary copy) {
+    	super(copy);
+    	for(int i = 0; i < copy.prisoners.size(); i++) {
+    		Player plyr = new Player(copy.prisoners.get(i));
+    		this.prisoners.add(plyr);
+    	}
+    }
 
     @Override
     public void activate() {

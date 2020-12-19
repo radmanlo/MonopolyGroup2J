@@ -8,8 +8,12 @@ public class MayfestTile extends Location{
     private int collectedTax;
 
     public MayfestTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere, int collectedTax) {
-        super(locationId, name, point, playersHere, LOCATION_TYPES.MAYFEST);
+        super(locationId, name, point, playersHere);
         this.collectedTax = collectedTax;
+    }
+    public MayfestTile(MayfestTile copy) {
+    	super(copy);
+    	this.collectedTax = copy.collectedTax;
     }
 
     public int getCollectedTax(){

@@ -23,7 +23,8 @@ public class BankManager implements Serializable {
     private BankManager( BankManager copy) {
         this.accounts = new ArrayList<BankAccount>();
     	for(int i = 0; i < copy.accounts.size(); i++ ) {
-    		this.accounts.add(copy.accounts.get(i));
+    		BankAccount bac = new BankAccount(copy.accounts.get(i));
+    		this.accounts.add(bac);
     	}
     }
 	public BankManager() {
