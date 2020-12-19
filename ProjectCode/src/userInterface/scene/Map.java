@@ -42,10 +42,10 @@ public class Map extends JPanel{
 				drawProperty(g, (Property) toDraw);
 				return;
 			case "class models.location.Disciplinary":
-				drawDisciplinary(g, (Disciplinary) toDraw);
+				drawDisciplinary(g, (GoToDisciplinaryTile) toDraw);
 				return;
 			case "class models.location.GoToDisciplinaryTile":
-				drawGoToDisciplinaryTile(g, (GoToDisciplinaryTile) toDraw);
+				drawGoToDisciplinaryTile(g, (Disciplinary) toDraw);
 				return;
 			case "class models.location.Utility":
 				drawUtility(g, (Utility) toDraw);
@@ -89,7 +89,7 @@ public class Map extends JPanel{
 		drawPlayersHere(g, toDraw); 
 	}
 	
-	private void drawDisciplinary(Graphics g, Disciplinary toDraw) {
+	private void drawDisciplinary(Graphics g, GoToDisciplinaryTile toDraw) {
 		drawPlayersHere(g, toDraw); 
 	}
 	
@@ -101,7 +101,7 @@ public class Map extends JPanel{
 		drawPlayersHere(g, toDraw); 
 	}
 	
-	private void drawGoToDisciplinaryTile(Graphics g, GoToDisciplinaryTile toDraw) {
+	private void drawGoToDisciplinaryTile(Graphics g, Disciplinary toDraw) {
 		drawPlayersHere(g, toDraw); 
 	}
 	

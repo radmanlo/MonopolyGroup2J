@@ -7,9 +7,13 @@ import models.Player;
 public class Disciplinary extends Location{
     private ArrayList<Player> prisoners;
 
-    public Disciplinary(int locationId, String name, Point2D point, ArrayList<Player> playersHere) {
-        super(locationId, name, point, playersHere);
-    }
+    public Disciplinary(int locationId, String name, Point2D point, ArrayList<Player> playersHere,ArrayList<Player> prisoners) {
+		super(locationId, name, point, playersHere);
+        this.prisoners = prisoners;
+
+		// TODO Auto-generated constructor stub
+	}
+
 
     @Override
     public void activate() {

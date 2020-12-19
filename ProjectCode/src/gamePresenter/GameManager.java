@@ -329,7 +329,7 @@ public class GameManager {
 
 	public void addJailTileToLocationManager(Node jailNode){
 		// Variables
-		Jail jailTile = null;
+		Disciplinary jailTile = null;
 		int id = 0;
 		int x = 0, y = 0;
 		String name = "";
@@ -343,14 +343,14 @@ public class GameManager {
 			y = Integer.parseInt(jailElement.getAttribute("y"));
 			name = jailElement.getAttribute("name");
 
-			jailTile = new Jail(id, name, new Point2D.Double(x,y), new ArrayList<Player>(0), new ArrayList<Player>(0));
+			jailTile = new Disciplinary(id, name, new Point2D.Double(x,y), new ArrayList<Player>(0), new ArrayList<Player>(0));
 			LocationManager.getInstance().addNonBuyable(jailTile);
 		}
 	}
 
 	public void addDisciplinaryTileToLocationManager(Node disciplinaryNode){
 		// Variables
-		Disciplinary thedisciplinary = null;
+		GoToDisciplinaryTile thedisciplinary = null;
 		int id = 0;
 		int x = 0, y = 0;
 		String name = "";
@@ -364,7 +364,7 @@ public class GameManager {
 			y = Integer.parseInt(disciplinaryElement.getAttribute("y"));
 			name = disciplinaryElement.getAttribute("name");
 
-			thedisciplinary = new Disciplinary(id, name, new Point2D.Double(x,y), new ArrayList<Player>(0));
+			thedisciplinary = new GoToDisciplinaryTile(id, name, new Point2D.Double(x,y), new ArrayList<Player>(0));
 			LocationManager.getInstance().addNonBuyable(thedisciplinary);
 		}
 	}
