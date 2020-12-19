@@ -10,7 +10,7 @@ public class Property extends BuyableLocation{
     private boolean ownsStarbucks;
 
     public Property(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, int vendingMachinesNo, boolean ownsStarbucks) {
-        super(locationId, name, point, playersHere, groupColor, owner, price, currentRentValue, mortgageValue, breakMortgageValue, underMortgage, rentValues);
+        super(locationId, name, point, playersHere, groupColor, owner, price, currentRentValue, mortgageValue, breakMortgageValue, underMortgage, rentValues, LOCATION_TYPES.PROPERTY);
         this.vendingMachinesNo = vendingMachinesNo;
         this.ownsStarbucks = ownsStarbucks;
     }

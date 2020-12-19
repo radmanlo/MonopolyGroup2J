@@ -7,7 +7,7 @@ import models.Player;
 public class GoToDisciplinaryTile extends Location{
 
     public GoToDisciplinaryTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere) {
-        super(locationId, name, point, playersHere);
+        super(locationId, name, point, playersHere, LOCATION_TYPES.GO_TO_DISCIPLINARY);
     }
 
     @Override

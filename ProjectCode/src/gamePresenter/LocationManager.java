@@ -168,6 +168,101 @@ public class LocationManager implements Serializable {
         this.nonBuyableLocations.add(aNonBuyable);
     }
 
+    public void activateLocation(Location locationToActivate){
+        // Check the location type
+        if (locationToActivate.getType() == Location.LOCATION_TYPES.BUS){
+            this.activateBus(locationToActivate);
+        } else if (locationToActivate.getType() == Location.LOCATION_TYPES.CHANCE){
+            this.activateChance(locationToActivate);
+        } else if (locationToActivate.getType() == Location.LOCATION_TYPES.DISCIPLINARY){
+            this.activateDisciplinary(locationToActivate);
+        } else if (locationToActivate.getType() == Location.LOCATION_TYPES.GO_TO_DISCIPLINARY){
+            this.activateGoToDisciplinary(locationToActivate);
+        } else if (locationToActivate.getType() == Location.LOCATION_TYPES.INCOME_TAX){
+            this.activateIncomeTax(locationToActivate);
+        } else if (locationToActivate.getType() == Location.LOCATION_TYPES.MAYFEST){
+            this.activateMayfest(locationToActivate);
+        } else if (locationToActivate.getType() == Location.LOCATION_TYPES.PROPERTY){
+            this.activateProperty(locationToActivate);
+        } else if (locationToActivate.getType() == Location.LOCATION_TYPES.START){
+            this.activateStart(locationToActivate);
+        } else if (locationToActivate.getType() == Location.LOCATION_TYPES.UTILITY){
+            this.activateUtility(locationToActivate);
+        }
+    }
+
+    public void activateBus(Location busLoc){
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        Player busStationOwner = ((BuyableLocation)busLoc).getOwner();
+        int rentValue = ((BuyableLocation)busLoc).getCurrentRentValue();
+
+        if (busStationOwner == null){
+            // Check money if enough
+            // Prompt to buy property
+
+            // if OK Buy the property
+            buyProperty(busLoc, currentPlayer);
+        } else {
+            deductRentValue(busStationOwner, currentPlayer, rentValue);
+        }
+    }
+
+    public void activateChance(Location chanceLoc){
+
+    }
+
+    public void activateDisciplinary(Location disciplinaryLoc){
+
+    }
+
+    public void activateGoToDisciplinary(Location goToDisciplinaryLoc){
+
+    }
+
+    public void activateIncomeTax(Location incomeTaxLoc){
+
+    }
+
+    public void activateMayfest(Location mayfestLoc){
+
+    }
+
+    public void activateProperty(Location propertyLoc){
+
+    }
+
+    public void activateStart(Location startLoc){
+
+    }
+
+    public void activateUtility(Location utilityLoc){
+
+    }
+
+    /**
+     * Deducts money from the visitor and gives it to the owner
+     * @param owner
+     * @param visitor
+     * @param amount
+     */
+    public void deductRentValue(Player owner, Player visitor, int amount){
+        visitor.setUsableMoney(visitor.getUsableMoney() - amount);
+        owner.setUsableMoney(owner.getUsableMoney() + amount);
+    }
+
+    public boolean buyProperty(Location location, Player buyer){
+        int price = ((BuyableLocation)location).getPrice();
+        boolean successful = false;
+
+        if (buyer.getUsableMoney() > price){
+            buyer.setUsableMoney(buyer.getUsableMoney() - price);
+            ((BuyableLocation)location).setOwner(buyer);
+            successful = true;
+        }
+
+        return successful;
+    }
+
     @Override
     public String toString() {
         return "LocationManager{" +

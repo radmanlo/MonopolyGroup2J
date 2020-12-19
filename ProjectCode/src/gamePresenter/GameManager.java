@@ -68,10 +68,10 @@ public class GameManager implements Serializable {
 		// move player's token
 		newLocation = LocationManager.getInstance().movePlayer(currentPlayer, moveDistance);
 
-		// Update the view
+		// todo Update the view
 
 		// Activate the new Location
-		newLocation.activate();
+		LocationManager.getInstance().activateLocation(newLocation);
 	}
 
 	/**
@@ -85,7 +85,6 @@ public class GameManager implements Serializable {
 		System.out.println(currentPlayer);
 		// view player's offers
 		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(currentPlayer);
-
 	}
 
 	/**

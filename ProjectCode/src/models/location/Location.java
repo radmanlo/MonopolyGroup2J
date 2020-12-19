@@ -15,13 +15,16 @@ public class Location implements Serializable{
     private String name;
     private Point2D point;
     private ArrayList<Player> playersHere;
+    private LOCATION_TYPES type;
+    public enum LOCATION_TYPES {BUS, CHANCE, DISCIPLINARY, GO_TO_DISCIPLINARY, INCOME_TAX, MAYFEST, PROPERTY, START, UTILITY};
 
     // Constructor
-    public Location(int locationId, String name, Point2D point, ArrayList<Player> playersHere) {
+    public Location(int locationId, String name, Point2D point, ArrayList<Player> playersHere, LOCATION_TYPES type) {
         this.locationId = locationId;
         this.name = name;
         this.point = point;
         this.playersHere = playersHere;
+        this.type = type;
     }
 
     @Override
@@ -92,5 +95,9 @@ public class Location implements Serializable{
 
     public ArrayList<Player> getAllPlayersHere(){
         return this.playersHere;
+    }
+
+    public LOCATION_TYPES getType(){
+        return this.type;
     }
 }
