@@ -5,6 +5,8 @@ import models.Player;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+import gamePresenter.LocationManager;
+
 public class Property extends BuyableLocation{
     private int vendingMachinesNo;
     private boolean ownsStarbucks;
@@ -40,9 +42,44 @@ public class Property extends BuyableLocation{
     public boolean hasStarbucks() {
         return ownsStarbucks;
     }
-
+    
+    public boolean upgrade() {
+    	
+    	if(ownsStarbucks == false){
+    		if(vendingMachinesNo < 2) {
+    			vendingMachinesNo++;
+    			return true;
+    		}else {
+    		vendingMachinesNo = 0;
+    		ownsStarbucks = true;
+    		return true;
+    		}
+    	}
+    	return false;
+    
+    }
     public int getUpgradeCost() {
         return upgradeCost;
+    }
+    
+    @Override
+    public int getRentValue() {
+    	int level = 0;
+    	if(LocationManager.getInstance().groupHasSameOwner(this.getGroupColor()).getName().equals(this.getOwner().getName())) {
+    		if(this.vendingMachinesNo == 0) {
+    			if(this.ownsStarbucks == true) {
+    				level = 4;
+    			}
+    			level = 1;
+    		}else if(this.vendingMachinesNo == 1) {
+    			level = 2;
+    		}else if(this.vendingMachinesNo == 2) {
+    			level = 3;
+    		}
+    	}
+    	int rentVal = this.getRentValues().get(level);
+    	this.setCurrentRentValue(rentVal);
+    	return rentVal;
     }
 
     public static int noOfPropertyPerColor(GroupColor color){

@@ -130,6 +130,10 @@ public class BuyableLocation extends Location{
     public ArrayList<Integer> getAllRentValues(){
         return this.rentValues;
     }
+    public int getRentValue() {
+		return this.currentRentValue;
+    }
+    
 
     public boolean upgrade(){
         if (this.currentRentIndex < this.rentValues.size() - 1){

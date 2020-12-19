@@ -5,6 +5,9 @@ import models.Player;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+import gamePresenter.GameManager;
+import gamePresenter.LocationManager;
+
 public class Utility extends BuyableLocation {
 
     public Utility(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues) {
@@ -16,5 +19,13 @@ public class Utility extends BuyableLocation {
     @Override
     public void activate() {
         super.activate();
+    }
+    @Override
+    public int getRentValue() {
+		int i = LocationManager.getInstance().noOfOwnedByPlayerInGroup(this.getOwner(),this.getGroupColor());
+		int k = GameManager.getInstance().totalDiceResultForUtility();
+		int money = this.getAllRentValues().get(i-1) * k;
+		this.setCurrentRentValue(money);
+		return money;
     }
 }

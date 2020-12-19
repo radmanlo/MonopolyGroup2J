@@ -85,6 +85,10 @@ public class GameManager implements Serializable {
 		newLocation.activate();
 		BoardManager.getInstance().updateMap();
 	}
+	
+	public int totalDiceResultForUtility() {
+		return this.dice.getTotalResult();
+	}
 
 	/**
 	 * Gets called when the game just started or when player presses EndTurn
