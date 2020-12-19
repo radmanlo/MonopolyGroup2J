@@ -3,6 +3,8 @@ package utilities;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Utils {
 
@@ -26,5 +28,18 @@ public class Utils {
             return null;
         }
         return img;
+    }
+
+    public static Font getFont() {
+        Font font =  null;
+        try {
+            //Returned font is of pt size 1
+            font = Font.createFont(Font.TRUETYPE_FONT, new File("langer.ttf"));
+
+        } catch (IOException |FontFormatException e) {
+            System.out.println("Failed to load font");
+            e.printStackTrace();
+        }
+        return font;
     }
 }

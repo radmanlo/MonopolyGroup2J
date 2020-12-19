@@ -63,6 +63,10 @@ public class RoundedButton extends Component {
         repaint();
     }
 
+    public Color getColor() {
+        return this.color;
+    }
+
     /**
      * paints the RoundedButton
      */
