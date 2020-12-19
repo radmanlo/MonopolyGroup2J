@@ -71,8 +71,8 @@ public class LocalDataManager {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 
 		try {
-//			Path xmlPath = Paths.get("..", "..", "resources", "defaultGame.xml");
-			xmlString = readFileToString("D:\\data\\defaultGame.xml");
+			Path xmlPath = Paths.get( "resources", "defaultGame.xml");
+			xmlString = readFileToString(xmlPath.toAbsolutePath().normalize().toString());
 
 			try {
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
