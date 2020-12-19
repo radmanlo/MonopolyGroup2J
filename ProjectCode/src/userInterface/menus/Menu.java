@@ -6,11 +6,11 @@ import javax.swing.JPanel;
 
 import models.Token;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 
 abstract class Menu extends JPanel{ //instead of it having a panel attribute, I made it directly extend JPanel
@@ -48,8 +48,10 @@ abstract class Menu extends JPanel{ //instead of it having a panel attribute, I 
 	   @Override
 	    protected void paintComponent(Graphics g) {
 	        super.paintComponent(g);
-	        // paint the background image and scale it to fill the entire space
-	        g.drawImage(img, 0, 0, getWidth(), getHeight(), this);
+	        // Get screen resolution
+		   Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+		   // Paint the image with max height and width
+		   g.drawImage(img, 0, 0, (int) size.getWidth(), (int) size.getHeight(), this);
 	    }
 	public void goBackPanel() {
 		MenuManager.getInstance().openMenu(5);//was private in class diagram but does not work when private -G

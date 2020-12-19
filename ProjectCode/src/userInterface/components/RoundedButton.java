@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
-class RoundedButton extends Component {
+public class RoundedButton extends Component {
 
     private ActionListener actionListener;     // Post action events to listeners
     private String label; // Button's label
@@ -13,11 +13,18 @@ class RoundedButton extends Component {
     private boolean hovered = false;
     private int radius = 20;
     private int fontSize = 20;
+    private Color color = new Color(230, 112, 112);
 
     /**
      * Constructs a RoundedButton with no label.
      */
     public RoundedButton() {
+    }
+
+    public RoundedButton(String label) {
+        super();
+        this.label = label;
+        setProps();
     }
 
     /**
@@ -29,10 +36,15 @@ class RoundedButton extends Component {
         this.label = label;
         this.fontSize = fontSize;
         this.radius = radius;
-        setBackground(color);
+        this.color = color;
+        setProps();
+        enableEvents(AWTEvent.MOUSE_EVENT_MASK);
+    }
+
+    private void setProps() {
+        setBackground(this.color);
         Font bTahoma = new Font("Tahoma", Font.BOLD, this.fontSize);
         setFont(bTahoma);
-        enableEvents(AWTEvent.MOUSE_EVENT_MASK);
     }
 
     /**
@@ -75,7 +87,7 @@ class RoundedButton extends Component {
         g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, this.radius, this.radius);
 
         // draw the border of the button
-        g.setColor(getBackground());
+        g.setColor(new Color(1f,0f,0f,.0f )); // transparent border
         g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, this.radius, this.radius);
 
         // draw the label at center
