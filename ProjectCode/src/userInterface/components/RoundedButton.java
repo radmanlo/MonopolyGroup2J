@@ -11,7 +11,7 @@ public class RoundedButton extends Component {
     private String label; // Button's label
     private boolean pressed = false; // For changing color when btn is pressed
     private boolean hovered = false;
-    private int radius = 20;
+    private int radius = 70;
     private int fontSize = 20;
     private Color color = new Color(230, 112, 112);
 

@@ -28,7 +28,7 @@ public class MainMenu extends Menu {
 				newGame();
 			}
 		});
-		newGameButton.setBounds(600, 50, 300, 100);
+		newGameButton.setBounds(150, 100, 500, 70);
 		add(newGameButton);
 
 		loadGameBtn = new RoundedButton("Load Game");
@@ -37,7 +37,7 @@ public class MainMenu extends Menu {
 				loadGame();
 			}
 		});
-		loadGameBtn.setBounds(600, 160, 300, 100);
+		loadGameBtn.setBounds(150, 190, 500, 70);
 		add(loadGameBtn);
 		
 		RoundedButton howToPlayBtn = new RoundedButton("How To Play");
@@ -46,7 +46,7 @@ public class MainMenu extends Menu {
 				howToPlay();
 			}
 		});
-		howToPlayBtn.setBounds(600, 270, 300, 100);
+		howToPlayBtn.setBounds(150, 280, 500, 70);
 		add(howToPlayBtn);
 		
 		RoundedButton settingsBtn = new RoundedButton("Settings");
@@ -55,7 +55,7 @@ public class MainMenu extends Menu {
 				settings();
 			}
 		});
-		settingsBtn.setBounds(600, 380, 300, 100);
+		settingsBtn.setBounds(150, 370, 500, 70);
 		add(settingsBtn);
 		
 		RoundedButton creditsBtn = new RoundedButton("Credits");
@@ -64,7 +64,7 @@ public class MainMenu extends Menu {
 				credits();
 			}
 		});
-		creditsBtn.setBounds(600, 490, 300, 100);
+		creditsBtn.setBounds(150, 460, 500, 70);
 		add(creditsBtn);
 		
 		RoundedButton quitBtn = new RoundedButton("Quit");
@@ -73,7 +73,7 @@ public class MainMenu extends Menu {
 				goBackPanel();
 			}
 		});
-		quitBtn.setBounds(600, 600, 300, 100);
+		quitBtn.setBounds(150, 550, 500, 70);
 		add(quitBtn);
 	}
 	
