@@ -1,19 +1,36 @@
 package gamePresenter;
 
+import models.location.BusStop;
 //import com.sun.javafx.image.IntPixelGetter;
 import models.location.BuyableLocation;
+import models.location.ChanceTile;
+import models.location.Disciplinary;
+import models.location.GoToDisciplinaryTile;
+import models.location.IncomeTaxTile;
 import models.location.Location;
+import models.location.MayfestTile;
+import models.location.Property;
+import models.location.StartTile;
+import models.location.Utility;
 import models.*;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class LocationManager {
     private static LocationManager locationManager = null;
     private ArrayList<BuyableLocation> buyableLocations;
     private ArrayList<Location> nonBuyableLocations;
 
-    private LocationManager(){ }
+    private LocationManager(){
+        this.buyableLocations = new ArrayList<BuyableLocation>();
+        this.nonBuyableLocations = new ArrayList<Location>();
+    }
 
     public static LocationManager getInstance(){
         if (locationManager == null){
@@ -60,12 +77,12 @@ public class LocationManager {
         return this.buyableLocations;
     }
 
-    public boolean groupHasSameOwner(BuyableLocation.GroupColor groupId){
+    public boolean groupHasSameOwner(BuyableLocation.GroupColor groupColor){
         HashMap<String, Integer> owners = new HashMap<String, Integer>();
         String ownerName = "";
 
         for (BuyableLocation loc : buyableLocations){
-            if (loc.getGroupId() == groupId){
+            if (loc.getGroupColor() == groupColor){
                 Integer propertyCount = owners.get(loc.getOwner().getName());
                 if (propertyCount == null)
                     propertyCount = 0;
@@ -82,16 +99,33 @@ public class LocationManager {
         }
     }
 
-    public int noOfOwnedByPlayerInGroup(Player player, BuyableLocation.GroupColor groupId){
+    public int noOfOwnedByPlayerInGroup(Player player, BuyableLocation.GroupColor groupColor){
         String playerName = player.getName();
         int count = 0;
 
         for (BuyableLocation loc : buyableLocations){
-            if (loc.getGroupId() == groupId && loc.getOwner().getName() == playerName){
+            if (loc.getGroupColor() == groupColor && loc.getOwner().getName() == playerName){
                 count ++;
             }
         }
 
         return count;
     }
+
+    public void addBuyable(BuyableLocation aBuyable){
+        this.buyableLocations.add(aBuyable);
+    }
+
+    public void addNonBuyable(Location aNonBuyable){
+        this.nonBuyableLocations.add(aNonBuyable);
+    }
+
+    @Override
+    public String toString() {
+        return "LocationManager{" +
+                "buyableLocations=" + buyableLocations.toString() +
+                ", nonBuyableLocations=" + nonBuyableLocations.toString() +
+                '}';
+    }
+    
 }

@@ -1,19 +1,27 @@
 package gamePresenter;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
-import models.Dice;
-import models.Player;
-import models.PlayerColor;
-import models.PotentialPlayer;
-import models.Token;
+import models.*;
+import models.location.*;
+import settingsPresenter.LocalDataManager;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class GameManager {
 	private static GameManager gameManager = null;
-	
+
+	private PlayerManager playerMngr = PlayerManager.getInstance();
+	private BoardManager boardMngr;
+	private Dice dice = new Dice();
+	private SoundManager soundMngr = SoundManager.getInstance();
+	private LocationManager locationManager = LocationManager.getInstance();
 	//private PlayerManager playerMngr;
 	//private BoardManager boardMngr;
-	private Dice dice;
 	//private SoundManager soundMngr;
 	//private BankManager bankMngr;
 
@@ -28,7 +36,7 @@ public class GameManager {
 		return gameManager;
 	}
 	
-	public void initializeNewGame(ArrayList<PotentialPlayer> pL) {
+	public void initializeNewGame(ArrayList<PotentialPlayer> pL, Document doc) {
 		for(int i = 0; i< pL.size(); i++) {
 			String name = pL.get(i).getName();
 			Token token = pL.get(i).getToken();
@@ -38,13 +46,18 @@ public class GameManager {
 			PlayerManager.getInstance().addPlayer(newPlayer);
 			BankManager.getInstance().openAccount(newPlayer);
 		}
-		PlayerManager.getInstance().setInitialCurrentPlayer();
+
+		LocalDataManager.getInstance().initialize(doc);
+
+//		PlayerManager.getInstance().setInitialCurrentPlayer();
 		BoardManager.getInstance();
-		LocationManager.getInstance();
-		CardManager.getInstance();
+//		LocationManager.getInstance();
+//		CardManager.getInstance();
 		TradeManager.getInstance();
 	}
-	
+
+
+
 	public static void executePurchase() {
 		
 	}
@@ -52,8 +65,19 @@ public class GameManager {
 	public static void rollDice() {
 		
 	}
+
+	public static void tradeRequest(Property property, int value) {
+		
+	}
 	
+	public static boolean upgradeProperty(Property property) {
+		return false;
+	}
 	
+	public static LocationManager getInventoryManager() {
+		return null;
+	}
+
 	public void handleNewTurn() {
 		
 	}

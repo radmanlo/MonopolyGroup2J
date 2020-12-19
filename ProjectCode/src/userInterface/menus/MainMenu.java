@@ -1,87 +1,80 @@
 package userInterface.menus;
-import javax.imageio.ImageIO;
-import javax.swing.JButton;
+import userInterface.components.RoundedButton;
 
+import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 
 public class MainMenu extends Menu {
 
-	private JButton loadGameBtn;
-	private JButton newGameBtn;
-	private JButton creditsBtn;
-	private JButton quitBtn;  	  
-	private JButton settingsBtn;
-	private JButton howToPlayBtn;
+	private RoundedButton loadGameBtn;
+	private RoundedButton newGameBtn;
+	private RoundedButton creditsBtn;
+	private RoundedButton quitBtn;
+	private RoundedButton settingsBtn;
+	private RoundedButton howToPlayBtn;
 	
 	public MainMenu() {
-		super("./resources/MainMenu.jpg");
+		super("./resources/MainBG1.png");
 		
 		setLayout(null);
-		setBounds(0, 0, 1500, 900);
+		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+		setBounds(0, 0, (int) size.getWidth(), (int) size.getHeight());
+		// Get device resolution
 		remove(backBtn);
-		
-		newGameBtn = new JButton("New Game");
+
+		newGameBtn = new RoundedButton("New Game");
 		newGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				newGame();	
+				newGame();
 			}
 		});
-		newGameBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		newGameBtn.setBounds(600, 50, 300, 100);
+		newGameBtn.setBounds(150, 100, 500, 70);
 		add(newGameBtn);
-		
-		loadGameBtn = new JButton("Load Game");
+
+		loadGameBtn = new RoundedButton("Load Game");
 		loadGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				loadGame();
 			}
 		});
-		loadGameBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		loadGameBtn.setBounds(600, 160, 300, 100);
+		loadGameBtn.setBounds(150, 190, 500, 70);
 		add(loadGameBtn);
 		
-		JButton howToPlayBtn = new JButton("How To Play");
+		howToPlayBtn = new RoundedButton("How To Play");
 		howToPlayBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				howToPlay();
 			}
 		});
-		howToPlayBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		howToPlayBtn.setBounds(600, 270, 300, 100);
+		howToPlayBtn.setBounds(150, 280, 500, 70);
 		add(howToPlayBtn);
 		
-		JButton settingsBtn = new JButton("Settings");
+		settingsBtn = new RoundedButton("Settings");
 		settingsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				settings();
 			}
 		});
-		settingsBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		settingsBtn.setBounds(600, 380, 300, 100);
+		settingsBtn.setBounds(150, 370, 500, 70);
 		add(settingsBtn);
 		
-		JButton creditsBtn = new JButton("Credits");
+		creditsBtn = new RoundedButton("Credits");
 		creditsBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				credits();
 			}
 		});
-		creditsBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		creditsBtn.setBounds(600, 490, 300, 100);
+		creditsBtn.setBounds(150, 460, 500, 70);
 		add(creditsBtn);
 		
-		JButton quitBtn = new JButton("Quit");
+		quitBtn = new RoundedButton("Quit");
 		quitBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				goBackPanel();
 			}
 		});
-		quitBtn.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		quitBtn.setBounds(600, 600, 300, 100);
+		quitBtn.setBounds(150, 550, 500, 70);
 		add(quitBtn);
 	}
 	

@@ -1,14 +1,18 @@
 package models.location;
 
+import models.Player;
+
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 public class Property extends BuyableLocation{
-    private ArrayList<Integer> rentValues;
     private int vendingMachinesNo;
     private boolean ownsStarbucks;
 
-    Property(){
-        super();
+    public Property(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, int vendingMachinesNo, boolean ownsStarbucks) {
+        super(locationId, name, point, playersHere, groupColor, owner, price, currentRentValue, mortgageValue, breakMortgageValue, underMortgage, rentValues);
+        this.vendingMachinesNo = vendingMachinesNo;
+        this.ownsStarbucks = ownsStarbucks;
     }
 
     @Override
@@ -22,10 +26,6 @@ public class Property extends BuyableLocation{
 
     public boolean degrade(){
         return false; // TODO not always false
-    }
-
-    public ArrayList<Integer> getRentValues() {
-        return rentValues;
     }
 
     public int getVendingMachinesNo() {

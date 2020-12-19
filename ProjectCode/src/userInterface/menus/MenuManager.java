@@ -1,6 +1,5 @@
 package userInterface.menus;
 
-import java.awt.EventQueue;
 
 import javax.swing.*;
 
@@ -18,8 +17,7 @@ public class MenuManager { //it is finished -G
 	private MainMenu mainMenu;
 	private HowToPlayMenu howToPlayMenu;
 	private JButton quitBtn;
-	
-	
+
 	private MenuManager() {
 		appFrame = new AppFrame();
 		appFrame.setVisible(true);
@@ -65,9 +63,9 @@ public class MenuManager { //it is finished -G
 			break;
 		case 1:
 			appFrame.contentPane.remove(mainMenu);
-			BoardManager board = BoardManager.getInstance();
-			appFrame.contentPane.add(board);
-			//appFrame.contentPane.add(loadGameMenu); //temporary change to test Board
+			//BoardManager board = BoardManager.getInstance();
+			//appFrame.contentPane.add(board);
+			appFrame.contentPane.add(loadGameMenu); //temporary change to test Board
 			break;
 		case 2:
 			appFrame.contentPane.remove(mainMenu);
@@ -88,6 +86,12 @@ public class MenuManager { //it is finished -G
 			appFrame.contentPane.remove(settingsMenu);
 			appFrame.contentPane.remove(creditsMenu);
 			appFrame.contentPane.add(mainMenu);
+			break;
+		case 6:
+			appFrame.contentPane.remove(newGameMenu);
+			BoardManager board = BoardManager.getInstance();
+			appFrame.contentPane.add(board);
+			BoardManager.getInstance().updateMap();
 			break;
 		default:
 			System.out.println("An error occurred on openMenu(int)");

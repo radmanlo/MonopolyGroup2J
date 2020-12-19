@@ -1,15 +1,19 @@
 package models.location;
-
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import models.Player;
 
-public class Jail extends Location{
+public class Disciplinary extends Location{
     private ArrayList<Player> prisoners;
 
-    Jail(){
-        super();
-    }
+    public Disciplinary(int locationId, String name, Point2D point, ArrayList<Player> playersHere,ArrayList<Player> prisoners) {
+		super(locationId, name, point, playersHere);
+        this.prisoners = prisoners;
+
+		// TODO Auto-generated constructor stub
+	}
+
 
     @Override
     public void activate() {
@@ -28,4 +32,5 @@ public class Jail extends Location{
     public void arrestPlayer(Player player){
         prisoners.add(player);
     }
+
 }
