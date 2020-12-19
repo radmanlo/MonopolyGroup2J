@@ -650,7 +650,7 @@ public void addPropertiesToLocationManager(NodeList properties){
 
 
 			theProperty = new Property(id, name, new Point2D.Double(x, y), new ArrayList<Player>(0), groupColor,
-					null, price, rents.get(0), mortgage, breakMortgage, false, rents, 0, false);
+					null, price, rents.get(0), mortgage, breakMortgage, false, rents, 0, false, upgradeCost);
 			LocationManager.getInstance().addBuyable(theProperty);
 		}
 	}

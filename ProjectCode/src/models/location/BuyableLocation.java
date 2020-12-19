@@ -14,6 +14,7 @@ public class BuyableLocation extends Location{
     private Player owner;
     private int price;
     private int currentRentValue;
+    private int currentRentIndex;
     private int mortgageValue = 80; // TODO to be changed later
     private int breakMortgageValue = 50; //TODO to be changed later
     private boolean underMortgage;
@@ -54,6 +55,7 @@ public class BuyableLocation extends Location{
         this.owner = owner;
         this.price = price;
         this.currentRentValue = currentRentValue;
+        this.currentRentIndex = 0;
         this.mortgageValue = mortgageValue;
         this.breakMortgageValue = breakMortgageValue;
         this.underMortgage = underMortgage;
@@ -110,6 +112,30 @@ public class BuyableLocation extends Location{
 
     public ArrayList<Integer> getRentValues() {
         return rentValues;
+    }
+
+    public ArrayList<Integer> getAllRentValues(){
+        return this.rentValues;
+    }
+
+    public boolean upgrade(){
+        if (this.currentRentIndex < this.rentValues.size() - 1){
+            this.currentRentIndex++;
+            this.currentRentValue = this.rentValues.get(this.currentRentIndex);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean degrade(){
+        if (this.currentRentIndex > 0){
+            this.currentRentIndex--;
+            this.currentRentValue = this.rentValues.get(this.currentRentIndex);
+            return true;
+        }
+
+        return false;
     }
 
     @Override

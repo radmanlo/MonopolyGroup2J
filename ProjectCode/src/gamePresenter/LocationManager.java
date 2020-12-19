@@ -125,25 +125,29 @@ public class LocationManager implements Serializable {
         return this.buyableLocations;
     }
 
-    public boolean groupHasSameOwner(BuyableLocation.GroupColor groupColor){
+    public Player groupHasSameOwner(BuyableLocation.GroupColor groupColor){
         HashMap<String, Integer> owners = new HashMap<String, Integer>();
         String ownerName = "";
+        Player owner = null;
+        Integer propertyCount = 0;
 
         for (BuyableLocation loc : buyableLocations){
             if (loc.getGroupColor() == groupColor){
-                Integer propertyCount = owners.get(loc.getOwner().getName());
-                if (propertyCount == null)
-                    propertyCount = 0;
-                ownerName = loc.getOwner().getName();
+                owner = loc.getOwner();
+                ownerName = owner.getName();
+                propertyCount = owners.get(ownerName); // Get the current count
 
-                owners.put(ownerName, propertyCount+1);
+                if (propertyCount == null) // To avoid crashing
+                    propertyCount = 0;
+
+                owners.put(ownerName, propertyCount+1); // update the count
             }
         }
 
-        if (owners.size() ==1 && owners.get(ownerName) > 3){ // TODO not always 3!!
-            return true;
+        if (owners.size() == 1 && owners.get(ownerName) == Property.noOfPropertyPerColor(groupColor)){
+            return owner;
         } else {
-            return false;
+            return null;
         }
     }
 
@@ -202,9 +206,38 @@ public class LocationManager implements Serializable {
 
             // if OK Buy the property
             buyProperty(busLoc, currentPlayer);
-        } else {
+        } else if (busStationOwner.getName() != currentPlayer.getName()){
             deductRentValue(busStationOwner, currentPlayer, rentValue);
         }
+    }
+
+    public void activateProperty(Location propertyLoc){
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        Player propertyOwner = ((BuyableLocation)propertyLoc).getOwner();
+        int rentValue = ((BuyableLocation)propertyLoc).getCurrentRentValue();
+        int upgradeValue = ((Property)propertyLoc).getUpgradeCost();
+
+        if (propertyOwner == null){ // Buy property
+            // Check money if enough
+            if (currentPlayer.getUsableMoney() > ((Property) propertyLoc).getPrice()){
+                // Prompt to buy property
+
+                // if OK Buy the property
+                buyProperty(propertyLoc, currentPlayer);
+            }
+        } else if (propertyOwner.getName() != currentPlayer.getName()){ // Pay rent
+            deductRentValue(propertyOwner, currentPlayer, rentValue);
+        } else { // Upgrade property
+            if (isPropertyUpgradeable((Property)propertyLoc)){
+                // Yes, then Suggest to upgrade
+                // If accepts upgrade
+                ((Property) propertyLoc).upgrade();
+            }
+        }
+    }
+
+    public void activateUtility(Location utilityLoc){
+
     }
 
     public void activateChance(Location chanceLoc){
@@ -227,16 +260,21 @@ public class LocationManager implements Serializable {
 
     }
 
-    public void activateProperty(Location propertyLoc){
-
-    }
-
     public void activateStart(Location startLoc){
 
     }
 
-    public void activateUtility(Location utilityLoc){
+    public boolean isPropertyUpgradeable(Property property){
+        Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        boolean upgradeable = false;
 
+        if (property.getUpgradeCost() <= currentPlayer.getUsableMoney()){ //Player has enough money
+            if (groupHasSameOwner(property.getGroupColor()).getName() == currentPlayer.getName()){ // Player is the owner of the whole group
+                upgradeable = true;
+            }
+        }
+
+        return upgradeable;
     }
 
     /**
