@@ -30,6 +30,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.StringReader;
 import java.nio.file.Paths;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoField;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -66,7 +68,12 @@ public class LocalDataManager implements Serializable{
         // Serialization 
 	    try {
 	    	//Writing game name
+	    	//Writing game name
 			FileWriter myWriter = new FileWriter("./resources/saves/savedGames.txt");
+			name = name + "_D"+ java.time.Clock.systemUTC().instant().atOffset(ZoneOffset.ofHours(3)).with(ChronoField.NANO_OF_SECOND, 0);
+			name = name.substring(0, name.length() - 9);
+			System.out.println(name);
+
 		    myWriter.write(name);
 		    myWriter.write("\n");
 		    myWriter.close();
