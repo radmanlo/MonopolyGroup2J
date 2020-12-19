@@ -44,6 +44,49 @@ public class LocationManager implements Serializable {
 
         return locationManager;
     }
+    
+    public Location movePlayer(Player playerToMove, int distance){
+        Location newLocation = null;
+
+        // get the current location of the player
+        Location currentLocation = getPlayerLocation(playerToMove);
+
+        // calculate the next location
+        int curLocId = currentLocation.getLocationId();
+        int nextLocId = (curLocId + distance) % 40; // There are 40 locations in total with ids: 0-39
+
+        // remove player from current location
+        currentLocation.removePlayerFromHere(playerToMove);
+
+        // add player to new location
+        newLocation = getLocationById(nextLocId);
+        newLocation.addPlayerHere(playerToMove);
+
+        return newLocation;
+    }
+
+    public Location getPlayerLocation(Player thePlayer){
+        Location playerLocation = null;
+        boolean found = false;
+
+        for (Location loc : buyableLocations){
+            if (loc.hasPlayer(thePlayer)){
+                playerLocation = loc;
+                found = true;
+                break;
+            }
+        }
+
+        if (!found)
+            for (Location loc : nonBuyableLocations){
+                if (loc.hasPlayer(thePlayer)){
+                    playerLocation = loc;
+                    break;
+                }
+            }
+
+        return playerLocation;
+    }
 
     public Location getLocationById(int id){
         Location tmp = null;

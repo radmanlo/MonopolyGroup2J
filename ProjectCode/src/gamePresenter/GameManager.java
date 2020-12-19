@@ -63,22 +63,35 @@ public class GameManager implements Serializable {
 		LocalDataManager.getInstance().saveGame(name);
 	}
 	
-	public static void rollDice() {
+	public void rollDice() {
 		// Get current player
+		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		Location newLocation = null;
+
 		// roll the dice
+		this.dice.rollDices();
+		int moveDistance = this.dice.getTotalResult();
+
 		// move player's token
+		newLocation = LocationManager.getInstance().movePlayer(currentPlayer, moveDistance);
+
 		// Activate the new Location
+		newLocation.activate();
 	}
 
-	public static void tradeRequest(Property property, int value) {
+	public void tradeRequest(Property property, int value) {
 		
 	}
 
 
-	public void handleNewTurn() { // Initializing a new turn
+	public void handleNewTurn() { // Initializing a new turn Basically view players info on the screen
 		// get the current player
+		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		// view the player
+		System.out.println(currentPlayer);
 		// view player's offers
+		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(currentPlayer);
+
 	}
 
 	public void getOfferInfo(){

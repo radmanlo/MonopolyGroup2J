@@ -42,14 +42,14 @@ public class TradeManager implements Serializable{
 		tradeDeals.remove(trade);
 	}
 	
-	public TradeDeal getTradeDeal(Player plyr) {
-		TradeDeal trade;
+	public ArrayList<TradeDeal> getTradeDeals(Player plyr) {
+		ArrayList<TradeDeal> trade = new ArrayList<TradeDeal>(0);
+
 		for(int i = 0; i < tradeDeals.size(); i++) {
 			if(tradeDeals.get(i).getReceiver().getName().equalsIgnoreCase(plyr.getName())){
-				trade = tradeDeals.get(i);
-				return trade;
+				trade.add(tradeDeals.get(i));
 			}
 		}
-		return null;
+		return trade;
 	}
 }

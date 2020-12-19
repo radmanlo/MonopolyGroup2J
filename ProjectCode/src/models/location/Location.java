@@ -39,6 +39,16 @@ public class Location implements Serializable{
         // To be implemented
     }
 
+    public boolean hasPlayer(Player thePlayer){
+        for (Player player : playersHere){
+            if (player.getName() == thePlayer.getName()){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public int getLocationId() {
         return locationId;
     }
