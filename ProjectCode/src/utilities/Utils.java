@@ -19,7 +19,7 @@ public class Utils {
         BufferedImage img = null;
         try {
             ImageIcon ii = new ImageIcon(path);//path to image
-            img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+            img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_ARGB);
             Graphics2D graphics = (Graphics2D) img.createGraphics();
             graphics.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY));
             graphics.drawImage(ii.getImage(), 0, 0, WIDTH, HEIGHT, null);
