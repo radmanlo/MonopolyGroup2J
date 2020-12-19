@@ -1,17 +1,18 @@
 package userInterface.menus;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
+
 import models.Player;
 import models.PlayerColor;
 import models.Token;
+import userInterface.components.RoundedButton;
 
-import javax.swing.JComboBox;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Font;
+import javax.swing.border.AbstractBorder;
+import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.geom.Area;
+import java.awt.geom.Rectangle2D;
+import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
@@ -23,7 +24,7 @@ public class NewPlayerAddingScreen extends JPanel{
 	private JTextField nameField;
 	public JComboBox colorComboBox; //public as temp
 	private JComboBox tokenComboBox;
-	private JButton removePlayerBtn;
+	private RoundedButton removePlayerBtn;
 	private NewGameMenu parentMenu;
 	private int chosenTokenIndex;
 	private int chosenColorIndex;
@@ -40,11 +41,12 @@ public class NewPlayerAddingScreen extends JPanel{
 		chosenToken = null;
 		chosenColor = PlayerColor.WHITE;
 		setLayout(null);
-		setBounds(400, 300, 1040, 80);
+		setBackground(new Color(0f,0f,0f,.0f ));
 
 		ArrayList<PlayerColor> choosableColors = parentMenu.getChoosableColors();
 		colorComboBox = new JComboBox();
-		colorComboBox.setBounds(626, 11, 90, 40);
+
+		colorComboBox.setBounds(625, 11, 90, 35);
 		for(int i = 0; i < choosableColors.size(); ++i) {
 			colorComboBox.addItem( new ImageIcon("./resources/" + choosableColors.get(i).toString() + ".jpg"));
 		}
@@ -55,25 +57,26 @@ public class NewPlayerAddingScreen extends JPanel{
 		for(int i = 0; i < choosableTokens.size(); ++i) {
 			tokenComboBox.addItem( new ImageIcon( choosableTokens.get(i).getImage()));
 		}
-		tokenComboBox.setBounds(775, 6, 90, 65);
+		tokenComboBox.setBounds(775, 11, 90, 35);
 		add(tokenComboBox);
 		
 		
-		nameField = new JTextField();
-		nameField.setBounds(47, 15, 529, 28);
+		nameField = new JTextField(20);
+		nameField.setBounds(47, 11, 530, 35);
+
 		add(nameField);
 		nameField.setColumns(10);
 
 		NewPlayerAddingScreen copyOfThis = this;
 
-		removePlayerBtn = new JButton("X"); //I want to make it rounded -G
+		removePlayerBtn = new RoundedButton("X", 20, 20, Color.red); //I want to make it rounded -G
 		removePlayerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				parentMenu.removePotentialPlayer(copyOfThis);
 			}
 		});
 		removePlayerBtn.setBackground(Color.RED);
-		removePlayerBtn.setOpaque(true);
+//		removePlayerBtn.se(true);
 		removePlayerBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		removePlayerBtn.setBounds(941, 11, 66, 36);
 		add(removePlayerBtn);
@@ -106,3 +109,26 @@ public class NewPlayerAddingScreen extends JPanel{
 		return chosenTokenIndex;
 	}
 }
+//
+//class RoundJTextField extends JTextField {
+//	private Shape shape;
+//	public RoundJTextField(int size) {
+//		super(size);
+//		setOpaque(false); // As suggested by @AVD in comment.
+//	}
+//	protected void paintComponent(Graphics g) {
+//		g.setColor(getBackground());
+//		g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+//		super.paintComponent(g);
+//	}
+//	protected void paintBorder(Graphics g) {
+//		g.setColor(getForeground());
+//		g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+//	}
+//	public boolean contains(int x, int y) {
+//		if (shape == null || !shape.getBounds().equals(getBounds())) {
+//			shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+//		}
+//		return shape.contains(x, y);
+//	}
+//}

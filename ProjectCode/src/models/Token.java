@@ -1,9 +1,10 @@
 package models;
 
+import utilities.Utils;
 import java.awt.Image;
 import java.io.Serializable;
 
-import javax.swing.ImageIcon;
+import java.awt.*;
 
 public class Token implements Serializable {
 	/**
@@ -16,8 +17,10 @@ public class Token implements Serializable {
 		this.path = path;
 	}
 
+	//Changing it and giving image as attribute of token crashes serialization please dont make changes.
 	public Image getImage() {
-		Image image = new ImageIcon(path).getImage();
+		Image image = image = Utils.scaleImage(90, 65, path);
 		return image;
 	}
+
 }

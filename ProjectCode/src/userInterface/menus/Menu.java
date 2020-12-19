@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import models.Token;
+import userInterface.components.RoundedButton;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -16,7 +17,7 @@ import java.awt.event.ActionEvent;
 abstract class Menu extends JPanel{ //instead of it having a panel attribute, I made it directly extend JPanel
 	//to make working with windowBuilder easier
 	
-	public JButton backBtn;
+	public RoundedButton backBtn;
     private BufferedImage img;
     private String backgroundImagePath;
     
@@ -24,19 +25,20 @@ abstract class Menu extends JPanel{ //instead of it having a panel attribute, I 
 	public Menu(String path) {
 		backgroundImagePath = path;
 		setLayout(null);
-        try {
-
-            img = ImageIO.read(new File(backgroundImagePath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-		backBtn = new JButton("Back");
+		if(backgroundImagePath != null)
+			try {
+				img = ImageIO.read(new File(backgroundImagePath));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		backBtn = new RoundedButton("Back Button");
+		backBtn.setBounds(100, 100, 500, 70);
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				goBackPanel();
 			}
 		});
-		backBtn.setBounds(10, 10, 89, 34);
+		backBtn.setBounds(80, 80, 300, 70);
 		add(backBtn);
 	}
 
