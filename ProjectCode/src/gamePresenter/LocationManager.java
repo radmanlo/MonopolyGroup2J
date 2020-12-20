@@ -183,6 +183,8 @@ public class LocationManager implements Serializable {
     	Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
  
 		Location loc = curPlayer.getLocation();
+		System.out.println(loc.getClass().toString());
+
 		switch(loc.getClass().toString()) {
 		case "class models.location.Property":
 			return true;

@@ -238,6 +238,7 @@ public class GameManager implements Serializable {
 		// Activate the new Location
 		newLocation.activate();
 		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void executePurchase(){
