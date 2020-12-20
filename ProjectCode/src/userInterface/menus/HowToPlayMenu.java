@@ -16,12 +16,12 @@ public class HowToPlayMenu extends Menu {
 	public HowToPlayMenu() {
 		super("./resources/MainBG.png");
 		setLayout(null);
-		addTextArea();
+		//addTextArea();
 		addLabel();
 	}
 
 	private void addLabel() {
-		JLabel label = new JLabel("How To Play");
+		JLabel label = new JLabel("");
 		label.setFont(new Font("Tahoma", Font.ITALIC, 26));
 		label.setForeground(Color.white);
 		label.setBounds(860, 50, 200, 40);
