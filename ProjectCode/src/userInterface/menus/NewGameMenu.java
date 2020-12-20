@@ -21,6 +21,7 @@ import utilities.Utils;
 
 public class NewGameMenu extends Menu{
 
+
 	private RoundedButton initializeGameBtn;
 	private RoundedButton addNewPlayerBtn;
 	private ArrayList<Token> choosableTokens;
@@ -32,12 +33,12 @@ public class NewGameMenu extends Menu{
 	final int FIRST_FIELD_Y = 100;
 	final int FIELDS_X = 700;
 	final int ADD_PLAYER_PANEL_WIDTH = 1080;
-	final int ADD_PLAYER_ITEM_HEIGHT = 50;
-	final int ADD_PLAYER_PANEL_HEIGHT = 500;
+	final int ADD_PLAYER_ITEM_HEIGHT = 85;
+	final int ADD_PLAYER_PANEL_HEIGHT = 750;
 
 	public NewGameMenu() {
 //		super("./resources/new-game-menu-bg.png");
-		super(null);
+		super("./resources/baseBackground.png");
 		setBackground(Utils.getBgColor());
 
 		// Create a separate panel for adding new players
@@ -123,22 +124,25 @@ public class NewGameMenu extends Menu{
 		addPlayerPanel = new RoundedPanel(new Dimension(100, 100));
 		addPlayerPanel.setBounds(FIELDS_X, 100, ADD_PLAYER_PANEL_WIDTH, ADD_PLAYER_PANEL_HEIGHT);
 		addPlayerPanel.setLayout(null);
-		addPlayerPanel.setBackground(Utils.getBgColor().brighter());
+		addPlayerPanel.setBackground(new Color(230, 112, 112, 38));
 
-		JLabel name = createLabel("Name");
+		JLabel name  = createLabel("Name");
 		JLabel color = createLabel("Color");
 		JLabel token = createLabel("Token");
 
 		// 290 is calculated from the width of namefield
 		name.setBounds(290, 5, 60, 30);
+		name.setForeground(Color.WHITE);
 		addPlayerPanel.add(name);
 
 		// 660 is calculated from the width of color field
 		color.setBounds(660, 5, 60, 30);
+		color.setForeground(Color.WHITE);
 		addPlayerPanel.add(color);
 
 		// 810 is calculated from the width of color field
 		token.setBounds(810, 5, 60, 30);
+		token.setForeground(Color.WHITE);
 		addPlayerPanel.add(token);
 
 		add(addPlayerPanel);

@@ -18,25 +18,26 @@ public class SettingsMenu extends Menu {
 	JButton applyButton;
 	
 	public SettingsMenu() {
-		super("./resources/MainBG1.png");
+		super("./resources/baseBackground.png");
 		setLayout(null);
 		addLabel();
 		addControls();
 	}
 
 	private void addLabel() {
-		JLabel label = new JLabel("Settings");
-		label.setFont(new Font("Tahoma", Font.ITALIC, 26));
-		label.setForeground(Color.white);
-		label.setBounds(860, 50, 200, 40);
-		add(label);
+//		JLabel label = new JLabel("Settings");
+//		label.setFont(new Font("Tahoma", Font.BOLD, 26));
+//		label.setForeground(Color.white);
+//		label.setBounds(1240, 150, 1000, 70);
+//		add(label);
 	}
 
 	private void addControls() {
-		JPanel panel = new RoundedPanel();
-		panel.setBounds(600, 100, 600, 300);
-		panel.setBackground(Utils.getBgColor().brighter());
+		JPanel panel;
+		panel = new RoundedPanel(new Dimension(100, 100));
+		panel.setBounds(700, 100, 1080, 750);
 		panel.setLayout(null);
+		panel.setBackground(new Color(230, 112, 112, 38));
 
 		// Music controller
 		this.sliderMusicVolume = new JSlider(0, 100, 40);
@@ -45,7 +46,7 @@ public class SettingsMenu extends Menu {
 		this.sliderMusicVolume.setPaintTicks(true);
 		this.sliderMusicVolume.setPaintLabels(true);
 		this.sliderMusicVolume.setForeground(Color.white);
-		this.sliderMusicVolume.setBounds(100, 40, 400, 70);
+		this.sliderMusicVolume.setBounds(40, 300, 1000, 70);
 		this.sliderMusicVolume.setPreferredSize(new Dimension(400, 70));
 		this.sliderMusicVolume.setBackground(Utils.getBgColor().brighter());
 		Border br = BorderFactory.createTitledBorder(null, "Music Volume", TitledBorder.LEFT, TitledBorder.TOP, new Font("Tahoma",Font.PLAIN,15), Color.white);
@@ -61,7 +62,7 @@ public class SettingsMenu extends Menu {
 		this.sliderSFXVolume.setPaintTicks(true);
 		this.sliderSFXVolume.setPaintLabels(true);
 		this.sliderSFXVolume.setForeground(Color.white);
-		this.sliderSFXVolume.setBounds(100, 150, 400, 70);
+		this.sliderSFXVolume.setBounds(40, 400, 1000, 70);
 		this.sliderSFXVolume.setPreferredSize(new Dimension(400, 70));
 		this.sliderSFXVolume.setBackground(Utils.getBgColor().brighter());
 		Border br1 = BorderFactory.createTitledBorder(null, "SFX Volume", TitledBorder.LEFT, TitledBorder.TOP, new Font("Tahoma",Font.PLAIN,15), Color.white);

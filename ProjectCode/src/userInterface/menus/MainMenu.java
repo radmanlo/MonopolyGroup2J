@@ -15,7 +15,7 @@ public class MainMenu extends Menu {
 	private RoundedButton howToPlayBtn;
 	
 	public MainMenu() {
-		super("./resources/MainBG1.png");
+		super("./resources/mainBackground.png");
 		
 		setLayout(null);
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize();

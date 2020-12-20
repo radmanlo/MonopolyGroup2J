@@ -10,6 +10,6 @@ public class CreditsMenu extends Menu{
 	private JTextArea creditDisplayer;
 	
 	public CreditsMenu() {
-		super("./resources/creditsMenu.png");
+		super("./resources/credits.png");
 	}
 }

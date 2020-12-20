@@ -30,8 +30,9 @@ public class LoadGameMenu extends Menu {//extends Menu{
 	private ArrayList<SavedGameTile> savedGamesTiles;
 	
 	public LoadGameMenu() {
-		super("./resources/MainBG1.png");
-		 remove(backBtn);
+		super("./resources/baseBackground.png");
+
+		remove(backBtn);
 		setLayout(null);
 
 		localDataManager = LocalDataManager.getInstance();
@@ -135,15 +136,15 @@ public class LoadGameMenu extends Menu {//extends Menu{
 
 		// Draw the panel
 		savedGamesPanel = new RoundedPanel(new Dimension(100, 100));
-		savedGamesPanel.setBackground(Utils.getBgColor().brighter());
-		savedGamesPanel.setBounds(750, 100, 500, 600);
+		savedGamesPanel.setBounds(700, 100, 1080, 750);
+		savedGamesPanel.setBackground(new Color(230, 112, 112, 38));
 
 		// Add title
-		JLabel label = new JLabel("Saved Games");
-		label.setPreferredSize(new Dimension(200, 70));
-		label.setFont(new Font("Tahoma", Font.ITALIC, 33));
-		label.setForeground(Color.white);
-		savedGamesPanel.add(label);
+//		JLabel label = new JLabel("Saved Games");
+//		label.setPreferredSize(new Dimension(200, 70));
+//		label.setFont(new Font("Tahoma", Font.ITALIC, 33));
+//		label.setForeground(Color.white);
+//		savedGamesPanel.add(label);
 
 		// Create ButtonGroup
 		ButtonGroup btnGroup = new ButtonGroup();
@@ -254,13 +255,13 @@ class SavedGameTile extends RoundedPanel {
 		// Create name label
 		JLabel name = new JLabel(this.name);
 		name.setBounds(10, 5, 200, 40);
-		name.setFont(new Font("Tahoma", Font.ITALIC, 24));
+		name.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		name.setForeground(Color.white);
 
 		// Create date label
 		JLabel date = new JLabel(this.date);
 		date.setBounds(230, 5, 130, 40);
-		date.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		date.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		date.setForeground(Color.white);
 
 		setMaximumSize(new Dimension(getWidth(), getHeight()));
@@ -270,7 +271,7 @@ class SavedGameTile extends RoundedPanel {
 
 		radioButton.setBackground(new Color(0f,0f,0f,.0f ));
 		radioButton.setBounds(400, 5, 100, 40);
-		radioButton.setFont(new Font("Tahoma", Font.ITALIC, 18));
+		radioButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 
 		add(radioButton);
 

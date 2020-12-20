@@ -32,7 +32,7 @@ abstract class Menu extends JPanel{ //instead of it having a panel attribute, I 
 				e.printStackTrace();
 			}
 		backBtn = new RoundedButton("Back");
-		backBtn.setBounds(150, 100, 300, 70);
+		backBtn.setBounds(150, 100, 500, 70);
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				goBackPanel();
