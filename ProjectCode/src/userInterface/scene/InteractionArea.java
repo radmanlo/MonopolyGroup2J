@@ -73,7 +73,7 @@ public class InteractionArea extends JPanel{
 				GameManager.getInstance().rollDice();
 			}
 		});
-
+		
 		rollDiceBtn.setBounds(53, 283, 168, 23);
 		add(rollDiceBtn);
 
