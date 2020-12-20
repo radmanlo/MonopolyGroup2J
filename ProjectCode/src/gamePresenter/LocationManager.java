@@ -296,6 +296,9 @@ public class LocationManager implements Serializable {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player busStationOwner = ((BuyableLocation)busLoc).getOwner();
 
+        if(busStationOwner != null) {
+        	GameManager.getInstance().disableBuyIfSameOwner();
+        }
         if (busStationOwner != null && busStationOwner.getName() != currentPlayer.getName()){ // Pay the rent
             GameManager.getInstance().askPlayerPaymentChoice();
         }
@@ -306,7 +309,9 @@ public class LocationManager implements Serializable {
 
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player propertyOwner = ((BuyableLocation)propertyLoc).getOwner();
-
+        if(propertyOwner != null ) {
+        	GameManager.getInstance().disableBuyIfSameOwner();
+        }
         if(propertyOwner != null && propertyOwner.getName() != currentPlayer.getName()) // Pay the rent
             GameManager.getInstance().askPlayerPaymentChoice();
     }
@@ -316,7 +321,9 @@ public class LocationManager implements Serializable {
 
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player utilityOwner = ((BuyableLocation)utilityLoc).getOwner();
-
+        if(utilityOwner != null ) {
+        	GameManager.getInstance().disableBuyIfSameOwner();
+        }
         if (utilityOwner != null && utilityOwner.getName() != currentPlayer.getName()) // Pay the rent
             GameManager.getInstance().askPlayerPaymentChoice();
     }

@@ -90,7 +90,14 @@ public class BoardManager extends JPanel implements Serializable{
 		revalidate();
 		repaint();
 	}
-
+	public void disableBuyButton() {
+		interactionArea.getBuyButton().setEnabled(false);
+	}
+	
+	public void enableBuyButton() {
+		interactionArea.getBuyButton().setEnabled(true);
+	}
+	
 	public void enableDice() {
 		interactionArea.getRollDiceButton().setEnabled(true);
 	}

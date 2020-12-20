@@ -115,8 +115,11 @@ public class GameManager implements Serializable {
 		movePlayer(currentPlayer, 1);
 	}
 	
-	
-	
+	public void disableBuyIfSameOwner() {
+		//BoardManager.getInstance()
+		BoardManager.getInstance().disableBuyButton();
+	}
+
 	/**
 	 * Gets called when the game just started or when player presses EndTurn
 	 * Gets all the information about the current player and passes them to the view
