@@ -6,7 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import gamePresenter.LocationManager;
 import gamePresenter.PlayerManager;
+import gamePresenter.TradeManager;
 import models.Card;
 import models.Player;
 import models.TradeDeal;
@@ -161,6 +163,11 @@ public class TradeScreen extends JPanel{
 		wantedPanel.add(warningLbl);
 
 		sendOfferBtn = new JButton("Send Offer");
+		sendOfferBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TradeManager.getInstance().addTradeDeal(createTradeDeal());
+			}
+		});
 		sendOfferBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		sendOfferBtn.setBounds(169, 551, 148, 38);
 		add(sendOfferBtn);
@@ -205,9 +212,13 @@ public class TradeScreen extends JPanel{
 		repaint();
 	}
 
-	private TradeDeal createTradeDeal() {
-		//TODO
-		//TradeDeal deal = new TradeDeal(currentPlayer, Player receiver, ArrayList<BuyableLocation> offeredBuyables, ArrayList<Card> offeredCards, int offeredMoney, ArrayList<BuyableLocation> requestedBuyables, ArrayList<Card> requestedCards, int requestedMoney)
-		return null;
+	private TradeDeal createTradeDeal() {		
+		ArrayList<BuyableLocation> offeredBuyables = LocationManager.getInstance().getBuyablesByStrings(offeredNames);
+		ArrayList<BuyableLocation> requestedBuyables = LocationManager.getInstance().getBuyablesByStrings(wantedNames);
+		int offeredMoney = Integer.parseInt(offeredMoneyField.getText());
+		int requestedMoney = Integer.parseInt(wantedMoneyField.getText());
+		TradeDeal deal = new TradeDeal(currentPlayer, targetPlayer, offeredBuyables, null, offeredMoney, requestedBuyables, null, requestedMoney);
+		
+		return deal;
 	}
 }
