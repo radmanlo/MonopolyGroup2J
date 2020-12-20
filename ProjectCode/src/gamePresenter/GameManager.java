@@ -405,6 +405,12 @@ public class GameManager implements Serializable {
 		
 	}
 	
+	/*
+	 * gets the name of the card and executes it
+	 */
+	public void useCardByName(String cardName) {
+		
+	}
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
 //		return false;
 //	}
