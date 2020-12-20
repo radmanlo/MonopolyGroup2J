@@ -46,17 +46,19 @@ public class BoardManager extends JPanel implements Serializable{
 	public void updateMap() {
 		ArrayList<Location> locationsList;
 		locationsList = LocationManager.getInstance().getLocationList();
-		System.out.println("\ncurrent:" + LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
+		//System.out.println("\ncurrent:" + LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 		map.update(locationsList);
 	}
 	
 	public void updateInteractionArea() {
-		
+		System.out.println("" + GameManager.getInstance().totalDiceResultForUtility());
+		interactionArea.setCurrentPlayerMoneyLbl(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney());
+		interactionArea.setDiceRollResultLbl(-1);//GameManager.getInstance().totalDiceResultForUtility());
+		interactionArea.update();
+		interactionArea.repaint();
 	}
 	
-	public void updateDiceResults(Dice dice) {
-		
-	}
+
 	
 	private void pauseGame() {  //should be public I think -G
 		

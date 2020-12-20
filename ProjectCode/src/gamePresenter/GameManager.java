@@ -86,8 +86,6 @@ public class GameManager implements Serializable {
 	}
 
 	public int totalDiceResultForUtility() {
-		BoardManager.getInstance().updateMap();
-		BoardManager.getInstance().updateInteractionArea();
 		return this.dice.getTotalResult();
 	}
 
