@@ -414,7 +414,7 @@ public class GameManager implements Serializable {
 		int price = aProperty.getPrice();
 		price = (int)(0.8 * price);
 
-		if (aProperty.getOwner().getName() == curPlayer.getName()){ // If player owns the property
+		if (aProperty.getOwner() != null && aProperty.getOwner().getName() == curPlayer.getName()){ // If player owns the property
 			if (aProperty.getVendingMachinesNo() == 0 && !aProperty.hasStarbucks()){
 				aProperty.resetToDefault();
 				curPlayer.setUsableMoney(curPlayer.getUsableMoney() + price);
