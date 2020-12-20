@@ -58,6 +58,20 @@ public class Property extends BuyableLocation{
     	return false;
     
     }
+    public boolean degreade() {
+    	
+    	if(ownsStarbucks == false){
+    		if(vendingMachinesNo > 0) {
+    			vendingMachinesNo--;
+    			return true;
+    		}else {  		
+    		return false;
+    		}
+    	}
+    	ownsStarbucks = false;
+    	return true;
+    
+    }
     public int getUpgradeCost() {
         return upgradeCost;
     }
