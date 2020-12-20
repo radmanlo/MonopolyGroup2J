@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -40,8 +41,10 @@ public class InteractionArea extends JPanel{
 	private PlayerInfoScreen currentPlayerPanel;
 	private ArrayList<PlayerInfoScreen> otherPlayers;
 	private JButton btnNewButton;
-
+	private Image backgroundImage;
+	
 	public InteractionArea() {
+		backgroundImage = new ImageIcon("./resources/BoardManager.png").getImage();
 		setLayout(null);
 		setBounds(0, 0, 900, 1000);
 
@@ -85,7 +88,7 @@ public class InteractionArea extends JPanel{
 
 		JLabel constantLblCurrentPlyr = new JLabel("Current Player");
 		constantLblCurrentPlyr.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		constantLblCurrentPlyr.setBounds(110, 82, 232, 34);
+		constantLblCurrentPlyr.setBounds(108, 73, 232, 34);
 		add(constantLblCurrentPlyr);
 
 		endTurnBtn = new JButton("End Turn");
@@ -183,4 +186,10 @@ public class InteractionArea extends JPanel{
 			otherPlayers.get(i).repaint();
 		}
 	}
+	@Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        g.drawImage(backgroundImage, 0,0, null);
+    }
 }
