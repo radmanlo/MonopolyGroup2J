@@ -1,11 +1,11 @@
 package userInterface.scene;
 import javax.swing.JPanel;
 
+import models.Card;
 import models.Player;
 import models.location.Location;
 import models.location.Property;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import java.awt.Color;
@@ -14,21 +14,15 @@ import javax.swing.border.LineBorder;
 
 import gamePresenter.GameManager;
 import gamePresenter.LocationManager;
-import gamePresenter.PlayerManager;
 
 import java.awt.Component;
-import javax.swing.SwingConstants;
 import javax.swing.JList;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.HierarchyListener;
-import java.awt.event.HierarchyEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class InventoryScreen extends JPanel{
 	private JButton degradeBtn;
@@ -142,7 +136,7 @@ public class InventoryScreen extends JPanel{
 		useCardBtn = new JButton("Use Card");
 		useCardBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameManager.getInstance().useCardByName((String) cardsList.getSelectedValue());
+				GameManager.getInstance().useCard((Card) cardsList.getSelectedValue());
 			}
 		});
 		useCardBtn.setFont(new Font("Tahoma", Font.PLAIN, 22));

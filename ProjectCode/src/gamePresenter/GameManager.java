@@ -423,14 +423,12 @@ public class GameManager implements Serializable {
 	/*
 	 * gets the name of the card and executes it
 	 */
-	public void useCardByName(String cardName) {
-		ArrayList<Card> deck = CardManager.getInstance().getCardDeck();
-		for(int i = 0; i < deck.size(); i++) {
-			if(deck.get(i).getCardName().equals(cardName)) {
-				CardManager.getInstance().executeCardAction(CardManager.getInstance().getCardDeck().get(i));
-			}
-		}
+	public void useCard(Card card) {
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		CardManager.getInstance().executeCardAction(card);
+		curPlayer.removeCard(card);
 	}
+
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
 //		return false;
 //	}
