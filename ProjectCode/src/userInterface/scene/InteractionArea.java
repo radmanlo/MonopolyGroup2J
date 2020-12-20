@@ -24,7 +24,7 @@ import java.awt.Font;
 import javax.swing.JList;
 
 public class InteractionArea extends JPanel{ 
-	private JButton diceRollButton;
+	public JButton diceRollButton;
 	private JButton buyButton;
 	private JButton optionsButton;
 	private JButton selectPropertyButton;

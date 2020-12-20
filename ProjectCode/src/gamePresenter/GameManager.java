@@ -187,14 +187,14 @@ public class GameManager implements Serializable {
 	 *
 	 */
 	public void enableDice(){
-		// TODO tell the UI to re-enable the dice
+		BoardManager.getInstance().enableDice();
 	}
 
 	/**
 	 *
 	 */
 	public void disableDice(){
-		// TODO tell the UI to re-enable the dice
+		BoardManager.getInstance().disableDice();
 	}
 
 	/**
