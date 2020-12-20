@@ -60,6 +60,7 @@ public class InteractionArea extends JPanel{
 		rollDiceBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameManager.getInstance().rollDice();
+				btnNewButton.setEnabled(true);
 			}
 		});
 		
@@ -114,11 +115,13 @@ public class InteractionArea extends JPanel{
 		add(diceRollResultLbl);
 		
 		btnNewButton = new JButton("Pay 200 TL to Reroll The Dice");
+		btnNewButton.setEnabled(false);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PlayerManager.getInstance().getCurrentPlayer().setUsableMoney(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney()-200);
 				BoardManager.getInstance().updateInteractionArea();
 				BoardManager.getInstance().enableDice();
+				btnNewButton.setEnabled(false);
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
