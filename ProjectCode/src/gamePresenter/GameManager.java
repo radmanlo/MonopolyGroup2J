@@ -84,12 +84,16 @@ public class GameManager implements Serializable {
 	 * Gets called when the game just started or when player presses EndTurn
 	 * Gets all the information about the current player and passes them to the view
 	 */
-	public void handleNewTurn(boolean canRoolDice) { // Initializing a new turn Basically view players info on the screen
+	public void handleNewTurn() { // Initializing a new turn Basically view players info on the screen
 		// TODO Disable dice if player is in Jail (canRollDice == false)
 		// TODO when player uses outOfJail card rollDice is enabled
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
-		// Todo handle if player is bankrupt
 		// TODO handle if only one player left
+		if (this.gameEnded()){
+			this.declareWinner(curPlayer);
+			return;
+		}
 
 		// TODO get the current player
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -123,10 +127,12 @@ public class GameManager implements Serializable {
 
 		if (curPlayer.getIsInJail() && curPlayer.getInJailCount() < 3){
 			curPlayer.setInJailCount(curPlayer.getInJailCount() + 1);
-			this.handleNewTurn(false);
+			this.disableDice();
+			this.handleNewTurn();
 		} else {
 			curPlayer.setIsInJail(false);
-			this.handleNewTurn(true);
+			this.enableDice();
+			this.handleNewTurn();
 		}
 	}
 
@@ -146,10 +152,21 @@ public class GameManager implements Serializable {
 		PlayerManager.getInstance().playerBankrupt(player);
 	}
 
+	public void declareWinner(Player winner){
+		// TODO some UI stuff for winner
+	}
+
 	/**
-	 * Called from CardManager by OutOfJail card
+	 *
 	 */
 	public void enableDice(){
+		// TODO tell the UI to re-enable the dice
+	}
+
+	/**
+	 *
+	 */
+	public void disableDice(){
 		// TODO tell the UI to re-enable the dice
 	}
 
@@ -252,6 +269,14 @@ public class GameManager implements Serializable {
 		}
 
 		return giveReward;
+	}
+
+	public boolean gameEnded(){
+		if (PlayerManager.getInstance().getPlayers().size() == 1){
+			return true;
+		}
+
+		return false;
 	}
 
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
