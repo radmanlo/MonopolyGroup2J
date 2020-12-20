@@ -3,6 +3,7 @@ package gamePresenter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -10,6 +11,7 @@ import javax.swing.JOptionPane;
 import models.Card;
 import models.Player;
 import models.location.Location;
+import models.location.Property;
 
 public class CardManager implements Serializable{
 	// Property
@@ -111,12 +113,23 @@ public class CardManager implements Serializable{
 
 	public void upgradeAProperty(){
 		System.out.println("Upgrade property card activated");
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		ArrayList<Property> properties = LocationManager.getInstance().getPropertiesOfPlayer(curPlayer);
+		ArrayList<Property> upgradableProps = new ArrayList<Property>(0);
 
 		// get the upgradeable properties owned by the user
+		for (Property prop : properties){
+			if (LocationManager.getInstance().isPropertyUpgradeable(prop)){
+				upgradableProps.add(prop);
+			}
+		}
 
-		// prompt which one they want to upgrade
+		if (upgradableProps.size() > 0){
+			Collections.shuffle(upgradableProps);
+			upgradableProps.get(0).upgrade();
+		}
 
-		// ask location manager to upgrade
+		GameManager.getInstance().updateUI();
 	}
 
 	public void pladiarismPunishment(){

@@ -539,5 +539,17 @@ public class LocationManager implements Serializable {
 		}
 		return temp;
 	}
-    
+
+	public ArrayList<Property> getPropertiesOfPlayer(Player aPlayer){
+	    ArrayList<Property> propertiesOfPlayer = new ArrayList<Property>(0);
+
+	    for (BuyableLocation buyable : buyableLocations){
+	        if (buyable.getType() == Location.LOCATION_TYPES.PROPERTY){
+	            if (buyable.getOwner() != null && buyable.getOwner().getName() == aPlayer.getName())
+	                propertiesOfPlayer.add((Property) buyable);
+            }
+        }
+
+	    return propertiesOfPlayer;
+    }
 }

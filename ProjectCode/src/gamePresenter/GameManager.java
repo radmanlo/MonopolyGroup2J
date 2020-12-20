@@ -422,6 +422,8 @@ public class GameManager implements Serializable {
 			aProperty.upgrade();
 			curPlayer.setUsableMoney(curPlayer.getUsableMoney() - upgradeCost);
 		}
+
+		this.updateUI();
 	}
 	
 	/*
@@ -434,6 +436,8 @@ public class GameManager implements Serializable {
 
 		aProperty.degrade();
 		curPlayer.setUsableMoney(curPlayer.getUsableMoney() + upgradeCost);
+
+		this.updateUI();
 	}
 	
 	/*
