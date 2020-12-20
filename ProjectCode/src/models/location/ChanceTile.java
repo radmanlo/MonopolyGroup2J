@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ChanceTile extends Location{
     public ChanceTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere) {
-        super(locationId, name, point, playersHere);
+        super(locationId, name, point, playersHere, LOCATION_TYPES.CHANCE);
     }
 
     public ChanceTile(ChanceTile copy) {

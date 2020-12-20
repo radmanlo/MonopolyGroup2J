@@ -49,8 +49,8 @@ public class BuyableLocation extends Location{
         }
     }
 
-    public BuyableLocation(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues) {
-        super(locationId, name, point, playersHere);
+    public BuyableLocation(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, LOCATION_TYPES type) {
+        super(locationId, name, point, playersHere, type);
         this.groupColor = groupColor;
         this.owner = owner;
         this.price = price;

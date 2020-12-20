@@ -203,7 +203,7 @@ public class LocationManager implements Serializable {
         Integer propertyCount = 0;
 
         for (BuyableLocation loc : buyableLocations){
-            if (loc.getGroupColor() == groupColor){
+            if (loc.getGroupColor() == groupColor && loc.getOwner() != null){
                 owner = loc.getOwner();
                 ownerName = owner.getName();
                 propertyCount = owners.get(ownerName); // Get the current count
@@ -240,6 +240,7 @@ public class LocationManager implements Serializable {
      * @param locationToActivate
      */
     public void activateLocation(Location locationToActivate){
+        System.out.println("Activate location called");
         // Check the location type
         if (locationToActivate.getType() == Location.LOCATION_TYPES.BUS){
             this.activateBus(locationToActivate);
@@ -263,6 +264,7 @@ public class LocationManager implements Serializable {
     }
 
     public void activateBus(Location busLoc){
+        System.out.println("Bus location activated");
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player busStationOwner = ((BuyableLocation)busLoc).getOwner();
 
@@ -272,6 +274,8 @@ public class LocationManager implements Serializable {
     }
 
     public void activateProperty(Location propertyLoc){
+        System.out.println("Property location activated");
+
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player propertyOwner = ((BuyableLocation)propertyLoc).getOwner();
 
@@ -280,6 +284,8 @@ public class LocationManager implements Serializable {
     }
 
     public void activateUtility(Location utilityLoc){
+        System.out.println("Utility location activated");
+
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player utilityOwner = ((BuyableLocation)utilityLoc).getOwner();
 
@@ -288,13 +294,18 @@ public class LocationManager implements Serializable {
     }
 
     public void activateIncomeTax(Location incomeTaxLoc){
+        System.out.println("IncomeTax location activated");
+
         int taxValue = ((IncomeTaxTile)incomeTaxLoc).getTaxValue();
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
         PlayerManager.getInstance().deductMoneyFromPlayer(currentPlayer, taxValue);
+        GameManager.getInstance().updateUI();
     }
 
     public void activateMayfest(Location mayfestLoc){
+        System.out.println("Mayfest location activated");
+
         int collectedTax = ((MayfestTile)mayfestLoc).getCollectedTax();
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
@@ -302,6 +313,8 @@ public class LocationManager implements Serializable {
     }
 
     public void activateChance(Location chanceLoc){
+        System.out.println("chance location activated");
+
         Card aCard = CardManager.getInstance().getTopCard();
         Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
@@ -313,17 +326,24 @@ public class LocationManager implements Serializable {
     }
 
     public void activateDisciplinary(Location disciplinaryLoc){
+        System.out.println("Disciplinary location activated");
+
         // NOTHING
     }
 
     public void activateGoToDisciplinary(Location goToDisciplinaryLoc){
+        System.out.println("GOTODIsciplinary location activated");
+
         final int DISTANCE_TO_DISCIPLINARY = 20;
         Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
         curPlayer.setIsInJail(true);
+        curPlayer.setInJailCount(3);
         GameManager.getInstance().movePlayer(curPlayer, DISTANCE_TO_DISCIPLINARY);
     }
 
     public void activateStart(Location startLoc){
+        System.out.println("Start location activated");
+
         // NOTHING
     }
 

@@ -85,6 +85,7 @@ public class GameManager implements Serializable {
 
 		// move player's token
 		movePlayer(currentPlayer, moveDistance);
+		disableDice();
 	}
 
 	public int totalDiceResultForUtility() {
@@ -194,6 +195,7 @@ public class GameManager implements Serializable {
 	 *
 	 */
 	public void disableDice(){
+		System.out.println("Dice disabled");
 		// TODO tell the UI to re-enable the dice
 	}
 
@@ -227,8 +229,8 @@ public class GameManager implements Serializable {
 
 		Location oldLocation = LocationManager.getInstance().getPlayerLocation(player);
 		Location newLocation = LocationManager.getInstance().movePlayer(player, distance);
-		PlayerManager.getInstance().getCurrentPlayer().getLocation().activate();
-		LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()).activate();
+		// PlayerManager.getInstance().getCurrentPlayer().getLocation().activate();
+		// LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()).activate();
 		
 		//int oldLocationId = oldLocation.getLocationId();
 		//int newLocationId = newLocation.getLocationId();
@@ -236,19 +238,32 @@ public class GameManager implements Serializable {
 
 
 		// Activate the new Location
-		newLocation.activate();
+		// newLocation.activate();
+		LocationManager.getInstance().activateLocation(newLocation);
+
+		// Update UI
 		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
+	}
+
+	public void updateUI(){
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void executePurchase(){
+		// Variables
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
 		int locationPrice = curLocation.getPrice();
 
+		// Process
 		if (curPlayer.getUsableMoney() >= locationPrice){
 			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
 			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
 		}
+
+		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
@@ -258,35 +273,46 @@ public class GameManager implements Serializable {
 	 * called from LocationManager buyables activation methods
 	 */
 	public void askPlayerPaymentChoice(){
-		// TODO prompt for payment choice
-		// pay with dice
-		payRentWithDice();
+		boolean payWithDice = false; // TODO get use input (false is temporary)
 
-		// normal payment
-		payRent();
+		if (payWithDice)
+			payRentWithDice();
+		else // normal payment
+			payRent();
+
+		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void payRentWithDice(){
+		// Variables
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
 		Player locationOwner = curLocation.getOwner();
 
+		// Process
 		this.dice.rollDices();
 		if (!this.dice.isDoubleDice()){
 			// Pay double rent
 			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
 		}
+
+		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void payRent(){
+		// Variables
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
 		Player locationOwner = curLocation.getOwner();
+
+		// Process
 		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
+
+		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}

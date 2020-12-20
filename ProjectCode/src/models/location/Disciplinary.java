@@ -13,7 +13,7 @@ public class Disciplinary extends Location{
 	private ArrayList<Player> prisoners;
 
     public Disciplinary(int locationId, String name, Point2D point, ArrayList<Player> playersHere,ArrayList<Player> prisoners) {
-		super(locationId, name, point, playersHere);
+		super(locationId, name, point, playersHere, LOCATION_TYPES.DISCIPLINARY);
 		
 		prisoners = new ArrayList<Player>();
 		

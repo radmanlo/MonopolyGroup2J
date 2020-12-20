@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import models.Card;
 import models.Player;
+import models.location.Location;
 
 public class CardManager implements Serializable{
 	// Property
@@ -122,8 +123,10 @@ public class CardManager implements Serializable{
 	public void goWc(){
 		final int WC_ID = 28;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		Location curLocation = LocationManager.getInstance().getPlayerLocation(curPlayer);
+		int distance = (curLocation.getLocationId() + WC_ID) % 40;
 
-		LocationManager.getInstance().movePlayer(curPlayer, WC_ID);
+		LocationManager.getInstance().movePlayer(curPlayer, distance);
 	}
 
 	public void aInCs319(){
