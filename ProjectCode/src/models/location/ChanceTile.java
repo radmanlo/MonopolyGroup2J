@@ -10,6 +10,9 @@ public class ChanceTile extends Location{
         super(locationId, name, point, playersHere);
     }
 
+    public ChanceTile(ChanceTile copy) {
+    	super(copy);
+    }
     @Override
     public void activate() {
         super.activate();

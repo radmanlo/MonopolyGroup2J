@@ -13,6 +13,14 @@ public class IncomeTaxTile extends Location{
         this.taxValue = taxValue;
     }
 
+    public IncomeTaxTile( IncomeTaxTile copy) {
+    	super(copy);
+    	this.taxValue = copy.taxValue;
+    }
+    public int getTaxValue(){
+        return this.taxValue;
+    }
+
     /**
      *
      */

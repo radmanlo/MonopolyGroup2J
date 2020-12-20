@@ -8,7 +8,12 @@ import javax.swing.JPanel;
 
 import gamePresenter.BoardManager;
 import gamePresenter.GameManager;
+import gamePresenter.LocationManager;
 import gamePresenter.PlayerManager;
+import models.Player;
+import models.location.BuyableLocation;
+import models.location.Location;
+import models.location.Property;
 import settingsPresenter.LocalDataManager;
 import userInterface.menus.MenuManager;
 
@@ -67,6 +72,12 @@ public class InteractionArea extends JPanel{
 		add(rollBtn);
 		
 		JButton move1Btn = new JButton("Move Player 1 Forward");
+		move1Btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(), 1);
+				 BoardManager.getInstance().updateMap();
+			}
+		});
 		move1Btn.setBounds(300, 202, 199, 34);
 		add(move1Btn);
 		
@@ -104,7 +115,7 @@ public class InteractionArea extends JPanel{
 				PlayerManager.getInstance().getCurrentPlayer().setUsableMoney(currentMoney + 100 );
 			}
 		});
-		addMoneyBtn.setBounds(25, 603, 89, 23);
+		addMoneyBtn.setBounds(25, 625, 89, 23);
 		add(addMoneyBtn);
 		
 		JLabel moneyLbl = new JLabel("");
@@ -123,10 +134,50 @@ public class InteractionArea extends JPanel{
 		JButton updateBtn = new JButton("Update");
 		updateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				BoardManager.getInstance().updateMap();
 			}
 		});
-		updateBtn.setBounds(25, 731, 89, 23);
+		updateBtn.setBounds(36, 562, 207, 44);
 		add(updateBtn);
+		
+		JButton setOwnerBtn = new JButton("setOwnerHereFromCurrent");
+		setOwnerBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+				for( BuyableLocation loc: LocationManager.getInstance().getBuyableList()) {
+					loc.setOwner(currentPlayer);
+				}
+				//LocationManager.getInstance().getLocationById(currentPlayer.getLocation)
+				//LocationManager.getInstance().getBuyableList().get();
+			}
+		});
+		setOwnerBtn.setBounds(347, 562, 232, 23);
+		add(setOwnerBtn);
+		
+		JButton upgradeBtn = new JButton("Upgrade");
+		upgradeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for( BuyableLocation loc: LocationManager.getInstance().getBuyableList()) {
+					if( loc instanceof Property)
+						loc.upgrade();
+				}
+			}
+		});
+		upgradeBtn.setBounds(36, 524, 131, 23);
+		add(upgradeBtn);
+		
+		JButton degradeBtn = new JButton("Degrade");
+		degradeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for( BuyableLocation loc: LocationManager.getInstance().getBuyableList()) {
+					if( loc instanceof Property)
+						loc.degrade();
+				}
+			}
+		});
+		degradeBtn.setBounds(196, 524, 112, 27);
+		add(degradeBtn);
 	}
 }

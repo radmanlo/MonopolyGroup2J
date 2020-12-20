@@ -75,10 +75,10 @@ public class NewGameMenu extends Menu{
 		backBtn.setBounds(33, 379, 289, 90);
 
 		// Initialize the first two players
-		NewPlayerAddingScreen s1 = new NewPlayerAddingScreen(this);
+		NewPlayerAddingScreen s1 = new NewPlayerAddingScreen(this, 1);
 		newPlayerAddingScreens.add(s1);
 
-		NewPlayerAddingScreen s2 = new NewPlayerAddingScreen(this);
+		NewPlayerAddingScreen s2 = new NewPlayerAddingScreen(this, 2);
 		newPlayerAddingScreens.add(s2);
 
 		addNewPlayerBtn = new RoundedButton("Add Player");
@@ -100,7 +100,7 @@ public class NewGameMenu extends Menu{
 		add(initializeGameBtn);
 
 		drawInitPlayers();
-
+		redrawPotentialPlayers();
 	}
 
 	/**
@@ -306,7 +306,7 @@ public class NewGameMenu extends Menu{
 	public void addPotentialPlayer() {
 		if( newPlayerAddingScreens.size() < 8 ) {
 
-			NewPlayerAddingScreen sTemp = new NewPlayerAddingScreen(this);
+			NewPlayerAddingScreen sTemp = new NewPlayerAddingScreen(this, newPlayerAddingScreens.size() + 1);
 			newPlayerAddingScreens.add(sTemp);
 			addPlayerPanel.add(sTemp);
 
@@ -337,8 +337,9 @@ public class NewGameMenu extends Menu{
 			// (ADD_PLAYER_ITEM_WIDTH - 40) to get horizontal padding
 			newPlayerAddingScreens.get(i).setBounds(20, i * ADD_PLAYER_ITEM_HEIGHT + SPACE_BETWEEN_FIELDS, ADD_PLAYER_PANEL_WIDTH - 40, ADD_PLAYER_ITEM_HEIGHT);
 		}
+		addNewPlayerBtn.setBounds(300, SPACE_BETWEEN_FIELDS + ADD_PLAYER_ITEM_HEIGHT * newPlayerAddingScreens.size() + 10 , 51, 42);
 
-		if(newPlayerAddingScreens.size() <= 8 )
+		if(newPlayerAddingScreens.size() < 8 )
 			addNewPlayerBtn.setVisible(true);
 		else
 			addNewPlayerBtn.setVisible(false);

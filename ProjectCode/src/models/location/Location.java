@@ -15,6 +15,8 @@ public class Location implements Serializable{
     private String name;
     private Point2D point;
     private ArrayList<Player> playersHere;
+    private LOCATION_TYPES type;
+    public enum LOCATION_TYPES {BUS, CHANCE, DISCIPLINARY, GO_TO_DISCIPLINARY, INCOME_TAX, MAYFEST, PROPERTY, START, UTILITY};
 
     // Constructor
     public Location(int locationId, String name, Point2D point, ArrayList<Player> playersHere) {
@@ -22,8 +24,15 @@ public class Location implements Serializable{
         this.name = name;
         this.point = point;
         this.playersHere = playersHere;
+        this.type = type;
     }
 
+    public Location(Location copy) {
+    	this.locationId = copy.locationId;
+    	this.name = copy.name;
+    	this.point = copy.point;
+    	this.playersHere = copy.playersHere;
+    }
     @Override
     public String toString() {
         return "Location{" +
@@ -92,5 +101,9 @@ public class Location implements Serializable{
 
     public ArrayList<Player> getAllPlayersHere(){
         return this.playersHere;
+    }
+
+    public LOCATION_TYPES getType(){
+        return this.type;
     }
 }

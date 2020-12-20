@@ -21,6 +21,12 @@ public class Card implements Serializable{
 		this.storable = storable;
 	}
 	
+	public Card(Card id) {
+		this.cardId = id.cardId;
+		this.cardName = id.cardName;
+		this.description = id.description;
+		this.storable = id.storable;
+	}
 	//Methods
 
 	public int getCardId() {

@@ -19,6 +19,12 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance();
 	}
 
+	public GameManager(GameManager mngr) {
+		// TODO Auto-generated constructor stub
+		// TODO ADD MAYBE NEEDED
+	
+	}
+
 	// Operational Methods
 	public static GameManager getInstance() {
 		if( gameManager == null ) {
@@ -26,12 +32,10 @@ public class GameManager implements Serializable {
 		}
 		return gameManager;
 	}
-	
-	
-	
+
 	public void initializeNewGame(ArrayList<PotentialPlayer> pL, Document doc) {
 		LocalDataManager.getInstance().initialize(doc);
-		
+
 		for(int i = 0; i< pL.size(); i++) {
 			String name = pL.get(i).getName();
 			Token token = pL.get(i).getToken();
@@ -40,10 +44,8 @@ public class GameManager implements Serializable {
 			Player newPlayer = new Player(name, token, color, playerId);
 			PlayerManager.getInstance().addPlayer(newPlayer);
 			BankManager.getInstance().openAccount(newPlayer);
-			LocationManager.getInstance().getLocationList().get(0).addPlayerHere(newPlayer);
+			LocationManager.getInstance().getLocationList().get(36).addPlayerHere(newPlayer);
 		}
-
-		
 
 		PlayerManager.getInstance().setInitialCurrentPlayer();
 		BoardManager.getInstance();
@@ -62,11 +64,7 @@ public class GameManager implements Serializable {
 	 * it moves the token and activates the new location
 	 */
 	public void rollDice() {
-		// Get current player
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		Location newLocation = null;
-
-		// roll the dice
 		int moveDistance = 0;
 
 		do {
@@ -75,35 +73,44 @@ public class GameManager implements Serializable {
 		}while(this.dice.isDoubleDice());
 
 		// move player's token
-		newLocation = LocationManager.getInstance().movePlayer(currentPlayer, moveDistance);
+		movePlayer(currentPlayer, moveDistance);
+	}
 
-		// Update the view
-
-		// Activate the new Location
-		newLocation.activate();
-		BoardManager.getInstance().updateMap();
+	public int totalDiceResultForUtility() {
+		return this.dice.getTotalResult();
 	}
 
 	/**
 	 * Gets called when the game just started or when player presses EndTurn
 	 * Gets all the information about the current player and passes them to the view
 	 */
-	public void handleNewTurn() { // Initializing a new turn Basically view players info on the screen
-		// get the current player
-		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		// view the player
-		System.out.println(currentPlayer);
-		// view player's offers
-		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(currentPlayer);
+	public void handleNewTurn(boolean canRoolDice) { // Initializing a new turn Basically view players info on the screen
+		// TODO Disable dice if player is in Jail (canRollDice == false)
+		// TODO when player uses outOfJail card rollDice is enabled
 
+		// TODO get the current player
+		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		// TODO view the player
+		System.out.println(currentPlayer);
+		// TODO view player's offers
+		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(currentPlayer);
 	}
 
 	/**
 	 * Handles the EndTurn button, change the turn and handles new turn
+	 * checks if a player is in jail and update their jail status
 	 */
 	public void handleEndTurn(){
 		PlayerManager.getInstance().changeCurrentPlayer();
-		this.handleNewTurn();
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+
+		if (curPlayer.getIsInJail() && curPlayer.getInJailCount() < 3){
+			curPlayer.setInJailCount(curPlayer.getInJailCount() + 1);
+			this.handleNewTurn(false);
+		} else {
+			curPlayer.setIsInJail(false);
+			this.handleNewTurn(true);
+		}
 	}
 
 	/**
@@ -122,6 +129,65 @@ public class GameManager implements Serializable {
 		// return the offer's information
 	}
 
+	public void create(GameManager mngr) {
+		// TODO Auto-generated method stub
+		gameManager = new GameManager(mngr);
+	}
+
+	/**
+	 * Asks the Location manager to move the player and update the UI
+	 * @param player
+	 * @param distance
+	 */
+	public void movePlayer(Player player, int distance){
+		Location newLocation = LocationManager.getInstance().movePlayer(player, distance);
+		// Activate the new Location
+		newLocation.activate();
+		BoardManager.getInstance().updateMap();
+	}
+
+	public void executePurchase(){
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
+		int locationPrice = curLocation.getPrice();
+
+		if (curPlayer.getUsableMoney() >= locationPrice){
+			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
+			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
+		}
+	}
+
+	/**
+	 * Asks the user for their preference
+	 * called from LocationManager buyables activation methods
+	 */
+	public void askPlayerPaymentChoice(){
+		// TODO prompt for payment choice
+		// pay with dice
+		payRentWithDice();
+
+		// normal payment
+		payRent();
+	}
+
+	public void payRentWithDice(){
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
+		Player locationOwner = curLocation.getOwner();
+
+		this.dice.rollDices();
+		if (!this.dice.isDoubleDice()){
+			// Pay double rent
+			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
+		}
+	}
+
+	public void payRent(){
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
+		Player locationOwner = curLocation.getOwner();
+		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
+	}
 
 //	public static void executePurchase() { // Let's have it in location's activate() method
 //

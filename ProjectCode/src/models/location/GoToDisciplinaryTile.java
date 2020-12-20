@@ -10,6 +10,9 @@ public class GoToDisciplinaryTile extends Location{
         super(locationId, name, point, playersHere);
     }
 
+    public GoToDisciplinaryTile(GoToDisciplinaryTile copy) {
+    	super(copy);
+    }
     @Override
     public void activate() {
         super.activate();

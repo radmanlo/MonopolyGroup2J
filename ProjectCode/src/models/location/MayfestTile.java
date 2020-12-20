@@ -11,6 +11,14 @@ public class MayfestTile extends Location{
         super(locationId, name, point, playersHere);
         this.collectedTax = collectedTax;
     }
+    public MayfestTile(MayfestTile copy) {
+    	super(copy);
+    	this.collectedTax = copy.collectedTax;
+    }
+
+    public int getCollectedTax(){
+        return this.collectedTax;
+    }
 
     @Override
     public void activate() {

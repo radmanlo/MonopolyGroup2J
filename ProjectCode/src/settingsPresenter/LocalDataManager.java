@@ -158,7 +158,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             TradeManager mngr = TradeManager.getInstance();
             mngr= (TradeManager)in.readObject();
-            
+            TradeManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Trade Object has been deserialized\n"); 
@@ -186,7 +186,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             PlayerManager mngr = PlayerManager.getInstance();
             mngr= (PlayerManager)in.readObject(); 
-  
+            PlayerManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Player Object has been deserialized\n"); 
@@ -214,7 +214,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             GameManager mngr = GameManager.getInstance();
             mngr= (GameManager)in.readObject(); 
-  
+            GameManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("GameMngr Object has been deserialized\n"); 
@@ -242,7 +242,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             CardManager mngr = CardManager.getInstance();
             mngr= (CardManager)in.readObject(); 
-  
+            CardManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Cards Object has been deserialized\n"); 
@@ -270,7 +270,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             BankManager mngr = BankManager.getInstance();
             mngr= (BankManager)in.readObject(); 
-  
+            BankManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Bankmngr Object has been deserialized\n"); 
@@ -297,8 +297,8 @@ public class LocalDataManager implements Serializable{
   
             // Method for deserialization of object 
             LocationManager mngr = LocationManager.getInstance();
-            mngr = (LocationManager)in.readObject();
-  
+            mngr= (LocationManager)in.readObject(); 
+            LocationManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 
             System.out.println("Location Object has been deserialized\n"); 
@@ -318,7 +318,26 @@ public class LocalDataManager implements Serializable{
                                 " is caught"); }
 	}
 
+	public static String fileToString(String filePath) throws Exception{
+		      String input = null;
+		      Scanner sc = new Scanner(new File(filePath));
+		      StringBuffer sb = new StringBuffer();
+		      while (sc.hasNextLine()) {
+		         input = sc.nextLine();
+		         sb.append(input);
+		      }
+		      return sb.toString();
+		   }
 	
+	public void deleteSavedGame(String str) throws Exception {
+		  String filePath = "./resources/saves/savedGames.txt";
+	      String result = fileToString(filePath);
+	      System.out.println("Contents of the file: "+result);
+	      result = result.replaceAll(str, "");
+	      PrintWriter writer = new PrintWriter(new File(filePath));
+	      writer.append(result);
+	      writer.flush();
+	}
 	public boolean saveTrade(String way) {
 		String filename = way;
         try { 
@@ -654,7 +673,7 @@ public void addPropertiesToLocationManager(NodeList properties){
 
 
 			theProperty = new Property(id, name, new Point2D.Double(x, y), new ArrayList<Player>(0), groupColor,
-					null, price, rents.get(0), mortgage, breakMortgage, false, rents, 0, false);
+					null, price, rents.get(0), mortgage, breakMortgage, false, rents, 0, false, upgradeCost);
 			LocationManager.getInstance().addBuyable(theProperty);
 		}
 	}

@@ -4,8 +4,17 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import gamePresenter.LocationManager;
+import models.location.BusStop;
 import models.location.BuyableLocation;
+import models.location.ChanceTile;
+import models.location.Disciplinary;
+import models.location.GoToDisciplinaryTile;
+import models.location.IncomeTaxTile;
 import models.location.Location;
+import models.location.MayfestTile;
+import models.location.Property;
+import models.location.StartTile;
+import models.location.Utility;
 
 
 public class Player implements Serializable{
@@ -26,6 +35,46 @@ public class Player implements Serializable{
 	private boolean isInJail;
 	private int id;
 
+	public Player (Player copy) {
+		//TODO LOCATION AND BUYABLELOCATION LIST HARD COPY
+		this.name = copy.name;
+		this.token = new Token(copy.token);
+		this.colorId = copy.getColorId();
+		this.ownedLocations = new ArrayList<BuyableLocation>();
+		this.cards = new ArrayList<Card>();
+		//copy.ownedLocations.get(0)
+		
+		for(int i = 0; i < copy.ownedLocations.size();i++) {
+			//this.ownedLocations.add(copy.ownedLocations.get(i));
+			Location loc = copy.ownedLocations.get(i);
+			switch(loc.getClass().toString()) {
+			case "class models.location.Property":
+				Property pr = new Property((Property)copy.ownedLocations.get(i));
+				this.ownedLocations.add(pr);
+				break;
+			case "class models.location.Utility":
+				Utility ut = new Utility((Utility)copy.ownedLocations.get(i));
+				this.ownedLocations.add(ut);
+				break;
+			case "class models.location.BusStop":
+				BusStop bs = new BusStop((BusStop)copy.ownedLocations.get(i));
+				this.ownedLocations.add(bs);
+				break;	
+			default:
+			}
+		}
+			
+		for(int k = 0; k < copy.cards.size(); k++ ) {
+			this.cards.add(copy.cards.get(k));
+		}
+		
+		this.usableMoney = copy.usableMoney;
+		this.bankAccount = new BankAccount(copy.bankAccount);
+		this.location = new Location(copy.location);
+		this.inJailCount = copy.inJailCount;
+		this.isInJail = copy.isInJail;
+		this.id = copy.id;
+	}
 	public Player(String name, Token token, PlayerColor colorId, int playerId) {
 		this.name = name;
 		this.token = token;
@@ -54,7 +103,7 @@ public class Player implements Serializable{
 		this.isInJail = isInJail;
 		this.id = id;
 	}
-
+	
 	public int getId() {
 		return id;
 	}

@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import models.location.BusStop;
 import models.location.BuyableLocation;
+import models.location.Location;
+import models.location.Property;
+import models.location.Utility;
 
 public class TradeDeal implements Serializable {
     
@@ -32,6 +36,58 @@ public class TradeDeal implements Serializable {
         this.requestedMoney = requestedMoney;
     }
 
+    public TradeDeal(TradeDeal copy) {
+    	this.offeredMoney = copy.offeredMoney;
+    	this.requestedMoney = copy.requestedMoney;
+    	this.offerer = new Player(copy.offerer);
+    	this.receiver = new Player(copy.receiver);
+    	for(int i = 0; i < copy.offeredCards.size(); i++) {
+    		Card car = new Card(copy.offeredCards.get(i));
+    		offeredCards.add(car);
+    	}
+    	for(int i = 0; i < copy.requestedCards.size(); i++) {
+    		Card car = new Card(copy.requestedCards.get(i));
+    		requestedCards.add(car);
+    	}
+		for(int i = 0; i < copy.offeredBuyables.size();i++) {
+			//this.ownedLocations.add(copy.ownedLocations.get(i));
+			Location loc = copy.offeredBuyables.get(i);
+			switch(loc.getClass().toString()) {
+			case "class models.location.Property":
+				Property pr = new Property((Property)copy.offeredBuyables.get(i));
+				this.offeredBuyables.add(pr);
+				break;
+			case "class models.location.Utility":
+				Utility ut = new Utility((Utility)copy.offeredBuyables.get(i));
+				this.offeredBuyables.add(ut);
+				break;
+			case "class models.location.BusStop":
+				BusStop bs = new BusStop((BusStop)copy.offeredBuyables.get(i));
+				this.offeredBuyables.add(bs);
+				break;	
+			default:
+			}
+		}
+		for(int i = 0; i < copy.requestedBuyables.size();i++) {
+			//this.ownedLocations.add(copy.ownedLocations.get(i));
+			Location loc = copy.requestedBuyables.get(i);
+			switch(loc.getClass().toString()) {
+			case "class models.location.Property":
+				Property pr = new Property((Property)copy.requestedBuyables.get(i));
+				this.requestedBuyables.add(pr);
+				break;
+			case "class models.location.Utility":
+				Utility ut = new Utility((Utility)copy.requestedBuyables.get(i));
+				this.requestedBuyables.add(ut);
+				break;
+			case "class models.location.BusStop":
+				BusStop bs = new BusStop((BusStop)copy.requestedBuyables.get(i));
+				this.requestedBuyables.add(bs);
+				break;	
+			default:
+			}
+		}
+    }
     public void execute() {
        transferMoney();
        transferCards();

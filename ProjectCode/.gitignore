@@ -2,6 +2,7 @@
 bin/
 tmp/
 out/
+resources/saves
 *.class
 *.tmp
 *.bak

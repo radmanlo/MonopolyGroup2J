@@ -14,6 +14,13 @@ public class Disciplinary extends Location{
 		// TODO Auto-generated constructor stub
 	}
 
+    public Disciplinary(Disciplinary copy) {
+    	super(copy);
+    	for(int i = 0; i < copy.prisoners.size(); i++) {
+    		Player plyr = new Player(copy.prisoners.get(i));
+    		this.prisoners.add(plyr);
+    	}
+    }
 
     @Override
     public void activate() {

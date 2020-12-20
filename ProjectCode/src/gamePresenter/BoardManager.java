@@ -48,6 +48,7 @@ public class BoardManager extends JPanel implements Serializable{
 	public void updateMap() {
 		ArrayList<Location> locationsList;
 		locationsList = LocationManager.getInstance().getLocationList();
+		System.out.println("\ncurrent:" + LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 		map.update(locationsList);
 	}
 	

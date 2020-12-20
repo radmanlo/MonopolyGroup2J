@@ -1,6 +1,8 @@
 package models.location;
 
 
+import gamePresenter.LocationManager;
+import gamePresenter.PlayerManager;
 import models.Player;
 
 import java.awt.geom.Point2D;
@@ -12,6 +14,7 @@ public class BuyableLocation extends Location{
     private Player owner;
     private int price;
     private int currentRentValue;
+    private int currentRentIndex;
     private int mortgageValue = 80; // TODO to be changed later
     private int breakMortgageValue = 50; //TODO to be changed later
     private boolean underMortgage;
@@ -52,13 +55,27 @@ public class BuyableLocation extends Location{
         this.owner = owner;
         this.price = price;
         this.currentRentValue = currentRentValue;
+        this.currentRentIndex = 0;
         this.mortgageValue = mortgageValue;
         this.breakMortgageValue = breakMortgageValue;
         this.underMortgage = underMortgage;
         this.rentValues = rentValues;
     }
 
-    public Player getOwner() {
+    public BuyableLocation(BuyableLocation copy) {
+    	super(copy);
+        this.groupColor = copy.groupColor;
+        this.owner = copy.owner;
+        this.price = copy.price;
+        this.currentRentValue = copy.currentRentValue;
+        this.currentRentIndex = copy.currentRentIndex;
+        this.mortgageValue = copy.mortgageValue;
+        this.breakMortgageValue = copy.breakMortgageValue;
+        this.underMortgage = copy.underMortgage;
+        this.rentValues = copy.rentValues;
+    }
+
+	public Player getOwner() {
         return owner;
     }
 
@@ -108,5 +125,38 @@ public class BuyableLocation extends Location{
 
     public ArrayList<Integer> getRentValues() {
         return rentValues;
+    }
+
+    public ArrayList<Integer> getAllRentValues(){
+        return this.rentValues;
+    }
+    public int getRentValue() {
+		return this.currentRentValue;
+    }
+    
+
+    public boolean upgrade(){
+        if (this.currentRentIndex < this.rentValues.size() - 1){
+            this.currentRentIndex++;
+            this.currentRentValue = this.rentValues.get(this.currentRentIndex);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean degrade(){
+        if (this.currentRentIndex > 0){
+            this.currentRentIndex--;
+            this.currentRentValue = this.rentValues.get(this.currentRentIndex);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public void activate() {
+        super.activate();
     }
 }
