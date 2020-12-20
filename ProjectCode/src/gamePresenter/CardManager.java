@@ -121,24 +121,38 @@ public class CardManager implements Serializable{
 	public void goWc(){
 		final int WC_ID = 28;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		
+
 		LocationManager.getInstance().movePlayer(curPlayer, WC_ID);
 	}
 
 	public void aInCs319(){
+		final int PRIZE = 500;
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
+		PlayerManager.getInstance().addMoneyToPlayer(curPlayer, PRIZE);
 	}
 
 	public void schoolTaxes(){
+		final int SCHOOL_TAX = 1000;
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
+		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, SCHOOL_TAX);
 	}
 
 	public void accidentFee(){
+		final int ACCIDENT_FEE = 500;
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
+		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, ACCIDENT_FEE);
 	}
 
 	public void moneyBorrowed(){
+		final int AMOUNT_BORROWED = 1500;
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		Player nextPlayer = PlayerManager.getInstance().getNextPlayer();
 
+		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, AMOUNT_BORROWED);
+		PlayerManager.getInstance().addMoneyToPlayer(nextPlayer, AMOUNT_BORROWED);
 	}
 
 	public void fellAsleap(){
@@ -146,7 +160,10 @@ public class CardManager implements Serializable{
 	}
 
 	public void friendHw(){
+		final int HW_FEE = 500;
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
+		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, HW_FEE);
 	}
 
 	@Override
