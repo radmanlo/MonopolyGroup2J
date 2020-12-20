@@ -58,7 +58,7 @@ public class BoardManager extends JPanel implements Serializable{
 	}
 	
 	public void updateInteractionArea() {
-
+		showPendingTradeDeals();
 		interactionArea.setCurrentPlayerMoneyLbl(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney());
 		interactionArea.setDiceRollResultLbl(GameManager.getInstance().totalDiceResultForUtility());
 		decideEnabledorNotForBuyBtn();
@@ -134,7 +134,30 @@ public class BoardManager extends JPanel implements Serializable{
 		repaint();
 		
 	}
-
+	
+	public void showPendingTradeDeals(){
+		
+		if( TradeManager.getInstance().checkTradeDeals(PlayerManager.getInstance().getCurrentPlayer())) {
+			
+			for( TradeDeal deal : TradeManager.getInstance().getTradeDeals(PlayerManager.getInstance().getCurrentPlayer())) {
+				
+				JDialog.setDefaultLookAndFeelDecorated(true);
+				
+				String promptMessage = "Do you want accept the following Trade Offer?\n" + deal.toStringForPrompt();
+			    int response = JOptionPane.showConfirmDialog(null, promptMessage, "Trade Offer",
+			        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			    if (response == JOptionPane.NO_OPTION) {
+			    	TradeManager.getInstance().removeDeal(deal);;
+			    } else if (response == JOptionPane.YES_OPTION) {
+			    	TradeManager.getInstance().executeTrade(deal);
+			    	TradeManager.getInstance().removeDeal(deal);
+			    } else if (response == JOptionPane.CLOSED_OPTION) {
+			      System.out.println("JOptionPane closed");
+			    }
+			}
+		}
+	}
+	
 	public void animateDies(int firstDiceResult, int secondDiceResult) {
 		map.animateDies(firstDiceResult, secondDiceResult);
 	}

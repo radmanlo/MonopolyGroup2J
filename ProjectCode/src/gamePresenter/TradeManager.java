@@ -70,6 +70,7 @@ public class TradeManager implements Serializable{
 				if(trdeal.getReceiver().getName().equalsIgnoreCase(tradeDeals.get(i).getReceiver().getName())) {
 					if(trdeal.getOfferedMoney() == tradeDeals.get(i).getOfferedMoney()) {
 						if(trdeal.getRequestedMoney() == tradeDeals.get(i).getRequestedMoney()) {
+							
 							tradeDeals.remove(i);
 						}
 					}
