@@ -356,7 +356,7 @@ public class GameManager implements Serializable {
 		// Process
 		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
 		 JFrame f =new JFrame();  
-		 JOptionPane.showMessageDialog(f, "Your came to "+locationOwner.getName() + "'s location. You have to pay: " + curLocation.getRentValue());  
+		 JOptionPane.showMessageDialog(f, "Your came to "+locationOwner.getName() + "'s location. You have to pay: " + curLocation.getRentValue() + " TL");  
 		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
@@ -428,6 +428,8 @@ public class GameManager implements Serializable {
 			if (aProperty.getVendingMachinesNo() == 0 && !aProperty.hasStarbucks()){
 				aProperty.resetToDefault();
 				curPlayer.setUsableMoney(curPlayer.getUsableMoney() + price);
+				 JFrame f =new JFrame();  
+				 JOptionPane.showMessageDialog(f, "You sold "+aProperty.getName() + " and earned " + price+" TL");  
 			}
 		}
 	}
