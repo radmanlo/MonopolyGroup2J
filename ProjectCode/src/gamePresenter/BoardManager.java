@@ -107,12 +107,17 @@ public class BoardManager extends JPanel implements Serializable{
 	}
 	
 	public void decideEnabledorNotForBuyBtn() {
-		
-		//System.out.println(LocationManager.getInstance().isPlaceBuyable() + "");
-		
 		if(LocationManager.getInstance().isPlaceBuyable())
 			interactionArea.buyBtn.setEnabled(true);
 		else
 			interactionArea.buyBtn.setEnabled(false);
+	}
+
+	public void openTradeScreen(Player currentPlayer) {
+		tradeScreen = new TradeScreen(currentPlayer);
+		add(tradeScreen, 0);
+		revalidate();
+		repaint();
+		
 	}
 }
