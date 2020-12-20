@@ -379,6 +379,9 @@ public class LocationManager implements Serializable {
         Card aCard = CardManager.getInstance().getTopCard();
         Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
+        JFrame f =new JFrame();
+        JOptionPane.showMessageDialog(f, aCard.getDescription());
+
         if (aCard.isStorable()){ // If card is storable just store it
             curPlayer.addCard(aCard);
         } else { // Not storable execute it

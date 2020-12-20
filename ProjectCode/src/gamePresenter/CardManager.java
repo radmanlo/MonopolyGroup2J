@@ -93,8 +93,6 @@ public class CardManager implements Serializable{
 			case 120: this.friendHw();
 			break;
 		}
-		 JFrame f =new JFrame();  
-		 JOptionPane.showMessageDialog(f, card.getDescription());  
 	}
 
 	/**
@@ -188,7 +186,7 @@ public class CardManager implements Serializable{
 	}
 
 	public void fellAsleep(){
-
+		GameManager.getInstance().handleEndTurn();
 	}
 
 	public void friendHw(){
