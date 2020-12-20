@@ -115,8 +115,17 @@ public class BoardManager extends JPanel implements Serializable{
 				interactionArea.buyBtn.setEnabled(true);
 		}
 		else {
+
 			interactionArea.buyBtn.setEnabled(false);
 		}
 			
+	}
+
+	public void openTradeScreen(Player currentPlayer) {
+		tradeScreen = new TradeScreen(currentPlayer);
+		add(tradeScreen, 0);
+		revalidate();
+		repaint();
+		
 	}
 }
