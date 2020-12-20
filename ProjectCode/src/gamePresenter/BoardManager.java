@@ -57,6 +57,7 @@ public class BoardManager extends JPanel implements Serializable{
 	public void updateInteractionArea() {
 		interactionArea.setCurrentPlayerMoneyLbl(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney());
 		interactionArea.setDiceRollResultLbl(GameManager.getInstance().totalDiceResultForUtility());
+		decideEnabledorNotForBuyBtn();
 		interactionArea.update();
 		interactionArea.revalidate();
 		interactionArea.repaint();
@@ -88,5 +89,23 @@ public class BoardManager extends JPanel implements Serializable{
 		add(inventoryScreen, 0);
 		revalidate();
 		repaint();
+	}
+
+	public void enableDice() {
+		interactionArea.diceRollButton.setEnabled(true);
+	}
+
+	public void disableDice() {
+		interactionArea.diceRollButton.setEnabled(false);
+	}
+	
+	public void decideEnabledorNotForBuyBtn() {
+		
+		//System.out.println(LocationManager.getInstance().isPlaceBuyable() + "");
+		
+		if(LocationManager.getInstance().isPlaceBuyable())
+			interactionArea.buyBtn.setEnabled(true);
+		else
+			interactionArea.buyBtn.setEnabled(false);
 	}
 }

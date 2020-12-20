@@ -177,7 +177,25 @@ public class LocationManager implements Serializable {
 
         return tmp;
     }
+    
+    //Returns whether current place of player is buyable
+    public boolean isPlaceBuyable() {
+    	Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+ 
+		Location loc = curPlayer.getLocation();
+		System.out.println(loc.getClass().toString());
 
+		switch(loc.getClass().toString()) {
+		case "class models.location.Property":
+			return true;
+		case "class models.location.Utility":
+			return true;
+		case "class models.location.BusStop":
+			return true;
+		default:
+			return false;
+		}
+    }
     //Returns location list
     public ArrayList<Location> getLocationList(){
         ArrayList<Location> locationList = new ArrayList<>(0);
@@ -191,8 +209,18 @@ public class LocationManager implements Serializable {
     }
 
     //returns buyable list
-    public ArrayList<BuyableLocation> getBuyableList(){
-        return this.buyableLocations;
+    public ArrayList<String> getBuyablesOfPlayer(Player curPlayer){
+    	ArrayList<String> arr = new ArrayList<String>();
+        for (BuyableLocation loc : buyableLocations) {
+        	if(loc != null) {
+        		if(loc.getOwner() != null) {
+        			if(loc.getOwner().getName().equals(curPlayer.getName())) {
+        				arr.add(loc.getName());
+        			}
+        		}
+        	}
+        }
+        return arr;
     }
 
     //Returns player if given all group color is his own and 
@@ -399,24 +427,12 @@ public class LocationManager implements Serializable {
         location.setOwner(player);
     }
 
-    public ArrayList<BuyableLocation> getAllLocationsOf(Player player){
-        ArrayList<BuyableLocation> locations = new ArrayList<BuyableLocation>(0);
-
-        for (BuyableLocation loc : buyableLocations){
-            if (loc.getOwner().getName() == player.getName()){
-                locations.add(loc);
-            }
-        }
-
-        return locations;
-    }
-
     public void freeAllLocationsOf(Player player){
-        ArrayList<BuyableLocation> playersLocs = this.getAllLocationsOf(player);
+        //ArrayList<BuyableLocation> playersLocs = this.getAllLocationsOf(player);
 
-        for (BuyableLocation loc : playersLocs){
-            loc.resetToDefault();
-        }
+       // for (BuyableLocation loc : playersLocs){
+          //  loc.resetToDefault();
+        //}
     }
 
     @Override

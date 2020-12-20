@@ -91,7 +91,32 @@ public class GameManager implements Serializable {
 	public int totalDiceResultForUtility() {
 		return this.dice.getTotalResult();
 	}
+	
+	
+	//this is a method for testing only - we'll delete it before releasing -G
+	public void rollDiceForTesting() {
+		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int moveDistance = 0;
+		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
+			PlayerManager.getInstance().getCurrentPlayer().setInJailCount(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() - 1);
+			if(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() <= 0) {
+				PlayerManager.getInstance().getCurrentPlayer().setIsInJail(false);
+				return;
+			}
+			return;
+		}
+		do {
+			this.dice.rollDices();
+			moveDistance += this.dice.getTotalResult();
+		}while(this.dice.isDoubleDice());
+        BoardManager.getInstance().updateMap();
+        BoardManager.getInstance().updateInteractionArea();
 
+		movePlayer(currentPlayer, 1);
+	}
+	
+	
+	
 	/**
 	 * Gets called when the game just started or when player presses EndTurn
 	 * Gets all the information about the current player and passes them to the view
@@ -188,15 +213,14 @@ public class GameManager implements Serializable {
 	 *
 	 */
 	public void enableDice(){
-		// TODO tell the UI to re-enable the dice
+		BoardManager.getInstance().enableDice();
 	}
 
 	/**
 	 *
 	 */
 	public void disableDice(){
-		System.out.println("Dice disabled");
-		// TODO tell the UI to re-enable the dice
+		BoardManager.getInstance().disableDice();
 	}
 
 	/**
@@ -260,6 +284,7 @@ public class GameManager implements Serializable {
 		// Process
 		if (curPlayer.getUsableMoney() >= locationPrice){
 			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
+			PlayerManager.getInstance().getCurrentPlayer().addOwnedLocation((BuyableLocation)LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
 		}
 
@@ -267,7 +292,17 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
+	public void sellProperty(BuyableLocation loc) {
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		if(loc.getCurrentRentValue() == loc.getAllRentValues().get(0)) {
+			loc.setOwner(null);
+			curPlayer.removeOwnedLocation(loc);
+			curPlayer.setUsableMoney(curPlayer.getUsableMoney()+ loc.getPrice() - 20);
+		}else {
+			return;
+		}
 
+	}
 	/**
 	 * Asks the user for their preference
 	 * called from LocationManager buyables activation methods
