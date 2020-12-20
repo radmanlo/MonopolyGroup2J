@@ -2,6 +2,9 @@ package models.location;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+import gamePresenter.BoardManager;
+import gamePresenter.LocationManager;
+import gamePresenter.PlayerManager;
 import models.Player;
 
 public class GoToDisciplinaryTile extends Location{
@@ -16,6 +19,10 @@ public class GoToDisciplinaryTile extends Location{
     @Override
     public void activate() {
         super.activate();
+        PlayerManager.getInstance().getCurrentPlayer().setInJailCount(3);
+        PlayerManager.getInstance().getCurrentPlayer().setIsInJail(true);
+        LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(),20);
+        BoardManager.getInstance().updateMap();
     }
 
 

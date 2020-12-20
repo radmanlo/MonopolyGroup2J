@@ -66,7 +66,14 @@ public class GameManager implements Serializable {
 	public void rollDice() {
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		int moveDistance = 0;
-
+		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
+			PlayerManager.getInstance().getCurrentPlayer().setInJailCount(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() - 1);
+			if(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() <= 0) {
+				PlayerManager.getInstance().getCurrentPlayer().setIsInJail(false);
+				return;
+			}
+			return;
+		}
 		do {
 			this.dice.rollDices();
 			moveDistance += this.dice.getTotalResult();
@@ -158,6 +165,18 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance().updateInteractionArea();
 	}
 
+	public boolean currentPlayerHasDeal() {
+		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(PlayerManager.getInstance().getCurrentPlayer());
+		if(playerDeals.size() == 0)
+			return false;
+		return true;
+	}
+	
+	public ArrayList<TradeDeal> currentPlayerDeals(){
+		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(PlayerManager.getInstance().getCurrentPlayer());
+		return playerDeals;
+	}
+	
 	public void declareWinner(Player winner){
 		// TODO some UI stuff for winner
 	}
@@ -182,7 +201,7 @@ public class GameManager implements Serializable {
 	 * @param value
 	 */
 	public void tradeRequest(Property property, int value) {
-
+		
 	}
 
 	/**
