@@ -156,7 +156,7 @@ public class CardManager implements Serializable{
 		System.out.println("school taxes -1000 card activated");
 
 
-		final int SCHOOL_TAX = 1000;
+		final int SCHOOL_TAX = 350;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
 		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, SCHOOL_TAX);
@@ -165,7 +165,7 @@ public class CardManager implements Serializable{
 	public void accidentFee(){
 		System.out.println("accident -500card activated");
 
-		final int ACCIDENT_FEE = 500;
+		final int ACCIDENT_FEE = 180;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
 		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, ACCIDENT_FEE);
@@ -174,7 +174,7 @@ public class CardManager implements Serializable{
 	public void moneyBorrowed(){
 		System.out.println("money borrowed 1500 to other player card activated");
 
-		final int AMOUNT_BORROWED = 1500;
+		final int AMOUNT_BORROWED = 400;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		Player nextPlayer = PlayerManager.getInstance().getNextPlayer();
 
@@ -189,7 +189,7 @@ public class CardManager implements Serializable{
 	public void friendHw(){
 		System.out.println("friend hw -500 card activated");
 
-		final int HW_FEE = 500;
+		final int HW_FEE = 75;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
 		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, HW_FEE);
