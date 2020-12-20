@@ -206,6 +206,8 @@ public class TradeScreen extends JPanel{
 	}
 
 	private TradeDeal createTradeDeal() {
-		TradeDeal deal = new TradeDeal(currentPlayer, Player receiver, ArrayList<BuyableLocation> offeredBuyables, ArrayList<Card> offeredCards, int offeredMoney, ArrayList<BuyableLocation> requestedBuyables, ArrayList<Card> requestedCards, int requestedMoney)
+		//TODO
+		//TradeDeal deal = new TradeDeal(currentPlayer, Player receiver, ArrayList<BuyableLocation> offeredBuyables, ArrayList<Card> offeredCards, int offeredMoney, ArrayList<BuyableLocation> requestedBuyables, ArrayList<Card> requestedCards, int requestedMoney)
+		return null;
 	}
 }
