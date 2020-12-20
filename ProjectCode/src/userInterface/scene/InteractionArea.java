@@ -42,7 +42,6 @@ public class InteractionArea extends JPanel{
 	private ArrayList<PlayerInfoScreen> otherPlayers;
 	private JButton btnNewButton;
 	private Image backgroundImage;
-	private JButton forPresentationBtn;
 	
 	public InteractionArea() {
 		backgroundImage = new ImageIcon("./resources/BoardManager.png").getImage();
@@ -135,20 +134,6 @@ public class InteractionArea extends JPanel{
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.setBounds(53, 402, 311, 37);
 		add(btnNewButton);
-		
-		forPresentationBtn = new JButton("forPresentation");
-		forPresentationBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for( Location loc: LocationManager.getInstance().getLocationList()) {
-					if( loc instanceof Property) {
-						((Property) loc).upgrade();
-						((Property) loc).setOwner(PlayerManager.getInstance().getCurrentPlayer());
-					}
-				}
-			}
-		});
-		forPresentationBtn.setBounds(10, 966, 108, 23);
-		add(forPresentationBtn);
 
 		otherPlayers = new ArrayList<PlayerInfoScreen>();
 	}
