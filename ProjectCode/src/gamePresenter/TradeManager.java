@@ -62,6 +62,19 @@ public class TradeManager implements Serializable{
 		return trade;
 	}
 
+	public void removeDeal(TradeDeal trdeal) {
+		for(int i = 0; i < tradeDeals.size(); i++) {
+			if(trdeal.getOfferer().getName().equalsIgnoreCase(tradeDeals.get(i).getOfferer().getName()) ){
+				if(trdeal.getReceiver().getName().equalsIgnoreCase(tradeDeals.get(i).getReceiver().getName())) {
+					if(trdeal.getOfferedMoney() == tradeDeals.get(i).getOfferedMoney()) {
+						if(trdeal.getRequestedMoney() == tradeDeals.get(i).getRequestedMoney()) {
+							tradeDeals.remove(i);
+						}
+					}
+				}
+			}
+		}
+	}
 	public void create(TradeManager mngr) {
 		// TODO Auto-generated method stub
 		tradeMngr = new TradeManager(mngr);

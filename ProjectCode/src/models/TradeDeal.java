@@ -88,6 +88,7 @@ public class TradeDeal implements Serializable {
 			}
 		}
     }
+    
     public void execute() {
        transferMoney();
        transferCards();
@@ -139,7 +140,6 @@ public class TradeDeal implements Serializable {
     		}
     	}
     }
-
     public void addBuyableToRequested(BuyableLocation item) { 
     	requestedBuyables.add(item);
     }
