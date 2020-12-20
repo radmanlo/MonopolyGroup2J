@@ -8,6 +8,9 @@ import models.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class LocationManager implements Serializable {
     // Properties
 	private static final long serialVersionUID = -9040597026391464212L;
@@ -379,6 +382,8 @@ public class LocationManager implements Serializable {
         curPlayer.setIsInJail(true);
         curPlayer.setInJailCount(3);
         GameManager.getInstance().movePlayer(curPlayer, DISTANCE_TO_DISCIPLINARY);
+		 JFrame f =new JFrame();  
+		 JOptionPane.showMessageDialog(f,"You got caught cheating. You are suspended for 3 turns.");  
     }
 
     public void activateStart(Location startLoc){

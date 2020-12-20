@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import models.Card;
 import models.Player;
 import models.location.Location;
@@ -90,6 +93,8 @@ public class CardManager implements Serializable{
 			case 120: this.friendHw();
 			break;
 		}
+		 JFrame f =new JFrame();  
+		 JOptionPane.showMessageDialog(f, card.getDescription());  
 	}
 
 	/**

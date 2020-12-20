@@ -2,6 +2,10 @@ package gamePresenter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import models.*;
 import models.location.*;
 import settingsPresenter.LocalDataManager;
@@ -79,6 +83,11 @@ public class GameManager implements Serializable {
 		do {
 			this.dice.rollDices();
 			moveDistance += this.dice.getTotalResult();
+			if(dice.isDoubleDice()) {
+				 JFrame f =new JFrame();  
+				 int doubling = dice.getFirstDiceResult();
+				 JOptionPane.showMessageDialog(f, "Your Dice Result is double "+ doubling + ":" + doubling);  
+			}
 		}while(this.dice.isDoubleDice());
         BoardManager.getInstance().updateMap();
         BoardManager.getInstance().updateInteractionArea();
@@ -346,7 +355,8 @@ public class GameManager implements Serializable {
 
 		// Process
 		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
-
+		 JFrame f =new JFrame();  
+		 JOptionPane.showMessageDialog(f, "Your came to "+locationOwner.getName() + "'s location. You have to pay: " + curLocation.getRentValue());  
 		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
