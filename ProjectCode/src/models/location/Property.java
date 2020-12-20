@@ -99,13 +99,13 @@ public class Property extends BuyableLocation{
 
     public static int noOfPropertyPerColor(GroupColor color){
         switch (color){
-            case GREEN:
-            case LIGHT_BLUE:
-            case PINK:
-            case ORANGE:
-            case RED:
+            case GREEN:return 3;
+            case LIGHT_BLUE:return 3;
+            case PINK:return 3;
+            case ORANGE:return 3;
+            case RED:return 3;
             case YELLOW: return 3;
-            case DARK_BLUE:
+            case DARK_BLUE:return 2;
             case BROWN: return 2;
             default: return -1;
         }
