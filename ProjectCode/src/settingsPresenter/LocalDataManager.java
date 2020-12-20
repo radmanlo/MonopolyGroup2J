@@ -120,8 +120,8 @@ public class LocalDataManager implements Serializable{
 	        System.out.println("An error occurred.");
 	        e.printStackTrace();
 	      }
-	    for(int i = 0; i < savedNames.size(); i++)
-	    	System.out.println(savedNames.get(i));
+//	    for(int i = 0; i < savedNames.size(); i++)
+//	    	System.out.println(savedNames.get(i));
 		return savedNames;
 	}
 	
@@ -297,7 +297,7 @@ public class LocalDataManager implements Serializable{
   
             // Method for deserialization of object 
             LocationManager mngr = LocationManager.getInstance();
-            mngr= (LocationManager)in.readObject(); 
+            mngr = (LocationManager)in.readObject();
   
             in.close(); 
             file.close(); 

@@ -42,4 +42,12 @@ public class Utils {
         }
         return font;
     }
+
+    public static Color getBgColor() {
+        return new Color(93, 52, 51);
+    }
+
+    public static Color getButtonColor() {
+        return new Color(230, 112, 112);
+    }
 }

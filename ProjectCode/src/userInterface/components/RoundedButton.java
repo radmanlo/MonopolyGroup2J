@@ -1,5 +1,7 @@
 package userInterface.components;
 
+import utilities.Utils;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +15,7 @@ public class RoundedButton extends Component {
     private boolean hovered = false;
     private int radius = 70;
     private int fontSize = 20;
-    private Color color = new Color(230, 112, 112);
+    private Color color;
 
     /**
      * Constructs a RoundedButton with no label.
@@ -24,6 +26,7 @@ public class RoundedButton extends Component {
     public RoundedButton(String label) {
         super();
         this.label = label;
+        this.color = Utils.getButtonColor();
         setProps();
     }
 
