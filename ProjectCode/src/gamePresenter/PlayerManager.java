@@ -116,4 +116,12 @@ public class PlayerManager implements Serializable{
 	public void addMoneyToPlayer(Player player, int amount){
 		player.setUsableMoney(player.getUsableMoney() + amount);
 	}
+	
+	/*
+	 * takes the name of the player and returns it
+	 */
+	public Player getPlayerByName(String name) {
+		
+		return null;
+	}
 }
