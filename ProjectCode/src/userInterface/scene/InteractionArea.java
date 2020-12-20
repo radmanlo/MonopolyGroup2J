@@ -30,7 +30,7 @@ public class InteractionArea extends JPanel{
 	private JButton selectPropertyButton;
 	private JTextField saveField;
 	private JTextField loadField;
-	private JButton buyBtn;
+	public JButton buyBtn;
 	private JButton rollDiceBtn;
 	private JButton offerTradeBtn;
 	private JButton pauseBtn;

@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
+
+import gamePresenter.LocationManager;
+
 import java.awt.Component;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
@@ -16,9 +19,14 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.HierarchyListener;
+import java.awt.event.HierarchyEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class InventoryScreen extends JPanel{
 	private JButton degradeBtn;
+	private JList locsList_1;
 
 	public InventoryScreen(Player player) {
 		setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -58,7 +66,19 @@ public class InventoryScreen extends JPanel{
 		add(locsPanel);
 		locsPanel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JList locsList = new JList(player.getOwnedLocations().toArray());
+		//System.out.println(LocationManager.getInstance().getAllLocationsOf(player).size()+ "");
+		JList locsList;
+		if(LocationManager.getInstance().getBuyablesOfPlayer(player).toArray() != null) {
+			locsList = new JList(LocationManager.getInstance().getBuyablesOfPlayer(player).toArray());
+		}
+		else
+			locsList = new JList();
+			locsList.addListSelectionListener(new ListSelectionListener() {
+				public void valueChanged(ListSelectionEvent arg0) {
+					System.out.println("asdfdf");
+				}
+			});
+		
 		locsPanel.add(locsList);
 		
 		JPanel cardsPanel = new JPanel();
