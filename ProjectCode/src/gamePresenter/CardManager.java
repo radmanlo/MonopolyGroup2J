@@ -194,6 +194,9 @@ public class CardManager implements Serializable{
 
 		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, HW_FEE);
 	}
+	public ArrayList<Card> getCardDeck(){
+		return cardDeck;
+	}
 
 	@Override
 	public String toString() {

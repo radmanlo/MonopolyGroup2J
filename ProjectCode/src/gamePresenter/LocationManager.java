@@ -455,7 +455,13 @@ public class LocationManager implements Serializable {
      * gets the name of the location and returns the location
      */
 	public Location getLocationByName(String locName) {
-
+		ArrayList<Location> list = getLocationList();
+		
+	    for(int i = 0; i < list.size();i++) {
+	    	if(list.get(i).getName().equals(locName))
+	    		return list.get(i);
+	    }
+		System.out.println("Lctn mngr getlocationbyname returned null");
 		return null;
 	}
 
@@ -463,7 +469,13 @@ public class LocationManager implements Serializable {
 	 * returns if the property is sellable (if it has upgrades on it, it cant be selled)
 	 */
 	public boolean isPropertySellable(Property property) {
-
+		if(property.getVendingMachinesNo() == 0) {
+			if(property.hasStarbucks() == false) {
+				return true;
+			}
+			return false;
+		}
+		
 		return false;
 	}
 
@@ -471,8 +483,14 @@ public class LocationManager implements Serializable {
 	 * returns if the property is degradeable (if it has no upgrades on it, it cant be degraded)
 	 */
 	public boolean isPropertyDegradeable(Property property) {
+		if(property.getVendingMachinesNo() == 0) {
+			if(property.hasStarbucks() == false) {
+				return false;
+			}
+			return true;
+		}
 		
-		return false;
+		return true;
 	}
 
 	
