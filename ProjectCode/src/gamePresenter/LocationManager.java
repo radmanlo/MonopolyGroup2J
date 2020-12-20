@@ -342,15 +342,14 @@ public class LocationManager implements Serializable {
     }
 
     public void activateChance(Location chanceLoc){
-        // TODO give a chance card
+        Card aCard = CardManager.getInstance().getTopCard();
+        Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
-        // Get a random card
-
-        // check if storable
-
-        // if not activate now
-
-        // if storable store it
+        if (aCard.isStorable()){ // If card is storable just store it
+            curPlayer.addCard(aCard);
+        } else { // Not storable execute it
+            CardManager.getInstance().executeCardAction(aCard);
+        }
     }
 
     public void activateDisciplinary(Location disciplinaryLoc){
