@@ -94,14 +94,17 @@ public class LocationManager implements Serializable {
         return locationManager;
     }
     
+    //For Copying location Manager
     public void create(LocationManager copy) {
     	locationManager = new LocationManager(copy);
     }
 
+    //Adds a new Buyable
     public void addBuyable(BuyableLocation aBuyable){
         this.buyableLocations.add(aBuyable);
     }
-
+  
+    //Adds a new NonBuyable
     public void addNonBuyable(Location aNonBuyable){
         this.nonBuyableLocations.add(aNonBuyable);
     }
@@ -152,6 +155,7 @@ public class LocationManager implements Serializable {
         return playerLocation;
     }
 
+    //Returns location with given location id
     public Location getLocationById(int id){
         Location tmp = null;
 
@@ -174,6 +178,7 @@ public class LocationManager implements Serializable {
         return tmp;
     }
 
+    //Returns location list
     public ArrayList<Location> getLocationList(){
         ArrayList<Location> locationList = new ArrayList<>(0);
 
@@ -185,10 +190,12 @@ public class LocationManager implements Serializable {
         return  locationList;
     }
 
+    //returns buyable list
     public ArrayList<BuyableLocation> getBuyableList(){
         return this.buyableLocations;
     }
 
+    //Returns player if given all group color is his own and 
     public Player groupHasSameOwner(BuyableLocation.GroupColor groupColor){
         HashMap<String, Integer> owners = new HashMap<String, Integer>();
         String ownerName = "";
