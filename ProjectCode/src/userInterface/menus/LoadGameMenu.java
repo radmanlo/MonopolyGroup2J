@@ -58,7 +58,7 @@ public class LoadGameMenu extends Menu {//extends Menu{
 		goBackBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				goBackPanel();
 			}
 		});
 
@@ -92,36 +92,39 @@ public class LoadGameMenu extends Menu {//extends Menu{
 			// name, date, and minute of the date
 			String[] parts = item.split("_");
 
-			String name = parts[0];
-			String dateString = parts[1];
-			String min = parts[2];
+			// check if the name is valid
+			if(parts.length >= 3) {
+				String name = parts[0];
+				String dateString = parts[1];
+				String min = parts[2];
 
-			// Remove _D from date
-			dateString = dateString.substring(2);
+				// Remove _D from date
+				dateString = dateString.substring(2);
 
-			// Merge minute with rest of date
-			dateString = dateString + ":" + min;
+				// Merge minute with rest of date
+				dateString = dateString + ":" + min;
 
-			// Parse string and get a Date object
-			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
-			Date date = null;
-			try {
-				date = dateFormat.parse(dateString);
-			} catch (ParseException e) {
-				e.printStackTrace();
+				// Parse string and get a Date object
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+				Date date = null;
+				try {
+					date = dateFormat.parse(dateString);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(date);
+
+				Map<String, String> gameInfo = new HashMap<>();
+				gameInfo.put("name", name);
+				// filename is the name of file (used for calling loadGame of LocalDataManager)
+				gameInfo.put("filename", item);
+				String readableDate = calendar.DAY_OF_MONTH + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
+				gameInfo.put("date", readableDate);
+
+				savedGameDetails.add(gameInfo);
 			}
-
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(date);
-
-			Map<String, String> gameInfo = new HashMap<>();
-			gameInfo.put("name", name);
-			// filename is the name of file (used for calling loadGame of LocalDataManager)
-			gameInfo.put("filename", item);
-			String readableDate = calendar.DAY_OF_MONTH + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
-			gameInfo.put("date",  readableDate);
-
-			savedGameDetails.add(gameInfo);
 
 		}
 		System.out.println(savedGameDetails);
