@@ -318,7 +318,26 @@ public class LocalDataManager implements Serializable{
                                 " is caught"); }
 	}
 
+	public static String fileToString(String filePath) throws Exception{
+		      String input = null;
+		      Scanner sc = new Scanner(new File(filePath));
+		      StringBuffer sb = new StringBuffer();
+		      while (sc.hasNextLine()) {
+		         input = sc.nextLine();
+		         sb.append(input);
+		      }
+		      return sb.toString();
+		   }
 	
+	public void deleteSavedGame(String str) throws Exception {
+		  String filePath = "./resources/saves/savedGames.txt";
+	      String result = fileToString(filePath);
+	      System.out.println("Contents of the file: "+result);
+	      result = result.replaceAll(str, "");
+	      PrintWriter writer = new PrintWriter(new File(filePath));
+	      writer.append(result);
+	      writer.flush();
+	}
 	public boolean saveTrade(String way) {
 		String filename = way;
         try { 

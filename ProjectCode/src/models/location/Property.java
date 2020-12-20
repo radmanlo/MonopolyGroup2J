@@ -58,7 +58,7 @@ public class Property extends BuyableLocation{
     	return false;
     
     }
-    public boolean degreade() {
+    public boolean degrade() {
     	
     	if(ownsStarbucks == false){
     		if(vendingMachinesNo > 0) {
@@ -68,7 +68,8 @@ public class Property extends BuyableLocation{
     		return false;
     		}
     	}
-    	ownsStarbucks = false;
+    	ownsStarbucks = false; 
+    	vendingMachinesNo = 2;
     	return true;
     
     }
