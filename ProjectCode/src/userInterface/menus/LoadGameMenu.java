@@ -8,15 +8,43 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+<<<<<<< Updated upstream
 import javax.swing.*;
+=======
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+>>>>>>> Stashed changes
 
 import settingsPresenter.LocalDataManager;
+<<<<<<< Updated upstream
 import userInterface.components.RoundedButton;
 import userInterface.components.RoundedPanel;
 import utilities.Utils;
+=======
+import javax.swing.JList;
+import java.awt.Font;
+import javax.swing.JScrollBar;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+>>>>>>> Stashed changes
 
-public class LoadGameMenu extends Menu{
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+import java.awt.BorderLayout;
+
+public class LoadGameMenu extends JPanel{//extends Menu{
 	
+<<<<<<< Updated upstream
 	private JTable gamesList;
 	private RoundedButton loadGameBtn;
 	private RoundedButton deleteGameBtn;
@@ -162,6 +190,50 @@ public class LoadGameMenu extends Menu{
 		}
 
 		add(savedGamesPanel);
+=======
+	private JList gamesList;
+	private JButton initializeGameBtn;
+	private JButton deleteGameBtn;
+	
+	public LoadGameMenu() {
+		setBounds(0, 0, 1900, 1000);
+		setLayout(null);
+		
+		JList list = new JList(LocalDataManager.getInstance().getSavedNames().toArray());
+		list.setLocation(466, 90);
+		list.setSize(458, 522);
+		add(list);
+		
+		JButton loadBtn = new JButton("Load Game");
+		loadBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String str = list.getSelectedValue().toString();
+				LocalDataManager.getInstance().loadGame(str);
+				MenuManager.getInstance().openMenu(6);
+			}
+		});
+		loadBtn.setBounds(994, 233, 143, 103);
+		add(loadBtn);
+		
+		JButton deleteBtn = new JButton("Delete");
+		deleteBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String str = list.getSelectedValue().toString();
+				try {
+					LocalDataManager.getInstance().deleteSavedGame(str);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		deleteBtn.setBounds(970, 452, 89, 23);
+		add(deleteBtn);
+
+	
+		
+		
+		//super("./resources/LoadMenu.jpg");
+>>>>>>> Stashed changes
 	}
 	
 	private boolean initializeLoadGame() {
