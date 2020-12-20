@@ -281,13 +281,16 @@ public class GameManager implements Serializable {
 			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
 			PlayerManager.getInstance().getCurrentPlayer().addOwnedLocation((BuyableLocation)LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
-
+			System.out.println("Im in execute purchase");
+			System.out.println("Im have disabled buy b utton");
 			this.disableBuyIfSameOwner();
 		}
 
+
 		// Update UI
-		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
+
+		BoardManager.getInstance().updateMap();
 	}
 	public void sellProperty(BuyableLocation loc) {
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();

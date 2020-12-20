@@ -75,6 +75,11 @@ public class InteractionArea extends JPanel{
 		add(rollDiceBtn);
 
 		offerTradeBtn = new JButton("Offer Trade");
+		offerTradeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BoardManager.getInstance().openTradeScreen(PlayerManager.getInstance().getCurrentPlayer());
+			}
+		});
 		offerTradeBtn.setBounds(372, 236, 112, 23);
 		add(offerTradeBtn);
 
