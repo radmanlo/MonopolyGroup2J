@@ -255,76 +255,26 @@ public class LocationManager implements Serializable {
     public void activateBus(Location busLoc){
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player busStationOwner = ((BuyableLocation)busLoc).getOwner();
-        int rentValue = ((BuyableLocation)busLoc).getCurrentRentValue();
 
-        if (busStationOwner == null){
-            if (currentPlayer.getUsableMoney() >= ((BuyableLocation) busLoc).getPrice()){
-                // TODO Prompt to buy location
-
-                // if OK Buy the property
-                boolean boughtTheBusStation = buyLocation(busLoc, currentPlayer);
-                if (boughtTheBusStation){
-                    busStationOwner = currentPlayer; // Current player bought it successfully
-                }
-            }
-        }
-
-        if (busStationOwner.getName() != currentPlayer.getName()){ // Rent the bus station
-            deductRentValue(busStationOwner, currentPlayer, rentValue);
+        if (busStationOwner != null && busStationOwner.getName() != currentPlayer.getName()){ // Pay the rent
+            GameManager.getInstance().askPlayerPaymentChoice();
         }
     }
 
     public void activateProperty(Location propertyLoc){
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player propertyOwner = ((BuyableLocation)propertyLoc).getOwner();
-        int rentValue = ((BuyableLocation)propertyLoc).getCurrentRentValue();
 
-        if (propertyOwner == null){ // Buy property
-            // Check money if enough
-            if (currentPlayer.getUsableMoney() >= ((Property) propertyLoc).getPrice()){
-                // TODO Prompt to buy property
-
-                // if OK Buy the property
-                boolean boughtTheProperty = buyLocation(propertyLoc, currentPlayer);
-                if (boughtTheProperty){
-                    propertyOwner = currentPlayer;
-                }
-            }
-        } else { // Upgrade property
-            if (isPropertyUpgradeable((Property)propertyLoc)){
-                if (((Property)propertyLoc).getUpgradeCost() <= currentPlayer.getUsableMoney()) { //Player has enough money
-                    // TODO Yes, then Suggest to upgrade by prompt
-                    // If accepts upgrade
-                    ((Property) propertyLoc).upgrade();
-                }
-            }
-        }
-
-        if (propertyOwner.getName() != currentPlayer.getName()){ // Pay rent
-            deductRentValue(propertyOwner, currentPlayer, rentValue);
-        }
+        if(propertyOwner != null && propertyOwner.getName() != currentPlayer.getName()) // Pay the rent
+            GameManager.getInstance().askPlayerPaymentChoice();
     }
 
     public void activateUtility(Location utilityLoc){
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player utilityOwner = ((BuyableLocation)utilityLoc).getOwner();
-        int rentValue = ((BuyableLocation)utilityLoc).getCurrentRentValue();
 
-        if (utilityOwner == null){ // Buy the utility
-            if (currentPlayer.getUsableMoney() >= ((BuyableLocation) utilityLoc).getPrice()){
-                // TODO Prompt to buy property
-
-                // if OK Buy the property
-                boolean boughtTheUtility = buyLocation(utilityLoc, currentPlayer);
-                if (boughtTheUtility){
-                    utilityOwner = currentPlayer;
-                }
-            }
-        }
-
-        if (utilityOwner.getName() != currentPlayer.getName()){ // Rent the utility
-            deductRentValue(utilityOwner, currentPlayer, rentValue);
-        }
+        if (utilityOwner != null && utilityOwner.getName() != currentPlayer.getName()) // Pay the rent
+            GameManager.getInstance().askPlayerPaymentChoice();
     }
 
     public void activateIncomeTax(Location incomeTaxLoc){
@@ -359,11 +309,12 @@ public class LocationManager implements Serializable {
     public void activateGoToDisciplinary(Location goToDisciplinaryLoc){
         final int DISTANCE_TO_DISCIPLINARY = 20;
         Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        curPlayer.setIsInJail(true);
         GameManager.getInstance().movePlayer(curPlayer, DISTANCE_TO_DISCIPLINARY);
     }
 
     public void activateStart(Location startLoc){
-        // TODO don't know
+        // NOTHING
     }
 
     /**
@@ -412,6 +363,10 @@ public class LocationManager implements Serializable {
         }
 
         return successful;
+    }
+
+    public void setLocationOwner(BuyableLocation location, Player player){
+        location.setOwner(player);
     }
 
     @Override

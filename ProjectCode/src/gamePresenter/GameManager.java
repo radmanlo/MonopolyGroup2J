@@ -64,11 +64,7 @@ public class GameManager implements Serializable {
 	 * it moves the token and activates the new location
 	 */
 	public void rollDice() {
-		// Get current player
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		Location newLocation = null;
-
-		// roll the dice
 		int moveDistance = 0;
 
 		do {
@@ -150,6 +146,48 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance().updateMap();
 	}
 
+	public void executePurchase(){
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
+		int locationPrice = curLocation.getPrice();
+
+		if (curPlayer.getUsableMoney() >= locationPrice){
+			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
+			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
+		}
+	}
+
+	/**
+	 * Asks the user for their preference
+	 * called from LocationManager buyables activation methods
+	 */
+	public void askPlayerPaymentChoice(){
+		// TODO prompt for payment choice
+		// pay with dice
+		payRentWithDice();
+
+		// normal payment
+		payRent();
+	}
+
+	public void payRentWithDice(){
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
+		Player locationOwner = curLocation.getOwner();
+
+		this.dice.rollDices();
+		if (!this.dice.isDoubleDice()){
+			// Pay double rent
+			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
+		}
+	}
+
+	public void payRent(){
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
+		Player locationOwner = curLocation.getOwner();
+		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
+	}
 
 //	public static void executePurchase() { // Let's have it in location's activate() method
 //
