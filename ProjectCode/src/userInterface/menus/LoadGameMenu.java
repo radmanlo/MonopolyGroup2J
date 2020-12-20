@@ -30,7 +30,7 @@ public class LoadGameMenu extends Menu {//extends Menu{
 	private ArrayList<SavedGameTile> savedGamesTiles;
 	
 	public LoadGameMenu() {
-		super("./resources/MainBG.png");
+		super("./resources/MainBG1.png");
 		 remove(backBtn);
 		setLayout(null);
 

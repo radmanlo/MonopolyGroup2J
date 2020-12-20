@@ -18,7 +18,7 @@ public class SettingsMenu extends Menu {
 	JButton applyButton;
 	
 	public SettingsMenu() {
-		super("./resources/MainBG.png");
+		super("./resources/MainBG1.png");
 		setLayout(null);
 		addLabel();
 		addControls();
