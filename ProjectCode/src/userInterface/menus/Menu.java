@@ -31,14 +31,13 @@ abstract class Menu extends JPanel{ //instead of it having a panel attribute, I 
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		backBtn = new RoundedButton("Back Button");
-		backBtn.setBounds(100, 100, 500, 70);
+		backBtn = new RoundedButton("Back");
+		backBtn.setBounds(150, 100, 300, 70);
 		backBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				goBackPanel();
 			}
 		});
-		backBtn.setBounds(80, 80, 300, 70);
 		add(backBtn);
 	}
 

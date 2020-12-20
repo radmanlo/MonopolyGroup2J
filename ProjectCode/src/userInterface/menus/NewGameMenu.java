@@ -87,7 +87,8 @@ public class NewGameMenu extends Menu{
 				addPotentialPlayer();
 			}
 		});
-//		addNewPlayerBtn.setFont(new Font("Tahoma", Font.BOLD, 16));
+
+		addNewPlayerBtn.setBounds(FIELDS_X, ADD_PLAYER_PANEL_HEIGHT + 130, 300, 70);
 		add(addNewPlayerBtn);
 
 		initializeGameBtn = new RoundedButton("Start Game");
@@ -114,9 +115,6 @@ public class NewGameMenu extends Menu{
 		}
 		addPlayerPanel.revalidate();
 		addPlayerPanel.repaint();
-
-		addNewPlayerBtn.setBounds(FIELDS_X, ADD_PLAYER_PANEL_HEIGHT + 130, 300, 70);
-		add(addNewPlayerBtn);
 	}
 
 	/***
@@ -337,7 +335,6 @@ public class NewGameMenu extends Menu{
 			// (ADD_PLAYER_ITEM_WIDTH - 40) to get horizontal padding
 			newPlayerAddingScreens.get(i).setBounds(20, i * ADD_PLAYER_ITEM_HEIGHT + SPACE_BETWEEN_FIELDS, ADD_PLAYER_PANEL_WIDTH - 40, ADD_PLAYER_ITEM_HEIGHT);
 		}
-		addNewPlayerBtn.setBounds(300, SPACE_BETWEEN_FIELDS + ADD_PLAYER_ITEM_HEIGHT * newPlayerAddingScreens.size() + 10 , 51, 42);
 
 		if(newPlayerAddingScreens.size() < 8 )
 			addNewPlayerBtn.setVisible(true);

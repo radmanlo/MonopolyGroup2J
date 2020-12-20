@@ -180,7 +180,7 @@ public class LoadGameMenu extends Menu{
 
 		// initialize game if any is selected
 		if(item != null) {
-//			localDataManager.deleteSavedGames(item.getFilename());
+//			localDataManager.deleteSavedGame(item.getFilename());
 		}
 		System.out.println(item);
 		return item != null;
