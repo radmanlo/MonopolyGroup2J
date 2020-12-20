@@ -245,36 +245,37 @@ public class Map extends JPanel{
 	}
 	
 	private void drawUpgradesOfHere(Property loc) {
-		final int SPACE_BETWEEN_VENDINGMACHINES = 50;
+		final int SPACE_BETWEEN_VENDINGMACHINES = 35;
 		final int HEIGHT_FROM_ORG_POINT = 110;
 		final int STARBUCKS_HEIGHT_OFFSET = 150;
-		final int EXTRA_HEIGHT_OFFSET = 170;
+		final int EXTRA_HEIGHT_OFFSET = 145;
 		final int STARBUCKS_WIDTH_OFFSET = 55;
 		BoardSide sideOfLoc = getBoardSideById(loc.getLocationId()); 
 		
 		Point2D orgPoint = loc.getPoint();
 		if( !loc.hasStarbucks()) {
-			ImageToDraw vendingMachine = new ImageToDraw();
+			
 		for( int i = 0; i < loc.getVendingMachinesNo(); ++i) {
 			int xPoint = 0;
 			int yPoint = 0;
+			ImageToDraw vendingMachine = new ImageToDraw();
 			
 			if( sideOfLoc == BoardSide.DOWN) {
-				vendingMachine.image = Utils.scaleImage(30,30,"./resources/VendingMachine_Down.png");
-				xPoint = (int) orgPoint.getX() - STARBUCKS_WIDTH_OFFSET -SPACE_BETWEEN_VENDINGMACHINES * i;
-				yPoint = (int) orgPoint.getY() - EXTRA_HEIGHT_OFFSET ;
+				vendingMachine.image = Utils.scaleImage(25,30,"./resources/VendingMachine_Down.png");
+				xPoint = (int) orgPoint.getX() - SPACE_BETWEEN_VENDINGMACHINES -SPACE_BETWEEN_VENDINGMACHINES * i;
+				yPoint = (int) orgPoint.getY() - EXTRA_HEIGHT_OFFSET;
 			}else if(sideOfLoc == BoardSide.LEFT) {
-				Utils.scaleImage(30,30,"./resources/VendingMachine_Left.png");
+				vendingMachine.image = Utils.scaleImage(30,25,"./resources/VendingMachine_Left.png");
 				xPoint = (int) orgPoint.getX() + HEIGHT_FROM_ORG_POINT;
-				yPoint = (int) orgPoint.getY() - SPACE_BETWEEN_VENDINGMACHINES * i;
+				yPoint = (int) orgPoint.getY() - SPACE_BETWEEN_VENDINGMACHINES - SPACE_BETWEEN_VENDINGMACHINES * i;
 			}else if(sideOfLoc == BoardSide.UP) {
-				Utils.scaleImage(30,30,"./resources/VendingMachine_Up.png");
-				xPoint = (int) orgPoint.getX() + SPACE_BETWEEN_VENDINGMACHINES * i;
+				vendingMachine.image = Utils.scaleImage(25,30,"./resources/VendingMachine_Up.png");
+				xPoint = (int) orgPoint.getX() + STARBUCKS_WIDTH_OFFSET - 50 + SPACE_BETWEEN_VENDINGMACHINES * i;
 				yPoint = (int) orgPoint.getY() + HEIGHT_FROM_ORG_POINT;
 			}else if(sideOfLoc == BoardSide.RIGHT) {
-				Utils.scaleImage(30,30,"./resources/VendingMachine_Right.png");
-				xPoint = (int) orgPoint.getX() - HEIGHT_FROM_ORG_POINT;
-				yPoint = (int) orgPoint.getY() + SPACE_BETWEEN_VENDINGMACHINES * i;
+				vendingMachine.image = Utils.scaleImage(30,25,"./resources/VendingMachine_Right.png");
+				xPoint = (int) orgPoint.getX() - STARBUCKS_HEIGHT_OFFSET;
+				yPoint = (int) orgPoint.getY() + 5 + SPACE_BETWEEN_VENDINGMACHINES * i;
 			}
 			
 			vendingMachine.orgPoint = new Point2D.Double(xPoint, yPoint);
