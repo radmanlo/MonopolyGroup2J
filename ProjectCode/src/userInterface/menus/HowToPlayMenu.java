@@ -1,13 +1,9 @@
 package userInterface.menus;
-import userInterface.components.RoundedButton;
 import userInterface.components.RoundedPanel;
 import utilities.Utils;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class HowToPlayMenu extends Menu {
@@ -21,24 +17,44 @@ public class HowToPlayMenu extends Menu {
 		super("./resources/MainBG.png");
 		setLayout(null);
 		addTextArea();
+		addLabel();
+	}
+
+	private void addLabel() {
+		JLabel label = new JLabel("How To Play");
+		label.setFont(new Font("Tahoma", Font.ITALIC, 26));
+		label.setForeground(Color.white);
+		label.setBounds(860, 50, 200, 40);
+		add(label);
 	}
 
 	private void addTextArea() {
 
-		JPanel instrPanel = new RoundedPanel();
+		JPanel instrPanel = new RoundedPanel(new Dimension(100, 100));
 		instrPanel.setBounds(600, 100, 700, 600);
 		instrPanel.setBackground(Utils.getBgColor().brighter());
-		add(instrPanel);
+		instrPanel.setLayout(null);
 
-//		JTextArea instructions = new JTextArea();
-//		instructions.setLineWrap(true);
-//
-//		JScrollPane scrollPane = new JScrollPane(instructions);
-//		scrollPane.setPreferredSize(new Dimension(300, 300));
-//		scrollPane.setBounds(500, 200, 500, 500);
-//		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-//		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-//		add(scrollPane);
+		JTextArea instructions = new JTextArea();
+		instructions.setLineWrap(true);
+		instructions.setBackground(Utils.getBgColor().brighter());
+		instructions.setText(text + text + text + text + text);
+		instructions.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		instructions.setForeground(Color.white);
+
+		// add pading
+		instructions.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+		JScrollPane scrollPane = new JScrollPane(instructions);
+		// remove border
+		scrollPane.setBorder(null);
+		scrollPane.setPreferredSize(new Dimension(300, 300));
+		scrollPane.setBounds(0, 0, 700, 600);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		instrPanel.add(scrollPane);
+
+		add(instrPanel);
 
 	}
 
