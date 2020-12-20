@@ -90,7 +90,32 @@ public class GameManager implements Serializable {
 	public int totalDiceResultForUtility() {
 		return this.dice.getTotalResult();
 	}
+	
+	
+	//this is a method for testing only - we'll delete it before releasing -G
+	public void rollDiceForTesting() {
+		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int moveDistance = 0;
+		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
+			PlayerManager.getInstance().getCurrentPlayer().setInJailCount(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() - 1);
+			if(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() <= 0) {
+				PlayerManager.getInstance().getCurrentPlayer().setIsInJail(false);
+				return;
+			}
+			return;
+		}
+		do {
+			this.dice.rollDices();
+			moveDistance += this.dice.getTotalResult();
+		}while(this.dice.isDoubleDice());
+        BoardManager.getInstance().updateMap();
+        BoardManager.getInstance().updateInteractionArea();
 
+		movePlayer(currentPlayer, 1);
+	}
+	
+	
+	
 	/**
 	 * Gets called when the game just started or when player presses EndTurn
 	 * Gets all the information about the current player and passes them to the view

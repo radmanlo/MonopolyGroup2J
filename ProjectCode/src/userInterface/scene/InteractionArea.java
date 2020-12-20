@@ -41,6 +41,7 @@ public class InteractionArea extends JPanel{
 	private JLabel diceRollResultLbl;
 	private PlayerInfoScreen currentPlayerPanel;
 	private ArrayList<PlayerInfoScreen> otherPlayers;
+	private JButton movePlayerBy1;
 
 	public InteractionArea() {
 		setLayout(null);
@@ -140,6 +141,15 @@ public class InteractionArea extends JPanel{
 		diceRollResultLbl.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		diceRollResultLbl.setBounds(53, 317, 168, 23);
 		add(diceRollResultLbl);
+		
+		movePlayerBy1 = new JButton("Move Player By 1");   //button for testing, will be deleted -G
+		movePlayerBy1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameManager.getInstance().rollDiceForTesting();
+			}
+		});
+		movePlayerBy1.setBounds(302, 916, 207, 23);
+		add(movePlayerBy1);
 
 		otherPlayers = new ArrayList<PlayerInfoScreen>();
 	}
