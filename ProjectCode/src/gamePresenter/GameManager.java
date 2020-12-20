@@ -421,6 +421,10 @@ public class GameManager implements Serializable {
 		if (propertyUpgradable && curPlayer.getUsableMoney() > upgradeCost){
 			aProperty.upgrade();
 			curPlayer.setUsableMoney(curPlayer.getUsableMoney() - upgradeCost);
+		} else {
+			// TODO give warning you cant update
+			JFrame f =new JFrame();
+			JOptionPane.showMessageDialog(f,"Unfortunately, you don't have enough money for the upgrade. Money needed: " + upgradeCost);
 		}
 
 		this.updateUI();
