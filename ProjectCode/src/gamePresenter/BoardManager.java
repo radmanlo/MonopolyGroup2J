@@ -52,7 +52,7 @@ public class BoardManager extends JPanel implements Serializable{
 		map.update(locationsList);
 	}
 	
-	public void updateInteractionArea(PlayerManager playerMngr) {
+	public void updateInteractionArea() {
 		
 	}
 	

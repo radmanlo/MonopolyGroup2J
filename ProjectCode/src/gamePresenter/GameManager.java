@@ -77,6 +77,8 @@ public class GameManager implements Serializable {
 	}
 
 	public int totalDiceResultForUtility() {
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 		return this.dice.getTotalResult();
 	}
 
@@ -134,6 +136,8 @@ public class GameManager implements Serializable {
 			this.enableDice();
 			this.handleNewTurn();
 		}
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	/**
@@ -150,6 +154,8 @@ public class GameManager implements Serializable {
 	public void declarePlayerBankrupt(Player player){
 		LocationManager.getInstance().freeAllLocationsOf(player);
 		PlayerManager.getInstance().playerBankrupt(player);
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void declareWinner(Player winner){
@@ -224,6 +230,8 @@ public class GameManager implements Serializable {
 			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
 			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
 		}
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	/**
@@ -237,6 +245,8 @@ public class GameManager implements Serializable {
 
 		// normal payment
 		payRent();
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void payRentWithDice(){
@@ -249,6 +259,8 @@ public class GameManager implements Serializable {
 			// Pay double rent
 			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
 		}
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void payRent(){
@@ -256,9 +268,12 @@ public class GameManager implements Serializable {
 		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
 		Player locationOwner = curLocation.getOwner();
 		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public boolean checkPassingStartReward(int oldLocationId, int newLocationId){
+		
 		// TODO probably location Manager is a better place to do this?
 		boolean giveReward = false;
 		int distance = Math.abs(oldLocationId - newLocationId); // Just in case the player turns around the bord and end
@@ -267,15 +282,19 @@ public class GameManager implements Serializable {
 		if (distance > 40 || newLocationId < oldLocationId){
 			giveReward = true;
 		}
-
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 		return giveReward;
 	}
 
 	public boolean gameEnded(){
 		if (PlayerManager.getInstance().getPlayers().size() == 1){
+			BoardManager.getInstance().updateMap();
+			BoardManager.getInstance().updateInteractionArea();
 			return true;
 		}
-
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 		return false;
 	}
 
