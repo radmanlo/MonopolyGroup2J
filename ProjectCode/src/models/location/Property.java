@@ -80,7 +80,8 @@ public class Property extends BuyableLocation{
     @Override
     public int getRentValue() {
     	int level = 0;
-    	if(LocationManager.getInstance().groupHasSameOwner(this.getGroupColor()).getName().equals(this.getOwner().getName())) {
+    	Player groupOwner = LocationManager.getInstance().groupHasSameOwner(this.getGroupColor());
+    	if(groupOwner != null && groupOwner.getName().equals(this.getOwner().getName())) {
     		if(this.vendingMachinesNo == 0) {
     			if(this.ownsStarbucks == true) {
     				level = 4;
@@ -95,20 +96,6 @@ public class Property extends BuyableLocation{
     	int rentVal = this.getRentValues().get(level);
     	this.setCurrentRentValue(rentVal);
     	return rentVal;
-    }
-
-    public static int noOfPropertyPerColor(GroupColor color){
-        switch (color){
-            case GREEN:
-            case LIGHT_BLUE:
-            case PINK:
-            case ORANGE:
-            case RED:
-            case YELLOW: return 3;
-            case DARK_BLUE:
-            case BROWN: return 2;
-            default: return -1;
-        }
     }
 
     @Override

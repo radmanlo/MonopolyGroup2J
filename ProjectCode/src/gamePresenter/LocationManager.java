@@ -243,9 +243,11 @@ public class LocationManager implements Serializable {
             }
         }
 
-        if (owners.size() == 1 && owners.get(ownerName) == Property.noOfPropertyPerColor(groupColor)){
+        if (owners.size() == 1 && owners.get(ownerName) == Property.noOfBuyablePerColor(groupColor)){
+            System.out.println("the group owner is : " + ownerName);
             return owner;
         } else {
+            System.out.println("Group has no owner");
             return null;
         }
     }
@@ -255,8 +257,11 @@ public class LocationManager implements Serializable {
         int count = 0;
 
         for (BuyableLocation loc : buyableLocations){
-            if (loc.getGroupColor() == groupColor && loc.getOwner().getName() == playerName){
-                count ++;
+            if (loc.getOwner() != null){
+                System.out.println("the Location owner is " + loc.getOwner().getName() + " and we are lokking for properties of " + playerName);
+                if (loc.getGroupColor() == groupColor && loc.getOwner().getName() == playerName){
+                    count ++;
+                }
             }
         }
 

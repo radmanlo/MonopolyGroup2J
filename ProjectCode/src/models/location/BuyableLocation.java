@@ -161,6 +161,26 @@ public class BuyableLocation extends Location{
         this.currentRentValue = this.rentValues.get(0);
     }
 
+    public static int noOfBuyablePerColor(GroupColor color){
+        if (color == null){
+            return -1;
+        }
+
+        switch (color){
+            case GREEN:
+            case LIGHT_BLUE:
+            case PINK:
+            case ORANGE:
+            case RED:
+            case YELLOW: return 3;
+            case DARK_BLUE:
+            case BROWN:
+            case UTILITY: return 2;
+            case BUS: return 4;
+            default: return -1;
+        }
+    }
+
     @Override
     public void activate() {
         super.activate();

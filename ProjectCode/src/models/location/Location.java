@@ -41,7 +41,7 @@ public class Location implements Serializable{
                 "locationId=" + locationId +
                 ", name='" + name + '\'' +
                 ", point=" + point +
-                ", playersHere=" + playersHere +
+//                ", playersHere=" + playersHere + // causes stack over flow
                 '}';
     }
 
