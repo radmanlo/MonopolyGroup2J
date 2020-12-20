@@ -49,8 +49,8 @@ public class BuyableLocation extends Location{
         }
     }
 
-    public BuyableLocation(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues) {
-        super(locationId, name, point, playersHere);
+    public BuyableLocation(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, LOCATION_TYPES type) {
+        super(locationId, name, point, playersHere, type);
         this.groupColor = groupColor;
         this.owner = owner;
         this.price = price;
@@ -130,10 +130,10 @@ public class BuyableLocation extends Location{
     public ArrayList<Integer> getAllRentValues(){
         return this.rentValues;
     }
+
     public int getRentValue() {
 		return this.currentRentValue;
     }
-    
 
     public boolean upgrade(){
         if (this.currentRentIndex < this.rentValues.size() - 1){
@@ -159,6 +159,26 @@ public class BuyableLocation extends Location{
         this.owner = null;
         this.currentRentIndex = 0;
         this.currentRentValue = this.rentValues.get(0);
+    }
+
+    public static int noOfBuyablePerColor(GroupColor color){
+        if (color == null){
+            return -1;
+        }
+
+        switch (color){
+            case GREEN:
+            case LIGHT_BLUE:
+            case PINK:
+            case ORANGE:
+            case RED:
+            case YELLOW: return 3;
+            case DARK_BLUE:
+            case BROWN:
+            case UTILITY: return 2;
+            case BUS: return 4;
+            default: return -1;
+        }
     }
 
     @Override

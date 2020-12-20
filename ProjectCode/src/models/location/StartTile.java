@@ -9,7 +9,7 @@ public class StartTile extends Location{
     private int prizeValue;
 
     public StartTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere, int prizeValue) {
-        super(locationId, name, point, playersHere);
+        super(locationId, name, point, playersHere, LOCATION_TYPES.START);
         this.prizeValue = prizeValue;
     }
 

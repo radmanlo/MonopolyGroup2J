@@ -4,6 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import models.*;
 import models.location.*;
 import settingsPresenter.LocalDataManager;
@@ -82,7 +86,6 @@ public class GameManager implements Serializable {
 			}
 			return;
 		}
-
 		// Let the player to roll the dice if its double
 		// Before it was done automatically
 		this.dice.rollDices();
@@ -113,13 +116,38 @@ public class GameManager implements Serializable {
 //
 //			moveDistance += this.dice.getTotalResult();
 //		}while(this.dice.isDoubleDice());
-
-
-
 	}
 
 	public int totalDiceResultForUtility() {
 		return this.dice.getTotalResult();
+	}
+	
+	
+	//this is a method for testing only - we'll delete it before releasing -G
+	public void rollDiceForTesting() {
+		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int moveDistance = 0;
+		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
+			PlayerManager.getInstance().getCurrentPlayer().setInJailCount(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() - 1);
+			if(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() <= 0) {
+				PlayerManager.getInstance().getCurrentPlayer().setIsInJail(false);
+				return;
+			}
+			return;
+		}
+		do {
+			this.dice.rollDices();
+			moveDistance += this.dice.getTotalResult();
+		}while(this.dice.isDoubleDice());
+        BoardManager.getInstance().updateMap();
+        BoardManager.getInstance().updateInteractionArea();
+
+		movePlayer(currentPlayer, 1);
+	}
+	
+	public void disableBuyIfSameOwner() {
+		//BoardManager.getInstance()
+		BoardManager.getInstance().disableBuyButton();
 	}
 
 	/**
@@ -155,11 +183,12 @@ public class GameManager implements Serializable {
 		// Handle player bankruptcy situation
 		if (this.isBankrupt(prevPlayer)){
 			// TODO Give warning and ask whether to end turn and go bankrupt or continue and sell some property
-			boolean warningAns = true; // true to continue and try to sell stuff (probably to bank)
+			boolean warningAns = false; // true to continue and try to sell stuff (probably to bank)
 			if (warningAns){
 				return;
 			} else {
 				this.declarePlayerBankrupt(prevPlayer);
+				
 			}
 		}
 
@@ -255,34 +284,43 @@ public class GameManager implements Serializable {
 	 * @param distance
 	 */
 	public void movePlayer(Player player, int distance){
-
-		Location oldLocation = LocationManager.getInstance().getPlayerLocation(player);
+		// Move player
 		Location newLocation = LocationManager.getInstance().movePlayer(player, distance);
-		PlayerManager.getInstance().getCurrentPlayer().getLocation().activate();
-		LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()).activate();
-		
-		//int oldLocationId = oldLocation.getLocationId();
-		//int newLocationId = newLocation.getLocationId();
-
-
 
 		// Activate the new Location
-		newLocation.activate();
+		LocationManager.getInstance().activateLocation(newLocation);
+
+		// Update UI
 		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
+	}
+
+	public void updateUI(){
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void executePurchase(){
+		// Variables
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
 		int locationPrice = curLocation.getPrice();
 
+		// Process
 		if (curPlayer.getUsableMoney() >= locationPrice){
 			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
 			PlayerManager.getInstance().getCurrentPlayer().addOwnedLocation((BuyableLocation)LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
+			System.out.println("Im in execute purchase");
+			System.out.println("Im have disabled buy b utton");
+			this.disableBuyIfSameOwner();
 		}
-		BoardManager.getInstance().updateMap();
+
+
+		// Update UI
 		BoardManager.getInstance().updateInteractionArea();
+
+		BoardManager.getInstance().updateMap();
 	}
 	public void sellProperty(BuyableLocation loc) {
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -300,35 +338,47 @@ public class GameManager implements Serializable {
 	 * called from LocationManager buyables activation methods
 	 */
 	public void askPlayerPaymentChoice(){
-		// TODO prompt for payment choice
-		// pay with dice
-		payRentWithDice();
+		boolean payWithDice = false; // TODO get use input (false is temporary)
 
-		// normal payment
-		payRent();
+		if (payWithDice)
+			payRentWithDice();
+		else // normal payment
+			payRent();
+
+		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void payRentWithDice(){
+		// Variables
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
 		Player locationOwner = curLocation.getOwner();
 
+		// Process
 		this.dice.rollDices();
 		if (!this.dice.isDoubleDice()){
 			// Pay double rent
 			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
 		}
+
+		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	public void payRent(){
+		// Variables
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
 		Player locationOwner = curLocation.getOwner();
+
+		// Process
 		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
+		 JFrame f =new JFrame();  
+		 JOptionPane.showMessageDialog(f, "Your came to "+locationOwner.getName() + "'s location. You have to pay: " + curLocation.getRentValue() + " TL");  
+		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
@@ -357,6 +407,69 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 		return false;
+	}
+
+	/*
+	 * gets the name of the property to be upgraded and upgrades it 
+	 */
+	public void upgradeProperty(String nameOfProperty) { 
+		Property aProperty = (Property) LocationManager.getInstance().getLocationByName(nameOfProperty);
+		boolean propertyUpgradable = LocationManager.getInstance().isPropertyUpgradeable(aProperty);
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int upgradeCost = aProperty.getUpgradeCost();
+
+		if (propertyUpgradable && curPlayer.getUsableMoney() > upgradeCost){
+			aProperty.upgrade();
+			curPlayer.setUsableMoney(curPlayer.getUsableMoney() - upgradeCost);
+		}
+	}
+	
+	/*
+	 * gets the name of the property to be upgraded and degrades it 
+	 */
+	public void degradeProperty(String nameOfProperty) {
+		Property aProperty = (Property) LocationManager.getInstance().getLocationByName(nameOfProperty);
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int upgradeCost = aProperty.getUpgradeCost();
+
+		aProperty.degrade();
+		curPlayer.setUsableMoney(curPlayer.getUsableMoney() + upgradeCost);
+	}
+	
+	/*
+	 * gets the name of the property to be upgraded and sells it 
+	 */
+	public void sellProperty(String nameOfProperty) {
+		Property aProperty = (Property) LocationManager.getInstance().getLocationByName(nameOfProperty);
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int price = aProperty.getPrice();
+		price = (int)(0.8 * price);
+
+		if (aProperty.getOwner() != null && aProperty.getOwner().getName() == curPlayer.getName()){ // If player owns the property
+			if (aProperty.getVendingMachinesNo() == 0 && !aProperty.hasStarbucks()){
+				aProperty.resetToDefault();
+				curPlayer.setUsableMoney(curPlayer.getUsableMoney() + price);
+				 JFrame f =new JFrame();  
+				 JOptionPane.showMessageDialog(f, "You sold "+aProperty.getName() + " and earned " + price+" TL");  
+			}
+		}
+	}
+	public void useCardByName(String cardName) {
+		ArrayList<Card> deck = CardManager.getInstance().getCardDeck();
+		for(int i = 0; i < deck.size(); i++) {
+			if(deck.get(i).getCardName().equals(cardName)) {
+				CardManager.getInstance().executeCardAction(CardManager.getInstance().getCardDeck().get(i));
+			}
+		}
+	}
+	
+	/*
+	 * gets the name of the card and executes it
+	 */
+	public void useCard(Card card) {
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		CardManager.getInstance().executeCardAction(card);
+		curPlayer.removeCard(card);
 	}
 
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method

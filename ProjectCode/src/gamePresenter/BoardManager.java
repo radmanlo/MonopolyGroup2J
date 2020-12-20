@@ -58,6 +58,7 @@ public class BoardManager extends JPanel implements Serializable{
 
 		interactionArea.setCurrentPlayerMoneyLbl(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney());
 		interactionArea.setDiceRollResultLbl(GameManager.getInstance().totalDiceResultForUtility());
+		decideEnabledorNotForBuyBtn();
 		interactionArea.update();
 		interactionArea.revalidate();
 		interactionArea.repaint();
@@ -90,13 +91,43 @@ public class BoardManager extends JPanel implements Serializable{
 		revalidate();
 		repaint();
 	}
-
+	public void disableBuyButton() {
+		interactionArea.getBuyButton().setEnabled(false);
+	}
+	
+	public void enableBuyButton() {
+		interactionArea.getBuyButton().setEnabled(true);
+	}
+	
 	public void enableDice() {
-		interactionArea.diceRollButton.setEnabled(true);
+		interactionArea.getRollDiceButton().setEnabled(true);
 	}
 
 	public void disableDice() {
-		interactionArea.diceRollButton.setEnabled(false);
+		interactionArea.getRollDiceButton().setEnabled(false);
+	}
+	
+	public void decideEnabledorNotForBuyBtn() {
+		
+		//System.out.println(LocationManager.getInstance().isPlaceBuyable() + "");
+		if(LocationManager.getInstance().isPlaceBuyable()) {
+			BuyableLocation log = (BuyableLocation)LocationManager.getInstance().getLocationByName(PlayerManager.getInstance().getCurrentPlayer().getLocation().getName());
+			if(log.getOwner() == null)
+				interactionArea.buyBtn.setEnabled(true);
+		}
+		else {
+
+			interactionArea.buyBtn.setEnabled(false);
+		}
+			
+	}
+
+	public void openTradeScreen(Player currentPlayer) {
+		tradeScreen = new TradeScreen(currentPlayer);
+		add(tradeScreen, 0);
+		revalidate();
+		repaint();
+		
 	}
 
 	public void animateDies(int firstDiceResult, int secondDiceResult) {

@@ -30,7 +30,7 @@ public class InteractionArea extends JPanel{
 	private JButton selectPropertyButton;
 	private JTextField saveField;
 	private JTextField loadField;
-	private JButton buyBtn;
+	public JButton buyBtn;
 	private JButton rollDiceBtn;
 	private JButton offerTradeBtn;
 	private JButton pauseBtn;
@@ -41,6 +41,7 @@ public class InteractionArea extends JPanel{
 	private JLabel diceRollResultLbl;
 	private PlayerInfoScreen currentPlayerPanel;
 	private ArrayList<PlayerInfoScreen> otherPlayers;
+	private JButton movePlayerBy1;
 
 	public InteractionArea() {
 		setLayout(null);
@@ -75,6 +76,11 @@ public class InteractionArea extends JPanel{
 		add(rollDiceBtn);
 
 		offerTradeBtn = new JButton("Offer Trade");
+		offerTradeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BoardManager.getInstance().openTradeScreen(PlayerManager.getInstance().getCurrentPlayer());
+			}
+		});
 		offerTradeBtn.setBounds(372, 236, 112, 23);
 		add(offerTradeBtn);
 
@@ -141,6 +147,15 @@ public class InteractionArea extends JPanel{
 		diceRollResultLbl.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		diceRollResultLbl.setBounds(53, 317, 168, 23);
 		add(diceRollResultLbl);
+		
+		movePlayerBy1 = new JButton("Move Player By 1");   //button for testing, will be deleted -G
+		movePlayerBy1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameManager.getInstance().rollDiceForTesting();
+			}
+		});
+		movePlayerBy1.setBounds(302, 916, 207, 23);
+		add(movePlayerBy1);
 
 		otherPlayers = new ArrayList<PlayerInfoScreen>();
 	}
@@ -156,7 +171,12 @@ public class InteractionArea extends JPanel{
 			diceRollResultLbl.setText( "Please roll the dice");
 	}
 
-	
+	public JButton getRollDiceButton() {
+		return rollDiceBtn;
+	}
+	public JButton getBuyButton() {
+		return buyBtn;
+	}
 	
 	public void update() {
 		if( currentPlayerPanel != null )

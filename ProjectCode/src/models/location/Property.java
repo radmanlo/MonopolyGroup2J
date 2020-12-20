@@ -13,7 +13,7 @@ public class Property extends BuyableLocation{
     private int upgradeCost;
 
     public Property(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, int vendingMachinesNo, boolean ownsStarbucks, int upgradeCost) {
-        super(locationId, name, point, playersHere, groupColor, owner, price, currentRentValue, mortgageValue, breakMortgageValue, underMortgage, rentValues);
+        super(locationId, name, point, playersHere, groupColor, owner, price, currentRentValue, mortgageValue, breakMortgageValue, underMortgage, rentValues, LOCATION_TYPES.PROPERTY);
         this.vendingMachinesNo = vendingMachinesNo;
         this.ownsStarbucks = ownsStarbucks;
         this.upgradeCost = upgradeCost;
@@ -80,7 +80,8 @@ public class Property extends BuyableLocation{
     @Override
     public int getRentValue() {
     	int level = 0;
-    	if(LocationManager.getInstance().groupHasSameOwner(this.getGroupColor()).getName().equals(this.getOwner().getName())) {
+    	Player groupOwner = LocationManager.getInstance().groupHasSameOwner(this.getGroupColor());
+    	if(groupOwner != null && groupOwner.getName().equals(this.getOwner().getName())) {
     		if(this.vendingMachinesNo == 0) {
     			if(this.ownsStarbucks == true) {
     				level = 4;
@@ -95,20 +96,6 @@ public class Property extends BuyableLocation{
     	int rentVal = this.getRentValues().get(level);
     	this.setCurrentRentValue(rentVal);
     	return rentVal;
-    }
-
-    public static int noOfPropertyPerColor(GroupColor color){
-        switch (color){
-            case GREEN:
-            case LIGHT_BLUE:
-            case PINK:
-            case ORANGE:
-            case RED:
-            case YELLOW: return 3;
-            case DARK_BLUE:
-            case BROWN: return 2;
-            default: return -1;
-        }
     }
 
     @Override

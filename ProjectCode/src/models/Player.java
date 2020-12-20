@@ -81,7 +81,7 @@ public class Player implements Serializable{
 		this.colorId = colorId;
 		this.ownedLocations = new ArrayList<BuyableLocation>();
 		this.cards = new ArrayList<Card>();
-		this.usableMoney = 200; // DEFAULT INITIAL MONEY
+		this.usableMoney = 1200; // DEFAULT INITIAL MONEY
 		this.bankAccount = new BankAccount(playerId, 0, 0);
 		this.location = LocationManager.getInstance().getLocationList().get(0);
 		this.inJailCount = 0; // Default
