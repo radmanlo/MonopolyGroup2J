@@ -50,6 +50,8 @@ public class BoardManager extends JPanel implements Serializable{
 	}
 	
 	public void updateMap() {
+		closeInventoryScreen();
+		closeTradeScreen();
 		ArrayList<Location> locationsList;
 		locationsList = LocationManager.getInstance().getLocationList();
 		map.update(locationsList);
@@ -87,6 +89,7 @@ public class BoardManager extends JPanel implements Serializable{
 	}
 
 	public void openInventoryScreen(Player player) {
+		closeTradeScreen();
 		inventoryScreen = new InventoryScreen(player);
 		add(inventoryScreen, 0);
 		revalidate();
@@ -124,6 +127,7 @@ public class BoardManager extends JPanel implements Serializable{
 	}
 
 	public void openTradeScreen(Player currentPlayer) {
+		closeInventoryScreen();
 		tradeScreen = new TradeScreen(currentPlayer);
 		add(tradeScreen, 0);
 		revalidate();
@@ -133,5 +137,19 @@ public class BoardManager extends JPanel implements Serializable{
 
 	public void animateDies(int firstDiceResult, int secondDiceResult) {
 		map.animateDies(firstDiceResult, secondDiceResult);
+	}
+
+	public void closeTradeScreen() {
+		if(tradeScreen != null)
+			remove(tradeScreen);
+		revalidate();
+		repaint();
+	}
+	
+	public void closeInventoryScreen() {
+		if(inventoryScreen != null)
+			remove(inventoryScreen);
+		revalidate();
+		repaint();
 	}
 }

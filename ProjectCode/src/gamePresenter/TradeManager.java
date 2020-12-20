@@ -3,6 +3,8 @@ package gamePresenter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.ListModel;
+
 import models.Player;
 import models.TradeDeal;
 
@@ -78,5 +80,12 @@ public class TradeManager implements Serializable{
 	public void create(TradeManager mngr) {
 		// TODO Auto-generated method stub
 		tradeMngr = new TradeManager(mngr);
+	}
+
+	public ArrayList<String> getTradeDealNames(Player currentPlayer) {
+		ArrayList<String> dealNames = new ArrayList<String>();
+		for( TradeDeal deal : tradeDeals)
+			dealNames.add(deal.getOfferer().getName() + "'s Offer");
+		return dealNames;
 	}
 }

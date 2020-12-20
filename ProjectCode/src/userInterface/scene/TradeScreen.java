@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import gamePresenter.BoardManager;
 import gamePresenter.LocationManager;
 import gamePresenter.PlayerManager;
 import gamePresenter.TradeManager;
@@ -166,6 +167,7 @@ public class TradeScreen extends JPanel{
 		sendOfferBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TradeManager.getInstance().addTradeDeal(createTradeDeal());
+				BoardManager.getInstance().closeTradeScreen();
 			}
 		});
 		sendOfferBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -173,13 +175,18 @@ public class TradeScreen extends JPanel{
 		add(sendOfferBtn);
 
 		cancelBtn = new JButton("Cancel");
+		cancelBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BoardManager.getInstance().closeTradeScreen();
+			}
+		});
 		cancelBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cancelBtn.setBounds(327, 551, 115, 38);
 		add(cancelBtn);
 	}
 
 	private void updateLists() {
-		System.out.println("hi: " + offeredNames.get(0));
+		//System.out.println("hi: " + offeredNames.get(0));
 		wantedList = new JList(wantedNames.toArray());
 		wantedList.setBounds( 10, 100 , 220, 200);
 		wantedPanel.add(wantedList);
@@ -189,6 +196,8 @@ public class TradeScreen extends JPanel{
 		offeredPanel.add(offeredList);
 		offeredList.setVisible(true);
 		offeredPanel.setVisible(true);
+		wantedList.setVisible(true);
+		wantedPanel.setVisible(true);
 		
 		wantedPanel.revalidate();
 		wantedPanel.repaint();
@@ -218,7 +227,6 @@ public class TradeScreen extends JPanel{
 		int offeredMoney = Integer.parseInt(offeredMoneyField.getText());
 		int requestedMoney = Integer.parseInt(wantedMoneyField.getText());
 		TradeDeal deal = new TradeDeal(currentPlayer, targetPlayer, offeredBuyables, null, offeredMoney, requestedBuyables, null, requestedMoney);
-		
 		return deal;
 	}
 }

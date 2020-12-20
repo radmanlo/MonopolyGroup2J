@@ -12,6 +12,7 @@ import gamePresenter.BoardManager;
 import gamePresenter.GameManager;
 import gamePresenter.LocationManager;
 import gamePresenter.PlayerManager;
+import gamePresenter.TradeManager;
 import models.Player;
 import models.location.BuyableLocation;
 import models.location.Location;
@@ -20,6 +21,7 @@ import settingsPresenter.LocalDataManager;
 import userInterface.menus.MenuManager;
 
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
 
@@ -94,6 +96,7 @@ public class InteractionArea extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				BoardManager.getInstance().updateMap();
 				BoardManager.getInstance().updateInteractionArea();
+				System.out.println(TradeManager.getInstance().getTradeDealNames(PlayerManager.getInstance().getCurrentPlayer()).get(0));
 			}
 		});
 		updateBtn.setBounds(53, 840, 207, 44); 
@@ -124,10 +127,12 @@ public class InteractionArea extends JPanel{
 		tradeOfferPanel = new JPanel();
 		tradeOfferPanel.setBounds(523, 124, 280, 256);
 		add(tradeOfferPanel);
-
-		tradeOffersList = new JList();
+		tradeOffersList = new JList(TradeManager.getInstance().getTradeDealNames(PlayerManager.getInstance().getCurrentPlayer()).toArray());
+		tradeOffersList.setBounds(0,0,100,100);
 		tradeOfferPanel.add(tradeOffersList);
-
+		tradeOfferPanel.revalidate();
+		tradeOfferPanel.repaint();
+		
 		JLabel constantLblOffers = new JLabel("Offers");
 		constantLblOffers.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		constantLblOffers.setBounds(606, 93, 112, 20);
