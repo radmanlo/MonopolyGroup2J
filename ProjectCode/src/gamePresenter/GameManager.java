@@ -377,23 +377,42 @@ public class GameManager implements Serializable {
 	 * gets the name of the property to be upgraded and upgrades it 
 	 */
 	public void upgradeProperty(String nameOfProperty) { 
-		
+		Property aProperty = (Property) LocationManager.getInstance().getLocationByName(nameOfProperty);
+		boolean propertyUpgradable = LocationManager.getInstance().isPropertyUpgradeable(aProperty);
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int upgradeCost = aProperty.getUpgradeCost();
+
+		if (propertyUpgradable && curPlayer.getUsableMoney() > upgradeCost){
+			aProperty.upgrade();
+			curPlayer.setUsableMoney(curPlayer.getUsableMoney() - upgradeCost);
+		}
 	}
 	
 	/*
 	 * gets the name of the property to be upgraded and degrades it 
 	 */
-	public void degradeProperty(String selectedValue) {
-		
-		
+	public void degradeProperty(String nameOfProperty) {
+		Property aProperty = (Property) LocationManager.getInstance().getLocationByName(nameOfProperty);
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int upgradeCost = aProperty.getUpgradeCost();
+
+		aProperty.degrade();
+		curPlayer.setUsableMoney(curPlayer.getUsableMoney() + upgradeCost);
 	}
 	
 	/*
 	 * gets the name of the property to be upgraded and sells it 
 	 */
-	public void sellProperty(String selectedValue) {
-		
-		
+	public void sellProperty(String nameOfProperty) {
+		Property aProperty = (Property) LocationManager.getInstance().getLocationByName(nameOfProperty);
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int price = aProperty.getPrice();
+		price = (int)(0.8 * price);
+
+		if (aProperty.getVendingMachinesNo() == 0 && !aProperty.hasStarbucks()){
+			aProperty.resetToDefault();
+			curPlayer.setUsableMoney(curPlayer.getUsableMoney() + price);
+		}
 	}
 	
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
