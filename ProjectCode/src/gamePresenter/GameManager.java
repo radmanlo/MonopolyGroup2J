@@ -88,6 +88,9 @@ public class GameManager implements Serializable {
 		// TODO Disable dice if player is in Jail (canRollDice == false)
 		// TODO when player uses outOfJail card rollDice is enabled
 
+		// Todo handle if player is bankrupt
+		// TODO handle if only one player left
+
 		// TODO get the current player
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		// TODO view the player
