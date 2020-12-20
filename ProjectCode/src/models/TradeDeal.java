@@ -300,7 +300,7 @@ public class TradeDeal implements Serializable {
 
 	public String toStringForPrompt() {
 		return 
-				"Offerer= " + getOfferer() + "\n" +
+				"Offerer= " + getOfferer().getName() + "\n" +
 				"OfferedBuyables= " + getOfferedBuyables() + "\n" +
 				"OfferedMoney= " + getOfferedMoney() + "\n" +
 				"requestedBuyables= " + getRequestedBuyables() + "\n" +
