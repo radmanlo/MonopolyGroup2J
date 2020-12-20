@@ -52,7 +52,7 @@ public class Location implements Serializable{
 
     public boolean hasPlayer(Player thePlayer){
         for (Player player : playersHere){
-            if (player.getName() == thePlayer.getName()){
+            if (player.getName().equals( thePlayer.getName())){
                 return true;
             }
         }

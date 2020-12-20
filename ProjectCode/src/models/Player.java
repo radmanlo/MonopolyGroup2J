@@ -160,8 +160,14 @@ public class Player implements Serializable{
 	}
 
 	public Location getLocation() {
-		return this.location;
+		for(int i = 0 ; i < LocationManager.getInstance().getLocationList().size(); i++){
+			if(LocationManager.getInstance().getLocationList().get(i).hasPlayer(this)) {
+				return LocationManager.getInstance().getLocationList().get(i);
+			}
+		}
+		return null;
 	}
+
 
 	public void setLocation(Location location) {
 		this.location = location;
@@ -215,7 +221,7 @@ public class Player implements Serializable{
 	public String toString() {
 		return "{" + " name='" + getName() + "'" + ", token='" + getToken() + "'" + ", colorId='" + getColorId() + "'"
 				+ ", ownedLocations='" + getOwnedLocations() + "'" + ", cards='" + getCards() + "'" + ", usableMoney='"
-				+ getUsableMoney() + "'" + ", bankAccount='" + getBankAccount() + "'" + ", location name='" + getLocation().getName()
+				+ getUsableMoney() + "'" + ", bankAccount='" + getBankAccount() + "'" 
 				+ "'" + ", inJailCount='" + getInJailCount() + "'" + ", isInJail='" + "'" + "}";
 	}
 
