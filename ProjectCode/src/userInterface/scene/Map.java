@@ -1,22 +1,20 @@
 package userInterface.scene;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import gamePresenter.BoardManager;
+import java.util.Random;
+import javax.swing.*;
+
 import models.Player;
 import models.PlayerColor;
 import models.location.*;
 import utilities.Utils;
 
 
-public class Map extends JPanel{ 
+public class Map extends JPanel {
 	enum BoardSide{
 		DOWN, LEFT, UP, RIGHT
 	}
@@ -41,16 +39,26 @@ public class Map extends JPanel{
 	final int NORMAL_TILE_WIDTH = 73;
 	final int LARGE_TILE_WIDTH = 120;
 
+	private DiceAnimationPanel diceAnimation;
+
 	public Map() {
 		mapImage = new ImageIcon("./resources/Board.jpg").getImage();
 		setBounds(900, 10, 1000, 1000);
 		locationsList = new ArrayList<Location>();
+		setLayout(null);
+		addDiceAnimation();
+	}
+
+	private void addDiceAnimation() {
+		diceAnimation = new DiceAnimationPanel();
+		diceAnimation.setBounds(280, 200, 500, 210);
+		add(diceAnimation);
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g); 
-		g.drawImage(mapImage, 0, 0, null); 
+		g.drawImage(mapImage, 0, 0, null);
 
 		imagesToDraw = new ArrayList<ImageToDraw>();
 		rectsToDraw = new ArrayList<RectToDraw>();
@@ -321,5 +329,136 @@ public class Map extends JPanel{
 		else
 			return BoardSide.RIGHT;
 	}
+
+	/**
+	 * Animates the dice
+	 */
+	public void animateDies(int firsDiceResult, int secondDiceResult) {
+		diceAnimation.rollDies(firsDiceResult, secondDiceResult);
+	}
+
+}
+
+class DiceAnimationPanel extends JPanel {
+	private ArrayList<Icon> icons;
+	private JLabel dice1;
+	private JLabel dice2;
+	private Timer timer;
+	private Timer timer2;
+
+	public DiceAnimationPanel() {
+		dice1 = new JLabel();
+		dice2 = new JLabel();
+		// Center items inside the panel
+		setLayout(new FlowLayout(FlowLayout.CENTER));
+		setBackground(Color.white);
+		setLayout(null);
+
+		// Don't show dies at the beginning
+		setVisible(false);
+
+		loadIcons();
+	}
+
+	/**
+	 * Sets the icons of labels to the given icons
+	 * @param dice1 first dice icon
+	 * @param dice2 second dice icon
+	 */
+	private void setLabels(Icon dice1, Icon dice2) {
+		// Set Label icons
+		this.dice1.setIcon(dice1);
+		this.dice2.setIcon(dice2);
+
+		repaint();
+	}
+
+
+	/**
+	 * Loads all 6 dice faces as Icon objects. Later to be changed based on the dice value
+	 *
+	 */
+	public void loadIcons() {
+		this.icons = new ArrayList<>();
+		for(int i = 1; i < 7; ++i) {
+			String path = "resources/dies/dice" + i + ".png";
+			Icon icon = new ImageIcon(Utils.scaleImage(200, 200, path));
+			icons.add(icon);
+		}
+	}
+
+	/**
+	 * Animates the dies. Uses a timer to dynamically change dice images for some time
+	 */
+	public void rollDies(int firsDiceResult, int secondDiceResult) {
+
+		if(timer != null && timer.isRunning()) {
+			timer.stop();
+		}
+
+		setVisible(true);
+		addDies();
+
+		timer = new Timer(300, new ActionListener() {
+			// For counting the delay and stoping timer
+			int count = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Generate die values
+				Random random = new Random();
+				int rand1 = random.nextInt(5 - 1 + 1) + 1;
+				int rand2 = random.nextInt(5 - 1 + 1) + 1;
+				setLabels(icons.get(rand1), icons.get(rand2));
+
+				count++;
+				// Stop timer after the delay
+				if(count >= 5) {
+					setLabels(icons.get(firsDiceResult - 1), icons.get(secondDiceResult - 1));
+					waitAndRemove();
+					timer.stop();
+				}
+			}
+		});
+		timer.start();
+		timer.setRepeats(true);
+	}
+
+	/**
+	 * Waits for a couple of seconds after the dies are rolled and remove them from the panel
+	 */
+	private void waitAndRemove() {
+		if(timer2 != null && timer2.isRunning()) {
+			timer2.stop();
+		}
+		timer2 = new Timer(300, new ActionListener() {
+			// For counting the delay and stoping timer
+			int count = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				count++;
+				// Stop timer after the delay
+				if(count >= 10) {
+					removeAll();
+					revalidate();
+					repaint();
+					setVisible(false);
+					timer2.stop();
+				}
+			}
+		});
+
+		timer2.restart();
+	}
+
+	/**
+	 * sets dies bounds and adds them to the panel
+	 */
+	private void addDies() {
+		dice1.setBounds(10, 0, 200, 200);
+		dice2.setBounds(240, 0, 200, 200);
+		add(this.dice1);
+		add(this.dice2);
+	}
+
 
 }

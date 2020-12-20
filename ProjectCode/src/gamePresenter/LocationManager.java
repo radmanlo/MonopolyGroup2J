@@ -522,6 +522,19 @@ public class LocationManager implements Serializable {
 		return true;
 	}
 
-	
+	/*
+	 * takes an array of strings of the names of locations and returns an array of buyables
+	 */
+	public ArrayList<BuyableLocation> getBuyablesByStrings(ArrayList<String> wantedNames) {
+		ArrayList<BuyableLocation> temp = new ArrayList<BuyableLocation>();
+		for(int i = 0; i < this.buyableLocations.size(); i++) {
+			for(int j = 0; j < wantedNames.size(); j++) {
+				if(buyableLocations.get(i).getName().equals(wantedNames.get(j))){
+					temp.add(buyableLocations.get(i));
+				}
+			}		
+		}
+		return temp;
+	}
     
 }

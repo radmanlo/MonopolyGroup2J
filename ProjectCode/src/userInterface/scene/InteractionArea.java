@@ -1,5 +1,6 @@
 package userInterface.scene;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,7 +21,6 @@ import userInterface.menus.MenuManager;
 
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JList;
 
 public class InteractionArea extends JPanel{ 
@@ -71,6 +71,7 @@ public class InteractionArea extends JPanel{
 				GameManager.getInstance().rollDice();
 			}
 		});
+
 		rollDiceBtn.setBounds(53, 283, 168, 23);
 		add(rollDiceBtn);
 

@@ -37,6 +37,7 @@ public class HowToPlayMenu extends Menu {
 
 		JTextArea instructions = new JTextArea();
 		instructions.setLineWrap(true);
+		instructions.setEditable(false);
 		instructions.setBackground(Utils.getBgColor().brighter());
 		instructions.setText(text + text + text + text + text);
 		instructions.setFont(new Font("Tahoma", Font.PLAIN, 18));

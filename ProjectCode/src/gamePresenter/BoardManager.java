@@ -1,14 +1,14 @@
 package gamePresenter;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import models.*;
-import models.location.BuyableLocation;
 import models.location.Location;
-import userInterface.menus.MenuManager;
 import userInterface.scene.EndTurnPrompt;
 import userInterface.scene.InteractionArea;
 import userInterface.scene.InventoryScreen;
@@ -55,6 +55,7 @@ public class BoardManager extends JPanel implements Serializable{
 	}
 	
 	public void updateInteractionArea() {
+
 		interactionArea.setCurrentPlayerMoneyLbl(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney());
 		interactionArea.setDiceRollResultLbl(GameManager.getInstance().totalDiceResultForUtility());
 		decideEnabledorNotForBuyBtn();
@@ -127,5 +128,9 @@ public class BoardManager extends JPanel implements Serializable{
 		revalidate();
 		repaint();
 		
+	}
+
+	public void animateDies(int firstDiceResult, int secondDiceResult) {
+		map.animateDies(firstDiceResult, secondDiceResult);
 	}
 }
