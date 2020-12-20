@@ -191,8 +191,14 @@ public class LocationManager implements Serializable {
     }
 
     //returns buyable list
-    public ArrayList<BuyableLocation> getBuyableList(){
-        return this.buyableLocations;
+    public ArrayList<BuyableLocation> getBuyablesOfPlayer(Player curPlayer){
+    	ArrayList<BuyableLocation> arr = new ArrayList<BuyableLocation>();
+        for (BuyableLocation loc : buyableLocations) {
+        	if(loc.getOwner().getName().equals(curPlayer.getName())) {
+        		arr.add(loc);
+        	}
+        }
+        return arr;
     }
 
     //Returns player if given all group color is his own and 
