@@ -150,11 +150,12 @@ public class GameManager implements Serializable {
 		// Handle player bankruptcy situation
 		if (this.isBankrupt(prevPlayer)){
 			// TODO Give warning and ask whether to end turn and go bankrupt or continue and sell some property
-			boolean warningAns = true; // true to continue and try to sell stuff (probably to bank)
+			boolean warningAns = false; // true to continue and try to sell stuff (probably to bank)
 			if (warningAns){
 				return;
 			} else {
 				this.declarePlayerBankrupt(prevPlayer);
+				
 			}
 		}
 

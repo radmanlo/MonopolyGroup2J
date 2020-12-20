@@ -165,7 +165,9 @@ public class InteractionArea extends JPanel{
 			diceRollResultLbl.setText( "Please roll the dice");
 	}
 
-	
+	public JButton getRollDiceButton() {
+		return rollDiceBtn;
+	}
 	
 	public void update() {
 		if( currentPlayerPanel != null )

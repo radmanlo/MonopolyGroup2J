@@ -92,11 +92,11 @@ public class BoardManager extends JPanel implements Serializable{
 	}
 
 	public void enableDice() {
-		interactionArea.diceRollButton.setEnabled(true);
+		interactionArea.getRollDiceButton().setEnabled(true);
 	}
 
 	public void disableDice() {
-		interactionArea.diceRollButton.setEnabled(false);
+		interactionArea.getRollDiceButton().setEnabled(false);
 	}
 	
 	public void decideEnabledorNotForBuyBtn() {
