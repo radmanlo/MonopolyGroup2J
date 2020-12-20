@@ -663,13 +663,16 @@ public void addPropertiesToLocationManager(NodeList properties){
 			breakMortgage = Integer.parseInt(aPropertyElement.getAttribute("breakMortgage"));
 
 			name = aPropertyElement.getAttribute("name");
-			groupColor = BuyableLocation.parseGroupColor(aPropertyElement.getAttribute("groupColor"));
+			groupColor = BuyableLocation.parseGroupColor(aPropertyElement.getAttribute("groupClr"));
 
 			String[] parts = aPropertyElement.getAttribute("rentValues").split(",");
 			ArrayList<Integer> rents = new ArrayList<Integer>();
 			for (int j = 0; j < parts.length; j++) {
 				rents.add(Integer.parseInt(parts[j]));
 			}
+
+			System.out.println("The value of groupClr after parsing: "+ groupColor);
+
 
 
 			theProperty = new Property(id, name, new Point2D.Double(x, y), new ArrayList<Player>(0), groupColor,
@@ -753,13 +756,16 @@ public void addBusLocsToLocationsManager(NodeList busLines){
 			breakMortgage = Integer.parseInt(aBusStopElement.getAttribute("breakMortgage"));
 
 			name = aBusStopElement.getAttribute("name");
-			groupColor = BuyableLocation.parseGroupColor(aBusStopElement.getAttribute("groupColor"));
+			groupColor = BuyableLocation.parseGroupColor(aBusStopElement.getAttribute("groupClr"));
 
 			String[] parts = aBusStopElement.getAttribute("rentValues").split(",");
 			ArrayList<Integer> rents = new ArrayList<Integer>();
 			for (int j = 0; j < parts.length; j++) {
 				rents.add(Integer.parseInt(parts[j]));
 			}
+
+			System.out.println("The value of groupClr after parsing: "+ groupColor);
+
 
 			theBus = new BusStop(id, name, new Point2D.Double(x, y), new ArrayList<Player>(0), groupColor, null,
 					price, rents.get(0), mortgage, breakMortgage, false, rents);
@@ -792,13 +798,15 @@ public void addUtilitiesToLocationManager(NodeList utilities){
 			breakMortgage = Integer.parseInt(aUtilityElement.getAttribute("breakMortgage"));
 
 			name = aUtilityElement.getAttribute("name");
-			groupColor = BuyableLocation.parseGroupColor(aUtilityElement.getAttribute("groupColor"));
+			groupColor = BuyableLocation.parseGroupColor(aUtilityElement.getAttribute("groupClr"));
 
 			String[] parts = aUtilityElement.getAttribute("rentValues").split(",");
 			ArrayList<Integer> rents = new ArrayList<Integer>();
 			for (int j = 0; j < parts.length; j++) {
 				rents.add(Integer.parseInt(parts[j]));
 			}
+
+			System.out.println("The value of groupClr after parsing: "+ groupColor);
 
 			theUtility = new Utility(id, name, new Point2D.Double(x,y), new ArrayList<Player>(0),
 					groupColor, null, price, rents.get(0), mortgage, breakMortgage, false, rents);

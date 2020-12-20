@@ -7,6 +7,7 @@ import models.Player;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class BuyableLocation extends Location{
     public enum GroupColor { BROWN, LIGHT_BLUE, DARK_BLUE, PINK, ORANGE, RED, YELLOW, GREEN, PURPLE, BUS, UTILITY}
@@ -21,28 +22,42 @@ public class BuyableLocation extends Location{
     private ArrayList<Integer> rentValues;
 
     public static BuyableLocation.GroupColor parseGroupColor(String groupColorStr){
+        System.out.println("parsing group color: " + groupColorStr);
+        groupColorStr = groupColorStr.toLowerCase();
+
         switch (groupColorStr){
             case "green":
+                System.out.println("green");
                 return GroupColor.GREEN;
             case "red":
+                System.out.println("red");
                 return GroupColor.RED;
-            case "lightBlue":
+            case "lightblue":
+                System.out.println("loghtblue");
                 return GroupColor.LIGHT_BLUE;
-            case "darkBlue":
+            case "darkblue":
+                System.out.println("darkblue");
                 return GroupColor.DARK_BLUE;
             case "pink":
+                System.out.println("pink");
                 return GroupColor.PINK;
             case "brown":
+                System.out.println("brown");
                 return GroupColor.BROWN;
             case "orange":
+                System.out.println("orange");
                 return GroupColor.ORANGE;
             case "yellow":
+                System.out.println("yellow");
                 return GroupColor.YELLOW;
             case "bus":
+                System.out.println("bus");
                 return GroupColor.BUS;
             case "utility":
+                System.out.println("utility");
                 return GroupColor.UTILITY;
             case "purple":
+                System.out.println("purple");
                 return GroupColor.PURPLE;
             default:
                 return null;

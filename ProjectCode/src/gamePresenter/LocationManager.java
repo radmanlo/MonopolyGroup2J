@@ -242,17 +242,35 @@ public class LocationManager implements Serializable {
                 if (propertyCount == null) // To avoid crashing
                     propertyCount = 0;
 
+                System.out.println("The property count so far : " + propertyCount);
+
                 owners.put(ownerName, propertyCount+1); // update the count
             }
         }
 
-        if (owners.size() == 1 && owners.get(ownerName) == Property.noOfBuyablePerColor(groupColor)){
+        System.out.println("number of buyables of the color : " + Property.noOfBuyablePerColor(groupColor));
+
+        if (owners.size() == 1){
+            ownerName = getKey(owners, Property.noOfBuyablePerColor(groupColor)); // get the owner with the value
             System.out.println("the group owner is : " + ownerName);
-            return owner;
+            return PlayerManager.getInstance().getPlayerByName(ownerName);
         } else {
             System.out.println("Group has no owner");
             return null;
         }
+    }
+
+    public static String getKey(HashMap<String, Integer> map, Integer value) {
+        System.out.println("finding the key for: " + value);
+
+        for (HashMap.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println("an intry : " + entry.getValue() + "  " + entry.getKey());
+            if (value.equals(entry.getValue())) {
+                System.out.println("Found that is : " + entry.getKey());
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     public int noOfOwnedByPlayerInGroup(Player player, BuyableLocation.GroupColor groupColor){

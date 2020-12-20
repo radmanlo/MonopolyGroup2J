@@ -80,9 +80,10 @@ public class Property extends BuyableLocation{
     @Override
     public int getRentValue() {
     	int level = 0;
-    	Player groupOwner = LocationManager.getInstance().groupHasSameOwner(this.getGroupColor());
-    	if(groupOwner != null && groupOwner.getName().equals(this.getOwner().getName())) {
-    		if(this.vendingMachinesNo == 0) {
+        Player groupOwner = LocationManager.getInstance().groupHasSameOwner(this.getGroupColor());
+        if(groupOwner != null && groupOwner.getName().equals(this.getOwner().getName())) {
+            System.out.println("there is an owner of grpup");
+            if(this.vendingMachinesNo == 0) {
     			if(this.ownsStarbucks == true) {
     				level = 4;
     			}
