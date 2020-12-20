@@ -247,12 +247,23 @@ public class GameManager implements Serializable {
 
 		if (curPlayer.getUsableMoney() >= locationPrice){
 			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
+			PlayerManager.getInstance().getCurrentPlayer().addOwnedLocation((BuyableLocation)LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
 		}
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
+	public void sellProperty(BuyableLocation loc) {
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		if(loc.getCurrentRentValue() == loc.getAllRentValues().get(0)) {
+			loc.setOwner(null);
+			curPlayer.removeOwnedLocation(loc);
+			curPlayer.setUsableMoney(curPlayer.getUsableMoney()+ loc.getPrice() - 20);
+		}else {
+			return;
+		}
 
+	}
 	/**
 	 * Asks the user for their preference
 	 * called from LocationManager buyables activation methods

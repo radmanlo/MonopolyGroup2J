@@ -131,10 +131,12 @@ public class Player implements Serializable{
 
 	public void addOwnedLocation(BuyableLocation property) { // TODO: Change to Buyable
 		this.ownedLocations.add(property);
+		property.setOwner(this);
 	}
 
 	public void removeOwnedLocation(BuyableLocation property) { // TODO: Change to Buyable
 		this.ownedLocations.remove(property);
+		property.setOwner(null);
 	}
 
 	public ArrayList<Card> getCards() {
