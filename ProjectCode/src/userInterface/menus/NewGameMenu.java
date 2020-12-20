@@ -30,7 +30,7 @@ public class NewGameMenu extends Menu{
 	private JPanel addPlayerPanel;
 	final int SPACE_BETWEEN_FIELDS = 30;
 	final int FIRST_FIELD_Y = 100;
-	final int FIELDS_X = 400;
+	final int FIELDS_X = 700;
 	final int ADD_PLAYER_PANEL_WIDTH = 1080;
 	final int ADD_PLAYER_ITEM_HEIGHT = 50;
 	final int ADD_PLAYER_PANEL_HEIGHT = 500;
@@ -70,7 +70,7 @@ public class NewGameMenu extends Menu{
 		setBounds(100, 100, getWidth(), getHeight());
 
 		backBtn.setLabel("Go Back");
-		backBtn.setBounds(33, 379, 289, 90);
+		backBtn.setBounds(150, 190, 500, 70);
 
 		// Initialize the first two players
 		NewPlayerAddingScreen s1 = new NewPlayerAddingScreen(this, 1);
@@ -90,7 +90,7 @@ public class NewGameMenu extends Menu{
 		add(addNewPlayerBtn);
 
 		initializeGameBtn = new RoundedButton("Start Game");
-		initializeGameBtn.setBounds(33, 247, 289, 90);
+		initializeGameBtn.setBounds(150, 100, 500, 70);
 		initializeGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				initializeNewGame();
