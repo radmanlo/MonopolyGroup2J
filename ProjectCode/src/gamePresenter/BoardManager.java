@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import models.*;
+import models.location.BuyableLocation;
 import models.location.Location;
 import userInterface.scene.EndTurnPrompt;
 import userInterface.scene.InteractionArea;
