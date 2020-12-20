@@ -42,7 +42,7 @@ public class Map extends JPanel {
 	private DiceAnimationPanel diceAnimation;
 
 	public Map() {
-		mapImage = new ImageIcon("./resources/Board.jpg").getImage();
+		mapImage = new ImageIcon("./resources/Board2.jpg").getImage();
 		setBounds(900, 10, 1000, 1000);
 		locationsList = new ArrayList<Location>();
 		setLayout(null);
