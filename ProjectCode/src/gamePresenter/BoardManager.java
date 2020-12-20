@@ -11,8 +11,10 @@ import models.location.Location;
 import userInterface.menus.MenuManager;
 import userInterface.scene.EndTurnPrompt;
 import userInterface.scene.InteractionArea;
+import userInterface.scene.InventoryScreen;
 import userInterface.scene.Map;
 import userInterface.scene.RentChoicePrompt;
+import userInterface.scene.TradeScreen;
 
 public class BoardManager extends JPanel implements Serializable{    
 
@@ -26,6 +28,9 @@ public class BoardManager extends JPanel implements Serializable{
 	private InteractionArea interactionArea;
 	private RentChoicePrompt rentChoicePrompt;
 	private EndTurnPrompt endturnPrompt;
+	private TradeScreen tradeScreen;
+	private InventoryScreen inventoryScreen;
+	
 	
 	private BoardManager() {
 		setBounds(0, 0, 1900, 1000);
@@ -46,18 +51,17 @@ public class BoardManager extends JPanel implements Serializable{
 	public void updateMap() {
 		ArrayList<Location> locationsList;
 		locationsList = LocationManager.getInstance().getLocationList();
-		//System.out.println("\ncurrent:" + LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 		map.update(locationsList);
 	}
 	
 	public void updateInteractionArea() {
 		interactionArea.setCurrentPlayerMoneyLbl(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney());
-		interactionArea.setDiceRollResultLbl(-1);//GameManager.getInstance().totalDiceResultForUtility());
+		interactionArea.setDiceRollResultLbl(GameManager.getInstance().totalDiceResultForUtility());
 		interactionArea.update();
+		interactionArea.revalidate();
 		interactionArea.repaint();
 	}
 	
-
 	
 	private void pauseGame() {  //should be public I think -G
 		
@@ -77,5 +81,12 @@ public class BoardManager extends JPanel implements Serializable{
 	
 	public void hideEndTurnPrompt() {
 		
+	}
+
+	public void openInventoryScreen(Player player) {
+		inventoryScreen = new InventoryScreen(player);
+		add(inventoryScreen);
+		revalidate();
+		repaint();
 	}
 }

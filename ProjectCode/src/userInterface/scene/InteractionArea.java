@@ -155,11 +155,11 @@ public class InteractionArea extends JPanel{
 			diceRollResultLbl.setText( "Please roll the dice");
 	}
 
+	
+	
 	public void update() {
-
 		if( currentPlayerPanel != null )
 			remove(currentPlayerPanel);
-
 
 		for( PlayerInfoScreen screen: otherPlayers)
 			remove(screen);
@@ -170,6 +170,7 @@ public class InteractionArea extends JPanel{
 			currentPlayerPanel.setBounds(53, 113, 320, 60);
 			add(currentPlayerPanel);
 		}
+		
 		int currentPlayerIndex = -1;
 		for( int i = 0; i < PlayerManager.getInstance().getPlayers().size(); ++i) {
 			if( PlayerManager.getInstance().getPlayers().get(i).getId() == PlayerManager.getInstance().getCurrentPlayer().getId() ) {

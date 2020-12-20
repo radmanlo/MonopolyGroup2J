@@ -6,8 +6,12 @@ import java.awt.Graphics;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import gamePresenter.BoardManager;
 import models.Player;
 import models.PlayerColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PlayerInfoScreen extends JPanel{
 	JLabel playerLbl;
@@ -20,6 +24,11 @@ public class PlayerInfoScreen extends JPanel{
 		setBounds(0, 0, 320, 60);
 		
 		inventoryBtn = new JButton("view inventory");
+		inventoryBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BoardManager.getInstance().openInventoryScreen(player);
+			}
+		});
 		inventoryBtn.setBounds(179, 19, 128, 23);
 		add(inventoryBtn);
 		
@@ -29,7 +38,6 @@ public class PlayerInfoScreen extends JPanel{
 		JPanel namePanel = new JPanel();
 		namePanel.setBounds(21, 11, 148, 36);
 		add(namePanel);
-		System.out.println(player.getName());
 		playerLbl = new JLabel();
 		playerLbl.setText(player.getName());
 		namePanel.add(playerLbl);

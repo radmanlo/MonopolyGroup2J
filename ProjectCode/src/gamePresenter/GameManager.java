@@ -52,6 +52,8 @@ public class GameManager implements Serializable {
 		LocationManager.getInstance();
 		CardManager.getInstance();
 		TradeManager.getInstance();
+		BoardManager.getInstance().updateInteractionArea();
+		
 	}
 
 	public void saveGame(String name) {
