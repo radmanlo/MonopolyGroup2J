@@ -168,6 +168,9 @@ public class InteractionArea extends JPanel{
 	public JButton getRollDiceButton() {
 		return rollDiceBtn;
 	}
+	public JButton getBuyButton() {
+		return buyBtn;
+	}
 	
 	public void update() {
 		if( currentPlayerPanel != null )

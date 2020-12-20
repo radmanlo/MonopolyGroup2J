@@ -296,6 +296,9 @@ public class LocationManager implements Serializable {
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player busStationOwner = ((BuyableLocation)busLoc).getOwner();
 
+        if(busStationOwner != null) {
+        	GameManager.getInstance().disableBuyIfSameOwner();
+        }
         if (busStationOwner != null && busStationOwner.getName() != currentPlayer.getName()){ // Pay the rent
             GameManager.getInstance().askPlayerPaymentChoice();
         }
@@ -306,7 +309,9 @@ public class LocationManager implements Serializable {
 
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player propertyOwner = ((BuyableLocation)propertyLoc).getOwner();
-
+        if(propertyOwner != null ) {
+        	GameManager.getInstance().disableBuyIfSameOwner();
+        }
         if(propertyOwner != null && propertyOwner.getName() != currentPlayer.getName()) // Pay the rent
             GameManager.getInstance().askPlayerPaymentChoice();
     }
@@ -316,7 +321,9 @@ public class LocationManager implements Serializable {
 
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player utilityOwner = ((BuyableLocation)utilityLoc).getOwner();
-
+        if(utilityOwner != null ) {
+        	GameManager.getInstance().disableBuyIfSameOwner();
+        }
         if (utilityOwner != null && utilityOwner.getName() != currentPlayer.getName()) // Pay the rent
             GameManager.getInstance().askPlayerPaymentChoice();
     }
@@ -442,5 +449,32 @@ public class LocationManager implements Serializable {
                 ", nonBuyableLocations=" + nonBuyableLocations.toString() +
                 '}';
     }
+    
+    
+    /*
+     * gets the name of the location and returns the location
+     */
+	public Location getLocationByName(String locName) {
+
+		return null;
+	}
+
+	/*
+	 * returns if the property is sellable (if it has upgrades on it, it cant be selled)
+	 */
+	public boolean isPropertySellable(Property property) {
+
+		return false;
+	}
+
+	/*
+	 * returns if the property is degradeable (if it has no upgrades on it, it cant be degraded)
+	 */
+	public boolean isPropertyDegradeable(Property property) {
+		
+		return false;
+	}
+
+	
     
 }
