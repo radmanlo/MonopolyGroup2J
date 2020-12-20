@@ -29,10 +29,13 @@ public class PlayerInfoScreen extends JPanel{
 		JPanel namePanel = new JPanel();
 		namePanel.setBounds(21, 11, 148, 36);
 		add(namePanel);
-		playerLbl = new JLabel(player.getName());
+		System.out.println(player.getName());
+		playerLbl = new JLabel();
+		playerLbl.setText(player.getName());
 		namePanel.add(playerLbl);
 		playerLbl.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		namePanel.setBackground(Color.WHITE);
+		repaint();
 	}
 
 	private Color getUsableColor(PlayerColor playerColor) {

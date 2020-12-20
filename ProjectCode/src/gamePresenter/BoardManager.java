@@ -51,7 +51,6 @@ public class BoardManager extends JPanel implements Serializable{
 	}
 	
 	public void updateInteractionArea() {
-		System.out.println("" + GameManager.getInstance().totalDiceResultForUtility());
 		interactionArea.setCurrentPlayerMoneyLbl(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney());
 		interactionArea.setDiceRollResultLbl(-1);//GameManager.getInstance().totalDiceResultForUtility());
 		interactionArea.update();
