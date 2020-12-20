@@ -207,11 +207,15 @@ public class LocationManager implements Serializable {
     }
 
     //returns buyable list
-    public ArrayList<BuyableLocation> getBuyablesOfPlayer(Player curPlayer){
-    	ArrayList<BuyableLocation> arr = new ArrayList<BuyableLocation>();
+    public ArrayList<String> getBuyablesOfPlayer(Player curPlayer){
+    	ArrayList<String> arr = new ArrayList<String>();
         for (BuyableLocation loc : buyableLocations) {
-        	if(loc.getOwner().getName().equals(curPlayer.getName())) {
-        		arr.add(loc);
+        	if(loc != null) {
+        		if(loc.getOwner() != null) {
+        			if(loc.getOwner().getName().equals(curPlayer.getName())) {
+        				arr.add(loc.getName());
+        			}
+        		}
         	}
         }
         return arr;
