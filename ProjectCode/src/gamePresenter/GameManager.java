@@ -419,8 +419,9 @@ public class GameManager implements Serializable {
 		int upgradeCost = aProperty.getUpgradeCost();
 
 		if (propertyUpgradable && curPlayer.getUsableMoney() > upgradeCost){
-			aProperty.upgrade();
-			curPlayer.setUsableMoney(curPlayer.getUsableMoney() - upgradeCost);
+			if (aProperty.upgrade()){
+				curPlayer.setUsableMoney(curPlayer.getUsableMoney() - upgradeCost);
+			}
 		} else {
 			// TODO give warning you cant update
 			JFrame f =new JFrame();
@@ -438,8 +439,9 @@ public class GameManager implements Serializable {
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		int upgradeCost = aProperty.getUpgradeCost();
 
-		aProperty.degrade();
-		curPlayer.setUsableMoney(curPlayer.getUsableMoney() + upgradeCost);
+		if (aProperty.degrade()){
+			curPlayer.setUsableMoney(curPlayer.getUsableMoney() + upgradeCost);
+		}
 
 		this.updateUI();
 	}
