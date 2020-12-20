@@ -97,4 +97,8 @@ public class BoardManager extends JPanel implements Serializable{
 	public void disableDice() {
 		interactionArea.diceRollButton.setEnabled(false);
 	}
+
+	public void effectOnDiesRoll() {
+		map.drawDiesOnRoll();
+	}
 }

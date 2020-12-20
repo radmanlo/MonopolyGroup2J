@@ -67,6 +67,7 @@ public class GameManager implements Serializable {
 	 */
 	public void rollDice() {
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		BoardManager.getInstance().effectOnDiesRoll();
 		int moveDistance = 0;
 		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
 			PlayerManager.getInstance().getCurrentPlayer().setInJailCount(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() - 1);
