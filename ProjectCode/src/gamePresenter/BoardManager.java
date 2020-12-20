@@ -20,8 +20,6 @@ public class BoardManager extends JPanel implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -5498787588296943523L;
-
-//needs to change eventually to not extend JPanel
 	private static BoardManager boardManager = null;
 	
 	private Map map;

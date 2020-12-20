@@ -33,6 +33,8 @@ public class Location implements Serializable{
     	this.point = copy.point;
     	this.playersHere = copy.playersHere;
     }
+    
+    
     @Override
     public String toString() {
         return "Location{" +
