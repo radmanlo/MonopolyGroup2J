@@ -251,19 +251,10 @@ public class GameManager implements Serializable {
 	 * @param distance
 	 */
 	public void movePlayer(Player player, int distance){
-
-		Location oldLocation = LocationManager.getInstance().getPlayerLocation(player);
+		// Move player
 		Location newLocation = LocationManager.getInstance().movePlayer(player, distance);
-		// PlayerManager.getInstance().getCurrentPlayer().getLocation().activate();
-		// LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()).activate();
-		
-		//int oldLocationId = oldLocation.getLocationId();
-		//int newLocationId = newLocation.getLocationId();
-
-
 
 		// Activate the new Location
-		// newLocation.activate();
 		LocationManager.getInstance().activateLocation(newLocation);
 
 		// Update UI
