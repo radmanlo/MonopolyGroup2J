@@ -1,33 +1,348 @@
 package userInterface.menus;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
+<<<<<<< Updated upstream
+import javax.swing.*;
+=======
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+>>>>>>> Stashed changes
 
-import gamePresenter.BoardManager;
 import settingsPresenter.LocalDataManager;
+<<<<<<< Updated upstream
+import userInterface.components.RoundedButton;
+import userInterface.components.RoundedPanel;
+import utilities.Utils;
+=======
+import javax.swing.JList;
+import java.awt.Font;
+import javax.swing.JScrollBar;
+import java.awt.GridLayout;
+import javax.swing.JLabel;
+>>>>>>> Stashed changes
 
-public class LoadGameMenu extends Menu{
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
+import java.awt.BorderLayout;
+
+public class LoadGameMenu extends JPanel{//extends Menu{
 	
+<<<<<<< Updated upstream
 	private JTable gamesList;
+	private RoundedButton loadGameBtn;
+	private RoundedButton deleteGameBtn;
+	private RoundedButton goBackBtn;
+	private LocalDataManager localDataManager;
+	private JPanel savedGamesPanel;
+	// stores game details(name, fullname, date) in map format
+	private ArrayList<Map<String, String>> savedGameDetails;
+	private ArrayList<SavedGameTile> savedGamesTiles;
+	
+	public LoadGameMenu() {
+		super("./resources/MainBG.png");
+		remove(backBtn);
+		setLayout(null);
+
+		localDataManager = LocalDataManager.getInstance();
+
+		addButtons();
+		parseGameDetails();
+		drawGamesList();
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+	}
+
+	private void addButtons() {
+		loadGameBtn = new RoundedButton("Load Game");
+		deleteGameBtn = new RoundedButton("Delete Game");
+		goBackBtn = new RoundedButton("Back");
+
+		loadGameBtn.setBounds(150, 100, 500, 70);
+		deleteGameBtn.setBounds(150, 190,  500, 70);
+		goBackBtn.setBounds(150, 280, 500, 70);
+
+		goBackBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				goBackPanel();
+			}
+		});
+
+		loadGameBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				initializeLoadGame();
+			}
+		});
+
+		deleteGameBtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				deleteGame();
+			}
+		});
+
+		add(loadGameBtn);
+		add(deleteGameBtn);
+		add(goBackBtn);
+
+	}
+
+	private void parseGameDetails() {
+		// get all saved games names
+		ArrayList<String> savedGames = localDataManager.getSavedNames();
+		savedGameDetails = new ArrayList<>();
+		for(String item : savedGames) {
+			// Split name at "_" characters
+			// this will yield three items
+			// name, date, and minute of the date
+			String[] parts = item.split("_");
+
+			String name = parts[0];
+			String dateString = parts[1];
+			String min = parts[2];
+
+			// Remove _D from date
+			dateString = dateString.substring(2);
+
+			// Merge minute with rest of date
+			dateString = dateString + ":" + min;
+
+			// Parse string and get a Date object
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+			Date date = null;
+			try {
+				date = dateFormat.parse(dateString);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+
+			Map<String, String> gameInfo = new HashMap<>();
+			gameInfo.put("name", name);
+			// filename is the name of file (used for calling loadGame of LocalDataManager)
+			gameInfo.put("filename", item);
+			String readableDate = calendar.DAY_OF_MONTH + "/" + calendar.get(Calendar.MONTH) + "/" + calendar.get(Calendar.YEAR);
+			gameInfo.put("date",  readableDate);
+
+			savedGameDetails.add(gameInfo);
+
+		}
+		System.out.println(savedGameDetails);
+	}
+
+	private void drawGamesList() {
+		savedGamesTiles = new ArrayList<>();
+
+		// Draw the panel
+		savedGamesPanel = new RoundedPanel(new Dimension(100, 100));
+		savedGamesPanel.setBackground(Utils.getBgColor().brighter());
+		savedGamesPanel.setBounds(750, 100, 500, 600);
+
+		// Add title
+		JLabel label = new JLabel("Saved Games");
+		label.setPreferredSize(new Dimension(200, 70));
+		label.setFont(new Font("Tahoma", Font.ITALIC, 33));
+		label.setForeground(Color.white);
+		savedGamesPanel.add(label);
+
+		// Create ButtonGroup
+		ButtonGroup btnGroup = new ButtonGroup();
+
+		// Create game tiles
+		for(int i = 0; i < savedGameDetails.size(); ++i) {
+			Map<String, String> game = savedGameDetails.get(i);
+
+			// Create RadioButton
+			JRadioButton rBtn = new JRadioButton();
+			btnGroup.add(rBtn);
+
+			// Create details labels
+			SavedGameTile g = new SavedGameTile(game.get("name"), game.get("date"), game.get("filename"), rBtn);
+
+			// add to savedGamesTiles to later check if its selected
+			savedGamesTiles.add(g);
+			// add to panel
+			g.setPreferredSize(new Dimension(450, 40));
+			savedGamesPanel.add(g);
+		}
+
+		add(savedGamesPanel);
+=======
+	private JList gamesList;
 	private JButton initializeGameBtn;
 	private JButton deleteGameBtn;
 	
 	public LoadGameMenu() {
-		super("./resources/LoadMenu.jpg");
+		setBounds(0, 0, 1900, 1000);
+		setLayout(null);
+		
+		JList list = new JList(LocalDataManager.getInstance().getSavedNames().toArray());
+		list.setLocation(466, 90);
+		list.setSize(458, 522);
+		add(list);
+		
+		JButton loadBtn = new JButton("Load Game");
+		loadBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String str = list.getSelectedValue().toString();
+				LocalDataManager.getInstance().loadGame(str);
+				MenuManager.getInstance().openMenu(6);
+			}
+		});
+		loadBtn.setBounds(994, 233, 143, 103);
+		add(loadBtn);
+		
+		JButton deleteBtn = new JButton("Delete");
+		deleteBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String str = list.getSelectedValue().toString();
+				try {
+					LocalDataManager.getInstance().deleteSavedGame(str);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		deleteBtn.setBounds(970, 452, 89, 23);
+		add(deleteBtn);
+
+	
+		
+		
+		//super("./resources/LoadMenu.jpg");
+>>>>>>> Stashed changes
 	}
 	
 	private boolean initializeLoadGame() {
-		return false;
+		SavedGameTile item = searchForSelected();
+
+		// initialize game if any is selected
+		if(item != null) {
+			localDataManager.loadGame(item.getFilename());
+		}
+		System.out.println(item);
+		return item != null;
 	}
 	
 	private boolean deleteGame() {
-		return false;
+		SavedGameTile item = searchForSelected();
+
+		// initialize game if any is selected
+		if(item != null) {
+//			localDataManager.deleteSavedGames(item.getFilename());
+		}
+		System.out.println(item);
+		return item != null;
 	}
+
+	/**
+	 * Searches through items to check if any is selected
+	 * @return selected item if any, null otherwise
+	 */
+	private SavedGameTile searchForSelected() {
+		SavedGameTile selectedItem = null;
+		// Search whether a game is selected
+		for(SavedGameTile item : savedGamesTiles) {
+			if (item.isSelected()) {
+				selectedItem = item;
+			}
+		}
+		return selectedItem;
+	}
+}
+
+class SavedGameTile extends RoundedPanel {
+	private String name;
+	private String date;
+	private String filename;
+	private JRadioButton radioButton;
+
+	public SavedGameTile() {
+
+	}
+
+	public SavedGameTile(String name, String date, String filename, JRadioButton radioButton) {
+		this.name = name;
+		this.date = date;
+		this.filename = filename;
+
+		this.radioButton = radioButton;
+		setLayout(null);
+
+		drawDetails();
+	}
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		setBackground(new Color(0f,0f,0f,.0f ));
+	}
+
+	/**
+	 * Returns whether this tile is selected or not
+	 *
+	 * @return
+	 */
+	public boolean isSelected() { return this.radioButton.isSelected(); }
+
+	/**
+	 * Returns this items filename
+	 * @return
+	 */
+	public String getFilename() {return this.filename; }
+
+	/**
+	 * Draws the tile
+	 */
+	private void drawDetails() {
+		// Create name label
+		JLabel name = new JLabel(this.name);
+		name.setBounds(10, 5, 200, 40);
+		name.setFont(new Font("Tahoma", Font.ITALIC, 24));
+		name.setForeground(Color.white);
+
+		// Create date label
+		JLabel date = new JLabel(this.date);
+		date.setBounds(230, 5, 130, 40);
+		date.setFont(new Font("Tahoma", Font.ITALIC, 20));
+		date.setForeground(Color.white);
+
+		setMaximumSize(new Dimension(getWidth(), getHeight()));
+
+		add(name);
+		add(date);
+
+		radioButton.setBackground(new Color(0f,0f,0f,.0f ));
+		radioButton.setBounds(400, 5, 100, 40);
+		radioButton.setFont(new Font("Tahoma", Font.ITALIC, 18));
+
+		add(radioButton);
+
+	}
+
+
+
 }

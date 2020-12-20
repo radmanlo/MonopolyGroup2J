@@ -89,6 +89,7 @@ public class MenuManager { //it is finished -G
 			break;
 		case 6:
 			appFrame.contentPane.remove(newGameMenu);
+			appFrame.contentPane.remove(loadGameMenu);
 			BoardManager board = BoardManager.getInstance();
 			appFrame.contentPane.add(board);
 			BoardManager.getInstance().updateMap();

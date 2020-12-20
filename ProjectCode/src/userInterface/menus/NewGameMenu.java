@@ -1,8 +1,7 @@
 package userInterface.menus;
 import static javax.swing.JOptionPane.showMessageDialog;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -12,12 +11,14 @@ import javax.swing.border.LineBorder;
 
 import gamePresenter.GameManager;
 //import jdk.jshell.execution.Util;
+import jdk.jshell.execution.Util;
 import models.Token;
 import models.PlayerColor;
 import org.w3c.dom.Document;
 import settingsPresenter.LocalDataManager;
 import models.PotentialPlayer;
 import userInterface.components.RoundedButton;
+import userInterface.components.RoundedPanel;
 import utilities.Utils;
 
 public class NewGameMenu extends Menu{
@@ -32,7 +33,6 @@ public class NewGameMenu extends Menu{
 	final int SPACE_BETWEEN_FIELDS = 30;
 	final int FIRST_FIELD_Y = 100;
 	final int FIELDS_X = 400;
-	final Color BG_COLOR = new Color(93, 51, 52) ;
 	final int ADD_PLAYER_PANEL_WIDTH = 1080;
 	final int ADD_PLAYER_ITEM_HEIGHT = 50;
 	final int ADD_PLAYER_PANEL_HEIGHT = 500;
@@ -40,7 +40,7 @@ public class NewGameMenu extends Menu{
 	public NewGameMenu() {
 //		super("./resources/new-game-menu-bg.png");
 		super(null);
-		setBackground(BG_COLOR);
+		setBackground(Utils.getBgColor());
 
 		// Create a separate panel for adding new players
 		drawAddPlayerPanel();
@@ -81,13 +81,13 @@ public class NewGameMenu extends Menu{
 		NewPlayerAddingScreen s2 = new NewPlayerAddingScreen(this, 2);
 		newPlayerAddingScreens.add(s2);
 
-		addNewPlayerBtn = new RoundedButton("+");
+		addNewPlayerBtn = new RoundedButton("Add Player");
 		addNewPlayerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addPotentialPlayer();
 			}
 		});
-		addNewPlayerBtn.setFont(new Font("Tahoma", Font.BOLD, 16));
+//		addNewPlayerBtn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		add(addNewPlayerBtn);
 
 		initializeGameBtn = new RoundedButton("Start Game");
@@ -115,19 +115,19 @@ public class NewGameMenu extends Menu{
 		addPlayerPanel.revalidate();
 		addPlayerPanel.repaint();
 
-		addNewPlayerBtn.setBounds(50, 50, 50, 50);
-		addPlayerPanel.add(addNewPlayerBtn);
+		addNewPlayerBtn.setBounds(FIELDS_X, ADD_PLAYER_PANEL_HEIGHT + 130, 300, 70);
+		add(addNewPlayerBtn);
 	}
 
 	/***
-	 * Initializes add new player panel
+	 * Initializes addNewPlayer panel and its components
 	 */
 	public void drawAddPlayerPanel() {
 
-		addPlayerPanel = new JPanel();
+		addPlayerPanel = new RoundedPanel(new Dimension(100, 100));
 		addPlayerPanel.setBounds(FIELDS_X, 100, ADD_PLAYER_PANEL_WIDTH, ADD_PLAYER_PANEL_HEIGHT);
 		addPlayerPanel.setLayout(null);
-		addPlayerPanel.setBackground(BG_COLOR.brighter());
+		addPlayerPanel.setBackground(Utils.getBgColor().brighter());
 
 		JLabel name = createLabel("Name");
 		JLabel color = createLabel("Color");

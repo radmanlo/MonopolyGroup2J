@@ -120,8 +120,8 @@ public class LocalDataManager implements Serializable{
 	        System.out.println("An error occurred.");
 	        e.printStackTrace();
 	      }
-	    for(int i = 0; i < savedNames.size(); i++)
-	    	System.out.println(savedNames.get(i));
+//	    for(int i = 0; i < savedNames.size(); i++)
+//	    	System.out.println(savedNames.get(i));
 		return savedNames;
 	}
 	
