@@ -177,7 +177,23 @@ public class LocationManager implements Serializable {
 
         return tmp;
     }
-
+    
+    //Returns whether current place of player is buyable
+    public boolean isPlaceBuyable() {
+    	Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+ 
+		Location loc = curPlayer.getLocation();
+		switch(loc.getClass().toString()) {
+		case "class models.location.Property":
+			return true;
+		case "class models.location.Utility":
+			return true;
+		case "class models.location.BusStop":
+			return true;
+		default:
+		}
+    	return false;
+    }
     //Returns location list
     public ArrayList<Location> getLocationList(){
         ArrayList<Location> locationList = new ArrayList<>(0);
