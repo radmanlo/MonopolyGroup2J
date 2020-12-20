@@ -29,6 +29,15 @@ public class InteractionArea extends JPanel{
 	private JButton selectPropertyButton;
 	private JTextField saveField;
 	private JTextField loadField;
+	private JButton buyBtn;
+	private JButton rollDiceBtn;
+	private JButton offerTradeBtn;
+	private JButton pauseBtn;
+	private JButton endTurnBtn;
+	private JPanel tradeOfferPanel;
+	private JList tradeOffersList;
+	private JLabel currentPlayerMoneyLbl;
+	private JLabel diceRollResultLbl;
 	
 	public InteractionArea() {
 		setLayout(null);
@@ -42,31 +51,27 @@ public class InteractionArea extends JPanel{
 		diceRollButton.setBounds(53, 916, 89, 23);
 		add(diceRollButton);
 		
-		JButton buyBtn = new JButton("Buy");
-		buyBtn.setBounds(53, 202, 89, 23);
+		buyBtn = new JButton("Buy");
+		buyBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameManager.getInstance().executePurchase();
+			}
+		});
+		buyBtn.setBounds(302, 285, 89, 23);
 		add(buyBtn);
 		
-		JButton rollDiceBtn = new JButton("Roll Dice");
+		rollDiceBtn = new JButton("Roll Dice");
+		rollDiceBtn.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		rollDiceBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameManager.getInstance().rollDice();
 			}
 		});
-		rollDiceBtn.setBounds(53, 168, 89, 23);
+		rollDiceBtn.setBounds(53, 283, 168, 23);
 		add(rollDiceBtn);
 		
-		JButton move1Btn = new JButton("Move Player 1 Forward");
-		move1Btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(), 1);
-				 BoardManager.getInstance().updateMap();
-			}
-		});
-		move1Btn.setBounds(405, 809, 199, 34);
-		add(move1Btn);
-		
-		JButton offerTradeBtn = new JButton("Offer Trade");
-		offerTradeBtn.setBounds(152, 168, 112, 23);
+		offerTradeBtn = new JButton("Offer Trade");
+		offerTradeBtn.setBounds(372, 236, 112, 23);
 		add(offerTradeBtn);
 		
 		saveField = new JTextField();
@@ -74,81 +79,19 @@ public class InteractionArea extends JPanel{
 		add(saveField);
 		saveField.setColumns(10);
 		
-		
-		
-		JButton addMoneyBtn = new JButton("Add Money");
-		addMoneyBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int currentMoney = PlayerManager.getInstance().getCurrentPlayer().getUsableMoney();
-				PlayerManager.getInstance().getCurrentPlayer().setUsableMoney(currentMoney + 100 );
-			}
-		});
-		addMoneyBtn.setBounds(299, 851, 89, 23);
-		add(addMoneyBtn);
-		
-		JLabel moneyLbl = new JLabel("");
-		moneyLbl.setBounds(196, 607, 46, 14);
-		add(moneyLbl);
-		
-		JButton updateMoneyBtn = new JButton("UpdateMoney");
-		updateMoneyBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				moneyLbl.setText(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney() + "");
-			}
-		});
-		updateMoneyBtn.setBounds(53, 806, 131, 23);
-		add(updateMoneyBtn);
-		
-		JButton updateBtn = new JButton("Update");
+		JButton updateBtn = new JButton("Update");  //sil
 		updateBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				BoardManager.getInstance().updateMap();
+				BoardManager.getInstance().updateInteractionArea();
 			}
 		});
-		updateBtn.setBounds(53, 840, 207, 44);
-		add(updateBtn);
+		updateBtn.setBounds(53, 840, 207, 44); 
+		add(updateBtn);     //sil
 		
-		JButton setOwnerBtn = new JButton("setOwnerHereFromCurrent");
-		setOwnerBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-				for( BuyableLocation loc: LocationManager.getInstance().getBuyableList()) {
-					loc.setOwner(currentPlayer);
-				}
-				//LocationManager.getInstance().getLocationById(currentPlayer.getLocation)
-				//LocationManager.getInstance().getBuyableList().get();
-			}
-		});
-		setOwnerBtn.setBounds(392, 927, 232, 23);
-		add(setOwnerBtn);
 		
-		JButton upgradeBtn = new JButton("Upgrade");
-		upgradeBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for( BuyableLocation loc: LocationManager.getInstance().getBuyableList()) {
-					if( loc instanceof Property)
-						loc.upgrade();
-				}
-			}
-		});
-		upgradeBtn.setBounds(167, 895, 131, 23);
-		add(upgradeBtn);
 		
-		JButton degradeBtn = new JButton("Degrade");
-		degradeBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				for( BuyableLocation loc: LocationManager.getInstance().getBuyableList()) {
-					if( loc instanceof Property)
-						loc.degrade();
-				}
-			}
-		});
-		degradeBtn.setBounds(231, 925, 112, 27);
-		add(degradeBtn);
-		
-		JButton pauseBtn = new JButton("Pause");
+		pauseBtn = new JButton("Pause");
 		pauseBtn.setBounds(10, 23, 89, 23);
 		add(pauseBtn);
 		
@@ -157,6 +100,8 @@ public class InteractionArea extends JPanel{
 		constantLblCurrentPlyr.setBounds(53, 57, 232, 34);
 		add(constantLblCurrentPlyr);
 		
+		
+		//bunlar grup
 		JPanel currentPlayerPanel = new JPanel();
 		currentPlayerPanel.setBounds(53, 113, 317, 44);
 		add(currentPlayerPanel);
@@ -170,20 +115,24 @@ public class InteractionArea extends JPanel{
 		JButton inventoryBtn = new JButton("view inventory");
 		inventoryBtn.setBounds(179, 11, 128, 23);
 		currentPlayerPanel.add(inventoryBtn);
+		//bunlar grup
 		
-		JButton endTurnBtn = new JButton("End Turn");
+		
+		endTurnBtn = new JButton("End Turn");
+		endTurnBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		endTurnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GameManager.getInstance().handleEndTurn();
 			}
 		});
-		endTurnBtn.setBounds(152, 202, 112, 23);
+		endTurnBtn.setBounds(332, 396, 152, 59);
 		add(endTurnBtn);
 		
-		JPanel tradeOfferPanel = new JPanel();
+		tradeOfferPanel = new JPanel();
 		tradeOfferPanel.setBounds(523, 124, 280, 256);
 		add(tradeOfferPanel);
 		
-		JList tradeOffersList = new JList();
+		tradeOffersList = new JList();
 		tradeOfferPanel.add(tradeOffersList);
 		
 		JLabel constantLblOffers = new JLabel("Offers");
@@ -191,10 +140,10 @@ public class InteractionArea extends JPanel{
 		constantLblOffers.setBounds(606, 93, 112, 20);
 		add(constantLblOffers);
 		
-		JLabel lblOtherPlayers = new JLabel("Other Players");
-		lblOtherPlayers.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		lblOtherPlayers.setBounds(53, 458, 232, 34);
-		add(lblOtherPlayers);
+		JLabel constantLblOtherPlyrs = new JLabel("Other Players");
+		constantLblOtherPlyrs.setFont(new Font("Tahoma", Font.PLAIN, 33));
+		constantLblOtherPlyrs.setBounds(53, 458, 232, 34);
+		add(constantLblOtherPlyrs);
 		
 		JPanel currentPlayerPanel_1 = new JPanel();
 		currentPlayerPanel_1.setLayout(null);
@@ -293,5 +242,38 @@ public class InteractionArea extends JPanel{
 		JButton inventoryBtn_7 = new JButton("view inventory");
 		inventoryBtn_7.setBounds(179, 11, 128, 23);
 		currentPlayerPanel_7.add(inventoryBtn_7);
+		
+		currentPlayerMoneyLbl = new JLabel("some tl");
+		currentPlayerMoneyLbl.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		currentPlayerMoneyLbl.setBounds(305, 316, 152, 23);
+		add(currentPlayerMoneyLbl);
+		
+		diceRollResultLbl = new JLabel("Roll the dice please...");
+		diceRollResultLbl.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		diceRollResultLbl.setBounds(53, 317, 168, 23);
+		add(diceRollResultLbl);
+		
+		JButton move1Btn = new JButton("move 1 ");
+		move1Btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(), 1);
+				BoardManager.getInstance().updateMap();
+				BoardManager.getInstance().updateInteractionArea();
+			}
+		});
+		move1Btn.setBounds(73, 406, 89, 23);
+		add(move1Btn);
 	}
+	
+	public void setCurrentPlayerMoneyLbl(int money) {
+		currentPlayerMoneyLbl.setText( money + " TL");
+	}
+	
+	public void setDiceRollResultLbl(int result) {
+		if(result != -1)
+			currentPlayerMoneyLbl.setText( "The dice result is: " + result);
+		else
+			currentPlayerMoneyLbl.setText( "Please roll the dice");
+	}
+	
 }
