@@ -504,6 +504,12 @@ public class LocationManager implements Serializable {
 		return true;
 	}
 
-	
+	/*
+	 * takes an array of strings of the names of locations and returns an array of buyables
+	 */
+	public ArrayList<BuyableLocation> getBuyablesByStrings(ArrayList<String> wantedNames) {
+		
+		return null;
+	}
     
 }

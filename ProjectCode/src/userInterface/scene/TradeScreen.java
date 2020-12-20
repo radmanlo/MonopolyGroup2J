@@ -1,11 +1,13 @@
 package userInterface.scene;
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import gamePresenter.PlayerManager;
+import models.Card;
 import models.Player;
 import models.TradeDeal;
 import models.location.BuyableLocation;
@@ -18,6 +20,9 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextPane;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.AncestorEvent;
 
 public class TradeScreen extends JPanel{
 	private JButton offerTradeBtn;
@@ -36,8 +41,17 @@ public class TradeScreen extends JPanel{
 	private JList wantedList;
 	private JButton sendOfferBtn;
 	private JButton cancelBtn;
+	private ArrayList<String> offeredNames;
+	private ArrayList<String> wantedNames;
+	private JTextPane wantedItemsTxt;
+	private JLabel warningLbl;
+	private Player currentPlayer;
 
 	public TradeScreen(Player currentPlayer) {
+		this.currentPlayer = currentPlayer;
+		offeredNames = new ArrayList<String>();
+		wantedNames = new ArrayList<String>();
+		
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(null);
 		setBounds(1100,210, 600, 600);
@@ -60,6 +74,8 @@ public class TradeScreen extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				targetPlayer = PlayerManager.getInstance().getPlayerByName((String)receiverComboBox.getSelectedItem());
 				receiverComboBox.setEnabled(false);
+				wantedMoneyField.setEnabled(true);
+				warningLbl.setText("");
 				updateWantedPanel();
 			}
 		});
@@ -90,16 +106,22 @@ public class TradeScreen extends JPanel{
 		constantLblOfferedMoney.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		constantLblOfferedMoney.setBounds(10, 332, 110, 17);
 		offeredPanel.add(constantLblOfferedMoney);
-
-		offeredList = new JList();
-		offeredList.setBounds(199, 305, -180, -205);
-		offeredPanel.add(offeredList);
-
-		offerComboBox = new JComboBox();
+		
+		ArrayList<String> temp2 = new ArrayList<String>();
+		for(BuyableLocation loc : currentPlayer.getOwnedLocations()) {
+			temp2.add(loc.getName());
+		}
+		offerComboBox = new JComboBox(temp2.toArray());
 		offerComboBox.setBounds(10, 47, 150, 20);
 		offeredPanel.add(offerComboBox);
 
 		addItemToOfferedBtn = new JButton("Add");
+		addItemToOfferedBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				offeredNames.add((String) offerComboBox.getSelectedItem());
+				updateLists();
+			}
+		});
 		addItemToOfferedBtn.setBounds(170, 46, 62, 23);
 		offeredPanel.add(addItemToOfferedBtn);
 
@@ -116,6 +138,7 @@ public class TradeScreen extends JPanel{
 		wantedMoneyField = new JTextField();
 		wantedMoneyField.setColumns(10);
 		wantedMoneyField.setBounds(130, 329, 96, 20);
+		wantedMoneyField.setEnabled(false);
 		wantedPanel.add(wantedMoneyField);
 
 		JLabel constantLblWantedMoney = new JLabel("Wanted Money");
@@ -124,12 +147,18 @@ public class TradeScreen extends JPanel{
 		wantedPanel.add(constantLblWantedMoney);
 
 		addItemToWantedBtn = new JButton("Add");
+		addItemToWantedBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				wantedNames.add((String) wantedComboBox.getSelectedItem());
+				updateLists();
+			}
+		});
 		addItemToWantedBtn.setBounds(170, 42, 56, 23);
 		wantedPanel.add(addItemToWantedBtn);
-
-		wantedList = new JList();
-		wantedList.setBounds(222, 299, -201, -197);
-		wantedPanel.add(wantedList);
+		
+		warningLbl = new JLabel("Please select a target Player");
+		warningLbl.setBounds(20, 139, 216, 89);
+		wantedPanel.add(warningLbl);
 
 		sendOfferBtn = new JButton("Send Offer");
 		sendOfferBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -142,12 +171,31 @@ public class TradeScreen extends JPanel{
 		add(cancelBtn);
 	}
 
+	private void updateLists() {
+		System.out.println("hi: " + offeredNames.get(0));
+		wantedList = new JList(wantedNames.toArray());
+		wantedList.setBounds( 10, 100 , 220, 200);
+		wantedPanel.add(wantedList);
+		
+		offeredList = new JList(offeredNames.toArray());
+		offeredList.setBounds( 10, 100 , 220, 200);
+		offeredPanel.add(offeredList);
+		offeredList.setVisible(true);
+		offeredPanel.setVisible(true);
+		
+		wantedPanel.revalidate();
+		wantedPanel.repaint();
+		offeredPanel.revalidate();
+		offeredPanel.repaint();
+		revalidate();
+		repaint();
+		}
+
 	private void updateWantedPanel() {
 		ArrayList<String> temp = new ArrayList<String>();
 		for(BuyableLocation loc : targetPlayer.getOwnedLocations()) {
 			temp.add(loc.getName());
 		}
-		
 		wantedComboBox = new JComboBox(temp.toArray());
 		wantedComboBox.setBounds(10, 42, 150, 20);
 		wantedPanel.add(wantedComboBox);
@@ -158,6 +206,6 @@ public class TradeScreen extends JPanel{
 	}
 
 	private TradeDeal createTradeDeal() {
-		return null;
+		TradeDeal deal = new TradeDeal(currentPlayer, Player receiver, ArrayList<BuyableLocation> offeredBuyables, ArrayList<Card> offeredCards, int offeredMoney, ArrayList<BuyableLocation> requestedBuyables, ArrayList<Card> requestedCards, int requestedMoney)
 	}
 }
