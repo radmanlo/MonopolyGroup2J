@@ -353,11 +353,13 @@ public class LocationManager implements Serializable {
     }
 
     public void activateDisciplinary(Location disciplinaryLoc){
-        // TODO don't know
+        // NOTHING
     }
 
     public void activateGoToDisciplinary(Location goToDisciplinaryLoc){
-        // TODO send player to disciplinary
+        final int DISTANCE_TO_DISCIPLINARY = 20;
+        Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+        GameManager.getInstance().movePlayer(curPlayer, DISTANCE_TO_DISCIPLINARY);
     }
 
     public void activateStart(Location startLoc){

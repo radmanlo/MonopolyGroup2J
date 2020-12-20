@@ -77,13 +77,7 @@ public class GameManager implements Serializable {
 		}while(this.dice.isDoubleDice());
 
 		// move player's token
-		newLocation = LocationManager.getInstance().movePlayer(currentPlayer, moveDistance);
-
-		// todo Update the view
-
-		// Activate the new Location
-		newLocation.activate();
-		BoardManager.getInstance().updateMap();
+		movePlayer(currentPlayer, moveDistance);
 	}
 
 	public int totalDiceResultForUtility() {
@@ -142,6 +136,18 @@ public class GameManager implements Serializable {
 	public void create(GameManager mngr) {
 		// TODO Auto-generated method stub
 		gameManager = new GameManager(mngr);
+	}
+
+	/**
+	 * Asks the Location manager to move the player and update the UI
+	 * @param player
+	 * @param distance
+	 */
+	public void movePlayer(Player player, int distance){
+		Location newLocation = LocationManager.getInstance().movePlayer(player, distance);
+		// Activate the new Location
+		newLocation.activate();
+		BoardManager.getInstance().updateMap();
 	}
 
 

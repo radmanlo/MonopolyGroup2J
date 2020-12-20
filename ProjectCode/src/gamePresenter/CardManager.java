@@ -84,7 +84,7 @@ public class CardManager implements Serializable{
 			break;
 			case 118: this.moneyBorrowed();
 			break;
-			case 119: this.fellAsleap();
+			case 119: this.fellAsleep();
 			break;
 			case 120: this.friendHw();
 			break;
@@ -155,7 +155,7 @@ public class CardManager implements Serializable{
 		PlayerManager.getInstance().addMoneyToPlayer(nextPlayer, AMOUNT_BORROWED);
 	}
 
-	public void fellAsleap(){
+	public void fellAsleep(){
 
 	}
 
