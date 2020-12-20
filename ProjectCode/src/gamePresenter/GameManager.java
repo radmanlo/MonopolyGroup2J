@@ -5,9 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-
 import models.*;
 import models.location.*;
 import settingsPresenter.LocalDataManager;
@@ -109,6 +106,7 @@ public class GameManager implements Serializable {
 		});
 
 		diceAnimationTimer.restart();
+		BoardManager.getInstance().disableDice();
 
 //		do {
 //			this.dice.rollDices();
@@ -338,7 +336,19 @@ public class GameManager implements Serializable {
 	 * called from LocationManager buyables activation methods
 	 */
 	public void askPlayerPaymentChoice(){
-		boolean payWithDice = false; // TODO get use input (false is temporary)
+		JDialog.setDefaultLookAndFeelDecorated(true);
+		boolean payWithDice = false;
+		String promptMessage = "Do you want double dice instead of paying rent?\n";
+	    int response = JOptionPane.showConfirmDialog(null, promptMessage, "Reroll Dice",
+	        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+	    if (response == JOptionPane.NO_OPTION) {
+	    	payWithDice=false;
+	    } else if (response == JOptionPane.YES_OPTION) {
+	    	payWithDice = true;
+	    } else if (response == JOptionPane.CLOSED_OPTION) {
+	      System.out.println("JOptionPane closed");
+	    }
+	 // TODO get use input (false is temporary)
 
 		if (payWithDice)
 			payRentWithDice();
@@ -360,6 +370,8 @@ public class GameManager implements Serializable {
 		this.dice.rollDices();
 		if (!this.dice.isDoubleDice()){
 			// Pay double rent
+			 JFrame f =new JFrame();  
+			 JOptionPane.showMessageDialog(f, "Your get the double and escaped form payment ");  
 			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
 		}
 
@@ -370,6 +382,20 @@ public class GameManager implements Serializable {
 
 	public void payRent(){
 		// Variables
+		JDialog.setDefaultLookAndFeelDecorated(true);
+		boolean payWithDice = false;
+		String promptMessage = "Do you want double dice instead of paying rent?\n";
+	    int response = JOptionPane.showConfirmDialog(null, promptMessage, "Reroll Dice",
+	        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+	    if (response == JOptionPane.NO_OPTION) {
+	    	payWithDice =false;
+	    } else if (response == JOptionPane.YES_OPTION) {
+	    	payWithDice = true;
+	    	payRentWithDice();
+	    } else if (response == JOptionPane.CLOSED_OPTION) {
+	      System.out.println("JOptionPane closed");
+	    }
+	    if(payWithDice == false) {
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
 		Player locationOwner = curLocation.getOwner();
@@ -381,6 +407,7 @@ public class GameManager implements Serializable {
 		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
+	    }
 	}
 
 	public boolean checkPassingStartReward(int oldLocationId, int newLocationId){
