@@ -195,8 +195,8 @@ public class Map extends JPanel {
 			int xPoint = 0;
 			int yPoint = 0;
 			if( sideOfLoc == BoardSide.DOWN) {
-				xPoint = (int) orgPoint.getX() - 20 - TOKEN_OFFSET * i;
-				yPoint = (int) orgPoint.getY() - 20 + TOKEN_OFFSETFOR4PLAYERS;
+				xPoint = (int) orgPoint.getX() - 20 - TOKEN_OFFSET * i + secondOffset*5;
+				yPoint = (int) orgPoint.getY() - 20 + TOKEN_OFFSETFOR4PLAYERS + secondOffset;
 			}else if(sideOfLoc == BoardSide.LEFT) {
 				xPoint = (int) orgPoint.getX() - TOKEN_OFFSETFOR4PLAYERS;
 				yPoint = (int) orgPoint.getY() - 20 -TOKEN_OFFSET * i;
