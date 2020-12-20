@@ -330,8 +330,11 @@ public class Map extends JPanel {
 			return BoardSide.RIGHT;
 	}
 
-	public void drawDiesOnRoll() {
-		diceAnimation.rollDies();
+	/**
+	 * Animates the dice
+	 */
+	public void animateDies(int firsDiceResult, int secondDiceResult) {
+		diceAnimation.rollDies(firsDiceResult, secondDiceResult);
 	}
 
 }
@@ -387,7 +390,12 @@ class DiceAnimationPanel extends JPanel {
 	/**
 	 * Animates the dies. Uses a timer to dynamically change dice images for some time
 	 */
-	public void rollDies() {
+	public void rollDies(int firsDiceResult, int secondDiceResult) {
+
+		if(timer != null && timer.isRunning()) {
+			timer.stop();
+		}
+
 		setVisible(true);
 		addDies();
 
@@ -405,6 +413,7 @@ class DiceAnimationPanel extends JPanel {
 				count++;
 				// Stop timer after the delay
 				if(count >= 5) {
+					setLabels(icons.get(firsDiceResult - 1), icons.get(secondDiceResult - 1));
 					waitAndRemove();
 					timer.stop();
 				}
@@ -418,6 +427,9 @@ class DiceAnimationPanel extends JPanel {
 	 * Waits for a couple of seconds after the dies are rolled and remove them from the panel
 	 */
 	private void waitAndRemove() {
+		if(timer2 != null && timer2.isRunning()) {
+			timer2.stop();
+		}
 		timer2 = new Timer(300, new ActionListener() {
 			// For counting the delay and stoping timer
 			int count = 0;

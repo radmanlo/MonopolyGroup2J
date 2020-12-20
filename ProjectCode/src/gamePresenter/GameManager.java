@@ -1,11 +1,16 @@
 package gamePresenter;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serializable;
 import java.util.ArrayList;
 import models.*;
 import models.location.*;
 import settingsPresenter.LocalDataManager;
 import org.w3c.dom.Document;
+import userInterface.scene.InteractionArea;
+
+import javax.swing.*;
 
 public class GameManager implements Serializable {
 
@@ -13,6 +18,7 @@ public class GameManager implements Serializable {
 	private static final long serialVersionUID = -5272580467727107668L;
 	private static GameManager gameManager = null;
 	private Dice dice = new Dice();
+	private Timer diceAnimationTimer;
 
 	// Constructor
 	private GameManager() {
@@ -67,7 +73,6 @@ public class GameManager implements Serializable {
 	 */
 	public void rollDice() {
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		BoardManager.getInstance().effectOnDiesRoll();
 		int moveDistance = 0;
 		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
 			PlayerManager.getInstance().getCurrentPlayer().setInJailCount(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() - 1);
@@ -77,15 +82,41 @@ public class GameManager implements Serializable {
 			}
 			return;
 		}
-		do {
-			this.dice.rollDices();
-			moveDistance += this.dice.getTotalResult();
-		}while(this.dice.isDoubleDice());
-        BoardManager.getInstance().updateMap();
-        BoardManager.getInstance().updateInteractionArea();
 
-		// move player's token
-		movePlayer(currentPlayer, moveDistance);
+		// Let the player to roll the dice if its double
+		// Before it was done automatically
+
+		this.dice.rollDices();
+		BoardManager.getInstance().animateDies(this.dice.getFirstDiceResult(), this.dice.getSecondDiceResult());
+
+		diceAnimationTimer = new Timer(400, new ActionListener() {
+			// For counting the delay and stopping timer
+			int count = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				count++;
+				// Stop timer after the delay
+				if(count >= 5) {
+					// Update the map after animation
+					diceAnimationTimer.stop();
+					BoardManager.getInstance().updateMap();
+					BoardManager.getInstance().updateInteractionArea();
+					movePlayer(currentPlayer, dice.getTotalResult());
+				}
+			}
+		});
+
+		diceAnimationTimer.restart();
+
+//		do {
+//			this.dice.rollDices();
+//			// Animated dies
+//
+//			moveDistance += this.dice.getTotalResult();
+//		}while(this.dice.isDoubleDice());
+
+
+
 	}
 
 	public int totalDiceResultForUtility() {
