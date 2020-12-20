@@ -222,18 +222,16 @@ public class GameManager implements Serializable {
 	 * @param distance
 	 */
 	public void movePlayer(Player player, int distance){
-		final int START_AWARD = 250; // TODO get this from the xml file
 
 		Location oldLocation = LocationManager.getInstance().getPlayerLocation(player);
 		Location newLocation = LocationManager.getInstance().movePlayer(player, distance);
+		PlayerManager.getInstance().getCurrentPlayer().getLocation().activate();
+		LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()).activate();
+		
+		//int oldLocationId = oldLocation.getLocationId();
+		//int newLocationId = newLocation.getLocationId();
 
-		int oldLocationId = oldLocation.getLocationId();
-		int newLocationId = newLocation.getLocationId();
 
-		// Check if passed the starting location to give award
-		if (checkPassingStartReward(oldLocationId, newLocationId)){
-			PlayerManager.getInstance().addMoneyToPlayer(player, START_AWARD);
-		}
 
 		// Activate the new Location
 		newLocation.activate();

@@ -5,6 +5,10 @@ import models.Player;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
+import gamePresenter.BoardManager;
+import gamePresenter.LocationManager;
+import gamePresenter.PlayerManager;
+
 public class IncomeTaxTile extends Location{
     private int taxValue;
 
@@ -27,6 +31,9 @@ public class IncomeTaxTile extends Location{
     @Override
     public void activate() {
         super.activate();
+        PlayerManager.getInstance().getCurrentPlayer().setUsableMoney(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney() - taxValue);
+        BoardManager.getInstance().updateInteractionArea();
+        BoardManager.getInstance().updateMap();
     }
 
     /**
