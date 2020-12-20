@@ -50,7 +50,7 @@ public class PlayerManager implements Serializable{
 		int nOfPlayers = players.size();
 		int nextPlayerIndex = (currentPlayerIndex + 1) % nOfPlayers;
 
-		return players.get(nextPlayerIndex); // update the current player
+		return players.get(nextPlayerIndex);
 	}
 
 	public void changeCurrentPlayer() {
@@ -84,6 +84,7 @@ public class PlayerManager implements Serializable{
 	 */
 	public void playerBankrupt(Player plyr) {
 		removePlayer(plyr);
+		currentPlayerIndex --;
 	}
 
 	public void removePlayer(Player plyr) {

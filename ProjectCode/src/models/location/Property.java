@@ -110,4 +110,11 @@ public class Property extends BuyableLocation{
             default: return -1;
         }
     }
+
+    @Override
+    public void resetToDefault() {
+        super.resetToDefault();
+        this.vendingMachinesNo = 0;
+        this.ownsStarbucks = false;
+    }
 }

@@ -155,6 +155,12 @@ public class BuyableLocation extends Location{
         return false;
     }
 
+    public void resetToDefault(){
+        this.owner = null;
+        this.currentRentIndex = 0;
+        this.currentRentValue = this.rentValues.get(0);
+    }
+
     @Override
     public void activate() {
         super.activate();

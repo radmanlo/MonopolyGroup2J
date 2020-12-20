@@ -104,6 +104,20 @@ public class GameManager implements Serializable {
 	 * checks if a player is in jail and update their jail status
 	 */
 	public void handleEndTurn(){
+		Player prevPlayer = PlayerManager.getInstance().getCurrentPlayer();
+
+		// Handle player bankruptcy situation
+		if (this.isBankrupt(prevPlayer)){
+			// TODO Give warning and ask whether to end turn and go bankrupt or continue and sell some property
+			boolean warningAns = true; // true to continue and try to sell stuff (probably to bank)
+			if (warningAns){
+				return;
+			} else {
+				this.declarePlayerBankrupt(prevPlayer);
+			}
+		}
+
+		// Move forward with the next player
 		PlayerManager.getInstance().changeCurrentPlayer();
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
@@ -114,6 +128,29 @@ public class GameManager implements Serializable {
 			curPlayer.setIsInJail(false);
 			this.handleNewTurn(true);
 		}
+	}
+
+	/**
+	 *
+	 * @param player
+	 */
+	public boolean isBankrupt(Player player){
+		if (player.getUsableMoney() <= 0){
+			return true;
+		}
+		return false;
+	}
+
+	public void declarePlayerBankrupt(Player player){
+		LocationManager.getInstance().freeAllLocationsOf(player);
+		PlayerManager.getInstance().playerBankrupt(player);
+	}
+
+	/**
+	 * Called from CardManager by OutOfJail card
+	 */
+	public void enableDice(){
+		// TODO tell the UI to re-enable the dice
 	}
 
 	/**

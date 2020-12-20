@@ -379,6 +379,26 @@ public class LocationManager implements Serializable {
         location.setOwner(player);
     }
 
+    public ArrayList<BuyableLocation> getAllLocationsOf(Player player){
+        ArrayList<BuyableLocation> locations = new ArrayList<BuyableLocation>(0);
+
+        for (BuyableLocation loc : buyableLocations){
+            if (loc.getOwner().getName() == player.getName()){
+                locations.add(loc);
+            }
+        }
+
+        return locations;
+    }
+
+    public void freeAllLocationsOf(Player player){
+        ArrayList<BuyableLocation> playersLocs = this.getAllLocationsOf(player);
+
+        for (BuyableLocation loc : playersLocs){
+            loc.resetToDefault();
+        }
+    }
+
     @Override
     public String toString() {
         return "LocationManager{" +

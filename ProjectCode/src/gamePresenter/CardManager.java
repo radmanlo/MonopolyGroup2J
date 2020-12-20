@@ -99,6 +99,7 @@ public class CardManager implements Serializable{
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		if (curPlayer.getIsInJail()){
 			curPlayer.setIsInJail(false);
+			GameManager.getInstance().enableDice();
 			curPlayer.removeCard(outOfJailCard);
 		}
 	}
