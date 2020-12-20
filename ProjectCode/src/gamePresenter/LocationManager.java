@@ -117,7 +117,7 @@ public class LocationManager implements Serializable {
         Location currentLocation = getPlayerLocation(playerToMove);
         // calculate the next location
         int curLocId = currentLocation.getLocationId();
-        if((curLocId + distance) >= 40) {
+        if((curLocId + distance) > 40) {
         	playerToMove.setUsableMoney(playerToMove.getUsableMoney()+200);
         }
         int nextLocId = (curLocId + distance) % 40; // There are 40 locations in total with ids: 0-39
