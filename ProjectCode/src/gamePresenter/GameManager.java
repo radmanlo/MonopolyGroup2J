@@ -373,10 +373,10 @@ public class GameManager implements Serializable {
 			 JFrame f =new JFrame();  
 			 JOptionPane.showMessageDialog(f, "You couldn't get the double and escaped form payment ");  
 			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
-		}
+		}else {
 		 JFrame f =new JFrame();  
 		 JOptionPane.showMessageDialog(f, "Congrats!, You get the double and escaped form payment ");  
-
+		}
 		// Update UI
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
