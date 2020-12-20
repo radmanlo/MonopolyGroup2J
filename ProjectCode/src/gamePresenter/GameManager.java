@@ -419,6 +419,14 @@ public class GameManager implements Serializable {
 			curPlayer.setUsableMoney(curPlayer.getUsableMoney() + price);
 		}
 	}
+	public void useCardByName(String cardName) {
+		ArrayList<Card> deck = CardManager.getInstance().getCardDeck();
+		for(int i = 0; i < deck.size(); i++) {
+			if(deck.get(i).getCardName().equals(cardName)) {
+				CardManager.getInstance().executeCardAction(CardManager.getInstance().getCardDeck().get(i));
+			}
+		}
+	}
 	
 	/*
 	 * gets the name of the card and executes it
