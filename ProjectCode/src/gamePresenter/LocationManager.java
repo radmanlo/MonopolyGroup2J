@@ -423,7 +423,10 @@ public class LocationManager implements Serializable {
         boolean upgradeable = false;
         Player owner = groupHasSameOwner(property.getGroupColor());
 
-        if (owner != null && owner.getName() == currentPlayer.getName()){ // Player is the owner of the whole group
+        if (owner != null && owner.getName() == currentPlayer.getName()
+                && currentPlayer.getUsableMoney() > property.getPrice()
+                && !property.hasStarbucks()){ // Player is the owner of the whole group
+
             upgradeable = true;
         }
 
@@ -501,14 +504,17 @@ public class LocationManager implements Serializable {
 	 * returns if the property is sellable (if it has upgrades on it, it cant be selled)
 	 */
 	public boolean isPropertySellable(Property property) {
-		if(property.getVendingMachinesNo() == 0) {
-			if(property.hasStarbucks() == false) {
-				return true;
-			}
-			return false;
-		}
-		
-		return false;
+        boolean sellable = true;
+
+        for (BuyableLocation prop : buyableLocations){
+            if (prop.getType() == Location.LOCATION_TYPES.PROPERTY && prop.getGroupColor() == property.getGroupColor()){
+                if (((Property)prop).getVendingMachinesNo() != 0 || ((Property)prop).hasStarbucks()){
+                    sellable = false;
+                }
+            }
+        }
+
+		return sellable;
 	}
 
 	/*
