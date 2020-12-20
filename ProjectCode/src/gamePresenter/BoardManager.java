@@ -85,7 +85,7 @@ public class BoardManager extends JPanel implements Serializable{
 
 	public void openInventoryScreen(Player player) {
 		inventoryScreen = new InventoryScreen(player);
-		add(inventoryScreen);
+		add(inventoryScreen, 0);
 		revalidate();
 		repaint();
 	}
