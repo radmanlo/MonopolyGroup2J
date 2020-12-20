@@ -395,7 +395,6 @@ public class LocationManager implements Serializable {
     public boolean isPropertyUpgradeable(Property property){
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         boolean upgradeable = false;
-
         if (groupHasSameOwner(property.getGroupColor()).getName() == currentPlayer.getName()){ // Player is the owner of the whole group
             upgradeable = true;
         }

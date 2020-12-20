@@ -122,6 +122,11 @@ public class PlayerManager implements Serializable{
 	 */
 	public Player getPlayerByName(String name) {
 		
+		for(int i = 0 ; i< players.size(); i++) {
+			if(players.get(i).getName().equals(name)) {
+				return players.get(i);
+			}
+		}
 		return null;
 	}
 }
