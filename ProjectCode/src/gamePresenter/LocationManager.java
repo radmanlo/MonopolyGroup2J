@@ -450,4 +450,31 @@ public class LocationManager implements Serializable {
                 '}';
     }
     
+    
+    /*
+     * gets the name of the location and returns the location
+     */
+	public Location getLocationByName(String locName) {
+
+		return null;
+	}
+
+	/*
+	 * returns if the property is sellable (if it has upgrades on it, it cant be selled)
+	 */
+	public boolean isPropertySellable(Property property) {
+
+		return false;
+	}
+
+	/*
+	 * returns if the property is degradeable (if it has no upgrades on it, it cant be degraded)
+	 */
+	public boolean isPropertyDegradeable(Property property) {
+		
+		return false;
+	}
+
+	
+    
 }
