@@ -5,17 +5,30 @@ import java.util.ArrayList;
 import models.Player;
 
 public class Disciplinary extends Location{
-    private ArrayList<Player> prisoners;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<Player> prisoners;
 
     public Disciplinary(int locationId, String name, Point2D point, ArrayList<Player> playersHere,ArrayList<Player> prisoners) {
 		super(locationId, name, point, playersHere);
-        this.prisoners = prisoners;
-
-		// TODO Auto-generated constructor stub
+		
+		prisoners = new ArrayList<Player>();
+		
+		for( Player plyr:prisoners)
+			this.prisoners.add( new Player(plyr));
 	}
 
     public Disciplinary(Disciplinary copy) {
     	super(copy);
+    	prisoners = new ArrayList<Player>();
+ 
+    	
+    	if( copy.prisoners == null)
+    		return;
+    	
     	for(int i = 0; i < copy.prisoners.size(); i++) {
     		Player plyr = new Player(copy.prisoners.get(i));
     		this.prisoners.add(plyr);

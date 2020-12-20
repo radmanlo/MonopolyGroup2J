@@ -140,7 +140,19 @@ public class GameManager implements Serializable {
 	 * @param distance
 	 */
 	public void movePlayer(Player player, int distance){
+		final int START_AWARD = 250; // TODO get this from the xml file
+
+		Location oldLocation = LocationManager.getInstance().getPlayerLocation(player);
 		Location newLocation = LocationManager.getInstance().movePlayer(player, distance);
+
+		int oldLocationId = oldLocation.getLocationId();
+		int newLocationId = newLocation.getLocationId();
+
+		// Check if passed the starting location to give award
+		if (checkPassingStartReward(oldLocationId, newLocationId)){
+			PlayerManager.getInstance().addMoneyToPlayer(player, START_AWARD);
+		}
+
 		// Activate the new Location
 		newLocation.activate();
 		BoardManager.getInstance().updateMap();
@@ -189,10 +201,19 @@ public class GameManager implements Serializable {
 		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
 	}
 
-//	public static void executePurchase() { // Let's have it in location's activate() method
-//
-//	}
-	
+	public boolean checkPassingStartReward(int oldLocationId, int newLocationId){
+		// TODO probably location Manager is a better place to do this?
+		boolean giveReward = false;
+		int distance = Math.abs(oldLocationId - newLocationId); // Just in case the player turns around the bord and end
+															// up in a location > old location (probably not possible)
+
+		if (distance > 40 || newLocationId < oldLocationId){
+			giveReward = true;
+		}
+
+		return giveReward;
+	}
+
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
 //		return false;
 //	}
@@ -200,15 +221,5 @@ public class GameManager implements Serializable {
 //	public static LocationManager getInventoryManager() { // What does it do?
 //		return null;
 //	}
-	
-//	private boolean payRent() { // Let's have it in location's activate() method
-//		return false;
-//	}
-	
-//	private void getAllTaxesFromMayfest() { // Let's have it in location's activate() method
-//
-//	}
-	
-	
 }
 

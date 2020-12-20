@@ -274,7 +274,7 @@ public class Map extends JPanel{
 				yPoint = (int) orgPoint.getY() + HEIGHT_FROM_ORG_POINT;
 			}else if(sideOfLoc == BoardSide.RIGHT) {
 				vendingMachine.image = Utils.scaleImage(30,25,"./resources/VendingMachine_Right.png");
-				xPoint = (int) orgPoint.getX() - STARBUCKS_HEIGHT_OFFSET;
+				xPoint = (int) orgPoint.getX() + 15 - STARBUCKS_HEIGHT_OFFSET;
 				yPoint = (int) orgPoint.getY() + 5 + SPACE_BETWEEN_VENDINGMACHINES * i;
 			}
 			

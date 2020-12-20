@@ -15,7 +15,9 @@ import userInterface.components.RoundedButton;
 import userInterface.components.RoundedPanel;
 import utilities.Utils;
 
-public class LoadGameMenu extends Menu{
+import java.awt.Dimension;
+
+public class LoadGameMenu extends Menu {//extends Menu{
 	
 	private JTable gamesList;
 	private RoundedButton loadGameBtn;
@@ -29,7 +31,7 @@ public class LoadGameMenu extends Menu{
 	
 	public LoadGameMenu() {
 		super("./resources/MainBG.png");
-		remove(backBtn);
+		 remove(backBtn);
 		setLayout(null);
 
 		localDataManager = LocalDataManager.getInstance();
@@ -56,7 +58,7 @@ public class LoadGameMenu extends Menu{
 		goBackBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				goBackPanel();
+
 			}
 		});
 
