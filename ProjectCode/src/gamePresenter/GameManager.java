@@ -78,6 +78,8 @@ public class GameManager implements Serializable {
 			this.dice.rollDices();
 			moveDistance += this.dice.getTotalResult();
 		}while(this.dice.isDoubleDice());
+        BoardManager.getInstance().updateMap();
+        BoardManager.getInstance().updateInteractionArea();
 
 		// move player's token
 		movePlayer(currentPlayer, moveDistance);
