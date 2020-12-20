@@ -1,5 +1,9 @@
 package gamePresenter;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serializable;
@@ -31,10 +35,12 @@ public class BoardManager extends JPanel implements Serializable{
 	private EndTurnPrompt endturnPrompt;
 	private TradeScreen tradeScreen;
 	private InventoryScreen inventoryScreen;
+	private Image backgroundImage;
 	
 	
 	private BoardManager() {
-		setBounds(0, 0, 1900, 1000);
+		backgroundImage = new ImageIcon("./resources/BoardManager.png").getImage();
+		setBounds(0, 0, 2000, 1200);
 		setLayout(null);
 		map = new Map();
 		add(map);
@@ -175,4 +181,11 @@ public class BoardManager extends JPanel implements Serializable{
 		revalidate();
 		repaint();
 	}
+	
+	@Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        g.drawImage(backgroundImage, 0,0, null);
+    }
 }
