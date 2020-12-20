@@ -2,6 +2,8 @@ package userInterface.scene;
 import javax.swing.JPanel;
 
 import models.Player;
+import models.location.Location;
+import models.location.Property;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -10,7 +12,9 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 
+import gamePresenter.GameManager;
 import gamePresenter.LocationManager;
+import gamePresenter.PlayerManager;
 
 import java.awt.Component;
 import javax.swing.SwingConstants;
@@ -26,6 +30,9 @@ import javax.swing.event.ListSelectionEvent;
 
 public class InventoryScreen extends JPanel{
 	private JButton degradeBtn;
+	private JButton upgradeBtn;
+	private JButton sellBtn;
+	private JButton useCardBtn;
 	private JList locsList_1;
 
 	public InventoryScreen(Player player) {
@@ -75,7 +82,38 @@ public class InventoryScreen extends JPanel{
 			locsList = new JList();
 			locsList.addListSelectionListener(new ListSelectionListener() {
 				public void valueChanged(ListSelectionEvent arg0) {
-					System.out.println("asdfdf");
+					
+					if(locsList.getSelectedValue() != null) {
+						Location loc = LocationManager.getInstance().getLocationByName( (String) locsList.getSelectedValue());
+						
+						if( loc instanceof Property ) {
+							if( LocationManager.getInstance().isPropertyUpgradeable((Property) loc))
+								upgradeBtn.setEnabled(true);
+							else
+								upgradeBtn.setEnabled(false);
+							
+							
+							if(LocationManager.getInstance().isPropertySellable((Property)loc))
+								sellBtn.setEnabled(true);
+							else
+								sellBtn.setEnabled(false);
+							
+							if(LocationManager.getInstance().isPropertyDegradeable((Property)loc))
+								degradeBtn.setEnabled(true);
+							else
+								degradeBtn.setEnabled(false);
+						}
+						else {
+							sellBtn.setEnabled(true);
+							degradeBtn.setEnabled(false);
+							upgradeBtn.setEnabled(false);
+						}
+					}
+					else {
+						sellBtn.setEnabled(false);
+						degradeBtn.setEnabled(false);
+						upgradeBtn.setEnabled(false);
+					}
 				}
 			});
 		
@@ -90,15 +128,15 @@ public class InventoryScreen extends JPanel{
 		JList cardsList = new JList(player.getCards().toArray());
 		cardsPanel.add(cardsList);
 		
-		JButton useCardBtn = new JButton("Use Card");
+		useCardBtn = new JButton("Use Card");
 		useCardBtn.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		useCardBtn.setBounds(20, 545, 198, 44);
 		add(useCardBtn);
 		
-		JButton upgradeBtn = new JButton("Upgrade by giving some TL");
+		upgradeBtn = new JButton("Upgrade by giving some TL");
 		upgradeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				player.getOwnedLocations().get(cardsList.getSelectedIndex()).upgrade();
+				GameManager.getInstance().upgradeProperty((String) locsList.getSelectedValue());	
 			}
 		});
 		upgradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -108,14 +146,19 @@ public class InventoryScreen extends JPanel{
 		degradeBtn = new JButton("Degrade to get some TL");
 		degradeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				player.getOwnedLocations().get(cardsList.getSelectedIndex()).degrade();
+				GameManager.getInstance().degradeProperty((String) locsList.getSelectedValue());
 			}
 		});
 		degradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		degradeBtn.setBounds(278, 501, 293, 39);
 		add(degradeBtn);
 		
-		JButton sellBtn = new JButton("Sell to get some TL");
+		sellBtn = new JButton("Sell to get some TL");
+		sellBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameManager.getInstance().sellProperty((String) locsList.getSelectedValue());
+			}
+		});
 		sellBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		sellBtn.setBounds(278, 550, 293, 39);
 		add(sellBtn);

@@ -379,6 +379,29 @@ public class GameManager implements Serializable {
 		return false;
 	}
 
+	/*
+	 * gets the name of the property to be upgraded and upgrades it 
+	 */
+	public void upgradeProperty(String nameOfProperty) { 
+		
+	}
+	
+	/*
+	 * gets the name of the property to be upgraded and degrades it 
+	 */
+	public void degradeProperty(String selectedValue) {
+		
+		
+	}
+	
+	/*
+	 * gets the name of the property to be upgraded and sells it 
+	 */
+	public void sellProperty(String selectedValue) {
+		
+		
+	}
+	
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
 //		return false;
 //	}
