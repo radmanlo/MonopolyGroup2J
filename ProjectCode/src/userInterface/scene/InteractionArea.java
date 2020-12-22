@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import gamePresenter.BoardManager;
@@ -25,6 +26,7 @@ import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class InteractionArea extends JPanel{
 	private JButton buyButton;
@@ -143,6 +145,16 @@ public class InteractionArea extends JPanel{
 		
 		JButton saveBtn = new JButton("Save Game");
 		saveBtn.setBounds(676, 968, 116, 23);
+		saveBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				LocalDataManager.getInstance().saveGame(saveTxtField.getText());
+				 JFrame f =new JFrame();  
+				 JOptionPane.showMessageDialog(f, "You saved the game with name " + saveTxtField.getText());  
+			}
+			
+		});
 		add(saveBtn);
 
 		otherPlayers = new ArrayList<PlayerInfoScreen>();

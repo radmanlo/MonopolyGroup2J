@@ -72,7 +72,12 @@ public class LoadGameMenu extends Menu {//extends Menu{
 		deleteGameBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				deleteGame();
+				try {
+					deleteGame();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -174,9 +179,14 @@ public class LoadGameMenu extends Menu {//extends Menu{
 
 		// initialize game if any is selected
 		if(item != null) {
+			System.out.println("Geldim item Null Değil");
 			localDataManager.loadGame(item.getFilename());
 		}
-		System.out.println(item);
+		else {
+			System.out.println("Geldim item Null");
+			System.out.println(item);
+		return item != null;
+		}
 		return item != null;
 	}
 
@@ -194,7 +204,7 @@ public class LoadGameMenu extends Menu {//extends Menu{
 		return null;
 	}
 	
-	private boolean deleteGame() {
+	private boolean deleteGame() throws Exception {
 		SavedGameTile item = searchForSelected();
 
 		// initialize game if any is selected

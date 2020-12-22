@@ -17,6 +17,7 @@ import models.location.MayfestTile;
 import models.location.Property;
 import models.location.StartTile;
 import models.location.Utility;
+import userInterface.menus.MenuManager;
 
 import org.w3c.dom.*;
 
@@ -127,6 +128,7 @@ public class LocalDataManager implements Serializable{
 	
 	public void loadGame(String name) {
 		ArrayList<String> savedGames = getSavedNames();
+		System.out.println(name);
 		String filename = "./resources/saves/"+ name+ "location.txt";
         loadLocation(filename);
         
@@ -144,6 +146,7 @@ public class LocalDataManager implements Serializable{
 
         filename = "./resources/saves/"+ name+ "trade.txt";
         loadTrade(filename);
+        MenuManager.getInstance().openMenu(6);
 	}
 	public void loadTrade(String string) {
 		// TODO Auto-generated method stub

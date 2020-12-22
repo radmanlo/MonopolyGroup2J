@@ -93,6 +93,7 @@ public class MenuManager { //it is finished -G
 			BoardManager board = BoardManager.getInstance();
 			appFrame.contentPane.add(board);
 			BoardManager.getInstance().updateMap();
+			BoardManager.getInstance().updateInteractionArea();
 			break;
 		default:
 			System.out.println("An error occurred on openMenu(int)");
