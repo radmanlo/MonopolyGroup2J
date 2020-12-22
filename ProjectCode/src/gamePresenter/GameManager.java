@@ -101,6 +101,16 @@ public class GameManager implements Serializable {
 					BoardManager.getInstance().updateMap();
 					BoardManager.getInstance().updateInteractionArea();
 					movePlayer(currentPlayer, dice.getTotalResult());
+					for(int i = 0; i< LocationManager.getInstance().getLocationList().size(); i++) {
+						System.out.println( LocationManager.getInstance().getLocationList().size());
+						System.out.println(LocationManager.getInstance().getLocationList().get(i).toString());
+						System.out.println("");
+						LocationManager.getInstance().getLocationList().get(i).printPlayersHere();
+
+					}
+					for(int i = 0; i < PlayerManager.getInstance().getPlayers().size(); i++) {
+						System.out.println(PlayerManager.getInstance().getPlayers().get(i).getName() + " - cur loc : " + PlayerManager.getInstance().getPlayers().get(i).getLocation().getName());
+					}
 				}
 			}
 		});
@@ -114,6 +124,7 @@ public class GameManager implements Serializable {
 //
 //			moveDistance += this.dice.getTotalResult();
 //		}while(this.dice.isDoubleDice());
+
 	}
 
 	public int totalDiceResultForUtility() {
@@ -273,7 +284,7 @@ public class GameManager implements Serializable {
 
 	public void create(GameManager mngr) {
 		// TODO Auto-generated method stub
-		gameManager = new GameManager(mngr);
+		//gameManager = new GameManager(mngr);
 	}
 
 	/**

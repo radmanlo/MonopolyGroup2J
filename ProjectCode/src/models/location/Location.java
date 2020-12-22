@@ -86,7 +86,7 @@ public class Location implements Serializable{
 
     public void removePlayerFromHere(Player player) {
         for (int i = 0; i < playersHere.size(); i++){
-            if (playersHere.get(i).equals(player)){
+            if (playersHere.get(i).getName().equals(player.getName())){
                 playersHere.remove(i);
                 return;
             }
@@ -108,5 +108,11 @@ public class Location implements Serializable{
 
     public LOCATION_TYPES getType(){
         return this.type;
+    }
+
+    public void printPlayersHere() {
+    	for(int i = 0; i < this.getAllPlayersHere().size(); i++) {
+    		System.out.print(this.playersHere.get(i).getName() + " - ");
+    	}
     }
 }

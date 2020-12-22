@@ -80,9 +80,16 @@ public class TradeManager implements Serializable{
 	}
 	public void create(TradeManager mngr) {
 		// TODO Auto-generated method stub
-		tradeMngr = new TradeManager(mngr);
 	}
 
+	public void set(TradeManager mngr) {
+		// TODO Auto-generated constructor stub
+		tradeDeals = new ArrayList<TradeDeal>();
+		for(int i = 0; i < mngr.tradeDeals.size(); i++) {
+			TradeDeal td = new TradeDeal(mngr.tradeDeals.get(i));
+			this.tradeDeals.add(td);
+		}
+	}
 	public ArrayList<String> getTradeDealNames(Player currentPlayer) {
 		ArrayList<String> dealNames = new ArrayList<String>();
 		for( TradeDeal deal : tradeDeals)

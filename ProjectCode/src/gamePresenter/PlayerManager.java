@@ -106,9 +106,21 @@ public class PlayerManager implements Serializable{
 
 	public void create(PlayerManager mngr) {
 		// TODO Auto-generated method stub
-		playerManager = new PlayerManager(mngr);
+		set(mngr);
 	}
 
+	public void set(PlayerManager mngr) {
+		players = new ArrayList<Player>();
+		currentPlayer = null;
+		currentPlayerIndex = mngr.currentPlayerIndex;
+		// TODO Auto-generated constructor stub
+		for(int i = 0; i < mngr.players.size(); i++) {
+			Player plyr = new Player(mngr.players.get(i));
+			this.players.add(plyr);
+		}
+		currentPlayer = new Player(mngr.getCurrentPlayer());
+	}
+	
 	public void deductMoneyFromPlayer(Player player, int amount){
 		player.setUsableMoney(player.getUsableMoney() - amount);
 	}
