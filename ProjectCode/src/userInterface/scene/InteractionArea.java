@@ -42,6 +42,7 @@ public class InteractionArea extends JPanel{
 	private ArrayList<PlayerInfoScreen> otherPlayers;
 	private JButton btnNewButton;
 	private Image backgroundImage;
+	private JTextField saveTxtField;
 	
 	public InteractionArea() {
 		backgroundImage = new ImageIcon("./resources/BoardManager.png").getImage();
@@ -134,6 +135,15 @@ public class InteractionArea extends JPanel{
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnNewButton.setBounds(53, 402, 311, 37);
 		add(btnNewButton);
+		
+		saveTxtField = new JTextField();
+		saveTxtField.setBounds(505, 969, 142, 22);
+		add(saveTxtField);
+		saveTxtField.setColumns(10);
+		
+		JButton saveBtn = new JButton("Save Game");
+		saveBtn.setBounds(676, 968, 116, 23);
+		add(saveBtn);
 
 		otherPlayers = new ArrayList<PlayerInfoScreen>();
 	}
