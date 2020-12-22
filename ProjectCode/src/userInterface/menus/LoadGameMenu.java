@@ -18,8 +18,7 @@ import utilities.Utils;
 import java.awt.Dimension;
 
 public class LoadGameMenu extends Menu {//extends Menu{
-	
-	private JTable gamesList;
+
 	private RoundedButton loadGameBtn;
 	private RoundedButton deleteGameBtn;
 	private RoundedButton goBackBtn;
@@ -180,13 +179,27 @@ public class LoadGameMenu extends Menu {//extends Menu{
 		System.out.println(item);
 		return item != null;
 	}
+
+	/**
+	 * Searches if any saved game is selected and returns the name of it
+	 * @return the name of selected game
+	 */
+	private String getSelectedGameName() {
+		SavedGameTile item = searchForSelected();
+
+		if(item != null) {
+			System.out.println(item.getFilename());
+			return item.getFilename();
+		}
+		return null;
+	}
 	
 	private boolean deleteGame() {
 		SavedGameTile item = searchForSelected();
 
 		// initialize game if any is selected
 		if(item != null) {
-//			localDataManager.deleteSavedGame(item.getFilename());
+			localDataManager.deleteSavedGame(item.getFilename());
 		}
 		System.out.println(item);
 		return item != null;
