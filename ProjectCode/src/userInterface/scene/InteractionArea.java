@@ -188,7 +188,7 @@ public class InteractionArea extends JPanel{
 
 		if(PlayerManager.getInstance().getCurrentPlayer() != null ) {
 			currentPlayerPanel = new PlayerInfoScreen(PlayerManager.getInstance().getCurrentPlayer());
-			currentPlayerPanel.setBounds(53, 113, 320, 60);
+			currentPlayerPanel.setBounds(53, 113, 400, 60);
 			add(currentPlayerPanel);
 		}
 		
@@ -207,9 +207,9 @@ public class InteractionArea extends JPanel{
 
 		for( int i = 0; i< otherPlayers.size(); ++i ) {
 			if(i < 4)
-				otherPlayers.get(i).setBounds(53, 500 + 100 * i, 320, 60);
+				otherPlayers.get(i).setBounds(53, 500 + 100 * i, 400, 60);
 			else
-				otherPlayers.get(i).setBounds(500, 550 + 100 * (i - 4), 320, 60);
+				otherPlayers.get(i).setBounds(500, 550 + 100 * (i - 4), 400, 60);
 			add(otherPlayers.get(i));
 			otherPlayers.get(i).revalidate();
 			otherPlayers.get(i).repaint();
