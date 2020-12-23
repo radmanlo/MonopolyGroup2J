@@ -12,7 +12,8 @@ public class SoundManager {
 	private final String GOTO_JAIL_PATH = "resources/sounds/land-goto-jail.wav";
 	private final String CHANCE_CARD_PATH = "resources/sounds/land-on-chance-card.wav";
 	private final String PAY_TAX_PATH = "resources/sounds/pay-tax.wav";
-
+	private final String START_TILE_PATH ="resources/sounds/startile.wav";
+	
 	private static SoundManager soundManager = null;
 	private int volumeLevel;
 	private int sfxVolume;
@@ -25,6 +26,7 @@ public class SoundManager {
 	private Clip gotoJailClip;
 	private Clip chanceCardClip;
 	private Clip payTaxClip;
+	private Clip startTileClip;
 
 
 	private SoundManager() {
@@ -38,6 +40,7 @@ public class SoundManager {
 		this.gotoJailClip = playMusic(this.GOTO_JAIL_PATH);
 		this.chanceCardClip = playMusic(this.CHANCE_CARD_PATH);
 		this.payTaxClip = playMusic(this.PAY_TAX_PATH);
+		this.startTileClip = playMusic(this.START_TILE_PATH);
 		this.setSfxVolume(40);
 		this.setBGVolume(10);
 	}
@@ -155,7 +158,11 @@ public class SoundManager {
 		this.setSfxVolume(this.sfxVolume);
 		this.gotoJailClip.start();
 	}
-
+	public void playOnPassingStartTile() {
+		this.startTileClip = playMusic(this.START_TILE_PATH);
+		this.setSfxVolume(this.sfxVolume);
+		this.startTileClip.start();
+	}
 	public void playLandedOnChanceCardSound() {
 		this.chanceCardClip = playMusic(this.CHANCE_CARD_PATH);
 		this.setSfxVolume(this.sfxVolume);

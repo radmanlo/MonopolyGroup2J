@@ -1,9 +1,9 @@
 <Bilopoly>
-    <card storable="true" id="111" name="Out Of Jail" description="Get out of jail."/>
-    <card storable="true" id="112" name="Buyable Upgrade" description="You are lucky! A stranger said he could improve your buyable.Upgrade a buyable without paying any money whenever you want."/>
-    <card storable="false" id="113" name="Pladiarizm" description="You got caught plagiarizing, pay 500 liras to the bank."/>
+    <card storable="true" id="111" name="Out Of Jail" description="Congratulations, You got an Get Out Of Jail card !"/>
+    <card storable="true" id="112" name="Buyable Upgrade" description="You are lucky! A stranger said he could improve your random buyable (If you have)."/>
+    <card storable="false" id="113" name="Pladiarizm" description="You got caught plagiarizing, pay 500 liras to the bank."></card>
     <card storable="false" id="114" name="WC" description="Your pee has come, go to the WC."/>
-    <card storable="false" id="115" name="A in CS319" description="You got A from CS319, get 500 liras from Eray Tüzün."/>
+    <card storable="false" id="115" name="A in CS319" description="You got A from CS319, get 500 liras from Eray Tuzun."/>
     <card storable="false" id="116" name="School Taxes" description="Pay school taxes 1000 liras."/>
     <card storable="false" id="117" name="Accodent fee" description="You had an accident in Mescid Otopark, pay 500 liras."/>
     <card storable="false" id="118" name="Money Borrowed" description="You borrowed Money from the player whose turn comes after you, Pay 1500 liras."/>
