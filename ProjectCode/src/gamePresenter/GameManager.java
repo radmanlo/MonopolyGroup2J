@@ -524,6 +524,7 @@ public class GameManager implements Serializable {
 		LocationManager.getInstance().readyForInitialize();
 		TradeManager.getInstance().readyForInitialize();
 		BankManager.getInstance().readyForInitialize();
+		BoardManager.getInstance().readyForInitialize();
 	}
 
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method

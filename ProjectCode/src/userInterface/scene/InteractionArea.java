@@ -231,4 +231,11 @@ public class InteractionArea extends JPanel{
         
         g.drawImage(backgroundImage, 0,0, null);
     }
+
+	public void readyForInitialize() {
+		buyBtn.setEnabled(false);
+		rollDiceBtn.setEnabled(true);
+		payToRerollBtn.setEnabled(false);
+		endTurnBtn.setEnabled(false);
+	}
 }

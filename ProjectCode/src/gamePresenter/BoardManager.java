@@ -195,4 +195,8 @@ public class BoardManager extends JPanel implements Serializable{
         
         g.drawImage(backgroundImage, 0,0, null);
     }
+
+	public void readyForInitialize() {
+		interactionArea.readyForInitialize();	
+	}
 }
