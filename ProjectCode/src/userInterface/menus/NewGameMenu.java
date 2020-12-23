@@ -169,10 +169,8 @@ public class NewGameMenu extends Menu{
 		if(areAllPlayersUnique() == false) {
 			showMessageDialog(null, "Tokens, names or colors can not be same! \nName can not be empty");
 		}else {
-			PlayerManager.getInstance().readyForInitialize();
-			LocationManager.getInstance().readyForInitialize();
-			TradeManager.getInstance().readyForInitialize();
-			BankManager.getInstance().readyForInitialize();
+
+			GameManager.getInstance().readyForInitialize();
 			potentialPlayers = new ArrayList<PotentialPlayer>();
 			// Ask the local data manager to get the default values' document
 			LocalDataManager ldm = LocalDataManager.getInstance();
