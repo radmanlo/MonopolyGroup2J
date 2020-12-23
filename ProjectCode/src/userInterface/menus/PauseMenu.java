@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -20,6 +21,7 @@ import userInterface.components.RoundedButton;
 import userInterface.components.RoundedPanel;
 import utilities.Utils;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class PauseMenu extends Menu{
 	private RoundedButton saveBtn; 
@@ -55,6 +57,8 @@ public class PauseMenu extends Menu{
 	
 	private void saveGame() {
 		LocalDataManager.getInstance().saveGame( saveNameTxtField.getText() );
+		JFrame f = new JFrame();  
+		JOptionPane.showMessageDialog(f, "You saved the game with name " + saveNameTxtField.getText()); 
 	}
 	
 	private void addLabels() {

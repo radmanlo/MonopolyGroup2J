@@ -66,6 +66,8 @@ public class BoardManager extends JPanel implements Serializable{
 	public void updateInteractionArea() {
 		closeInventoryScreen();
 		closeTradeScreen();
+		interactionArea.update();
+		interactionArea.repaint();
 		showPendingTradeDeals();
 		interactionArea.setCurrentPlayerMoneyLbl(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney());
 		interactionArea.setDiceRollResultLbl(GameManager.getInstance().totalDiceResultForUtility());
@@ -125,11 +127,11 @@ public class BoardManager extends JPanel implements Serializable{
 		if(LocationManager.getInstance().isPlaceBuyable()) {
 			BuyableLocation log = (BuyableLocation)LocationManager.getInstance().getLocationByName(PlayerManager.getInstance().getCurrentPlayer().getLocation().getName());
 			if(log.getOwner() == null)
-				interactionArea.buyBtn.setEnabled(true);
+				interactionArea.getBuyButton().setEnabled(true);
 		}
 		else {
 
-			interactionArea.buyBtn.setEnabled(false);
+			interactionArea.getBuyButton().setEnabled(false);
 		}
 			
 	}

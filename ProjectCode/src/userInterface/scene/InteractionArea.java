@@ -33,7 +33,7 @@ public class InteractionArea extends JPanel{
 	private JButton optionsButton;
 	private JButton selectPropertyButton;
 	private JTextField loadField;
-	public JButton buyBtn;
+	private JButton buyBtn;
 	private JButton rollDiceBtn;
 	private JButton offerTradeBtn;
 	private JButton pauseBtn;
@@ -42,7 +42,7 @@ public class InteractionArea extends JPanel{
 	private JLabel diceRollResultLbl;
 	private PlayerInfoScreen currentPlayerPanel;
 	private ArrayList<PlayerInfoScreen> otherPlayers;
-	private JButton btnNewButton;
+	private JButton payToRerollBtn;
 	private Image backgroundImage;
 	private JTextField saveTxtField;
 	
@@ -50,127 +50,9 @@ public class InteractionArea extends JPanel{
 		backgroundImage = new ImageIcon("./resources/BoardManager.png").getImage();
 		setLayout(null);
 		setBounds(0, 0, 900, 1000);
-
-		buyBtn = new JButton("Buy");
-		buyBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		buyBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GameManager.getInstance().executePurchase();
-			}
-		});
-		buyBtn.setBounds(505, 309, 108, 44);
-		add(buyBtn);
-
-		rollDiceBtn = new JButton("Roll Dice");
-		rollDiceBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		rollDiceBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				GameManager.getInstance().rollDice();
-				btnNewButton.setEnabled(true);
-			}
-		});
 		
-		rollDiceBtn.setBounds(53, 312, 168, 38);
-		add(rollDiceBtn);
-
-		offerTradeBtn = new JButton("Offer Trade");
-		offerTradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		offerTradeBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				BoardManager.getInstance().openTradeScreen(PlayerManager.getInstance().getCurrentPlayer());
-			}
-		});
-		offerTradeBtn.setBounds(738, 302, 152, 52);
-		add(offerTradeBtn);
-
-
-
-		pauseBtn = new JButton("Pause");
-		pauseBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MenuManager.getInstance().openMenu(7);
-			}
-		});
-		pauseBtn.setBounds(10, 23, 89, 23);
-		add(pauseBtn);
-
-		JLabel constantLblCurrentPlyr = new JLabel("Current Player");
-		constantLblCurrentPlyr.setForeground(Color.WHITE);
-		constantLblCurrentPlyr.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		constantLblCurrentPlyr.setBounds(108, 73, 232, 34);
-		add(constantLblCurrentPlyr);
-
-		endTurnBtn = new JButton("End Turn");
-		endTurnBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		endTurnBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				update();
-				GameManager.getInstance().handleEndTurn();
-			}
-		});
-		endTurnBtn.setBounds(695, 390, 195, 59);
-		add(endTurnBtn);
-
-		JLabel constantLblOtherPlyrs = new JLabel("Other Players");
-		constantLblOtherPlyrs.setForeground(Color.WHITE);
-		constantLblOtherPlyrs.setFont(new Font("Tahoma", Font.PLAIN, 33));
-		constantLblOtherPlyrs.setBounds(53, 458, 232, 34);
-		add(constantLblOtherPlyrs);
-
-		currentPlayerMoneyLbl = new JLabel("some tl");
-		currentPlayerMoneyLbl.setForeground(Color.WHITE);
-		currentPlayerMoneyLbl.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		currentPlayerMoneyLbl.setBounds(524, 361, 89, 23);
-		add(currentPlayerMoneyLbl);
-
-		diceRollResultLbl = new JLabel("Roll the dice please...");
-		diceRollResultLbl.setForeground(Color.WHITE);
-		diceRollResultLbl.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		diceRollResultLbl.setBounds(63, 362, 168, 23);
-		add(diceRollResultLbl);
-		
-		btnNewButton = new JButton("Pay 200 TL to Reroll The Dice");
-		btnNewButton.setEnabled(false);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PlayerManager.getInstance().getCurrentPlayer().setUsableMoney(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney()-200);
-				BoardManager.getInstance().updateInteractionArea();
-				BoardManager.getInstance().enableDice();
-				btnNewButton.setEnabled(false);
-			}
-		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnNewButton.setBounds(53, 402, 311, 37);
-		add(btnNewButton);
-		
-		saveTxtField = new JTextField();
-		saveTxtField.setBounds(505, 969, 142, 22);
-		add(saveTxtField);
-		saveTxtField.setColumns(10);
-		
-		JButton saveBtn = new JButton("Save Game");
-		saveBtn.setBounds(676, 968, 116, 23);
-		saveBtn.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				LocalDataManager.getInstance().saveGame(saveTxtField.getText());
-				 JFrame f = new JFrame();  
-				 JOptionPane.showMessageDialog(f, "You saved the game with name " + saveTxtField.getText());  
-			}
-			
-		});
-		add(saveBtn);
-		
-		JButton tempBtn = new JButton("Move 1 Forward");
-		tempBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(), 1);
-				BoardManager.getInstance().updateMap();
-			}
-		});
-		tempBtn.setBounds(703, 919, 142, 23);
-		add(tempBtn);
+		addButtons();
+		addLabels();
 
 		otherPlayers = new ArrayList<PlayerInfoScreen>();
 	}
@@ -189,6 +71,7 @@ public class InteractionArea extends JPanel{
 	public JButton getRollDiceButton() {
 		return rollDiceBtn;
 	}
+	
 	public JButton getBuyButton() {
 		return buyBtn;
 	}
@@ -229,6 +112,113 @@ public class InteractionArea extends JPanel{
 			otherPlayers.get(i).revalidate();
 			otherPlayers.get(i).repaint();
 		}
+	}
+	
+	private void addButtons() {
+		buyBtn = new JButton("Buy");
+		buyBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		buyBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameManager.getInstance().executePurchase();
+			}
+		});
+		buyBtn.setBounds(505, 309, 108, 44);
+		add(buyBtn);
+		
+		rollDiceBtn = new JButton("Roll Dice");
+		rollDiceBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rollDiceBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameManager.getInstance().rollDice();
+				endTurnBtn.setEnabled(true);
+				payToRerollBtn.setEnabled(true);
+			}
+		});
+		rollDiceBtn.setBounds(53, 312, 168, 38);
+		add(rollDiceBtn);
+		
+		offerTradeBtn = new JButton("Offer Trade");
+		offerTradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		offerTradeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BoardManager.getInstance().openTradeScreen(PlayerManager.getInstance().getCurrentPlayer());
+			}
+		});
+		offerTradeBtn.setBounds(738, 302, 152, 52);
+		add(offerTradeBtn);
+		
+		pauseBtn = new JButton("Pause");
+		pauseBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuManager.getInstance().openMenu(7);
+			}
+		});
+		pauseBtn.setBounds(10, 23, 89, 23);
+		add(pauseBtn);
+		
+		endTurnBtn = new JButton("End Turn");
+		endTurnBtn.setEnabled(false);
+		endTurnBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		endTurnBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				update();
+				GameManager.getInstance().handleEndTurn();
+				payToRerollBtn.setEnabled(false);
+				endTurnBtn.setEnabled(false);
+			}
+		});
+		endTurnBtn.setBounds(695, 390, 195, 59);
+		add(endTurnBtn);
+		
+		payToRerollBtn = new JButton("Pay 200 TL to Reroll The Dice");
+		payToRerollBtn.setEnabled(false);
+		payToRerollBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PlayerManager.getInstance().getCurrentPlayer().setUsableMoney(PlayerManager.getInstance().getCurrentPlayer().getUsableMoney()-200);
+				BoardManager.getInstance().updateInteractionArea();
+				BoardManager.getInstance().enableDice();
+				payToRerollBtn.setEnabled(false);
+			}
+		});
+		payToRerollBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		payToRerollBtn.setBounds(53, 402, 311, 37);
+		add(payToRerollBtn);
+		
+		JButton tempBtn = new JButton("Move 1 Forward");  //should be removed after testing
+		tempBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(), 1);
+				BoardManager.getInstance().updateMap();
+			}
+		});
+		tempBtn.setBounds(703, 919, 142, 23);
+		add(tempBtn);
+	}
+	
+	private void addLabels() {
+		JLabel constantLblCurrentPlyr = new JLabel("Current Player");
+		constantLblCurrentPlyr.setForeground(Color.WHITE);
+		constantLblCurrentPlyr.setFont(new Font("Tahoma", Font.PLAIN, 33));
+		constantLblCurrentPlyr.setBounds(108, 73, 232, 34);
+		add(constantLblCurrentPlyr);
+
+		JLabel constantLblOtherPlyrs = new JLabel("Other Players");
+		constantLblOtherPlyrs.setForeground(Color.WHITE);
+		constantLblOtherPlyrs.setFont(new Font("Tahoma", Font.PLAIN, 33));
+		constantLblOtherPlyrs.setBounds(53, 458, 232, 34);
+		add(constantLblOtherPlyrs);
+
+		currentPlayerMoneyLbl = new JLabel("some tl");
+		currentPlayerMoneyLbl.setForeground(Color.WHITE);
+		currentPlayerMoneyLbl.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		currentPlayerMoneyLbl.setBounds(524, 361, 89, 23);
+		add(currentPlayerMoneyLbl);
+
+		diceRollResultLbl = new JLabel("Roll the dice please...");
+		diceRollResultLbl.setForeground(Color.WHITE);
+		diceRollResultLbl.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		diceRollResultLbl.setBounds(63, 362, 168, 23);
+		add(diceRollResultLbl);
 	}
 	
 	@Override
