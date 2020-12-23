@@ -194,14 +194,13 @@ public class Map extends JPanel {
 				tokenSize = 50;
 			else if( playersHere.size() <= 2)
 				tokenSize = 35;
-			else if( playersHere.size() <= 3)
+			else if( loc instanceof StartTile || loc instanceof MayfestTile || loc instanceof Disciplinary || loc instanceof GoToDisciplinaryTile)
 				tokenSize = 30;
-			else{
-				if( loc instanceof StartTile || loc instanceof MayfestTile || loc instanceof Disciplinary || loc instanceof GoToDisciplinaryTile)
-					tokenSize = 30;
-				else
-					tokenSize = 20;
-			}			
+			else if( playersHere.size() <= 3)
+				tokenSize = 25;
+			else
+				tokenSize = 20;
+			
 			
 			if( i >= 4)
 				offsetForMoreThan4PlayersOnATile = (tokenSize + SPACE_BETWEEN_TOKENS) ;

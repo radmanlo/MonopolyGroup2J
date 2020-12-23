@@ -16,6 +16,7 @@ public class MenuManager { //it is finished -G
 	private CreditsMenu creditsMenu;
 	private MainMenu mainMenu;
 	private HowToPlayMenu howToPlayMenu;
+	private PauseMenu pauseMenu;
 	private JButton quitBtn;
 
 	private MenuManager() {
@@ -41,6 +42,9 @@ public class MenuManager { //it is finished -G
 		
 		creditsMenu = new CreditsMenu();
 		creditsMenu.setBounds(0, 0, 1900, 1000);
+		
+		pauseMenu = new PauseMenu();
+		pauseMenu.setBounds(0, 0, 1900, 1000);
 
 		SoundManager soundManager = SoundManager.getInstance();
 		soundManager.playBackgroundSound();
@@ -63,9 +67,7 @@ public class MenuManager { //it is finished -G
 			break;
 		case 1:
 			appFrame.contentPane.remove(mainMenu);
-			//BoardManager board = BoardManager.getInstance();
-			//appFrame.contentPane.add(board);
-			appFrame.contentPane.add(loadGameMenu); //temporary change to test Board
+			appFrame.contentPane.add(loadGameMenu); 
 			break;
 		case 2:
 			appFrame.contentPane.remove(mainMenu);
@@ -80,21 +82,19 @@ public class MenuManager { //it is finished -G
 			appFrame.contentPane.add(creditsMenu);
 			break;
 		case 5: 
-			appFrame.contentPane.remove(newGameMenu);
-			appFrame.contentPane.remove(loadGameMenu);
-			appFrame.contentPane.remove(howToPlayMenu);
-			appFrame.contentPane.remove(settingsMenu);
-			appFrame.contentPane.remove(creditsMenu);
+			appFrame.contentPane.removeAll();
 			appFrame.contentPane.add(mainMenu);
 			break;
 		case 6:
-			appFrame.contentPane.remove(newGameMenu);
-			appFrame.contentPane.remove(loadGameMenu);
+			appFrame.contentPane.removeAll();
 			BoardManager board = BoardManager.getInstance();
 			appFrame.contentPane.add(board);
 			BoardManager.getInstance().updateMap();
 			BoardManager.getInstance().updateInteractionArea();
 			break;
+		case 7:
+			appFrame.contentPane.removeAll();
+			appFrame.contentPane.add(pauseMenu);
 		default:
 			System.out.println("An error occurred on openMenu(int)");
 		}

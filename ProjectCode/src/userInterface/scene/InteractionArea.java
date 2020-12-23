@@ -86,6 +86,11 @@ public class InteractionArea extends JPanel{
 
 
 		pauseBtn = new JButton("Pause");
+		pauseBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MenuManager.getInstance().openMenu(7);
+			}
+		});
 		pauseBtn.setBounds(10, 23, 89, 23);
 		add(pauseBtn);
 
