@@ -168,6 +168,9 @@ public class BoardManager extends JPanel implements Serializable{
 		}
 	}
 	
+	public void setEndTurnButton(boolean tmp) {
+		interactionArea.getEndTurnButton().setEnabled(tmp);
+	}
 	public void animateDies(int firstDiceResult, int secondDiceResult) {
 		map.animateDies(firstDiceResult, secondDiceResult);
 	}

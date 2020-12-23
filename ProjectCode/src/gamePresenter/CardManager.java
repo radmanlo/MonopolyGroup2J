@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import models.BankAccount;
 import models.Card;
 import models.Player;
 import models.location.Location;
@@ -220,5 +221,8 @@ public class CardManager implements Serializable{
 				"cardDeck=" + cardDeck.toString() +
 				", takenCardCount=" + takenCardCount +
 				'}';
+	}
+	public void readyForInitialize() {
+		this.takenCardCount = 0;
 	}
 }

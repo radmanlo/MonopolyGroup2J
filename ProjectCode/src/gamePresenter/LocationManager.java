@@ -184,6 +184,8 @@ public class LocationManager implements Serializable {
         int curLocId = currentLocation.getLocationId();
         if((curLocId + distance) > 40) {
         	playerToMove.setUsableMoney(playerToMove.getUsableMoney()+200);
+			 JFrame f =new JFrame();  
+			 JOptionPane.showMessageDialog(f, "Congratulations, you passed Start Tile and WON 200 TL !!!");  
         }
         int nextLocId = (curLocId + distance) % 40; // There are 40 locations in total with ids: 0-39
         if(nextLocId == 0)
@@ -421,7 +423,8 @@ public class LocationManager implements Serializable {
 
         int taxValue = ((IncomeTaxTile)incomeTaxLoc).getTaxValue();
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-
+		JFrame f =new JFrame();  
+		JOptionPane.showMessageDialog(f, "Oops! You have to pay taxes: " + taxValue + " TL");  
         PlayerManager.getInstance().deductMoneyFromPlayer(currentPlayer, taxValue);
         GameManager.getInstance().updateUI();
     }
@@ -620,4 +623,8 @@ public class LocationManager implements Serializable {
 
 	    return propertiesOfPlayer;
     }
+	public void readyForInitialize() {
+		this.buyableLocations = new ArrayList<BuyableLocation>();
+		this.nonBuyableLocations = new ArrayList<Location>();
+	}
 }

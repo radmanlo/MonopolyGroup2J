@@ -99,6 +99,7 @@ public class GameManager implements Serializable {
 				if(count >= 5) {
 					// Update the map after animation
 					diceAnimationTimer.stop();
+					BoardManager.getInstance().setEndTurnButton(true); // Opening EndTurn Button after getting dice results
 					BoardManager.getInstance().updateMap();
 					BoardManager.getInstance().updateInteractionArea();
 					movePlayer(currentPlayer, dice.getTotalResult());
@@ -119,12 +120,6 @@ public class GameManager implements Serializable {
 		diceAnimationTimer.restart();
 		BoardManager.getInstance().disableDice();
 
-//		do {
-//			this.dice.rollDices();
-//			// Animated dies
-//
-//			moveDistance += this.dice.getTotalResult();
-//		}while(this.dice.isDoubleDice());
 
 	}
 

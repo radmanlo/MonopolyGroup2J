@@ -131,7 +131,6 @@ public class InteractionArea extends JPanel{
 		rollDiceBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameManager.getInstance().rollDice();
-				endTurnBtn.setEnabled(true);
 				payToRerollBtn.setEnabled(true);
 			}
 		});
@@ -195,6 +194,9 @@ public class InteractionArea extends JPanel{
 		});
 		tempBtn.setBounds(613, 919, 232, 23);
 		add(tempBtn);
+	}
+	public JButton getEndTurnButton() {
+		return this.endTurnBtn;
 	}
 	
 	private void addLabels() {

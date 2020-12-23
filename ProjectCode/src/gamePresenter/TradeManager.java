@@ -96,4 +96,7 @@ public class TradeManager implements Serializable{
 			dealNames.add(deal.getOfferer().getName() + "'s Offer");
 		return dealNames;
 	}
+	public void readyForInitialize() {
+		tradeDeals = new ArrayList<TradeDeal>();
+	}
 }

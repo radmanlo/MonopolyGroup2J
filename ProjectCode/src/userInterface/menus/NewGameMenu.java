@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import gamePresenter.BankManager;
 import gamePresenter.GameManager;
+import gamePresenter.LocationManager;
+import gamePresenter.PlayerManager;
+import gamePresenter.TradeManager;
 import models.Token;
 import models.PlayerColor;
 import org.w3c.dom.Document;
@@ -165,7 +169,11 @@ public class NewGameMenu extends Menu{
 		if(areAllPlayersUnique() == false) {
 			showMessageDialog(null, "Tokens, names or colors can not be same! \nName can not be empty");
 		}else {
-
+			PlayerManager.getInstance().readyForInitialize();
+			LocationManager.getInstance().readyForInitialize();
+			TradeManager.getInstance().readyForInitialize();
+			BankManager.getInstance().readyForInitialize();
+			potentialPlayers = new ArrayList<PotentialPlayer>();
 			// Ask the local data manager to get the default values' document
 			LocalDataManager ldm = LocalDataManager.getInstance();
 			Document doc = ldm.getDefaultValues();

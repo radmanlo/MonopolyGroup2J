@@ -3,6 +3,7 @@ package gamePresenter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import models.BankAccount;
 import models.Player;
 
 public class PlayerManager implements Serializable{
@@ -140,5 +141,10 @@ public class PlayerManager implements Serializable{
 			}
 		}
 		return null;
+	}
+	public void readyForInitialize() {
+		players = new ArrayList<Player>();
+		currentPlayer = null;
+		currentPlayerIndex = 0;
 	}
 }

@@ -76,4 +76,8 @@ public class BankManager implements Serializable {
 	public void setINTEREST_RATE(double iNTEREST_RATE) {
 		INTEREST_RATE = iNTEREST_RATE;
 	}
+	
+	public void readyForInitialize() {
+		accounts = new ArrayList<BankAccount>();
+	}
 }
