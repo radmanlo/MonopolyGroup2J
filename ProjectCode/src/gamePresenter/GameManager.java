@@ -67,6 +67,8 @@ public class GameManager implements Serializable {
 		LocalDataManager.getInstance().saveGame(name);
 	}
 
+	int total = 0;
+
 	// Game Logic Methods
 	/**
 	 * When player press RollDice this gets executed
@@ -85,9 +87,14 @@ public class GameManager implements Serializable {
 		}
 		// Let the player to roll the dice if its double
 		// Before it was done automatically
-		SoundManager.getInstance().playDiceSound();
-		this.dice.rollDices();
-		BoardManager.getInstance().animateDies(this.dice.getFirstDiceResult(), this.dice.getSecondDiceResult());
+
+		do {
+			if(diceAnimationTimer != null && diceAnimationTimer.isRunning()) continue;
+			SoundManager.getInstance().playDiceSound();
+			this.dice.rollDices();
+			total += this.dice.getTotalResult();
+			BoardManager.getInstance().animateDies(this.dice.getFirstDiceResult(), this.dice.getSecondDiceResult());
+		} while (dice.isDoubleDice());
 
 		diceAnimationTimer = new Timer(400, new ActionListener() {
 			// For counting the delay and stopping timer
@@ -102,7 +109,8 @@ public class GameManager implements Serializable {
 					BoardManager.getInstance().setEndTurnButton(true); // Opening EndTurn Button after getting dice results
 					BoardManager.getInstance().updateMap();
 					BoardManager.getInstance().updateInteractionArea();
-					movePlayer(currentPlayer, dice.getTotalResult());
+					movePlayer(currentPlayer, total);
+					total = 0;
 					for(int i = 0; i< LocationManager.getInstance().getLocationList().size(); i++) {
 						System.out.println( LocationManager.getInstance().getLocationList().size());
 						System.out.println(LocationManager.getInstance().getLocationList().get(i).toString());

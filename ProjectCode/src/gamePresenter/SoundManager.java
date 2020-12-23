@@ -6,8 +6,12 @@ import java.io.File;
 public class SoundManager {
 
 	private final String DICE_SOUND_PATH = "resources/sounds/roll-dice.wav";
-	private final String BUYING_PROPERTY_SOUND_PATH = "resources/sounds/bg-music.wav";
+	private final String BUYING_PROPERTY_SOUND_PATH = "resources/sounds/buy-property.wav";
 	private final String BACKGROUND_SOUND_PATH = "resources/sounds/bg-music.wav";
+	private final String BUYABLE_WITH_OWNER_PATH = "resources/sounds/land-buyable-with-owner.wav";
+	private final String GOTO_JAIL_PATH = "resources/sounds/land-goto-jail.wav";
+	private final String CHANCE_CARD_PATH = "resources/sounds/land-on-chance-card.wav";
+	private final String PAY_TAX_PATH = "resources/sounds/pay-tax.wav";
 
 	private static SoundManager soundManager = null;
 	private int volumeLevel;
@@ -17,15 +21,24 @@ public class SoundManager {
 	private Clip backgroundMusicClip;
 	private Clip diceClip;
 	private Clip propertyClip;
+	private Clip buyableWithOwnerClip;
+	private Clip gotoJailClip;
+	private Clip chanceCardClip;
+	private Clip payTaxClip;
 
-	
+
 	private SoundManager() {
 		this.volumeLevel = 40;
 		this.sfxVolume = 40;
-		// Create a Clip for playing the music
+		// Initialize the clips
 		this.backgroundMusicClip = playMusic(this.BACKGROUND_SOUND_PATH);
 		this.diceClip = playMusic(this.DICE_SOUND_PATH);
-		this.setSfxVolume(30);
+		this.propertyClip = playMusic(this.BUYING_PROPERTY_SOUND_PATH);
+		this.buyableWithOwnerClip = playMusic(this.BUYABLE_WITH_OWNER_PATH);
+		this.gotoJailClip = playMusic(this.GOTO_JAIL_PATH);
+		this.chanceCardClip = playMusic(this.CHANCE_CARD_PATH);
+		this.payTaxClip = playMusic(this.PAY_TAX_PATH);
+		this.setSfxVolume(40);
 		this.setBGVolume(10);
 	}
 	
@@ -70,14 +83,24 @@ public class SoundManager {
 
 		// Update volume
 		this.sfxVolume = volume;
-		FloatControl diceClipController = (FloatControl) this.diceClip.getControl(FloatControl.Type.MASTER_GAIN);
-//		FloatControl propertyClipController = (FloatControl) this.propertyClip.getControl(FloatControl.Type.MASTER_GAIN);
+		FloatControl diceCtrl = (FloatControl) this.diceClip.getControl(FloatControl.Type.MASTER_GAIN);
+		FloatControl buyPropCtrl = (FloatControl) this.propertyClip.getControl(FloatControl.Type.MASTER_GAIN);
+		FloatControl buyableCtrl = (FloatControl) this.buyableWithOwnerClip.getControl(FloatControl.Type.MASTER_GAIN);
+		FloatControl jailCtrl = (FloatControl) this.gotoJailClip.getControl(FloatControl.Type.MASTER_GAIN);
+		FloatControl chanceCrl = (FloatControl) this.chanceCardClip.getControl(FloatControl.Type.MASTER_GAIN);
+		FloatControl taxCtrl = (FloatControl) this.payTaxClip.getControl(FloatControl.Type.MASTER_GAIN);
+
+
 
 		double gain = this.sfxVolume / 100.0;
 		// Calculate equivalent decibels
 		float DB =  (float) (Math.log(gain) / Math.log(10.0) * 20.0);
-		diceClipController.setValue(DB);
-//		propertyClipController.setValue(DB);
+		diceCtrl.setValue(DB);
+		buyableCtrl.setValue(DB);
+		buyPropCtrl.setValue(DB);
+		jailCtrl.setValue(DB);
+		chanceCrl.setValue(DB);
+		taxCtrl.setValue(DB);
 	}
 
 	/**
@@ -111,18 +134,41 @@ public class SoundManager {
 		this.diceClip.start();
 	}
 	
+	public void playBackgroundSound() {
+		backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+
 	public void playBuyingPropertySound() {
-		this.propertyClip = playMusic(this.DICE_SOUND_PATH);
+		this.propertyClip = playMusic(this.BUYING_PROPERTY_SOUND_PATH);
 		this.setSfxVolume(this.sfxVolume);
 		this.propertyClip.start();
 	}
-	
-	public void playBackgroundSound() {
-		backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
+
+	public void playLandedOnBuyableWithOwnerSound() {
+		this.buyableWithOwnerClip = playMusic(this.BUYABLE_WITH_OWNER_PATH);
+		this.setSfxVolume(this.sfxVolume);
+		this.buyableWithOwnerClip.start();
+	}
+
+	public void playLandedOnGotoJailSound() {
+		this.gotoJailClip = playMusic(this.GOTO_JAIL_PATH);
+		this.setSfxVolume(this.sfxVolume);
+		this.gotoJailClip.start();
+	}
+
+	public void playLandedOnChanceCardSound() {
+		this.chanceCardClip = playMusic(this.CHANCE_CARD_PATH);
+		this.setSfxVolume(this.sfxVolume);
+		this.chanceCardClip.start();
+	}
+
+	public void playPayTaxSound() {
+		this.payTaxClip = playMusic(this.PAY_TAX_PATH);
+		this.setSfxVolume(this.sfxVolume);
+		this.payTaxClip.start();
 	}
 	
 	private void applyChanges() {
 
-		
 	}
 }

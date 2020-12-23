@@ -403,9 +403,11 @@ class DiceAnimationPanel extends JPanel {
 	 * Animates the dies. Uses a timer to dynamically change dice images for some time
 	 */
 	public void rollDies(int firsDiceResult, int secondDiceResult) {
-
-		if(timer != null && timer.isRunning()) {
+		if(timer != null) {
 			timer.stop();
+			removeAll();
+			revalidate();
+			repaint();
 		}
 
 		setVisible(true);
@@ -436,7 +438,7 @@ class DiceAnimationPanel extends JPanel {
 	}
 
 	/**
-	 * Waits for a couple of seconds after the dies are rolled and remove them from the panel
+	 * Waits for 2 seconds after the dies are rolled and remove them from the panel
 	 */
 	private void waitAndRemove() {
 		if(timer2 != null && timer2.isRunning()) {
@@ -449,7 +451,7 @@ class DiceAnimationPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				count++;
 				// Stop timer after the delay
-				if(count >= 10) {
+				if(count >= 6) {
 					removeAll();
 					revalidate();
 					repaint();

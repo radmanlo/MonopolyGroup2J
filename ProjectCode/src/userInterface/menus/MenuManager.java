@@ -52,8 +52,6 @@ public class MenuManager { //it is finished -G
 
 		SoundManager soundManager = SoundManager.getInstance();
 		soundManager.playBackgroundSound();
-		soundManager.setBGVolume(10);
-//		System.out.println(soundManager.setVolumeLevel(100));
 	}
 	
 	public static MenuManager getInstance() {
