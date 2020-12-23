@@ -518,6 +518,14 @@ public class GameManager implements Serializable {
 		curPlayer.removeCard(card);
 	}
 
+	public void readyForInitialize() {
+		// TODO Auto-generated method stub
+		PlayerManager.getInstance().readyForInitialize();
+		LocationManager.getInstance().readyForInitialize();
+		TradeManager.getInstance().readyForInitialize();
+		BankManager.getInstance().readyForInitialize();
+	}
+
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
 //		return false;
 //	}
