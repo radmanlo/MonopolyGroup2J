@@ -36,19 +36,23 @@ public class MenuManager { //it is finished -G
 		
 		howToPlayMenu = new HowToPlayMenu();
 		howToPlayMenu.setBounds(0, 0, 1900, 1000);
-		
-		settingsMenu = new SettingsMenu();
-		settingsMenu.setBounds(0, 0, 1900, 1000);
+
+		// Removed from here to get updated volume values when its changed from the
+		// pause menu. Otherwise ones changes wouldn't be reflected into other
+		// Added them to the openMenu method
+
+//		settingsMenu = new SettingsMenu();
+//		settingsMenu.setBounds(0, 0, 1900, 1000);
+
+//		pauseMenu = new PauseMenu();
+//		pauseMenu.setBounds(0, 0, 1900, 1000);
 		
 		creditsMenu = new CreditsMenu();
 		creditsMenu.setBounds(0, 0, 1900, 1000);
-		
-		pauseMenu = new PauseMenu();
-		pauseMenu.setBounds(0, 0, 1900, 1000);
 
 		SoundManager soundManager = SoundManager.getInstance();
 		soundManager.playBackgroundSound();
-		soundManager.setVolumeLevel(10);
+		soundManager.setBGVolume(10);
 //		System.out.println(soundManager.setVolumeLevel(100));
 	}
 	
@@ -75,6 +79,8 @@ public class MenuManager { //it is finished -G
 			break;
 		case 3:
 			appFrame.contentPane.remove(mainMenu);
+			settingsMenu = new SettingsMenu();
+			settingsMenu.setBounds(0, 0, 1900, 1000);
 			appFrame.contentPane.add(settingsMenu);
 			break;
 		case 4:
@@ -94,7 +100,10 @@ public class MenuManager { //it is finished -G
 			break;
 		case 7:
 			appFrame.contentPane.removeAll();
+			pauseMenu = new PauseMenu();
+			pauseMenu.setBounds(0, 0, 1900, 1000);
 			appFrame.contentPane.add(pauseMenu);
+			break;
 		default:
 			System.out.println("An error occurred on openMenu(int)");
 		}

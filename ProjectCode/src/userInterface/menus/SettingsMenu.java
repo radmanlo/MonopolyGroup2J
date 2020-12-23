@@ -8,8 +8,6 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class SettingsMenu extends Menu {
 
@@ -40,7 +38,8 @@ public class SettingsMenu extends Menu {
 		panel.setBackground(new Color(230, 112, 112, 38));
 
 		// Music controller
-		this.sliderMusicVolume = new JSlider(0, 100, 40);
+		int currBGVolume = SoundManager.getInstance().getBGVolume();
+		this.sliderMusicVolume = new JSlider(0, 100, currBGVolume);
 		this.sliderMusicVolume.setMajorTickSpacing(10);
 		this.sliderMusicVolume.setMinorTickSpacing(1);
 		this.sliderMusicVolume.setPaintTicks(true);
@@ -52,11 +51,12 @@ public class SettingsMenu extends Menu {
 		Border br = BorderFactory.createTitledBorder(null, "Music Volume", TitledBorder.LEFT, TitledBorder.TOP, new Font("Tahoma",Font.PLAIN,15), Color.white);
 		this.sliderMusicVolume.setBorder(br);
 
-		this.sliderMusicVolume.addChangeListener(e -> onSliderChanged());
+		this.sliderMusicVolume.addChangeListener(e -> onBGSliderChange());
 		panel.add(this.sliderMusicVolume);
 
 		// SFX controller
-		this.sliderSFXVolume = new JSlider(0, 100, 40);
+		int currSFXVolume = SoundManager.getInstance().getSfxVolume();
+		this.sliderSFXVolume = new JSlider(0, 100, currSFXVolume);
 		this.sliderSFXVolume.setMajorTickSpacing(10);
 		this.sliderSFXVolume.setMinorTickSpacing(1);
 		this.sliderSFXVolume.setPaintTicks(true);
@@ -67,13 +67,18 @@ public class SettingsMenu extends Menu {
 		this.sliderSFXVolume.setBackground(Utils.getBgColor().brighter());
 		Border br1 = BorderFactory.createTitledBorder(null, "SFX Volume", TitledBorder.LEFT, TitledBorder.TOP, new Font("Tahoma",Font.PLAIN,15), Color.white);
 		this.sliderSFXVolume.setBorder(br1);
+		this.sliderSFXVolume.addChangeListener(e -> onSFXSliderChange());
 		panel.add(this.sliderSFXVolume);
 
 		add(panel);
 	}
 
-	private void onSliderChanged() {
-		SoundManager.getInstance().setVolumeLevel(this.sliderMusicVolume.getValue());
+	private void onBGSliderChange() {
+		SoundManager.getInstance().setBGVolume(this.sliderMusicVolume.getValue());
+	}
+
+	private void onSFXSliderChange() {
+		SoundManager.getInstance().setSfxVolume(this.sliderSFXVolume.getValue());
 	}
 	
 	private void applyMusicVolume() {

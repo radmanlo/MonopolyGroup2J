@@ -1,9 +1,6 @@
 package gamePresenter;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.*;
 import java.io.File;
 
 public class SoundManager {
@@ -18,6 +15,8 @@ public class SoundManager {
 
 	// New varaibles
 	private Clip backgroundMusicClip;
+	private Clip diceClip;
+	private Clip propertyClip;
 
 	
 	private SoundManager() {
@@ -25,7 +24,9 @@ public class SoundManager {
 		this.sfxVolume = 40;
 		// Create a Clip for playing the music
 		this.backgroundMusicClip = playMusic(this.BACKGROUND_SOUND_PATH);
-		this.setVolumeLevel(this.volumeLevel);
+		this.diceClip = playMusic(this.DICE_SOUND_PATH);
+		this.setSfxVolume(30);
+		this.setBGVolume(10);
 	}
 	
 	public static SoundManager getInstance() {
@@ -35,26 +36,48 @@ public class SoundManager {
 		return soundManager;
 	}
 
-	public int getVolumeLevel() {
-		FloatControl volumeController = (FloatControl) this.backgroundMusicClip.getControl(FloatControl.Type.MASTER_GAIN);
-		return (int) Math.pow(10f, volumeController.getValue() / 20f);
+	public int getBGVolume() {
+		return this.volumeLevel;
 	}
 
 	/**
 	 * Set background music volume.
 	 * @param volume
 	 */
-	public void setVolumeLevel(int volume) {
+	public void setBGVolume(int volume) {
+		if (volume < 0 || volume > 100)
+			throw new IllegalArgumentException("Invalid volume: " + volume);
+
+
+		// Update volume
+		this.volumeLevel = volume;
+		FloatControl controller = (FloatControl) this.backgroundMusicClip.getControl(FloatControl.Type.MASTER_GAIN);
+		double gain = this.volumeLevel / 100.0;
+		// Calculate equivalent decibels
+		float DB =  (float) (Math.log(gain) / Math.log(10.0) * 20.0);
+		controller.setValue(DB);
+	}
+
+	public int getSfxVolume() { return this.sfxVolume; }
+
+	/**
+	 * Set sfx volume.
+	 * @param volume
+	 */
+	public void setSfxVolume(int volume) {
 		if (volume < 0 || volume > 100)
 			throw new IllegalArgumentException("Invalid volume: " + volume);
 
 		// Update volume
-		this.volumeLevel = volume;
-		FloatControl volumeContoller = (FloatControl) this.backgroundMusicClip.getControl(FloatControl.Type.MASTER_GAIN);
-		double gain = this.volumeLevel / 100.0;
+		this.sfxVolume = volume;
+		FloatControl diceClipController = (FloatControl) this.diceClip.getControl(FloatControl.Type.MASTER_GAIN);
+//		FloatControl propertyClipController = (FloatControl) this.propertyClip.getControl(FloatControl.Type.MASTER_GAIN);
+
+		double gain = this.sfxVolume / 100.0;
 		// Calculate equivalent decibels
 		float DB =  (float) (Math.log(gain) / Math.log(10.0) * 20.0);
-		volumeContoller.setValue(DB);
+		diceClipController.setValue(DB);
+//		propertyClipController.setValue(DB);
 	}
 
 	/**
@@ -62,7 +85,7 @@ public class SoundManager {
 	 * @param path path of the audio to be played
 	 * @return
 	 */
-	private Clip playMusic(String path ) { // No need to be public (public in class diagram thou)
+	private Clip playMusic(String path) { // No need to be public (public in class diagram thou)
 		Clip musicPlayer  = null;
 		try {
 			File musicPath = new File(path);
@@ -83,12 +106,15 @@ public class SoundManager {
 
 
 	public void playDiceSound() {
-		Clip musicPlayer = playMusic(DICE_SOUND_PATH);
-		musicPlayer.start();
+		this.diceClip = playMusic(this.DICE_SOUND_PATH);
+		this.setSfxVolume(this.sfxVolume);
+		this.diceClip.start();
 	}
 	
 	public void playBuyingPropertySound() {
-		playMusic(BUYING_PROPERTY_SOUND_PATH);
+		this.propertyClip = playMusic(this.DICE_SOUND_PATH);
+		this.setSfxVolume(this.sfxVolume);
+		this.propertyClip.start();
 	}
 	
 	public void playBackgroundSound() {

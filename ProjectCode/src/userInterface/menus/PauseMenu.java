@@ -117,7 +117,8 @@ public class PauseMenu extends Menu{
 	
 	private void addControls() {
 		// Music controller
-		this.sliderMusicVolume = new JSlider(0, 100, 40);
+		int currBgVolume = SoundManager.getInstance().getBGVolume();
+		this.sliderMusicVolume = new JSlider(0, 100, currBgVolume);
 		this.sliderMusicVolume.setMajorTickSpacing(10);
 		this.sliderMusicVolume.setMinorTickSpacing(1);
 		this.sliderMusicVolume.setPaintTicks(true);
@@ -129,11 +130,12 @@ public class PauseMenu extends Menu{
 		Border br = BorderFactory.createTitledBorder(null, "Music Volume", TitledBorder.LEFT, TitledBorder.TOP, new Font("Tahoma",Font.PLAIN,15), Color.white);
 		this.sliderMusicVolume.setBorder(br);
 
-		this.sliderMusicVolume.addChangeListener(e -> onSliderChanged());
+		this.sliderMusicVolume.addChangeListener(e -> onBGChange());
 		innerPanel.add(this.sliderMusicVolume);
 
 		// SFX controller
-		this.sliderSFXVolume = new JSlider(0, 100, 40);
+		int currSFXVolume = SoundManager.getInstance().getSfxVolume();
+		this.sliderSFXVolume = new JSlider(0, 100, currSFXVolume);
 		this.sliderSFXVolume.setMajorTickSpacing(10);
 		this.sliderSFXVolume.setMinorTickSpacing(1);
 		this.sliderSFXVolume.setPaintTicks(true);
@@ -144,12 +146,16 @@ public class PauseMenu extends Menu{
 		this.sliderSFXVolume.setBackground(Utils.getBgColor().brighter());
 		Border br1 = BorderFactory.createTitledBorder(null, "SFX Volume", TitledBorder.LEFT, TitledBorder.TOP, new Font("Tahoma",Font.PLAIN,15), Color.white);
 		this.sliderSFXVolume.setBorder(br1);
+		this.sliderSFXVolume.addChangeListener(e -> onSFXChange());
 		innerPanel.add(this.sliderSFXVolume);
 
 		add(innerPanel);
 	}
 
-	private void onSliderChanged() {
-		SoundManager.getInstance().setVolumeLevel(this.sliderMusicVolume.getValue());
+	private void onBGChange() {
+		SoundManager.getInstance().setBGVolume(this.sliderMusicVolume.getValue());
+	}
+	private void onSFXChange() {
+		SoundManager.getInstance().setSfxVolume(this.sliderSFXVolume.getValue());
 	}
 }

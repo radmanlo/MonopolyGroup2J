@@ -85,6 +85,7 @@ public class GameManager implements Serializable {
 		}
 		// Let the player to roll the dice if its double
 		// Before it was done automatically
+		SoundManager.getInstance().playDiceSound();
 		this.dice.rollDices();
 		BoardManager.getInstance().animateDies(this.dice.getFirstDiceResult(), this.dice.getSecondDiceResult());
 
