@@ -329,6 +329,8 @@ public class GameManager implements Serializable {
 			this.disableBuyIfSameOwner();
 		}
 
+		// Play sound effect
+		SoundManager.getInstance().playBuyingPropertySound();
 
 		// Update UI
 		BoardManager.getInstance().updateInteractionArea();
@@ -524,6 +526,15 @@ public class GameManager implements Serializable {
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		CardManager.getInstance().executeCardAction(card);
 		curPlayer.removeCard(card);
+	}
+
+	public void readyForInitialize() {
+		// TODO Auto-generated method stub
+		PlayerManager.getInstance().readyForInitialize();
+		LocationManager.getInstance().readyForInitialize();
+		TradeManager.getInstance().readyForInitialize();
+		BankManager.getInstance().readyForInitialize();
+		BoardManager.getInstance().readyForInitialize();
 	}
 
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method

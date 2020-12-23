@@ -402,8 +402,10 @@ public class LocationManager implements Serializable {
         if(propertyOwner != null ) {
         	GameManager.getInstance().disableBuyIfSameOwner();
         }
-        if(propertyOwner != null && propertyOwner.getName() != currentPlayer.getName()) // Pay the rent
+        if(propertyOwner != null && propertyOwner.getName() != currentPlayer.getName()) { // Pay the rent
+            SoundManager.getInstance().playLandedOnBuyableWithOwnerSound();
             GameManager.getInstance().askPlayerPaymentChoice();
+        }
     }
 
     public void activateUtility(Location utilityLoc){
@@ -421,6 +423,8 @@ public class LocationManager implements Serializable {
     public void activateIncomeTax(Location incomeTaxLoc){
         System.out.println("IncomeTax location activated");
 
+        //Play sound effect
+        SoundManager.getInstance().playPayTaxSound();
         int taxValue = ((IncomeTaxTile)incomeTaxLoc).getTaxValue();
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		JFrame f =new JFrame();  
@@ -440,6 +444,9 @@ public class LocationManager implements Serializable {
 
     public void activateChance(Location chanceLoc){
         System.out.println("chance location activated");
+
+        // Play sound effect
+        SoundManager.getInstance().playLandedOnChanceCardSound();
 
         Card aCard = CardManager.getInstance().getTopCard();
         Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -462,6 +469,9 @@ public class LocationManager implements Serializable {
 
     public void activateGoToDisciplinary(Location goToDisciplinaryLoc){
         System.out.println("GOTODIsciplinary location activated");
+
+        // Play sound effect
+        SoundManager.getInstance().playLandedOnGotoJailSound();
 
         final int DISTANCE_TO_DISCIPLINARY = 20;
         Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
