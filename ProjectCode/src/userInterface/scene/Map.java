@@ -194,14 +194,13 @@ public class Map extends JPanel {
 				tokenSize = 50;
 			else if( playersHere.size() <= 2)
 				tokenSize = 35;
-			else if( loc instanceof StartTile || loc instanceof MayfestTile || loc instanceof Disciplinary || loc instanceof GoToDisciplinaryTile)
-				tokenSize = 30;
+			//else if( loc instanceof StartTile || loc instanceof MayfestTile || loc instanceof Disciplinary || loc instanceof GoToDisciplinaryTile)
+				//tokenSize = 30;
 			else if( playersHere.size() <= 3)
 				tokenSize = 25;
 			else
 				tokenSize = 20;
-			
-			
+				
 			if( i >= 4)
 				offsetForMoreThan4PlayersOnATile = (tokenSize + SPACE_BETWEEN_TOKENS) ;
 
@@ -212,13 +211,13 @@ public class Map extends JPanel {
 				yPoint = (int) orgPoint.getY() + offsetForMoreThan4PlayersOnATile;
 			}else if(sideOfLoc == BoardSide.LEFT) {
 				xPoint = (int) orgPoint.getX() - tokenSize - offsetForMoreThan4PlayersOnATile;
-				yPoint = (int) orgPoint.getY() - tokenSize - (tokenSize + SPACE_BETWEEN_TOKENS) * i;
+				yPoint = (int) orgPoint.getY() - tokenSize - (tokenSize + SPACE_BETWEEN_TOKENS) * i + offsetForMoreThan4PlayersOnATile * 4;
 			}else if(sideOfLoc == BoardSide.UP) {
-				xPoint = (int) orgPoint.getX() + (tokenSize + SPACE_BETWEEN_TOKENS) * i;
+				xPoint = (int) orgPoint.getX() + (tokenSize + SPACE_BETWEEN_TOKENS) * i - offsetForMoreThan4PlayersOnATile * 4;
 				yPoint = (int) orgPoint.getY() - tokenSize - offsetForMoreThan4PlayersOnATile;
 			}else if(sideOfLoc == BoardSide.RIGHT) {
 				xPoint = (int) orgPoint.getX() + offsetForMoreThan4PlayersOnATile;
-				yPoint = (int) orgPoint.getY() + (tokenSize + SPACE_BETWEEN_TOKENS) * i;
+				yPoint = (int) orgPoint.getY() + (tokenSize + SPACE_BETWEEN_TOKENS) * i - offsetForMoreThan4PlayersOnATile * 4;
 			}
 			ImageToDraw token = new ImageToDraw();
 			token.image = Utils.scaleImage(tokenSize,tokenSize,playerTokenPath);

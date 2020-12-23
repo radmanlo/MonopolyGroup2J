@@ -20,6 +20,7 @@ import models.location.BuyableLocation;
 import models.location.Location;
 import models.location.Property;
 import settingsPresenter.LocalDataManager;
+import userInterface.components.RoundedButton;
 import userInterface.menus.MenuManager;
 
 import javax.swing.JTextField;
@@ -36,7 +37,7 @@ public class InteractionArea extends JPanel{
 	private JButton buyBtn;
 	private JButton rollDiceBtn;
 	private JButton offerTradeBtn;
-	private JButton pauseBtn;
+	private RoundedButton pauseBtn;
 	private JButton endTurnBtn;
 	private JLabel currentPlayerMoneyLbl;
 	private JLabel diceRollResultLbl;
@@ -147,13 +148,13 @@ public class InteractionArea extends JPanel{
 		offerTradeBtn.setBounds(738, 302, 152, 52);
 		add(offerTradeBtn);
 		
-		pauseBtn = new JButton("Pause");
+		pauseBtn = new RoundedButton("Pause");
 		pauseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuManager.getInstance().openMenu(7);
 			}
 		});
-		pauseBtn.setBounds(10, 23, 89, 23);
+		pauseBtn.setBounds(10, 10, 128, 57);
 		add(pauseBtn);
 		
 		endTurnBtn = new JButton("End Turn");
@@ -184,14 +185,15 @@ public class InteractionArea extends JPanel{
 		payToRerollBtn.setBounds(53, 402, 311, 37);
 		add(payToRerollBtn);
 		
-		JButton tempBtn = new JButton("Move 1 Forward");  //should be removed after testing
+		JButton tempBtn = new JButton("Move everyone 1 Forward");  //should be removed after testing
 		tempBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(), 1);
+				for( Player plyr: PlayerManager.getInstance().getPlayers())
+					LocationManager.getInstance().movePlayer(plyr, 1);
 				BoardManager.getInstance().updateMap();
 			}
 		});
-		tempBtn.setBounds(703, 919, 142, 23);
+		tempBtn.setBounds(613, 919, 232, 23);
 		add(tempBtn);
 	}
 	
