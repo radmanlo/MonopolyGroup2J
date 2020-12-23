@@ -177,9 +177,9 @@ public class Map extends JPanel {
 	}
 
 	private void drawPlayersHere(Location loc) {
-		final int TOKEN_OFFSET = 20; 
-		final int TOKEN_OFFSETFOR4PLAYERS = 20; 
-		int secondOffset = 0;
+		final int SPACE_BETWEEN_TOKENS = 0; 
+		int tokenSize = 25; //will be used to offset each token, to not make them on top of each other
+		int offsetForMoreThan4PlayersOnATile = 0;  //will be used if there are more than 4 players on a tile to create a second line for them
 		Point2D orgPoint = loc.getPoint();
 
 		ArrayList<Player> playersHere = loc.getAllPlayersHere();
@@ -188,27 +188,41 @@ public class Map extends JPanel {
 		
 		for(int i=0; i< playersHere.size(); ++i) {
 			String playerTokenPath = playersHere.get(i).getToken().getPath();
-
-			if( i > 4)
-				secondOffset = TOKEN_OFFSETFOR4PLAYERS;
+			
+			
+			if( playersHere.size() <= 1)
+				tokenSize = 50;
+			else if( playersHere.size() <= 2)
+				tokenSize = 35;
+			else if( playersHere.size() <= 3)
+				tokenSize = 30;
+			else{
+				if( loc instanceof StartTile || loc instanceof MayfestTile || loc instanceof Disciplinary || loc instanceof GoToDisciplinaryTile)
+					tokenSize = 30;
+				else
+					tokenSize = 20;
+			}			
+			
+			if( i >= 4)
+				offsetForMoreThan4PlayersOnATile = (tokenSize + SPACE_BETWEEN_TOKENS) ;
 
 			int xPoint = 0;
 			int yPoint = 0;
 			if( sideOfLoc == BoardSide.DOWN) {
-				xPoint = (int) orgPoint.getX() - 20 - TOKEN_OFFSET * i + secondOffset*5;
-				yPoint = (int) orgPoint.getY() - 20 + TOKEN_OFFSETFOR4PLAYERS + secondOffset;
+				xPoint = (int) orgPoint.getX() - tokenSize - (tokenSize + SPACE_BETWEEN_TOKENS) * i + offsetForMoreThan4PlayersOnATile * 4;
+				yPoint = (int) orgPoint.getY() + offsetForMoreThan4PlayersOnATile;
 			}else if(sideOfLoc == BoardSide.LEFT) {
-				xPoint = (int) orgPoint.getX() - TOKEN_OFFSETFOR4PLAYERS;
-				yPoint = (int) orgPoint.getY() - 20 -TOKEN_OFFSET * i;
+				xPoint = (int) orgPoint.getX() - tokenSize - offsetForMoreThan4PlayersOnATile;
+				yPoint = (int) orgPoint.getY() - tokenSize - (tokenSize + SPACE_BETWEEN_TOKENS) * i;
 			}else if(sideOfLoc == BoardSide.UP) {
-				xPoint = (int) orgPoint.getX() + TOKEN_OFFSET * i;
-				yPoint = (int) orgPoint.getY() - TOKEN_OFFSETFOR4PLAYERS;
+				xPoint = (int) orgPoint.getX() + (tokenSize + SPACE_BETWEEN_TOKENS) * i;
+				yPoint = (int) orgPoint.getY() - tokenSize - offsetForMoreThan4PlayersOnATile;
 			}else if(sideOfLoc == BoardSide.RIGHT) {
-				xPoint = (int) orgPoint.getX() -20 + TOKEN_OFFSETFOR4PLAYERS;
-				yPoint = (int) orgPoint.getY() + TOKEN_OFFSET * i;
+				xPoint = (int) orgPoint.getX() + offsetForMoreThan4PlayersOnATile;
+				yPoint = (int) orgPoint.getY() + (tokenSize + SPACE_BETWEEN_TOKENS) * i;
 			}
 			ImageToDraw token = new ImageToDraw();
-			token.image = Utils.scaleImage(20,20,playerTokenPath);
+			token.image = Utils.scaleImage(tokenSize,tokenSize,playerTokenPath);
 			token.orgPoint = new Point2D.Double(xPoint, yPoint);
 			imagesToDraw.add(token);
 		}

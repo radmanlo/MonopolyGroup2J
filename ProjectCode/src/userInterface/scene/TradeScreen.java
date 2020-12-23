@@ -101,6 +101,7 @@ public class TradeScreen extends JPanel{
 		offeredPanel.add(constantLblItemsOffered);
 
 		offeredMoneyField = new JTextField();
+		offeredMoneyField.setText("0");
 		offeredMoneyField.setBounds(114, 329, 118, 20);
 		offeredPanel.add(offeredMoneyField);
 		offeredMoneyField.setColumns(10);
@@ -139,6 +140,7 @@ public class TradeScreen extends JPanel{
 		wantedPanel.add(constantLblItemsWanted);
 
 		wantedMoneyField = new JTextField();
+		wantedMoneyField.setText("0");
 		wantedMoneyField.setColumns(10);
 		wantedMoneyField.setBounds(130, 329, 96, 20);
 		wantedMoneyField.setEnabled(false);

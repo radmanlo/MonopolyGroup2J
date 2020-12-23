@@ -150,12 +150,22 @@ public class InteractionArea extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				LocalDataManager.getInstance().saveGame(saveTxtField.getText());
-				 JFrame f =new JFrame();  
+				 JFrame f = new JFrame();  
 				 JOptionPane.showMessageDialog(f, "You saved the game with name " + saveTxtField.getText());  
 			}
 			
 		});
 		add(saveBtn);
+		
+		JButton tempBtn = new JButton("Move 1 Forward");
+		tempBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LocationManager.getInstance().movePlayer(PlayerManager.getInstance().getCurrentPlayer(), 1);
+				BoardManager.getInstance().updateMap();
+			}
+		});
+		tempBtn.setBounds(703, 919, 142, 23);
+		add(tempBtn);
 
 		otherPlayers = new ArrayList<PlayerInfoScreen>();
 	}
