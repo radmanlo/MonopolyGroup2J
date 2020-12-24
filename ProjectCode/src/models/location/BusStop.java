@@ -26,4 +26,5 @@ public class BusStop extends BuyableLocation{
 		this.setCurrentRentValue(money);
 		return money;
     }
+
 }

@@ -245,6 +245,7 @@ public class LocalDataManager implements Serializable{
             // Method for deserialization of object 
             CardManager mngr = CardManager.getInstance();
             mngr= (CardManager)in.readObject(); 
+
             CardManager.getInstance().create(mngr);
             in.close(); 
             file.close(); 

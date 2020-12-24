@@ -75,6 +75,9 @@ public class GameManager implements Serializable {
 	 * it moves the token and activates the new location
 	 */
 	public void rollDice() {
+		for(int i = 0; i < CardManager.getInstance().getCardDeck().size(); i++)
+			System.out.println(CardManager.getInstance().getCardDeck().get(i).getDescription());
+		System.out.println("------------**********- Card sieze : "+ CardManager.getInstance().getCardDeck().size());
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		int moveDistance = 0;
 		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
@@ -535,6 +538,7 @@ public class GameManager implements Serializable {
 		TradeManager.getInstance().readyForInitialize();
 		BankManager.getInstance().readyForInitialize();
 		BoardManager.getInstance().readyForInitialize();
+		CardManager.getInstance().readyForInitialize();
 	}
 
 //	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method

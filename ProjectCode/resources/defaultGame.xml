@@ -4,11 +4,11 @@
     <card storable="false" id="113" name="Pladiarizm" description="You got caught plagiarizing, pay 500 liras to the bank."></card>
     <card storable="false" id="114" name="WC" description="Your pee has come, go to the WC."/>
     <card storable="false" id="115" name="A in CS319" description="You got A from CS319, get 500 liras from Eray Tuzun."/>
-    <card storable="false" id="116" name="School Taxes" description="Pay school taxes 1000 liras."/>
-    <card storable="false" id="117" name="Accodent fee" description="You had an accident in Mescid Otopark, pay 500 liras."/>
-    <card storable="false" id="118" name="Money Borrowed" description="You borrowed Money from the player whose turn comes after you, Pay 1500 liras."/>
+    <card storable="false" id="116" name="School Taxes" description="Pay school taxes 350 liras."/>
+    <card storable="false" id="117" name="Accodent fee" description="You had an accident in Mescid Otopark, pay 180 liras."/>
+    <card storable="false" id="118" name="Money Borrowed" description="You borrowed Money from the player whose turn comes after you, Pay 400 liras."/>
     <card storable="false" id="119" name="Fell asleep" description="You fell asleep in class and missed your turn."/>
-    <card storable="false" id="120" name="Friend's HW" description="You got caught doing your friend's homework. Pay 500."/>
+    <card storable="false" id="120" name="Friend's HW" description="You got caught doing your friend's homework. Pay 75."/>
 
     <startLoc id="1" name="Start Location" x="949" y="949" prizeValue="250"/>
     <property id="2" name="Odeon" x="829" y="949" groupClr="Brown" price="60" rentValues="2,4,10,30,90" upgradeCost="50" mortgage="30" breakMortgage="50"/>
