@@ -153,14 +153,14 @@ public class InteractionArea extends JPanel{
 		offerTradeBtn.setBounds(728, 290, 160, 70);
 		add(offerTradeBtn);
 		
-		pauseBtn = new RoundedButton("Ξ");
-		pauseBtn.setFont(new Font("Tahoma", Font.BOLD, 26));
+		pauseBtn = new RoundedButton("Pause");
+		pauseBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		pauseBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuManager.getInstance().openMenu(7);
 			}
 		});
-		pauseBtn.setBounds(10, 10, 60, 60);
+		pauseBtn.setBounds(10, 10, 70, 40);
 		add(pauseBtn);
 		
 		endTurnBtn = new RoundedButton("End Turn");
