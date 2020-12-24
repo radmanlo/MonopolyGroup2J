@@ -84,6 +84,8 @@ public class TradeScreen extends JPanel{
 			}
 		});
 		receiverComboBox.setBounds(186, 95, 230, 20);
+		receiverComboBox.setBackground(new Color(60, 60, 60, 255));
+		receiverComboBox.setForeground(Color.WHITE);
 		add(receiverComboBox);
 
 		JLabel constantLblOfferTo = new JLabel("Offer To");
@@ -125,6 +127,8 @@ public class TradeScreen extends JPanel{
 		}
 		offerComboBox = new JComboBox(temp2.toArray());
 		offerComboBox.setBounds(10, 47, 150, 20);
+		offerComboBox.setBackground(new Color(60, 60, 60, 255));
+		offerComboBox.setForeground(Color.WHITE);
 		offeredPanel.add(offerComboBox);
 
 		addItemToOfferedBtn = new JButton("Add");
