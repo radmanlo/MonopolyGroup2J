@@ -51,7 +51,7 @@ public class Map extends JPanel {
 
 	private void addDiceAnimation() {
 		diceAnimation = new DiceAnimationPanel();
-		diceAnimation.setBounds(280, 200, 500, 210);
+		diceAnimation.setBounds(200, 200, 600, 600);
 		add(diceAnimation);
 	}
 
@@ -108,26 +108,25 @@ public class Map extends JPanel {
 	}
 
 	private Color getUsableColor(PlayerColor playerColor) {
-		Color PURPLE = new Color(102,0,153);
 		switch(playerColor) {
-		case BLACK:
-			return java.awt.Color.BLACK;
-		case BLUE:
-			return java.awt.Color.BLUE;
-		case GREEN:
-			return java.awt.Color.GREEN;
-		case ORANGE:
-			return java.awt.Color.ORANGE;
-		case PURPLE:
-			return PURPLE;
-		case RED:
-			return java.awt.Color.RED;
-		case WHITE:
-			return java.awt.Color.WHITE;
-		case YELLOW:
-			return java.awt.Color.YELLOW;
-		default:
-			return null;
+			case BLACK:
+				return new Color(36, 36, 36, 255);
+			case BLUE:
+				return new Color(126, 181, 243, 255);
+			case GREEN:
+				return new Color(79, 180, 136, 255);
+			case ORANGE:
+				return new Color(198, 104, 104, 255);
+			case PURPLE:
+				return new Color(202, 118, 223, 255);
+			case RED:
+				return new Color(172, 0, 0, 255);
+			case WHITE:
+				return new Color(245, 245, 245, 255);
+			case YELLOW:
+				return new Color(180, 173, 79, 255);
+			default:
+				return null;
 		}
 	}
 
@@ -468,8 +467,8 @@ class DiceAnimationPanel extends JPanel {
 	 * sets dies bounds and adds them to the panel
 	 */
 	private void addDies() {
-		dice1.setBounds(10, 0, 200, 200);
-		dice2.setBounds(240, 0, 200, 200);
+		dice1.setBounds(75, 200, 200, 200);
+		dice2.setBounds(330, 200, 200, 200);
 		add(this.dice1);
 		add(this.dice2);
 	}

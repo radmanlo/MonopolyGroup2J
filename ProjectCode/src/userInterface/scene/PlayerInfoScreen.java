@@ -28,7 +28,7 @@ public class PlayerInfoScreen extends JPanel{
 	public PlayerInfoScreen(Player player){
 		setLayout(null);
 		setBounds(0, 0, 400, 60);
-		
+
 		inventoryBtn = new JButton("view inventory");
 		inventoryBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -36,6 +36,8 @@ public class PlayerInfoScreen extends JPanel{
 			}
 		});
 		inventoryBtn.setBounds(179, 19, 128, 23);
+		inventoryBtn.setBackground(new Color(60, 60, 60, 255));
+		inventoryBtn.setForeground(Color.WHITE);
 		add(inventoryBtn);
 		
 		backgroundColor = player.getColorId();
@@ -43,13 +45,20 @@ public class PlayerInfoScreen extends JPanel{
 		
 		JPanel namePanel = new JPanel();
 		namePanel.setBounds(21, 11, 148, 36);
+
 		add(namePanel);
 		playerLbl = new JLabel();
 		playerLbl.setText(player.getName());
 		namePanel.add(playerLbl);
 		playerLbl.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		namePanel.setBackground(Color.WHITE);
-		
+
+		if (backgroundColor == PlayerColor.RED || backgroundColor == PlayerColor.BLACK)
+			playerLbl.setForeground(new Color(245, 245, 245, 255));
+		else
+			playerLbl.setForeground(new Color(36, 36, 36, 255));
+
+		namePanel.setBackground(getUsableColor(backgroundColor));
+
 		String imgPath = player.getToken().getPath();
 		tokenImg = Utils.scaleImage(40,40,imgPath);
 		
@@ -67,21 +76,21 @@ public class PlayerInfoScreen extends JPanel{
 		Color PURPLE = new Color(102,0,153);
 		switch(playerColor) {
 		case BLACK:
-			return java.awt.Color.BLACK;
+			return new Color(36, 36, 36, 255);
 		case BLUE:
-			return java.awt.Color.BLUE;
+			return new Color(126, 181, 243, 255);
 		case GREEN:
-			return java.awt.Color.GREEN;
+			return new Color(79, 180, 136, 255);
 		case ORANGE:
-			return java.awt.Color.ORANGE;
+			return new Color(198, 104, 104, 255);
 		case PURPLE:
-			return PURPLE;
+			return new Color(202, 118, 223, 255);
 		case RED:
-			return java.awt.Color.RED;
+			return new Color(172, 0, 0, 255);
 		case WHITE:
-			return java.awt.Color.WHITE;
+			return new Color(245, 245, 245, 255);
 		case YELLOW:
-			return java.awt.Color.YELLOW;
+			return new Color(180, 173, 79, 255);
 		default:
 			return null;
 		}

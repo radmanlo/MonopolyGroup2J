@@ -58,11 +58,12 @@ public class TradeScreen extends JPanel{
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(null);
 		setBounds(1100,210, 600, 600);
-		setBackground(Color.WHITE);
+		setBackground(new Color(60, 60, 60, 230));
 
 		JLabel constantLblOffer = new JLabel("Offer a Trade");
 		constantLblOffer.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		constantLblOffer.setBounds(179, 11, 196, 56);
+		constantLblOffer.setForeground(Color.WHITE);
 		add(constantLblOffer);
 
 
@@ -88,27 +89,34 @@ public class TradeScreen extends JPanel{
 		JLabel constantLblOfferTo = new JLabel("Offer To");
 		constantLblOfferTo.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		constantLblOfferTo.setBounds(82, 98, 75, 17);
+		constantLblOfferTo.setForeground(Color.WHITE);
 		add(constantLblOfferTo);
 
 		offeredPanel = new JPanel();
 		offeredPanel.setBounds(42, 140, 242, 360);
 		add(offeredPanel);
 		offeredPanel.setLayout(null);
+		offeredPanel.setBackground(new Color(60, 60, 60, 255));
 
 		JLabel constantLblItemsOffered = new JLabel("Items Offered");
 		constantLblItemsOffered.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		constantLblItemsOffered.setBounds(39, 11, 110, 25);
+		constantLblItemsOffered.setForeground(Color.WHITE);
 		offeredPanel.add(constantLblItemsOffered);
 
 		offeredMoneyField = new JTextField();
 		offeredMoneyField.setText("0");
 		offeredMoneyField.setBounds(114, 329, 118, 20);
+		offeredMoneyField.setBackground(new Color(60, 60, 60, 255));
+		offeredMoneyField.setForeground(Color.WHITE);
+
 		offeredPanel.add(offeredMoneyField);
 		offeredMoneyField.setColumns(10);
 
 		JLabel constantLblOfferedMoney = new JLabel("Offered Money");
 		constantLblOfferedMoney.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		constantLblOfferedMoney.setBounds(10, 332, 110, 17);
+		constantLblOfferedMoney.setForeground(Color.WHITE);
 		offeredPanel.add(constantLblOfferedMoney);
 		
 		ArrayList<String> temp2 = new ArrayList<String>();
@@ -127,14 +135,18 @@ public class TradeScreen extends JPanel{
 			}
 		});
 		addItemToOfferedBtn.setBounds(170, 46, 62, 23);
+		addItemToOfferedBtn.setBackground(new Color(60, 60, 60, 255));
+		addItemToOfferedBtn.setForeground(Color.WHITE);
 		offeredPanel.add(addItemToOfferedBtn);
 
 		wantedPanel = new JPanel();
 		wantedPanel.setBounds(337, 140, 236, 360);
+		wantedPanel.setBackground(new Color(60, 60, 60, 255));
 		add(wantedPanel);
 		wantedPanel.setLayout(null);
 
 		JLabel constantLblItemsWanted = new JLabel("Items Wanted");
+		constantLblItemsWanted.setForeground(Color.WHITE);
 		constantLblItemsWanted.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		constantLblItemsWanted.setBounds(60, 11, 105, 25);
 		wantedPanel.add(constantLblItemsWanted);
@@ -144,11 +156,14 @@ public class TradeScreen extends JPanel{
 		wantedMoneyField.setColumns(10);
 		wantedMoneyField.setBounds(130, 329, 96, 20);
 		wantedMoneyField.setEnabled(false);
+		wantedMoneyField.setBackground(new Color(60, 60, 60, 255));
+		wantedMoneyField.setForeground(Color.WHITE);
 		wantedPanel.add(wantedMoneyField);
 
 		JLabel constantLblWantedMoney = new JLabel("Wanted Money");
 		constantLblWantedMoney.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		constantLblWantedMoney.setBounds(10, 332, 110, 17);
+		constantLblWantedMoney.setForeground(Color.WHITE);
 		wantedPanel.add(constantLblWantedMoney);
 
 		addItemToWantedBtn = new JButton("Add");
@@ -159,10 +174,13 @@ public class TradeScreen extends JPanel{
 			}
 		});
 		addItemToWantedBtn.setBounds(170, 42, 56, 23);
+		addItemToWantedBtn.setBackground(new Color(60, 60, 60, 255));
+		addItemToWantedBtn.setForeground(Color.WHITE);
 		wantedPanel.add(addItemToWantedBtn);
 		
 		warningLbl = new JLabel("Please select a target Player");
 		warningLbl.setBounds(20, 139, 216, 89);
+		warningLbl.setForeground(Color.WHITE);
 		wantedPanel.add(warningLbl);
 
 		sendOfferBtn = new JButton("Send Offer");
@@ -174,6 +192,8 @@ public class TradeScreen extends JPanel{
 		});
 		sendOfferBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		sendOfferBtn.setBounds(169, 551, 148, 38);
+		sendOfferBtn.setBackground(new Color(60, 60, 60, 255));
+		sendOfferBtn.setForeground(Color.WHITE);
 		add(sendOfferBtn);
 
 		cancelBtn = new JButton("Cancel");
@@ -184,6 +204,8 @@ public class TradeScreen extends JPanel{
 		});
 		cancelBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		cancelBtn.setBounds(327, 551, 115, 38);
+		cancelBtn.setBackground(new Color(60, 60, 60, 255));
+		cancelBtn.setForeground(Color.WHITE);
 		add(cancelBtn);
 	}
 
@@ -192,14 +214,18 @@ public class TradeScreen extends JPanel{
 			wantedPanel.remove(wantedList);
 		wantedList = new JList(wantedNames.toArray());
 		wantedList.setBounds( 10, 100 , 220, 200);
+		wantedList.setBackground(new Color(60, 60, 60, 255));
+		wantedList.setForeground(Color.WHITE);
 		wantedPanel.add(wantedList);
 		
 		if(offeredList != null)
 			offeredPanel.remove(offeredList);
 		offeredList = new JList(offeredNames.toArray());
 		offeredList.setBounds( 10, 100 , 220, 200);
+		offeredList.setBackground(new Color(60, 60, 60, 255));
+		offeredList.setForeground(Color.WHITE);
 		offeredPanel.add(offeredList);
-		
+
 		wantedPanel.repaint();
 		offeredPanel.repaint();
 		}
@@ -211,6 +237,8 @@ public class TradeScreen extends JPanel{
 		}
 		wantedComboBox = new JComboBox(temp.toArray());
 		wantedComboBox.setBounds(10, 42, 150, 20);
+		wantedComboBox.setBackground(new Color(60, 60, 60, 255));
+		wantedComboBox.setForeground(Color.WHITE);
 		wantedPanel.add(wantedComboBox);
 		wantedPanel.revalidate();
 		wantedPanel.repaint();
