@@ -55,11 +55,6 @@ public class Card implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Card{" +
-				"cardId=" + cardId +
-				", cardName='" + cardName + '\'' +
-				", description='" + description + '\'' +
-				", storable=" + storable +
-				'}';
+		return cardName;
 	}
 }

@@ -9,6 +9,8 @@ import models.*;
 import models.location.*;
 import settingsPresenter.LocalDataManager;
 import org.w3c.dom.Document;
+
+import userInterface.menus.MenuManager;
 import userInterface.scene.InteractionArea;
 
 import javax.swing.*;
@@ -243,6 +245,7 @@ public class GameManager implements Serializable {
 			this.enableDice();
 			this.handleNewTurn();
 		}
+		checkForWin();
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
@@ -576,6 +579,21 @@ public class GameManager implements Serializable {
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		CardManager.getInstance().executeCardAction(card);
 		curPlayer.removeCard(card);
+	}
+	
+	public void checkForWin() {
+		if(PlayerManager.getInstance().getPlayers().size() == 1) {
+			
+			JDialog.setDefaultLookAndFeelDecorated(true);
+
+			String promptMessage = PlayerManager.getInstance().getCurrentPlayer().getName() + " won!\n";
+			int response = JOptionPane.showConfirmDialog(null, promptMessage, "Win", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (response == JOptionPane.YES_OPTION) {
+				MenuManager.getInstance().openMenu(5);
+			} else if (response == JOptionPane.CLOSED_OPTION) {
+				System.out.println("JOptionPane closed");
+			}
+		}
 	}
 
 	/*

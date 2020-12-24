@@ -398,12 +398,29 @@ public class TradeDeal implements Serializable {
 	}
 
 	public String toStringForPrompt() {
-		return 
-				"Offerer= " + getOfferer().getName() + "\n" +
-				"OfferedBuyables= " + getOfferedBuyables() + "\n" +
-				"OfferedMoney= " + getOfferedMoney() + "\n" +
-				"requestedBuyables= " + getRequestedBuyables() + "\n" +
-				"requestedMoney= " + getRequestedMoney() + "\n";
+		String toBeReturned = "";
+		toBeReturned += "Offerer= " + getOfferer().getName() + "\n";
+		toBeReturned += "Offered Locations= ";
+
+		if( getOfferedBuyables().get(0) != null)
+			toBeReturned += getOfferedBuyables().get(0).getName();
+
+		for( int i = 1; i < getOfferedBuyables().size(); ++i)
+			toBeReturned += ", " + getOfferedBuyables().get(i).getName() ;
+
+
+		toBeReturned +=	"\nOfferedMoney= " + getOfferedMoney() + "\n";
+		toBeReturned +=	"Requested Locations= ";
+		
+		if( getRequestedBuyables().get(0) != null)
+			toBeReturned += getRequestedBuyables().get(0).getName();
+
+		for( int i = 1; i < getRequestedBuyables().size(); ++i)
+			toBeReturned += ", " + getRequestedBuyables().get(i).getName() ;
+		
+		toBeReturned +="\nRequestedMoney= " + getRequestedMoney() + "\n";
+		
+		return toBeReturned;
 	}
 
 }

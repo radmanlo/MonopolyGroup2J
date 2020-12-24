@@ -1,5 +1,7 @@
 package userInterface.scene;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 import models.Card;
 import models.Player;
@@ -124,9 +126,18 @@ public class InventoryScreen extends JPanel{
 			}
 		});
 
-		locsList.setBackground(new Color(60, 60, 60, 100));
+		locsList.setBackground(new Color(60, 60, 60));
 		locsList.setForeground(Color.WHITE);
-		locsPanel.add(locsList);
+		
+		locsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane listScroller = new JScrollPane();
+        listScroller.setViewportView(locsList);
+        listScroller.setBackground(new Color(60, 60, 60));
+        listScroller.setForeground(Color.WHITE);
+        locsList.setLayoutOrientation(JList.VERTICAL);
+        locsPanel.add(listScroller);
+		
+		
 
 		JPanel cardsPanel = new JPanel();
 		cardsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
