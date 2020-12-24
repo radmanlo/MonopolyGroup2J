@@ -51,6 +51,8 @@ public class LoadGameMenu extends Menu {//extends Menu{
 		deleteGameBtn = new RoundedButton("Delete Game");
 		goBackBtn = new RoundedButton("Back");
 
+		loadGameBtn.setEnabled(false);
+
 		loadGameBtn.setBounds(150, 100, 500, 70);
 		deleteGameBtn.setBounds(150, 190,  500, 70);
 		goBackBtn.setBounds(150, 280, 500, 70);
@@ -71,6 +73,7 @@ public class LoadGameMenu extends Menu {//extends Menu{
 		deleteGameBtn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				loadGameBtn.setEnabled(!loadGameBtn.isEnabled());
 				try {
 					deleteGame();
 				} catch (Exception e1) {

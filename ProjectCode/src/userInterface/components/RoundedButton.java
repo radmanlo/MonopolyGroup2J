@@ -166,33 +166,43 @@ public class RoundedButton extends Component {
     @Override
     public void processMouseEvent(MouseEvent e) {
         Graphics g;
-        switch (e.getID()) {
-            case MouseEvent.MOUSE_PRESSED:
-                pressed = true;
-                repaint();
-                break;
-            case MouseEvent.MOUSE_RELEASED:
-                if (actionListener != null) {
-                    actionListener.actionPerformed(new ActionEvent(
-                            this, ActionEvent.ACTION_PERFORMED, label));
-                }
-                if (pressed == true) {
-                    pressed = false;
-
+        if(isEnabled()) {
+            switch (e.getID()) {
+                case MouseEvent.MOUSE_PRESSED:
+                    pressed = true;
                     repaint();
-                }
-                break;
-            case MouseEvent.MOUSE_ENTERED:
+                    break;
+                case MouseEvent.MOUSE_RELEASED:
+                    if (actionListener != null) {
+                        actionListener.actionPerformed(new ActionEvent(
+                                this, ActionEvent.ACTION_PERFORMED, label));
+                    }
+                    if (pressed == true) {
+                        pressed = false;
 
-                break;
-            case MouseEvent.MOUSE_EXITED:
+                        repaint();
+                    }
+                    break;
+                case MouseEvent.MOUSE_ENTERED:
+
+                    break;
+                case MouseEvent.MOUSE_EXITED:
 //                hovered = false;
-                if (pressed) {
-                    pressed = false;
-                    repaint();
-                }
-                break;
+                    if (pressed) {
+                        pressed = false;
+                        repaint();
+                    }
+                    break;
+            }
+            super.processMouseEvent(e);
         }
-        super.processMouseEvent(e);
+    }
+
+    @Override
+    public void setEnabled(boolean b) {
+        super.setEnabled(b);
+        if(b) setBackground(Utils.getButtonColor());
+        else setBackground(Utils.getButtonColor().darker());
+        repaint();
     }
 }
