@@ -400,6 +400,9 @@ public class LocationManager implements Serializable {
 
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
         Player propertyOwner = ((BuyableLocation)propertyLoc).getOwner();
+        
+        //System.out.println(currentPlayer.getName() +" Current Player Name ||| Property Owner " + propertyOwner.getName());
+
         if(propertyOwner != null ) {
         	GameManager.getInstance().disableBuyIfSameOwner();
         }

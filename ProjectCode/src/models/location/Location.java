@@ -32,6 +32,7 @@ public class Location implements Serializable{
     	this.name = copy.name;
     	this.point = copy.point;
     	this.playersHere = copy.playersHere;
+    	this.type = copy.type;
     }
     
     
