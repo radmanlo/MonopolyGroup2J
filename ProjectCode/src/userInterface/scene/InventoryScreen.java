@@ -37,36 +37,42 @@ public class InventoryScreen extends JPanel{
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		setLayout(null);
 		setBounds(1100,210, 600, 600);
-		setBackground(Color.WHITE);
+		setBackground(new Color(60, 60, 60, 230));
 
 		JLabel playerNameLbl = new JLabel( player.getName() + "'s Inventory");
 		playerNameLbl.setAlignmentX(Component.CENTER_ALIGNMENT);
 		playerNameLbl.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		playerNameLbl.setBounds(129, 22, 350, 53);
+		playerNameLbl.setForeground(Color.WHITE);
 		add(playerNameLbl);
 
 		JLabel constantLblMoney = new JLabel("Money");
 		constantLblMoney.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		constantLblMoney.setBounds(76, 112, 72, 27);
+		constantLblMoney.setForeground(Color.WHITE);
 		add(constantLblMoney);
 
 		JLabel moneyLbl = new JLabel( player.getUsableMoney() +" TL");
-		moneyLbl.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		moneyLbl.setFont(new Font("Tahoma", Font.PLAIN, 36));
 		moneyLbl.setBounds(60, 151, 148, 34);
+		moneyLbl.setForeground(Color.WHITE);
 		add(moneyLbl);
 
 		JLabel constantLblCards = new JLabel("Cards");
 		constantLblCards.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		constantLblCards.setBounds(87, 232, 64, 27);
+		constantLblCards.setForeground(Color.WHITE);
 		add(constantLblCards);
 
 		JLabel constantLblLocs = new JLabel("Owned Locations");
 		constantLblLocs.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		constantLblLocs.setBounds(336, 112, 177, 27);
+		constantLblLocs.setForeground(Color.WHITE);
 		add(constantLblLocs);
 
 		JPanel locsPanel = new JPanel();
 		locsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		locsPanel.setBackground(new Color(60, 60, 60, 100));
 		locsPanel.setBounds(278, 151, 293, 289);
 		add(locsPanel);
 		locsPanel.setLayout(new GridLayout(1, 0, 0, 0));
@@ -118,13 +124,16 @@ public class InventoryScreen extends JPanel{
 			}
 		});
 
+		locsList.setBackground(new Color(60, 60, 60, 100));
+		locsList.setForeground(Color.WHITE);
 		locsPanel.add(locsList);
 
 		JPanel cardsPanel = new JPanel();
 		cardsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		cardsPanel.setBackground(new Color(60, 60, 60, 100));
 		cardsPanel.setBounds(20, 270, 198, 269);
-		add(cardsPanel);
 		cardsPanel.setLayout(new GridLayout(1, 0, 0, 0));
+		add(cardsPanel);
 
 		JList cardsList = new JList(player.getCards().toArray());
 		cardsList.addListSelectionListener(new ListSelectionListener() {
@@ -136,6 +145,10 @@ public class InventoryScreen extends JPanel{
 					useCardBtn.setEnabled(false);
 			}
 		});
+
+		cardsList.setBackground(new Color(60, 60, 60, 255));
+		cardsList.setForeground(Color.WHITE);
+		cardsList.setForeground(Color.WHITE);
 		cardsPanel.add(cardsList);
 
 		useCardBtn = new JButton("Use Card");
@@ -146,6 +159,8 @@ public class InventoryScreen extends JPanel{
 			}
 		});
 		useCardBtn.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		useCardBtn.setBackground(new Color(60, 60, 60, 255));
+		useCardBtn.setForeground(Color.WHITE);
 		useCardBtn.setBounds(20, 545, 198, 44);
 		add(useCardBtn);
 
@@ -158,6 +173,8 @@ public class InventoryScreen extends JPanel{
 		});
 		upgradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		upgradeBtn.setBounds(278, 451, 293, 39);
+		upgradeBtn.setBackground(new Color(60, 60, 60, 255));
+		upgradeBtn.setForeground(Color.WHITE);
 		add(upgradeBtn);
 
 		degradeBtn = new JButton("Degrade to get some TL");
@@ -168,7 +185,9 @@ public class InventoryScreen extends JPanel{
 			}
 		});
 		degradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		degradeBtn.setBackground(new Color(60, 60, 60, 255));
 		degradeBtn.setBounds(278, 501, 293, 39);
+		degradeBtn.setForeground(Color.WHITE);
 		add(degradeBtn);
 
 		sellBtn = new JButton("Sell to get some TL");
@@ -178,6 +197,8 @@ public class InventoryScreen extends JPanel{
 				BoardManager.getInstance().closeInventoryScreen();
 			}
 		});
+		sellBtn.setBackground(new Color(60, 60, 60, 255));
+		sellBtn.setForeground(Color.WHITE);
 		sellBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		sellBtn.setBounds(278, 550, 293, 39);
 		add(sellBtn);
