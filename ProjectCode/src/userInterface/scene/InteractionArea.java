@@ -46,6 +46,7 @@ public class InteractionArea extends JPanel{
 	private JButton payToRerollBtn;
 	private Image backgroundImage;
 	private JTextField saveTxtField;
+	private JLabel buyPriceLbl;
 	
 	public InteractionArea() {
 		backgroundImage = new ImageIcon("./resources/BoardManager.png").getImage();
@@ -75,6 +76,10 @@ public class InteractionArea extends JPanel{
 	
 	public JButton getBuyButton() {
 		return buyBtn;
+	}
+	
+	public void setTextOnBuyPriceLbl(String text) {
+		buyPriceLbl.setText(text);
 	}
 	
 	public void update() {
@@ -121,6 +126,7 @@ public class InteractionArea extends JPanel{
 		buyBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameManager.getInstance().executePurchase();
+				setTextOnBuyPriceLbl("");
 			}
 		});
 		buyBtn.setBounds(505, 309, 108, 44);
@@ -130,6 +136,7 @@ public class InteractionArea extends JPanel{
 		rollDiceBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rollDiceBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				BoardManager.getInstance().updateInteractionArea();
 				GameManager.getInstance().rollDice();
 				payToRerollBtn.setEnabled(true);
 			}
@@ -161,7 +168,7 @@ public class InteractionArea extends JPanel{
 		endTurnBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		endTurnBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				update();
+				BoardManager.getInstance().updateInteractionArea();
 				GameManager.getInstance().handleEndTurn();
 				payToRerollBtn.setEnabled(false);
 				endTurnBtn.setEnabled(false);
@@ -215,7 +222,7 @@ public class InteractionArea extends JPanel{
 		currentPlayerMoneyLbl = new JLabel("some tl");
 		currentPlayerMoneyLbl.setForeground(Color.WHITE);
 		currentPlayerMoneyLbl.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		currentPlayerMoneyLbl.setBounds(524, 361, 89, 23);
+		currentPlayerMoneyLbl.setBounds(524, 138, 89, 23);
 		add(currentPlayerMoneyLbl);
 
 		diceRollResultLbl = new JLabel("Roll the dice please...");
@@ -223,6 +230,18 @@ public class InteractionArea extends JPanel{
 		diceRollResultLbl.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		diceRollResultLbl.setBounds(63, 362, 168, 23);
 		add(diceRollResultLbl);
+		
+		JLabel constantLblMoney = new JLabel("Money");
+		constantLblMoney.setForeground(Color.WHITE);
+		constantLblMoney.setFont(new Font("Tahoma", Font.PLAIN, 33));
+		constantLblMoney.setBounds(524, 68, 120, 44);
+		add(constantLblMoney);
+		
+		buyPriceLbl = new JLabel("");
+		buyPriceLbl.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		buyPriceLbl.setForeground(Color.WHITE);
+		buyPriceLbl.setBounds(524, 364, 89, 21);
+		add(buyPriceLbl);
 	}
 	
 	@Override

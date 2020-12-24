@@ -12,8 +12,10 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.border.LineBorder;
 
+import gamePresenter.BoardManager;
 import gamePresenter.GameManager;
 import gamePresenter.LocationManager;
+import gamePresenter.PlayerManager;
 
 import java.awt.Component;
 import javax.swing.JList;
@@ -78,7 +80,10 @@ public class InventoryScreen extends JPanel{
 			locsList = new JList();
 		locsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-
+				
+				if( player != PlayerManager.getInstance().getCurrentPlayer())
+					return;
+				
 				if(locsList.getSelectedValue() != null) {
 					Location loc = LocationManager.getInstance().getLocationByName( (String) locsList.getSelectedValue());
 
@@ -137,6 +142,7 @@ public class InventoryScreen extends JPanel{
 		useCardBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameManager.getInstance().useCard((Card) cardsList.getSelectedValue());
+				BoardManager.getInstance().closeInventoryScreen();
 			}
 		});
 		useCardBtn.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -146,7 +152,8 @@ public class InventoryScreen extends JPanel{
 		upgradeBtn = new JButton("Upgrade by giving some TL");
 		upgradeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameManager.getInstance().upgradeProperty((String) locsList.getSelectedValue());	
+				GameManager.getInstance().upgradeProperty((String) locsList.getSelectedValue());
+				BoardManager.getInstance().closeInventoryScreen();
 			}
 		});
 		upgradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -157,6 +164,7 @@ public class InventoryScreen extends JPanel{
 		degradeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameManager.getInstance().degradeProperty((String) locsList.getSelectedValue());
+				BoardManager.getInstance().closeInventoryScreen();
 			}
 		});
 		degradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -167,6 +175,7 @@ public class InventoryScreen extends JPanel{
 		sellBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameManager.getInstance().sellProperty((String) locsList.getSelectedValue());
+				BoardManager.getInstance().closeInventoryScreen();
 			}
 		});
 		sellBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));

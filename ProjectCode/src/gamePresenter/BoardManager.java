@@ -100,6 +100,7 @@ public class BoardManager extends JPanel implements Serializable{
 
 	public void openInventoryScreen(Player player) {
 		closeTradeScreen();
+		closeInventoryScreen();
 		inventoryScreen = new InventoryScreen(player);
 		add(inventoryScreen, 0);
 		revalidate();
@@ -128,15 +129,18 @@ public class BoardManager extends JPanel implements Serializable{
 			BuyableLocation log = (BuyableLocation)LocationManager.getInstance().getLocationByName(PlayerManager.getInstance().getCurrentPlayer().getLocation().getName());
 			if(log.getOwner() == null)
 				interactionArea.getBuyButton().setEnabled(true);
+				BuyableLocation currentLoc = (BuyableLocation) PlayerManager.getInstance().getCurrentPlayer().getLocation();
+				interactionArea.setTextOnBuyPriceLbl(currentLoc.getPrice() + " TL");
 		}
 		else {
-
 			interactionArea.getBuyButton().setEnabled(false);
+			interactionArea.setTextOnBuyPriceLbl("");
 		}
 			
 	}
 
 	public void openTradeScreen(Player currentPlayer) {
+		closeTradeScreen();
 		closeInventoryScreen();
 		tradeScreen = new TradeScreen(currentPlayer);
 		add(tradeScreen, 0);
