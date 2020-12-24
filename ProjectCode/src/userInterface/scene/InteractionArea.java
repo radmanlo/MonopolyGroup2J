@@ -169,6 +169,7 @@ public class InteractionArea extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				BoardManager.getInstance().updateInteractionArea();
 				GameManager.getInstance().handleEndTurn();
+				rollDiceBtn.setEnabled(true);
 				payToRerollBtn.setEnabled(false);
 				endTurnBtn.setEnabled(false);
 			}
