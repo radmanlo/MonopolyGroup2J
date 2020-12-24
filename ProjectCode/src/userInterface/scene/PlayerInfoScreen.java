@@ -36,6 +36,8 @@ public class PlayerInfoScreen extends JPanel{
 			}
 		});
 		inventoryBtn.setBounds(179, 19, 128, 23);
+		inventoryBtn.setBackground(new Color(60, 60, 60, 255));
+		inventoryBtn.setForeground(Color.WHITE);
 		add(inventoryBtn);
 		
 		backgroundColor = player.getColorId();

@@ -64,7 +64,7 @@ public class InteractionArea extends JPanel{
 
 	public void setDiceRollResultLbl(int result) {
 		if(result != -1)
-			diceRollResultLbl.setText( "The dice result is: " + result);
+			diceRollResultLbl.setText( "The dice result was: " + result);
 		else
 			diceRollResultLbl.setText( "Please roll the dice");
 	}
@@ -128,11 +128,11 @@ public class InteractionArea extends JPanel{
 				setTextOnBuyPriceLbl("");
 			}
 		});
-		buyBtn.setBounds(496, 302, 137, 48);
+		buyBtn.setBounds(300, 290, 138, 70);
 		add(buyBtn);
 		
 		rollDiceBtn = new RoundedButton("Roll Dice");
-		rollDiceBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		rollDiceBtn.setFont(new Font("Tahoma", Font.BOLD, 18));
 		rollDiceBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BoardManager.getInstance().updateInteractionArea();
@@ -140,7 +140,7 @@ public class InteractionArea extends JPanel{
 				payToRerollBtn.setEnabled(true);
 			}
 		});
-		rollDiceBtn.setBounds(53, 302, 203, 48);
+		rollDiceBtn.setBounds(53, 290, 200, 70);
 		add(rollDiceBtn);
 		
 		offerTradeBtn = new RoundedButton("Offer Trade");
@@ -150,7 +150,7 @@ public class InteractionArea extends JPanel{
 				BoardManager.getInstance().openTradeScreen(PlayerManager.getInstance().getCurrentPlayer());
 			}
 		});
-		offerTradeBtn.setBounds(728, 295, 162, 55);
+		offerTradeBtn.setBounds(728, 290, 160, 70);
 		add(offerTradeBtn);
 		
 		pauseBtn = new RoundedButton("Pause");
@@ -187,7 +187,7 @@ public class InteractionArea extends JPanel{
 			}
 		});
 		payToRerollBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		payToRerollBtn.setBounds(53, 390, 311, 59);
+		payToRerollBtn.setBounds(53, 390, 385, 55);
 		add(payToRerollBtn);
 		
 		RoundedButton tempBtn = new RoundedButton("Move everyone 1 Forward");  //should be removed after testing
