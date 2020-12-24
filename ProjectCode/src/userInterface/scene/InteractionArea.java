@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -30,20 +29,20 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 public class InteractionArea extends JPanel{
-	private JButton buyButton;
-	private JButton optionsButton;
-	private JButton selectPropertyButton;
+	private RoundedButton buyButton;
+	private RoundedButton optionsButton;
+	private RoundedButton selectPropertyButton;
 	private JTextField loadField;
-	private JButton buyBtn;
-	private JButton rollDiceBtn;
-	private JButton offerTradeBtn;
+	private RoundedButton buyBtn;
+	private RoundedButton rollDiceBtn;
+	private RoundedButton offerTradeBtn;
 	private RoundedButton pauseBtn;
-	private JButton endTurnBtn;
+	private RoundedButton endTurnBtn;
 	private JLabel currentPlayerMoneyLbl;
 	private JLabel diceRollResultLbl;
 	private PlayerInfoScreen currentPlayerPanel;
 	private ArrayList<PlayerInfoScreen> otherPlayers;
-	private JButton payToRerollBtn;
+	private RoundedButton payToRerollBtn;
 	private Image backgroundImage;
 	private JTextField saveTxtField;
 	private JLabel buyPriceLbl;
@@ -70,11 +69,11 @@ public class InteractionArea extends JPanel{
 			diceRollResultLbl.setText( "Please roll the dice");
 	}
 
-	public JButton getRollDiceButton() {
+	public RoundedButton getRollDiceButton() {
 		return rollDiceBtn;
 	}
 	
-	public JButton getBuyButton() {
+	public RoundedButton getBuyButton() {
 		return buyBtn;
 	}
 	
@@ -121,7 +120,7 @@ public class InteractionArea extends JPanel{
 	}
 	
 	private void addButtons() {
-		buyBtn = new JButton("Buy");
+		buyBtn = new RoundedButton("Buy");
 		buyBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		buyBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,10 +128,10 @@ public class InteractionArea extends JPanel{
 				setTextOnBuyPriceLbl("");
 			}
 		});
-		buyBtn.setBounds(505, 309, 108, 44);
+		buyBtn.setBounds(496, 302, 137, 48);
 		add(buyBtn);
 		
-		rollDiceBtn = new JButton("Roll Dice");
+		rollDiceBtn = new RoundedButton("Roll Dice");
 		rollDiceBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		rollDiceBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -141,17 +140,17 @@ public class InteractionArea extends JPanel{
 				payToRerollBtn.setEnabled(true);
 			}
 		});
-		rollDiceBtn.setBounds(53, 312, 168, 38);
+		rollDiceBtn.setBounds(53, 302, 203, 48);
 		add(rollDiceBtn);
 		
-		offerTradeBtn = new JButton("Offer Trade");
+		offerTradeBtn = new RoundedButton("Offer Trade");
 		offerTradeBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		offerTradeBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				BoardManager.getInstance().openTradeScreen(PlayerManager.getInstance().getCurrentPlayer());
 			}
 		});
-		offerTradeBtn.setBounds(738, 302, 152, 52);
+		offerTradeBtn.setBounds(728, 295, 162, 55);
 		add(offerTradeBtn);
 		
 		pauseBtn = new RoundedButton("Pause");
@@ -163,7 +162,7 @@ public class InteractionArea extends JPanel{
 		pauseBtn.setBounds(10, 10, 128, 57);
 		add(pauseBtn);
 		
-		endTurnBtn = new JButton("End Turn");
+		endTurnBtn = new RoundedButton("End Turn");
 		endTurnBtn.setEnabled(false);
 		endTurnBtn.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		endTurnBtn.addActionListener(new ActionListener() {
@@ -174,10 +173,10 @@ public class InteractionArea extends JPanel{
 				endTurnBtn.setEnabled(false);
 			}
 		});
-		endTurnBtn.setBounds(695, 390, 195, 59);
+		endTurnBtn.setBounds(687, 390, 203, 59);
 		add(endTurnBtn);
 		
-		payToRerollBtn = new JButton("Pay 200 TL to Reroll The Dice");
+		payToRerollBtn = new RoundedButton("Pay 200 TL to Reroll The Dice");
 		payToRerollBtn.setEnabled(false);
 		payToRerollBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -188,10 +187,10 @@ public class InteractionArea extends JPanel{
 			}
 		});
 		payToRerollBtn.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		payToRerollBtn.setBounds(53, 402, 311, 37);
+		payToRerollBtn.setBounds(53, 390, 311, 59);
 		add(payToRerollBtn);
 		
-		JButton tempBtn = new JButton("Move everyone 1 Forward");  //should be removed after testing
+		RoundedButton tempBtn = new RoundedButton("Move everyone 1 Forward");  //should be removed after testing
 		tempBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				for( Player plyr: PlayerManager.getInstance().getPlayers())
@@ -199,10 +198,10 @@ public class InteractionArea extends JPanel{
 				BoardManager.getInstance().updateMap();
 			}
 		});
-		tempBtn.setBounds(613, 919, 232, 23);
+		tempBtn.setBounds(496, 887, 368, 55);
 		add(tempBtn);
 	}
-	public JButton getEndTurnButton() {
+	public RoundedButton getEndTurnButton() {
 		return this.endTurnBtn;
 	}
 	
