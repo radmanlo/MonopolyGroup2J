@@ -117,8 +117,8 @@ public class TradeDeal implements Serializable {
 			receiver.addOwnedLocation(offeredBuyables.get(i));
 		}
 		for(int i = 0; i < requestedBuyables.size(); i++) {
-			receiver.removeOwnedLocation(offeredBuyables.get(i));
-			offerer.addOwnedLocation(offeredBuyables.get(i));
+			receiver.removeOwnedLocation(requestedBuyables.get(i));
+			offerer.addOwnedLocation(requestedBuyables.get(i));
 		}
 	}
 

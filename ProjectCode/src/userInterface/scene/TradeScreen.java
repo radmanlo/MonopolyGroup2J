@@ -188,25 +188,20 @@ public class TradeScreen extends JPanel{
 	}
 
 	private void updateLists() {
-		//System.out.println("hi: " + offeredNames.get(0));
+		if(wantedList != null)
+			wantedPanel.remove(wantedList);
 		wantedList = new JList(wantedNames.toArray());
 		wantedList.setBounds( 10, 100 , 220, 200);
 		wantedPanel.add(wantedList);
 		
+		if(offeredList != null)
+			offeredPanel.remove(offeredList);
 		offeredList = new JList(offeredNames.toArray());
 		offeredList.setBounds( 10, 100 , 220, 200);
 		offeredPanel.add(offeredList);
-		offeredList.setVisible(true);
-		offeredPanel.setVisible(true);
-		wantedList.setVisible(true);
-		wantedPanel.setVisible(true);
 		
-		wantedPanel.revalidate();
 		wantedPanel.repaint();
-		offeredPanel.revalidate();
 		offeredPanel.repaint();
-		revalidate();
-		repaint();
 		}
 
 	private void updateWantedPanel() {
