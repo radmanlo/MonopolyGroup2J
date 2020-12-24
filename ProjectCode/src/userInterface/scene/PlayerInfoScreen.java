@@ -28,7 +28,7 @@ public class PlayerInfoScreen extends JPanel{
 	public PlayerInfoScreen(Player player){
 		setLayout(null);
 		setBounds(0, 0, 400, 60);
-		
+
 		inventoryBtn = new JButton("view inventory");
 		inventoryBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -43,13 +43,20 @@ public class PlayerInfoScreen extends JPanel{
 		
 		JPanel namePanel = new JPanel();
 		namePanel.setBounds(21, 11, 148, 36);
+
 		add(namePanel);
 		playerLbl = new JLabel();
 		playerLbl.setText(player.getName());
 		namePanel.add(playerLbl);
 		playerLbl.setFont(new Font("Tahoma", Font.PLAIN, 23));
-		namePanel.setBackground(Color.WHITE);
-		
+
+		if (backgroundColor == PlayerColor.RED || backgroundColor == PlayerColor.BLACK)
+			playerLbl.setForeground(new Color(245, 245, 245, 255));
+		else
+			playerLbl.setForeground(new Color(36, 36, 36, 255));
+
+		namePanel.setBackground(getUsableColor(backgroundColor));
+
 		String imgPath = player.getToken().getPath();
 		tokenImg = Utils.scaleImage(40,40,imgPath);
 		
