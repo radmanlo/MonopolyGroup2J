@@ -12,6 +12,24 @@ public class Property extends BuyableLocation{
     private boolean ownsStarbucks;
     private int upgradeCost;
 
+    /**
+     * Construcotr with given parameters
+     * @param locationId
+     * @param name
+     * @param point
+     * @param playersHere
+     * @param groupColor
+     * @param owner
+     * @param price
+     * @param currentRentValue
+     * @param mortgageValue
+     * @param breakMortgageValue
+     * @param underMortgage
+     * @param rentValues
+     * @param vendingMachinesNo
+     * @param ownsStarbucks
+     * @param upgradeCost
+     */
     public Property(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, int vendingMachinesNo, boolean ownsStarbucks, int upgradeCost) {
         super(locationId, name, point, playersHere, groupColor, owner, price, currentRentValue, mortgageValue, breakMortgageValue, underMortgage, rentValues, LOCATION_TYPES.PROPERTY);
         this.vendingMachinesNo = vendingMachinesNo;
@@ -19,6 +37,10 @@ public class Property extends BuyableLocation{
         this.upgradeCost = upgradeCost;
     }
 
+    /**
+     * Copy constructor
+     * @param copy
+     */
     public Property(Property copy) {
         super(copy);
         this.vendingMachinesNo = copy.vendingMachinesNo;
@@ -27,6 +49,9 @@ public class Property extends BuyableLocation{
 		// TODO Auto-generated constructor stub
 	}
 
+    /**
+     * Creates clone of its
+     */
     public Property clone() {
         return new Property(this);
     }
@@ -35,14 +60,25 @@ public class Property extends BuyableLocation{
         super.activate();
     }
 
+	/**
+	 * retuns how many vending machines found
+	 * @return
+	 */
     public int getVendingMachinesNo() {
         return vendingMachinesNo;
     }
 
+    /**
+     * Returns if location has sturbucks
+     * @return
+     */
     public boolean hasStarbucks() {
         return ownsStarbucks;
     }
     
+    /**
+     * Upgrades property
+     */
     public boolean upgrade() {
     	
     	if(ownsStarbucks == false){
@@ -58,6 +94,9 @@ public class Property extends BuyableLocation{
     	return false;
     
     }
+    /**
+     * Degreades property
+     */
     public boolean degrade() {
     	
     	if(ownsStarbucks == false){
@@ -73,10 +112,17 @@ public class Property extends BuyableLocation{
     	return true;
     
     }
+    /**
+     * Returns upgrade cost of property
+     * @return
+     */
     public int getUpgradeCost() {
         return upgradeCost;
     }
     
+    /**
+     * Returns get rent value 
+     */
     @Override
     public int getRentValue() {
     	int level = 0;

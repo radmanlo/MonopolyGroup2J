@@ -9,10 +9,21 @@ import models.Player;
 
 public class GoToDisciplinaryTile extends Location{
 
+	/**
+	 * Constructor of Go to disciplinary location
+	 * @param locationId
+	 * @param name
+	 * @param point
+	 * @param playersHere
+	 */
     public GoToDisciplinaryTile(int locationId, String name, Point2D point, ArrayList<Player> playersHere) {
         super(locationId, name, point, playersHere, LOCATION_TYPES.GO_TO_DISCIPLINARY);
     }
 
+    /**
+     * Copy constructor of Goto disciplinary tile
+     * @param copy
+     */
     public GoToDisciplinaryTile(GoToDisciplinaryTile copy) {
     	super(copy);
     }

@@ -8,7 +8,9 @@ import models.Player;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Locale;
-
+/*
+ * Constructor of Buyable
+ */
 public class BuyableLocation extends Location{
     public enum GroupColor { BROWN, LIGHT_BLUE, DARK_BLUE, PINK, ORANGE, RED, YELLOW, GREEN, PURPLE, BUS, UTILITY}
     private GroupColor groupColor;
@@ -63,7 +65,9 @@ public class BuyableLocation extends Location{
                 return null;
         }
     }
-
+/*
+ * Cunstroctor of buyable with all parameters
+ */
     public BuyableLocation(int locationId, String name, Point2D point, ArrayList<Player> playersHere, GroupColor groupColor, Player owner, int price, int currentRentValue, int mortgageValue, int breakMortgageValue, boolean underMortgage, ArrayList<Integer> rentValues, LOCATION_TYPES type) {
         super(locationId, name, point, playersHere, type);
         this.groupColor = groupColor;
@@ -77,6 +81,9 @@ public class BuyableLocation extends Location{
         this.rentValues = rentValues;
     }
 
+    /*
+     * Copy constructor of buyables
+     */
     public BuyableLocation(BuyableLocation copy) {
     	super(copy);
         this.groupColor = copy.groupColor;
@@ -90,66 +97,104 @@ public class BuyableLocation extends Location{
         this.rentValues = copy.rentValues;
     }
 
+    /*
+     * Returns owner of buyable
+     */
 	public Player getOwner() {
         return owner;
     }
-
+    /*
+     * Returns group color of buyable
+     */
     public GroupColor getGroupColor() {
         return groupColor;
     }
-
+    /*
+     * Set group color of buyable
+     */
     public void setGroupColor(GroupColor groupColor) {
         this.groupColor = groupColor;
     }
 
+    /*
+     * Set owner of buyable
+     */
     public void setOwner(Player owner) {
         this.owner = owner;
     }
 
+    /*
+     * Returns prica of buyable
+     */
     public int getPrice() {
         return price;
     }
 
+    /*
+     * Set price of buyable
+     */
     public void setPrice(int price) {
         this.price = price;
     }
 
+    /*
+     * Returns rent value of buyable
+     */
     public int getCurrentRentValue() {
         return currentRentValue;
     }
 
+    /*
+     * Set current rent value of buyable
+     */
     public void setCurrentRentValue(int currentRentValue) {
         this.currentRentValue = currentRentValue;
     }
 
+    //TODO
     public int getMortgageValue() {
         return mortgageValue;
     }
-
+    //TODO
     public int getBreakMortgageValue() {
         return breakMortgageValue;
     }
-
+    //TODO
     public boolean isUnderMortgage() {
         return underMortgage;
     }
-
+    /*
+     * TODO
+     */
     public void setUnderMortgage(boolean underMortgage) {
         this.underMortgage = underMortgage;
     }
 
+    /*
+     * Return rent value list of buyable
+     */
     public ArrayList<Integer> getRentValues() {
         return rentValues;
     }
 
+    /*
+     * Return rent value list of buyable
+     */
     public ArrayList<Integer> getAllRentValues(){
         return this.rentValues;
     }
 
+    /*
+     * Return rent value of buyable
+     */
     public int getRentValue() {
 		return this.currentRentValue;
     }
 
+    /*
+     * Upgrades the buyable
+     *  
+     */
     public boolean upgrade(){
         if (this.currentRentIndex < this.rentValues.size() - 1){
             this.currentRentIndex++;
@@ -160,6 +205,9 @@ public class BuyableLocation extends Location{
         return false;
     }
 
+    /*
+     * Degreade the buyable
+     */
     public boolean degrade(){
         if (this.currentRentIndex > 0){
             this.currentRentIndex--;
@@ -170,12 +218,18 @@ public class BuyableLocation extends Location{
         return false;
     }
 
+    /*
+     * Reset for default adding local datas
+     */
     public void resetToDefault(){
         this.owner = null;
         this.currentRentIndex = 0;
         this.currentRentValue = this.rentValues.get(0);
     }
 
+    /*
+     * Returns int nof buyables per colors
+     */
     public static int noOfBuyablePerColor(GroupColor color){
         if (color == null){
             return -1;
