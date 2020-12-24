@@ -47,6 +47,8 @@ public class NewPlayerAddingScreen extends JPanel{
 		colorComboBox = new JComboBox();
 
 		colorComboBox.setBounds(625, 11, 90, 35);
+		colorComboBox.setBackground(new Color(60, 60, 60, 255));
+		colorComboBox.setForeground(Color.WHITE);
 		for(int i = 0; i < choosableColors.size(); ++i) {
 			colorComboBox.addItem( new ImageIcon("./resources/" + choosableColors.get(i).toString() + ".jpg"));
 		}
@@ -58,25 +60,31 @@ public class NewPlayerAddingScreen extends JPanel{
 			tokenComboBox.addItem( new ImageIcon( choosableTokens.get(i).getImage()));
 		}
 		tokenComboBox.setBounds(775, 11, 90, 35);
+		tokenComboBox.setBackground(new Color(60, 60, 60, 255));
 		add(tokenComboBox);
 		
 		
 		nameField = new JTextField(20);
 		nameField.setBounds(47, 11, 530, 35);
-
+		nameField.setBackground(new Color(60, 60, 60, 255));
+		nameField.setForeground(Color.WHITE);
+		nameField.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		add(nameField);
 		nameField.setColumns(10);
 
 		NewPlayerAddingScreen copyOfThis = this;
 
-		removePlayerBtn = new RoundedButton("X", 20, 20, Color.red);
+		removePlayerBtn = new RoundedButton("X", 20, 20, new Color(60, 60, 60, 255));
+		removePlayerBtn.setFont(new Font("Tahoma", Font.PLAIN, 23));
+
 		removePlayerBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				parentMenu.removePotentialPlayer(copyOfThis);
 			}
 		});
-		removePlayerBtn.setBackground(Color.RED);
-		removePlayerBtn.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		removePlayerBtn.setBackground(new Color(60, 60, 60, 255));
+		removePlayerBtn.setForeground(new Color(172, 0, 0, 255));
+		removePlayerBtn.setFont(new Font("Tahoma", Font.BOLD, 16));
 		removePlayerBtn.setBounds(941, 11, 66, 36);
 		add(removePlayerBtn);
 		
