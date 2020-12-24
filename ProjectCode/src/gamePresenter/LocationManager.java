@@ -97,6 +97,7 @@ public class LocationManager implements Serializable {
         return locationManager;
     }
     
+    //Changes the values of the location manager with given manager
     public void set(LocationManager copy) {
         this.buyableLocations = new ArrayList<BuyableLocation>();
         this.nonBuyableLocations = new ArrayList<Location>();
@@ -202,6 +203,7 @@ public class LocationManager implements Serializable {
         return newLocation;
     }
 
+    //Get location of given player
     public Location getPlayerLocation(Player thePlayer){
         Location playerLocation = null;
         boolean found = false;
@@ -627,6 +629,9 @@ public class LocationManager implements Serializable {
 		return temp;
 	}
 
+	/*
+	 * Get buyables of player
+	 */
 	public ArrayList<Property> getPropertiesOfPlayer(Player aPlayer){
 	    ArrayList<Property> propertiesOfPlayer = new ArrayList<Property>(0);
 
@@ -639,6 +644,9 @@ public class LocationManager implements Serializable {
 
 	    return propertiesOfPlayer;
     }
+	/*
+	 * Makes maanager ready for initialization load data
+	 */
 	public void readyForInitialize() {
 		this.buyableLocations = new ArrayList<BuyableLocation>();
 		this.nonBuyableLocations = new ArrayList<Location>();

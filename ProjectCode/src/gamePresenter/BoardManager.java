@@ -38,6 +38,7 @@ public class BoardManager extends JPanel implements Serializable{
 	private Image backgroundImage;
 
 
+	//Default Constructor
 	private BoardManager() {
 		backgroundImage = new ImageIcon("./resources/BoardManager.png").getImage();
 		setBounds(0, 0, 2000, 1200);
@@ -48,6 +49,7 @@ public class BoardManager extends JPanel implements Serializable{
 		add(interactionArea);
 	}
 
+	//Method for getting instance of singleton manager
 	public static BoardManager getInstance() {
 		if( boardManager == null ) {
 			boardManager = new BoardManager();
@@ -55,6 +57,7 @@ public class BoardManager extends JPanel implements Serializable{
 		return boardManager;
 	}
 
+	//Updates map
 	public void updateMap() {
 		closeInventoryScreen();
 		closeTradeScreen();
@@ -63,6 +66,7 @@ public class BoardManager extends JPanel implements Serializable{
 		map.update(locationsList);
 	}
 
+	//Updates Interaction Area
 	public void updateInteractionArea() {
 		closeInventoryScreen();
 		closeTradeScreen();
@@ -76,6 +80,7 @@ public class BoardManager extends JPanel implements Serializable{
 		interactionArea.revalidate();
 		interactionArea.repaint();
 	}
+	//Opens inventory Screen
 
 	public void openInventoryScreen(Player player) {
 		closeTradeScreen();
@@ -85,22 +90,25 @@ public class BoardManager extends JPanel implements Serializable{
 		revalidate();
 		repaint();
 	}
+	//Disabling buy button
+
 	public void disableBuyButton() {
 		interactionArea.getBuyButton().setEnabled(false);
 	}
-
+	//Enabling buy button
 	public void enableBuyButton() {
 		interactionArea.getBuyButton().setEnabled(true);
 	}
-
+	//Enabling roll dice button
 	public void enableDice() {
 		interactionArea.getRollDiceButton().setEnabled(true);
 	}
-
+	//Disabling roll dice button
 	public void disableDice() {
 		interactionArea.getRollDiceButton().setEnabled(false);
 	}
 
+	//Enable or disable buy button according to players' location
 	public void decideEnabledorNotForBuyBtn() {
 		if(LocationManager.getInstance().isPlaceBuyable()) {
 			BuyableLocation loc = (BuyableLocation)LocationManager.getInstance().getLocationByName(PlayerManager.getInstance().getCurrentPlayer().getLocation().getName());
@@ -117,6 +125,7 @@ public class BoardManager extends JPanel implements Serializable{
 
 	}
 
+	//Opens trade Screen Panel
 	public void openTradeScreen(Player currentPlayer) {
 		closeTradeScreen();
 		closeInventoryScreen();
@@ -127,6 +136,7 @@ public class BoardManager extends JPanel implements Serializable{
 
 	}
 
+	//Shows pending trade deals
 	public void showPendingTradeDeals(){
 
 		if( TradeManager.getInstance().checkTradeDeals(PlayerManager.getInstance().getCurrentPlayer())) {
@@ -150,13 +160,17 @@ public class BoardManager extends JPanel implements Serializable{
 		}
 	}
 
+	//End Turn Visible or not maker with given boolean tmp
 	public void setEndTurnButton(boolean tmp) {
 		interactionArea.getEndTurnButton().setEnabled(tmp);
 	}
+	
+	//Call Die animates
 	public void animateDies(int firstDiceResult, int secondDiceResult) {
 		map.animateDies(firstDiceResult, secondDiceResult);
 	}
 
+	//Closing Trade Screen
 	public void closeTradeScreen() {
 		if(tradeScreen != null)
 			remove(tradeScreen);
@@ -164,6 +178,7 @@ public class BoardManager extends JPanel implements Serializable{
 		repaint();
 	}
 
+	//Closing Inventory Screen
 	public void closeInventoryScreen() {
 		if(inventoryScreen != null)
 			remove(inventoryScreen);
@@ -178,6 +193,7 @@ public class BoardManager extends JPanel implements Serializable{
 		g.drawImage(backgroundImage, 0,0, null);
 	}
 
+	//Making ready for initialize load game
 	public void readyForInitialize() {
 		interactionArea.readyForInitialize();	
 	}

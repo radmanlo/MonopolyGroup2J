@@ -47,6 +47,7 @@ public class PlayerManager implements Serializable{
 		return currentPlayer;
 	}
 
+	//Giving next Player
 	public Player getNextPlayer(){
 		int nOfPlayers = players.size();
 		int nextPlayerIndex = (currentPlayerIndex + 1) % nOfPlayers;
@@ -54,6 +55,7 @@ public class PlayerManager implements Serializable{
 		return players.get(nextPlayerIndex);
 	}
 
+	//Next player will be current player
 	public void changeCurrentPlayer() {
 		int nOfPlayers = players.size();
 
@@ -61,6 +63,7 @@ public class PlayerManager implements Serializable{
 		currentPlayer = players.get(currentPlayerIndex); // update the current player
 	}
 	
+	//Returns all players
 	public ArrayList<Player> getPlayers(){
 		return players;
 	}
@@ -88,6 +91,7 @@ public class PlayerManager implements Serializable{
 		currentPlayerIndex --;
 	}
 
+	//Remove Player from list
 	public void removePlayer(Player plyr) {
 		for(int i = 0; i< players.size(); i++) {
 			if( plyr.getName() == players.get(i).getName()){
@@ -96,20 +100,24 @@ public class PlayerManager implements Serializable{
 		}
 	}
 
+	//Add Player from list
 	public void addPlayer(Player plyr) {
 		players.add(plyr);
 	}
-	
+
+	//Arranging initial values of current player
 	public void setInitialCurrentPlayer() {
 		currentPlayerIndex = 0;
 		currentPlayer = players.get(currentPlayerIndex);
 	}
 
+	//Changing our Manager adding new datas
 	public void create(PlayerManager mngr) {
 		// TODO Auto-generated method stub
 		set(mngr);
 	}
 
+	//Changing our Manager adding new datas
 	public void set(PlayerManager mngr) {
 		players = new ArrayList<Player>();
 		currentPlayer = null;
@@ -122,10 +130,12 @@ public class PlayerManager implements Serializable{
 		currentPlayer = new Player(mngr.getCurrentPlayer());
 	}
 	
+	//Remove amount of money from the given player
 	public void deductMoneyFromPlayer(Player player, int amount){
 		player.setUsableMoney(player.getUsableMoney() - amount);
 	}
 
+	//Add amount of money from the given player
 	public void addMoneyToPlayer(Player player, int amount){
 		player.setUsableMoney(player.getUsableMoney() + amount);
 	}
@@ -142,6 +152,7 @@ public class PlayerManager implements Serializable{
 		}
 		return null;
 	}
+	//Design Manager for Ready Load Data 
 	public void readyForInitialize() {
 		players = new ArrayList<Player>();
 		currentPlayer = null;

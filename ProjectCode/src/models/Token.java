@@ -13,10 +13,16 @@ public class Token implements Serializable {
 	private static final long serialVersionUID = -1858717624870311197L;
 	String path;
 	
+	/*
+	 * Constructor with given img path
+	 */
 	public Token(String path) {
 		this.path = path;
 	}
 
+	/*
+	 * Constructor with given token
+	 */
 	public Token(Token token) {
 		// TODO Auto-generated constructor stub
 		this.path = token.path;
@@ -28,6 +34,9 @@ public class Token implements Serializable {
 		return image;
 	}
 	
+	/*
+	 * Returns path of image
+	 */
 	public String getPath() {
 		return path;
 	}

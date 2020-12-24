@@ -25,6 +25,9 @@ public class TradeDeal implements Serializable {
 	private ArrayList<Card> requestedCards; 
 	private int requestedMoney;
 
+	/*
+	 * Trade Deal Construcotr
+	 */
 	public TradeDeal(Player offerer, Player receiver, ArrayList<BuyableLocation> offeredBuyables, ArrayList<Card> offeredCards, int offeredMoney, ArrayList<BuyableLocation> requestedBuyables, ArrayList<Card> requestedCards, int requestedMoney) {
 		this.offerer = offerer;
 		this.receiver = receiver;
@@ -36,6 +39,9 @@ public class TradeDeal implements Serializable {
 		this.requestedMoney = requestedMoney;
 	}
 
+	/*
+	 * Trade Deal copy Constructor
+	 */
 	public TradeDeal(TradeDeal copy) {
 		this.offeredMoney = copy.offeredMoney;
 		this.requestedMoney = copy.requestedMoney;
@@ -89,16 +95,25 @@ public class TradeDeal implements Serializable {
 		}
 	}
 
+	/*
+	 * Execution of trade Deal
+	 */
 	public void execute() {
 		transferMoney();
 		transferCards();
 		transferBuyables();
 	}
+	/*
+	 * Transferring moneys
+	 */
 	public void transferMoney() {
 		int money = offeredMoney- requestedMoney;
 		offerer.setUsableMoney(offerer.getUsableMoney() - money);
 		receiver.setUsableMoney(receiver.getUsableMoney() + money);
 	}
+	/*
+	 * Transferring cards
+	 */
 	public void transferCards() {
 		if(offeredCards != null) {
 			for(int i = 0; i < offeredCards.size(); i++) {
@@ -111,6 +126,9 @@ public class TradeDeal implements Serializable {
 			}
 		}
 	}
+	/*
+	 * Transferring buyables
+	 */
 	public void transferBuyables() {
 		for(int i = 0; i < offeredBuyables.size(); i++) {
 			offerer.removeOwnedLocation(offeredBuyables.get(i));
@@ -122,7 +140,9 @@ public class TradeDeal implements Serializable {
 		}
 	}
 
-
+	/*
+	 * adding buyable to offer to list
+	 */
 	public void addBuyableToOffered(BuyableLocation item) {
 		offeredBuyables.add(item);
 	}
@@ -133,6 +153,9 @@ public class TradeDeal implements Serializable {
 			}
 		}
 	}
+	/*
+	 * Adding card to offer to list
+	 */
 	public void addCardToOffered(Card card) { 
 		offeredCards.add(card);
 	}
@@ -143,6 +166,9 @@ public class TradeDeal implements Serializable {
 			}
 		}
 	}
+	/*
+	 * Adding request list a buyable
+	 */
 	public void addBuyableToRequested(BuyableLocation item) { 
 		requestedBuyables.add(item);
 	}
@@ -153,9 +179,15 @@ public class TradeDeal implements Serializable {
 			}
 		}
 	}
+	/*
+	 * Adding request card list a card
+	 */
 	public void addCardToRequested(Card card) { 
 		requestedCards.add(card);
 	}
+	/*
+	 * Removes card from request list
+	 */
 	public void removeCardFromRequested(Card card) { 
 		for(int i = 0; i < requestedCards.size(); i++) {
 			if(requestedCards.get(i).getCardId() == card.getCardId()) {
@@ -164,105 +196,172 @@ public class TradeDeal implements Serializable {
 		}
 	}
 
+	/*
+	 * Returns offerer player
+	 */
 	public Player getOfferer() {
 		return this.offerer;
 	}
 
+	/*
+	 * Set offerer player
+	 */
 	public void setOfferer(Player offerer) {
 		this.offerer = offerer;
 	}
 
+	/*
+	 * Returns receiver player
+	 */
 	public Player getReceiver() {
 		return this.receiver;
 	}
 
+	/*
+	 * Sets receiver player
+	 */
 	public void setReceiver(Player receiver) {
 		this.receiver = receiver;
 	}
 
+	/*
+	 * Returns all buyables offered
+	 */
 	public ArrayList<BuyableLocation> getOfferedBuyables() {
 		return this.offeredBuyables;
 	}
 
+	/*
+	 * Sets all buyables offered
+	 */
 	public void setOfferedBuyables(ArrayList<BuyableLocation> offeredBuyables) {
 		this.offeredBuyables = offeredBuyables;
 	}
 
+	/*
+	 * Get all offered cards
+	 */
 	public ArrayList<Card> getOfferedCards() {
 		return this.offeredCards;
 	}
 
+	/*
+	 * Set offered cards list
+	 */
 	public void setOfferedCards(ArrayList<Card> offeredCards) {
 		this.offeredCards = offeredCards;
 	}
 
+	/*
+	 * Gets offered money 
+	 */
 	public int getOfferedMoney() {
 		return this.offeredMoney;
 	}
 
+	/*
+	 * Set offered money
+	 */
 	public void setOfferedMoney(int offeredMoney) {
 		this.offeredMoney = offeredMoney;
 	}
 
+	/*
+	 * Gets requested buyables
+	 */
 	public ArrayList<BuyableLocation> getRequestedBuyables() {
 		return this.requestedBuyables;
 	}
 
+	/*
+	 * Set requested buyables with given array
+	 */
 	public void setRequestedBuyables(ArrayList<BuyableLocation> requestedBuyables) {
 		this.requestedBuyables = requestedBuyables;
 	}
 
+	/*
+	 * Get requested cards
+	 */
 	public ArrayList<Card> getRequestedCards() {
 		return this.requestedCards;
 	}
 
+	/*
+	 * Set requested cards
+	 */
 	public void setRequestedCards(ArrayList<Card> requestedCards) {
 		this.requestedCards = requestedCards;
 	}
 
+	/*
+	 * Get requested money
+	 */
 	public int getRequestedMoney() {
 		return this.requestedMoney;
 	}
 
+	/*
+	 * set requested money
+	 */
 	public void setRequestedMoney(int requestedMoney) {
 		this.requestedMoney = requestedMoney;
 	}
 
+	/*
+	 * returns trade deal with given offerer
+	 */
 	public TradeDeal offerer(Player offerer) {
 		this.offerer = offerer;
 		return this;
 	}
-
+	/*
+	 * returns trade deal with given receiver
+	 */
 	public TradeDeal receiver(Player receiver) {
 		this.receiver = receiver;
 		return this;
 	}
-
+	/*
+	 * returns trade deal with given offered buyable list
+	 */
 	public TradeDeal offeredBuyables(ArrayList<BuyableLocation> offeredBuyables) {
 		this.offeredBuyables = offeredBuyables;
 		return this;
 	}
-
+	/*
+	 * returns trade deal with given offered cards
+	 */
 	public TradeDeal offeredCards(ArrayList<Card> offeredCards) {
 		this.offeredCards = offeredCards;
 		return this;
 	}
 
+	/*
+	 * returns trade deal with given offered money
+	 */
 	public TradeDeal offeredMoney(int offeredMoney) {
 		this.offeredMoney = offeredMoney;
 		return this;
 	}
 
+	/*
+	 * Returns trade deal with given requested buyable list
+	 */
 	public TradeDeal requestedBuyables(ArrayList<BuyableLocation> requestedBuyables) {
 		this.requestedBuyables = requestedBuyables;
 		return this;
 	}
-
+	/*
+	 * Returns trade deal with given requested card list
+	 */
 	public TradeDeal requestedCards(ArrayList<Card> requestedCards) {
 		this.requestedCards = requestedCards;
 		return this;
 	}
-
+	/*
+	 * Returns trade deal with given requested money 
+	 */
 	public TradeDeal requestedMoney(int requestedMoney) {
 		this.requestedMoney = requestedMoney;
 		return this;

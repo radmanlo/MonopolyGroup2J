@@ -21,6 +21,9 @@ public class Card implements Serializable{
 		this.storable = storable;
 	}
 	
+	/*
+	 * Copy Constructor
+	 */
 	public Card(Card id) {
 		this.cardId = id.cardId;
 		this.cardName = id.cardName;
@@ -33,12 +36,21 @@ public class Card implements Serializable{
 		return this.cardId;
 	}
 
+	/*
+	 * Retuns description of card
+	 */
 	public String getDescription() { return this.description; }
 
+	/*
+	 * Returns a card is storable or not
+	 */
 	public boolean isStorable() {
 		return this.storable;
 	}
 
+	/*
+	 * Returns card name
+	 */
 	public String getCardName() { return  this.cardName; }
 
 	@Override

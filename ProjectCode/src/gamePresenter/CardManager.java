@@ -56,6 +56,7 @@ public class CardManager implements Serializable{
 		}
 	}
 
+	//Adds card to carddeck
 	public void addCard(Card card) {
 		cardDeck.add(card);
 	}
@@ -74,10 +75,12 @@ public class CardManager implements Serializable{
 		return cardDeck.get(0);
 	}
 
+	//Shuffle's deck
 	public void shuffle() {
         Collections.shuffle(cardDeck);
 	}
 
+	//Choose what to do according to given card
 	public void executeCardAction(Card card) {
 		switch (card.getCardId()){
 			case 111: this.getOutOfJail(card);
@@ -108,7 +111,7 @@ public class CardManager implements Serializable{
 	 * @param outOfJailCard
 	 */
 	public void getOutOfJail(Card outOfJailCard) {
-		System.out.println("OutOfJail card activated");
+		//System.out.println("OutOfJail card activated");
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		if (curPlayer.getIsInJail()){
 			curPlayer.setIsInJail(false);
@@ -117,8 +120,9 @@ public class CardManager implements Serializable{
 		}
 	}
 
+	// Upgrade Property Call Activision
 	public void upgradeAProperty(){
-		System.out.println("Upgrade property card activated");
+		//System.out.println("Upgrade property card activated");
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		ArrayList<Property> properties = LocationManager.getInstance().getPropertiesOfPlayer(curPlayer);
 		ArrayList<Property> upgradableProps = new ArrayList<Property>(0);
@@ -138,14 +142,16 @@ public class CardManager implements Serializable{
 		GameManager.getInstance().updateUI();
 	}
 
+	// Plagirism Punishment Call Activision
 	public void pladiarismPunishment(){
-		System.out.println("Plagiarism -500 card activated");
+		//System.out.println("Plagiarism -500 card activated");
 
 		final int PLAGIARISM_FINE = 500;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
 		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, PLAGIARISM_FINE);
 	}
+	// Go WC Call Activision
 
 	public void goWc(){
 		final int WC_ID = 28;
@@ -160,22 +166,24 @@ public class CardManager implements Serializable{
 			distance = WC_ID + (40 - curLocationId) + 1;
 		}
 
-		System.out.println("Go to Wc card activated " + distance);
+		//System.out.println("Go to Wc card activated " + distance);
 
 		LocationManager.getInstance().movePlayer(curPlayer, distance);
 	}
+	// Go CS Prize 319 Card Activision
 
 	public void aInCs319(){
-		System.out.println("a in cs319 +500 card activated");
+	//	System.out.println("a in cs319 +500 card activated");
 
 		final int PRIZE = 500;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
 		PlayerManager.getInstance().addMoneyToPlayer(curPlayer, PRIZE);
 	}
+	//Pay school taxes Card Activision
 
 	public void schoolTaxes(){
-		System.out.println("school taxes -1000 card activated");
+		//System.out.println("school taxes -1000 card activated");
 
 
 		final int SCHOOL_TAX = 350;
@@ -184,8 +192,10 @@ public class CardManager implements Serializable{
 		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, SCHOOL_TAX);
 	}
 
+	//Pay car accident fee Card Activision
+
 	public void accidentFee(){
-		System.out.println("accident -500card activated");
+		//System.out.println("accident -500card activated");
 
 		final int ACCIDENT_FEE = 180;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -193,8 +203,10 @@ public class CardManager implements Serializable{
 		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, ACCIDENT_FEE);
 	}
 
+	//Money borrowed card activision
+
 	public void moneyBorrowed(){
-		System.out.println("money borrowed 1500 to other player card activated");
+		//System.out.println("money borrowed 1500 to other player card activated");
 
 		final int AMOUNT_BORROWED = 400;
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -204,10 +216,12 @@ public class CardManager implements Serializable{
 		PlayerManager.getInstance().addMoneyToPlayer(nextPlayer, AMOUNT_BORROWED);
 	}
 
+	//You fell asleep card activision
 	public void fellAsleep(){
 		GameManager.getInstance().handleEndTurn();
 	}
 
+	//You catched on doing hw of your friend card activison
 	public void friendHw(){
 		System.out.println("friend hw -500 card activated");
 
@@ -216,6 +230,7 @@ public class CardManager implements Serializable{
 
 		PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, HW_FEE);
 	}
+	//Returns all cards
 	public ArrayList<Card> getCardDeck(){
 		return cardDeck;
 	}
@@ -227,6 +242,7 @@ public class CardManager implements Serializable{
 				", takenCardCount=" + takenCardCount +
 				'}';
 	}
+	//make manager for ready to initialize local data
 	public void readyForInitialize() {
 		this.takenCardCount = 0;
 		cardDeck = new ArrayList<Card>();

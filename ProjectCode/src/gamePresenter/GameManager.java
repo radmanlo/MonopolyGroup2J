@@ -40,6 +40,7 @@ public class GameManager implements Serializable {
 		return gameManager;
 	}
 
+	//Initializes new game with given potential players and doc field 
 	public void initializeNewGame(ArrayList<PotentialPlayer> pL, Document doc) {
 		LocalDataManager.getInstance().initialize(doc);
 
@@ -63,6 +64,7 @@ public class GameManager implements Serializable {
 		
 	}
 
+	//Calls save game 
 	public void saveGame(String name) {
 		LocalDataManager.getInstance().saveGame(name);
 	}
@@ -152,7 +154,7 @@ public class GameManager implements Serializable {
 
 
 	}
-
+	//Calls dice Total result for reuse in utility
 	public int totalDiceResultForUtility() {
 		return this.dice.getTotalResult();
 	}
@@ -180,6 +182,7 @@ public class GameManager implements Serializable {
 		movePlayer(currentPlayer, 1);
 	}
 	
+	//Disable buy button if they have same owner
 	public void disableBuyIfSameOwner() {
 		//BoardManager.getInstance()
 		BoardManager.getInstance().disableBuyButton();
@@ -255,6 +258,7 @@ public class GameManager implements Serializable {
 		return false;
 	}
 
+	//Declares someone bankrupt
 	public void declarePlayerBankrupt(Player player){
 		LocationManager.getInstance().freeAllLocationsOf(player);
 		PlayerManager.getInstance().playerBankrupt(player);
@@ -262,13 +266,16 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance().updateInteractionArea();
 	}
 
+	//Returns true if current player has deal
+
 	public boolean currentPlayerHasDeal() {
 		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(PlayerManager.getInstance().getCurrentPlayer());
 		if(playerDeals.size() == 0)
 			return false;
 		return true;
 	}
-	
+	//Returns list of deals of current player
+
 	public ArrayList<TradeDeal> currentPlayerDeals(){
 		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(PlayerManager.getInstance().getCurrentPlayer());
 		return playerDeals;
@@ -329,12 +336,14 @@ public class GameManager implements Serializable {
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
+	//Updates UI
 
 	public void updateUI(){
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
 	}
 
+	//Executing purchase of a buyable
 	public void executePurchase(){
 		// Variables
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -359,6 +368,7 @@ public class GameManager implements Serializable {
 
 		BoardManager.getInstance().updateMap();
 	}
+	//Sells property to bank
 	public void sellProperty(BuyableLocation loc) {
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		if(loc.getCurrentRentValue() == loc.getAllRentValues().get(0)) {
@@ -436,7 +446,8 @@ public class GameManager implements Serializable {
 
 
 	}
-
+	
+	//Paying rent method
 	public void payRent(){
 		// Variables
 		JDialog.setDefaultLookAndFeelDecorated(true);
@@ -467,6 +478,7 @@ public class GameManager implements Serializable {
 	    }
 	}
 
+	//Controlling whether player passed starttile or not
 	public boolean checkPassingStartReward(int oldLocationId, int newLocationId){
 		
 		// TODO probably location Manager is a better place to do this?
@@ -566,6 +578,9 @@ public class GameManager implements Serializable {
 		curPlayer.removeCard(card);
 	}
 
+	/*
+	 * Make ready game manager for upload data
+	 */
 	public void readyForInitialize() {
 		// TODO Auto-generated method stub
 		PlayerManager.getInstance().readyForInitialize();
@@ -576,12 +591,5 @@ public class GameManager implements Serializable {
 		CardManager.getInstance().readyForInitialize();
 	}
 
-//	public static boolean upgradeProperty(Property property) { // Let's have it in location's activate() method
-//		return false;
-//	}
-	
-//	public static LocationManager getInventoryManager() { // What does it do?
-//		return null;
-//	}
 }
 

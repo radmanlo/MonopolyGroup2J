@@ -42,29 +42,19 @@ public class LocalDataManager implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 6228221915237073759L;
-	private String localPath;
 	private static LocalDataManager localManager = null;
 
 	private LocalDataManager() {}
 
+	//Singleton Method for recalling
 	public static LocalDataManager getInstance(){
 		if (localManager == null)
 			localManager = new LocalDataManager();
 		return localManager;
 	}
 	
-	public ArrayList<Integer> getStoredGamesIds(){ 
-		return null;
-	}
-	
-	public boolean deleteSavedGames(int id) {
-		return false;
-	}
-	
-	public String getSavedGameNameById(int id) { 
-		return "";
-	}
-	
+	//Used for serializing game
+
 	public boolean saveGame(String name) {
         // Serialization 
 	    try {
@@ -107,6 +97,8 @@ public class LocalDataManager implements Serializable{
         
         return true;
 	}
+	//Returns saved names before as arraylist string
+	
 	public ArrayList<String> getSavedNames(){
 		ArrayList<String> savedNames = new ArrayList<String>();
 	    try {
@@ -125,7 +117,8 @@ public class LocalDataManager implements Serializable{
 //	    	System.out.println(savedNames.get(i));
 		return savedNames;
 	}
-	
+	//Loading All Managers
+
 	public void loadGame(String name) {
 		ArrayList<String> savedGames = getSavedNames();
 		System.out.println(name);
@@ -148,6 +141,9 @@ public class LocalDataManager implements Serializable{
         loadTrade(filename);
         MenuManager.getInstance().openMenu(6);
 	}
+	
+	//Loading Trade Manager
+
 	public void loadTrade(String string) {
 		// TODO Auto-generated method stub
 		String filename = string;
@@ -176,6 +172,8 @@ public class LocalDataManager implements Serializable{
             System.out.println("ClassNotFoundException" + 
                                 " is caught"); }
 	}
+	//Loading Player Manager
+
 	public void loadPlayer(String string) {
 		// TODO Auto-generated method stub
 		String filename = string;
@@ -204,6 +202,8 @@ public class LocalDataManager implements Serializable{
             System.out.println("ClassNotFoundException" + 
                                 " is caught"); }
 	}
+	//Loading Game Manager
+
 	public void loadGameMngr(String string) {
 		// TODO Auto-generated method stub
 		String filename = string;
@@ -232,6 +232,8 @@ public class LocalDataManager implements Serializable{
             System.out.println("ClassNotFoundException" + 
                                 " is caught"); }
 	}
+	//Loading Card Manager
+
 	public void loadCard(String string) {
 		// TODO Auto-generated method stub
 		String filename = string;
@@ -261,6 +263,9 @@ public class LocalDataManager implements Serializable{
             System.out.println("ClassNotFoundException" + 
                                 " is caught"); }
 	}
+	
+	//Loading Bank Manager
+
 	public void loadBank(String string) {
 		// TODO Auto-generated method stub
 		String filename = string;
@@ -289,6 +294,9 @@ public class LocalDataManager implements Serializable{
             System.out.println("ClassNotFoundException" + 
                                 " is caught"); }
 	}
+	
+	//Loading Location Manager
+
 	public void loadLocation(String string) {
 		// TODO Auto-generated method stub
 		String filename = string;
@@ -322,6 +330,8 @@ public class LocalDataManager implements Serializable{
                                 " is caught"); }
 	}
 
+	//Returns file of String path
+
 	public static String fileToString(String filePath) throws Exception{
 		      String input = null;
 		      Scanner sc = new Scanner(new File(filePath));
@@ -333,6 +343,8 @@ public class LocalDataManager implements Serializable{
 		      return sb.toString();
 		   }
 	
+	//Deleting Saved Game with given name
+
 	public void deleteSavedGame(String str) throws Exception {
 		  String filePath = "./resources/saves/savedGames.txt";
 	      String result = fileToString(filePath);
@@ -342,6 +354,9 @@ public class LocalDataManager implements Serializable{
 	      writer.append(result);
 	      writer.flush();
 	}
+	
+	//Saving Trade Manager
+
 	public boolean saveTrade(String way) {
 		String filename = way;
         try { 
@@ -369,6 +384,8 @@ public class LocalDataManager implements Serializable{
 		return false;
 	}
 	
+	//Saving Player Manager
+
 	public boolean savePlayer(String way) {
 		String filename = way;
         try { 
@@ -396,6 +413,9 @@ public class LocalDataManager implements Serializable{
   
 		return false;
 	}
+	
+	//Saving Game Manager
+
 	public boolean saveGameMngr(String way) {
 		String filename = way;
         try { 
@@ -422,6 +442,9 @@ public class LocalDataManager implements Serializable{
   
 		return false;
 	}
+	
+	//Saving Card Manager
+
 	public boolean saveCard(String way) {
 		String filename = way;
         try { 
@@ -448,6 +471,8 @@ public class LocalDataManager implements Serializable{
   
 		return false;
 	}
+	//Saving Board Manager
+
 	public boolean saveBoard(String way) {
 		String filename = way;
         try { 
@@ -475,6 +500,8 @@ public class LocalDataManager implements Serializable{
 		return false;
 	}
 	
+	//Saving Bank Manager
+
 	public boolean saveBank(String way) {
 		String filename = way;
         try { 
@@ -502,6 +529,7 @@ public class LocalDataManager implements Serializable{
 		return false;
 	}
 	
+	//Saving Location Manager
 	public boolean saveLocation(String way) {
 		String filename = way;
         try { 
@@ -528,7 +556,7 @@ public class LocalDataManager implements Serializable{
   
 		return false;
 	}
-
+	//Read XML file Returns 
 	private String readFileToString (String path) throws Exception {
 		String xmlString = "";
 		File file = null;
@@ -556,7 +584,7 @@ public class LocalDataManager implements Serializable{
 
 		return xmlString;
 	}
-
+	//Get Default values from XML File
 	public Document getDefaultValues(){
 		String xmlString = "";
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -579,6 +607,7 @@ public class LocalDataManager implements Serializable{
 		}
 	}
 	
+	//Get Local Data as Doc and initializes them
 	public void initialize(Document doc) {
 		// Parse the information from the default game document
 				NodeList cards = doc.getElementsByTagName("card");

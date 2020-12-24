@@ -22,18 +22,24 @@ public class BankAccount implements Serializable {
 	}
 	
 	//Methods
+	//Get cooldown count of withdrawing money
 	public int getCooldownCount() {
 		return cooldownCount;
 	}
+	//Set cooldown count of withdrawing money
+
 	public void setCooldownCount(int cooldownCount) {
 		this.cooldownCount = cooldownCount;
 	}
+	//Get ID of Account
 	public int getId() {
 		return id;
 	}
+	//Get all money in account
 	public int getMoneyAmount() {
 		return moneyAmount;
 	}
+	//Set money in account
 	public void setMoneyAmount(int moneyAmount) {
 		this.moneyAmount = moneyAmount;
 	}

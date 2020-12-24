@@ -130,45 +130,65 @@ public class SoundManager {
 		return musicPlayer;
 	}
 
-
+/*
+ * Plays Dice Sound
+ */
 	public void playDiceSound() {
 		this.diceClip = playMusic(this.DICE_SOUND_PATH);
 		this.setSfxVolume(this.sfxVolume);
 		this.diceClip.start();
 	}
 	
+	/*
+	 * Plays background music
+	 */
 	public void playBackgroundSound() {
 		backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 
+	/*
+	 * Plays effect of buying property
+	 */
 	public void playBuyingPropertySound() {
 		this.propertyClip = playMusic(this.BUYING_PROPERTY_SOUND_PATH);
 		this.setSfxVolume(this.sfxVolume);
 		this.propertyClip.start();
 	}
-
+/*
+ * Plays effect of landed on buyable with owner
+ */
 	public void playLandedOnBuyableWithOwnerSound() {
 		this.buyableWithOwnerClip = playMusic(this.BUYABLE_WITH_OWNER_PATH);
 		this.setSfxVolume(this.sfxVolume);
 		this.buyableWithOwnerClip.start();
 	}
-
+	/*
+	 * Plays effect of landed on buyable with owner
+	 */
 	public void playLandedOnGotoJailSound() {
 		this.gotoJailClip = playMusic(this.GOTO_JAIL_PATH);
 		this.setSfxVolume(this.sfxVolume);
 		this.gotoJailClip.start();
 	}
+	/*
+	 * Plays effect of landed on buyable with owner
+	 */
 	public void playOnPassingStartTile() {
 		this.startTileClip = playMusic(this.START_TILE_PATH);
 		this.setSfxVolume(this.sfxVolume);
 		this.startTileClip.start();
 	}
+	/*
+	 * Plays effect of landed on buyable with owner
+	 */
 	public void playLandedOnChanceCardSound() {
 		this.chanceCardClip = playMusic(this.CHANCE_CARD_PATH);
 		this.setSfxVolume(this.sfxVolume);
 		this.chanceCardClip.start();
 	}
-
+	/*
+	 * Plays effect of landed on buyable with owner
+	 */
 	public void playPayTaxSound() {
 		this.payTaxClip = playMusic(this.PAY_TAX_PATH);
 		this.setSfxVolume(this.sfxVolume);
