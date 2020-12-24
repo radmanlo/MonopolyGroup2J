@@ -67,21 +67,21 @@ public class PlayerInfoScreen extends JPanel{
 		Color PURPLE = new Color(102,0,153);
 		switch(playerColor) {
 		case BLACK:
-			return java.awt.Color.BLACK;
+			return new Color(36, 36, 36, 255);
 		case BLUE:
-			return java.awt.Color.BLUE;
+			return new Color(126, 181, 243, 255);
 		case GREEN:
-			return java.awt.Color.GREEN;
+			return new Color(79, 180, 136, 255);
 		case ORANGE:
-			return java.awt.Color.ORANGE;
+			return new Color(198, 104, 104, 255);
 		case PURPLE:
-			return PURPLE;
+			return new Color(202, 118, 223, 255);
 		case RED:
-			return java.awt.Color.RED;
+			return new Color(172, 0, 0, 255);
 		case WHITE:
-			return java.awt.Color.WHITE;
+			return new Color(245, 245, 245, 255);
 		case YELLOW:
-			return java.awt.Color.YELLOW;
+			return new Color(180, 173, 79, 255);
 		default:
 			return null;
 		}

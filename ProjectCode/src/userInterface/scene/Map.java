@@ -51,7 +51,7 @@ public class Map extends JPanel {
 
 	private void addDiceAnimation() {
 		diceAnimation = new DiceAnimationPanel();
-		diceAnimation.setBounds(280, 200, 500, 210);
+		diceAnimation.setBounds(200, 200, 600, 600);
 		add(diceAnimation);
 	}
 
@@ -468,8 +468,8 @@ class DiceAnimationPanel extends JPanel {
 	 * sets dies bounds and adds them to the panel
 	 */
 	private void addDies() {
-		dice1.setBounds(10, 0, 200, 200);
-		dice2.setBounds(240, 0, 200, 200);
+		dice1.setBounds(75, 200, 200, 200);
+		dice2.setBounds(330, 200, 200, 200);
 		add(this.dice1);
 		add(this.dice2);
 	}
