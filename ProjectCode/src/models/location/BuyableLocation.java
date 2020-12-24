@@ -184,7 +184,7 @@ public class BuyableLocation extends Location{
         switch (color){
             case GREEN:
             case LIGHT_BLUE:
-            case PINK:
+            case PURPLE:
             case ORANGE:
             case RED:
             case YELLOW: return 3;

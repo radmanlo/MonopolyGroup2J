@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -203,6 +204,22 @@ public class InteractionArea extends JPanel{
 		});
 		tempBtn.setBounds(496, 887, 368, 55);
 		add(tempBtn);
+		
+		JButton testBtn = new JButton("own all");
+		testBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for( Location loc: LocationManager.getInstance().getLocationList()) {
+					if( loc instanceof BuyableLocation) {
+						((BuyableLocation) loc).setOwner(PlayerManager.getInstance().getCurrentPlayer());
+					}
+				}
+				BoardManager.getInstance().updateMap();
+				BoardManager.getInstance().updateInteractionArea();
+
+			}
+		});
+		testBtn.setBounds(614, 836, 151, 23);
+		add(testBtn);
 	}
 	public RoundedButton getEndTurnButton() {
 		return this.endTurnBtn;
