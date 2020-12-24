@@ -81,12 +81,25 @@ public class GameManager implements Serializable {
 		*/
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		int moveDistance = 0;
-		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
+		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true || PlayerManager.getInstance().getCurrentPlayer().getInJailCount() > 0) {
 			PlayerManager.getInstance().getCurrentPlayer().setInJailCount(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() - 1);
 			if(PlayerManager.getInstance().getCurrentPlayer().getInJailCount() <= 0) {
 				PlayerManager.getInstance().getCurrentPlayer().setIsInJail(false);
+			}
+			this.dice.rollDices();
+			if(this.dice.isDoubleDice()) {
+				PlayerManager.getInstance().getCurrentPlayer().setIsInJail(false);
+				PlayerManager.getInstance().getCurrentPlayer().setInJailCount(0);
+				JFrame f =new JFrame();
+				JOptionPane.showMessageDialog(f,"You got double dice! " +dice.getFirstDiceResult() + ":"+ dice.getSecondDiceResult() + " and escaped from Jail !!! Reroll now! ");
+				BoardManager.getInstance().enableDice();
+				BoardManager.getInstance().setEndTurnButton(false);
 				return;
 			}
+			JFrame f =new JFrame();
+			JOptionPane.showMessageDialog(f,"You couln't get double dice! Wait for next turn :( Dice Results: " +dice.getFirstDiceResult() + ":"+ dice.getSecondDiceResult());
+			BoardManager.getInstance().disableDice();
+			BoardManager.getInstance().setEndTurnButton(true);
 			return;
 		}
 		// Let the player to roll the dice if its double

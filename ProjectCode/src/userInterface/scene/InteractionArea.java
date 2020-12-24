@@ -190,11 +190,12 @@ public class InteractionArea extends JPanel{
 		payToRerollBtn.setBounds(53, 390, 311, 59);
 		add(payToRerollBtn);
 		
-		RoundedButton tempBtn = new RoundedButton("Move everyone 1 Forward");  //should be removed after testing
+		RoundedButton tempBtn = new RoundedButton("*");  //should be removed after testing
 		tempBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				for( Player plyr: PlayerManager.getInstance().getPlayers())
-					LocationManager.getInstance().movePlayer(plyr, 1);
+			//	for( Player plyr: PlayerManager.getInstance().getPlayers())
+					//LocationManager.getInstance().movePlayer(plyr, 1);
+				GameManager.getInstance().rollDiceForTesting();
 				BoardManager.getInstance().updateMap();
 			}
 		});
