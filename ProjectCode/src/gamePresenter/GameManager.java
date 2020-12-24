@@ -394,18 +394,34 @@ public class GameManager implements Serializable {
 
 		// Process
 		this.dice.rollDices();
-		if (!this.dice.isDoubleDice()){
-			// Pay double rent
-			 JFrame f =new JFrame();  
-			 JOptionPane.showMessageDialog(f, "You couldn't get the double and escaped form payment ");  
-			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
-		}else {
-		 JFrame f =new JFrame();  
-		 JOptionPane.showMessageDialog(f, "Congrats!, You get the double and escaped form payment ");  
-		}
-		// Update UI
-		BoardManager.getInstance().updateMap();
-		BoardManager.getInstance().updateInteractionArea();
+		BoardManager.getInstance().animateDies(dice.getFirstDiceResult(), dice.getSecondDiceResult());
+		diceAnimationTimer = new Timer(400, new ActionListener() {
+			int count = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				count++;
+
+				if (count >= 5) {
+					diceAnimationTimer.stop();
+					if (!dice.isDoubleDice()){
+						// Pay double rent
+						JFrame f =new JFrame();
+						JOptionPane.showMessageDialog(f, "You couldn't get the double and escaped form payment ");
+						LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue()*2);
+					}else {
+						JFrame f =new JFrame();
+						JOptionPane.showMessageDialog(f, "Congrats!, You get the double and escaped form payment ");
+					}
+					// Update UI
+					BoardManager.getInstance().updateMap();
+					BoardManager.getInstance().updateInteractionArea();
+				}
+			}
+		});
+
+		diceAnimationTimer.start();
+
+
 	}
 
 	public void payRent(){
