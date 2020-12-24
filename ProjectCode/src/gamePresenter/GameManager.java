@@ -75,9 +75,10 @@ public class GameManager implements Serializable {
 	 * it moves the token and activates the new location
 	 */
 	public void rollDice() {
-		for(int i = 0; i < CardManager.getInstance().getCardDeck().size(); i++)
+	/*	for(int i = 0; i < CardManager.getInstance().getCardDeck().size(); i++)
 			System.out.println(CardManager.getInstance().getCardDeck().get(i).getDescription());
 		System.out.println("------------**********- Card sieze : "+ CardManager.getInstance().getCardDeck().size());
+		*/
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		int moveDistance = 0;
 		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true) {
@@ -96,7 +97,12 @@ public class GameManager implements Serializable {
 			SoundManager.getInstance().playDiceSound();
 			this.dice.rollDices();
 			total += this.dice.getTotalResult();
+			System.out.println(" DİCE RESULT : "+dice.getFirstDiceResult() + ":"+ dice.getSecondDiceResult());
 			BoardManager.getInstance().animateDies(this.dice.getFirstDiceResult(), this.dice.getSecondDiceResult());
+			if(this.dice.isDoubleDice()) {
+				JFrame f =new JFrame();
+				JOptionPane.showMessageDialog(f,"You got double dice! " +dice.getFirstDiceResult() + ":"+ dice.getSecondDiceResult() + " Automatically Rerolled ");
+			}
 		} while (dice.isDoubleDice());
 
 		diceAnimationTimer = new Timer(400, new ActionListener() {
@@ -114,7 +120,7 @@ public class GameManager implements Serializable {
 					BoardManager.getInstance().updateInteractionArea();
 					movePlayer(currentPlayer, total);
 					total = 0;
-					for(int i = 0; i< LocationManager.getInstance().getLocationList().size(); i++) {
+					/*for(int i = 0; i< LocationManager.getInstance().getLocationList().size(); i++) {
 						System.out.println( LocationManager.getInstance().getLocationList().size());
 						System.out.println(LocationManager.getInstance().getLocationList().get(i).toString());
 						System.out.println("");
@@ -123,7 +129,7 @@ public class GameManager implements Serializable {
 					}
 					for(int i = 0; i < PlayerManager.getInstance().getPlayers().size(); i++) {
 						System.out.println(PlayerManager.getInstance().getPlayers().get(i).getName() + " - cur loc : " + PlayerManager.getInstance().getPlayers().get(i).getLocation().getName());
-					}
+					}*/
 				}
 			}
 		});
@@ -327,8 +333,8 @@ public class GameManager implements Serializable {
 			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
 			PlayerManager.getInstance().getCurrentPlayer().addOwnedLocation((BuyableLocation)LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
-			System.out.println("Im in execute purchase");
-			System.out.println("Im have disabled buy b utton");
+		//	System.out.println("Im in execute purchase");
+		//	System.out.println("Im have disabled buy b utton");
 			this.disableBuyIfSameOwner();
 		}
 
