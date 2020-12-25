@@ -74,12 +74,14 @@ public class TradeScreen extends JPanel{
 			}	
 		}
 		JComboBox receiverComboBox = new JComboBox(temp.toArray());
+		receiverComboBox.setSelectedItem(null);
 		receiverComboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				targetPlayer = PlayerManager.getInstance().getPlayerByName((String)receiverComboBox.getSelectedItem());
 				receiverComboBox.setEnabled(false);
 				wantedMoneyField.setEnabled(true);
 				warningLbl.setText("");
+				addItemToWantedBtn.setVisible(true);
 				updateWantedPanel();
 			}
 		});
@@ -171,6 +173,7 @@ public class TradeScreen extends JPanel{
 		wantedPanel.add(constantLblWantedMoney);
 
 		addItemToWantedBtn = new JButton("Add");
+		addItemToWantedBtn.setVisible(false);
 		addItemToWantedBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				wantedNames.add((String) wantedComboBox.getSelectedItem());

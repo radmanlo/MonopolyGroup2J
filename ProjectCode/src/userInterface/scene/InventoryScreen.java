@@ -5,6 +5,7 @@ import javax.swing.ListSelectionModel;
 
 import models.Card;
 import models.Player;
+import models.location.BuyableLocation;
 import models.location.Location;
 import models.location.Property;
 
@@ -88,10 +89,10 @@ public class InventoryScreen extends JPanel{
 			locsList = new JList();
 		locsList.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				
+
 				if( player != PlayerManager.getInstance().getCurrentPlayer())
 					return;
-				
+
 				if(locsList.getSelectedValue() != null) {
 					Location loc = LocationManager.getInstance().getLocationByName( (String) locsList.getSelectedValue());
 
@@ -123,21 +124,36 @@ public class InventoryScreen extends JPanel{
 					degradeBtn.setEnabled(false);
 					upgradeBtn.setEnabled(false);
 				}
+
+				if(upgradeBtn.isEnabled())
+					upgradeBtn.setText("Upgrade by giving " + ((Property) LocationManager.getInstance().getLocationByName((String) locsList.getSelectedValue())).getUpgradeCost() + " TL");
+				else
+					upgradeBtn.setText("Upgrade by giving some TL");
+
+				if(degradeBtn.isEnabled())
+					degradeBtn.setText("Degrade to get " + ((Property) LocationManager.getInstance().getLocationByName((String) locsList.getSelectedValue())).getUpgradeCost() / 2 + " TL");
+				else 
+					degradeBtn.setText("Degrade to get some TL");
+
+				if(sellBtn.isEnabled())
+					sellBtn.setText("Sell to get " + (int)((BuyableLocation) LocationManager.getInstance().getLocationByName((String) locsList.getSelectedValue())).getPrice() * 0.8 + " TL");
+				else
+					sellBtn.setText("Sell to get some TL");
 			}
 		});
 
 		locsList.setBackground(new Color(60, 60, 60));
 		locsList.setForeground(Color.WHITE);
-		
+
 		locsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        JScrollPane listScroller = new JScrollPane();
-        listScroller.setViewportView(locsList);
-        listScroller.setBackground(new Color(60, 60, 60));
-        listScroller.setForeground(Color.WHITE);
-        locsList.setLayoutOrientation(JList.VERTICAL);
-        locsPanel.add(listScroller);
-		
-		
+		JScrollPane listScroller = new JScrollPane();
+		listScroller.setViewportView(locsList);
+		listScroller.setBackground(new Color(60, 60, 60));
+		listScroller.setForeground(Color.WHITE);
+		locsList.setLayoutOrientation(JList.VERTICAL);
+		locsPanel.add(listScroller);
+
+
 
 		JPanel cardsPanel = new JPanel();
 		cardsPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -204,7 +220,13 @@ public class InventoryScreen extends JPanel{
 		sellBtn = new JButton("Sell to get some TL");
 		sellBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameManager.getInstance().sellProperty((String) locsList.getSelectedValue());
+				if( LocationManager.getInstance().getLocationByName((String) locsList.getSelectedValue()) instanceof Property)
+					GameManager.getInstance().sellProperty((String) locsList.getSelectedValue());
+				else
+					GameManager.getInstance().sellUtilityOrStation((String) locsList.getSelectedValue());
+				
+				BoardManager.getInstance().updateInteractionArea();
+				BoardManager.getInstance().updateMap();
 				BoardManager.getInstance().closeInventoryScreen();
 			}
 		});
@@ -218,6 +240,18 @@ public class InventoryScreen extends JPanel{
 		degradeBtn.setEnabled(false);
 		upgradeBtn.setEnabled(false);
 		useCardBtn.setEnabled(false);
+
+		JButton closeBtn = new JButton("Close");
+		closeBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BoardManager.getInstance().closeInventoryScreen();
+			}
+		});
+		closeBtn.setBackground(new Color(60, 60, 60, 255));
+		closeBtn.setForeground(Color.WHITE);
+		closeBtn.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		closeBtn.setBounds(482, 22, 89, 27);
+		add(closeBtn);
 		revalidate();
 		repaint();
 		//setVisible(true);

@@ -13,7 +13,7 @@ public class Property extends BuyableLocation{
     private int upgradeCost;
 
     /**
-     * Construcotr with given parameters
+     * Constructor with given parameters
      * @param locationId
      * @param name
      * @param point

@@ -31,7 +31,7 @@ public class GameManager implements Serializable {
 	public GameManager(GameManager mngr) {
 		// TODO Auto-generated constructor stub
 		// TODO ADD MAYBE NEEDED
-	
+
 	}
 
 	// Operational Methods
@@ -63,7 +63,7 @@ public class GameManager implements Serializable {
 		CardManager.getInstance();
 		TradeManager.getInstance();
 		BoardManager.getInstance().updateInteractionArea();
-		
+
 	}
 
 	//Calls save game 
@@ -79,10 +79,10 @@ public class GameManager implements Serializable {
 	 * it moves the token and activates the new location
 	 */
 	public void rollDice() {
-	/*	for(int i = 0; i < CardManager.getInstance().getCardDeck().size(); i++)
+		/*	for(int i = 0; i < CardManager.getInstance().getCardDeck().size(); i++)
 			System.out.println(CardManager.getInstance().getCardDeck().get(i).getDescription());
 		System.out.println("------------**********- Card sieze : "+ CardManager.getInstance().getCardDeck().size());
-		*/
+		 */
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
 		int moveDistance = 0;
 		if(PlayerManager.getInstance().getCurrentPlayer().getIsInJail() == true || PlayerManager.getInstance().getCurrentPlayer().getInJailCount() > 0) {
@@ -160,8 +160,8 @@ public class GameManager implements Serializable {
 	public int totalDiceResultForUtility() {
 		return this.dice.getTotalResult();
 	}
-	
-	
+
+
 	//this is a method for testing only - we'll delete it before releasing -G
 	public void rollDiceForTesting() {
 		Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
@@ -178,12 +178,12 @@ public class GameManager implements Serializable {
 			this.dice.rollDices();
 			moveDistance += this.dice.getTotalResult();
 		}while(this.dice.isDoubleDice());
-        BoardManager.getInstance().updateMap();
-        BoardManager.getInstance().updateInteractionArea();
+		BoardManager.getInstance().updateMap();
+		BoardManager.getInstance().updateInteractionArea();
 
 		movePlayer(currentPlayer, 1);
 	}
-	
+
 	//Disable buy button if they have same owner
 	public void disableBuyIfSameOwner() {
 		//BoardManager.getInstance()
@@ -228,7 +228,7 @@ public class GameManager implements Serializable {
 				return;
 			} else {
 				this.declarePlayerBankrupt(prevPlayer);
-				
+
 			}
 		}
 
@@ -283,7 +283,7 @@ public class GameManager implements Serializable {
 		ArrayList<TradeDeal> playerDeals = TradeManager.getInstance().getTradeDeals(PlayerManager.getInstance().getCurrentPlayer());
 		return playerDeals;
 	}
-	
+
 	public void declareWinner(Player winner){
 		// TODO some UI stuff for winner
 	}
@@ -308,7 +308,7 @@ public class GameManager implements Serializable {
 	 * @param value
 	 */
 	public void tradeRequest(Property property, int value) {
-		
+
 	}
 
 	/**
@@ -358,8 +358,8 @@ public class GameManager implements Serializable {
 			LocationManager.getInstance().setLocationOwner(curLocation, curPlayer);
 			PlayerManager.getInstance().getCurrentPlayer().addOwnedLocation((BuyableLocation)LocationManager.getInstance().getPlayerLocation(PlayerManager.getInstance().getCurrentPlayer()));
 			PlayerManager.getInstance().deductMoneyFromPlayer(curPlayer, locationPrice);
-		//	System.out.println("Im in execute purchase");
-		//	System.out.println("Im have disabled buy b utton");
+			//	System.out.println("Im in execute purchase");
+			//	System.out.println("Im have disabled buy b utton");
 			this.disableBuyIfSameOwner();
 		}
 
@@ -391,16 +391,16 @@ public class GameManager implements Serializable {
 		JDialog.setDefaultLookAndFeelDecorated(true);
 		boolean payWithDice = false;
 		String promptMessage = "Do you want double dice instead of paying rent?\n";
-	    int response = JOptionPane.showConfirmDialog(null, promptMessage, "Reroll Dice",
-	        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-	    if (response == JOptionPane.NO_OPTION) {
-	    	payWithDice=false;
-	    } else if (response == JOptionPane.YES_OPTION) {
-	    	payWithDice = true;
-	    } else if (response == JOptionPane.CLOSED_OPTION) {
-	      System.out.println("JOptionPane closed");
-	    }
-	 // TODO get use input (false is temporary)
+		int response = JOptionPane.showConfirmDialog(null, promptMessage, "Reroll Dice",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		if (response == JOptionPane.NO_OPTION) {
+			payWithDice=false;
+		} else if (response == JOptionPane.YES_OPTION) {
+			payWithDice = true;
+		} else if (response == JOptionPane.CLOSED_OPTION) {
+			System.out.println("JOptionPane closed");
+		}
+		// TODO get use input (false is temporary)
 
 		if (payWithDice)
 			payRentWithDice();
@@ -449,45 +449,45 @@ public class GameManager implements Serializable {
 
 
 	}
-	
+
 	//Paying rent method
 	public void payRent(){
 		// Variables
 		JDialog.setDefaultLookAndFeelDecorated(true);
 		boolean payWithDice = false;
 		String promptMessage = "Do you want double dice instead of paying rent?\n";
-	    int response = JOptionPane.showConfirmDialog(null, promptMessage, "Reroll Dice",
-	        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-	    if (response == JOptionPane.NO_OPTION) {
-	    	payWithDice =false;
-	    } else if (response == JOptionPane.YES_OPTION) {
-	    	payWithDice = true;
-	    	payRentWithDice();
-	    } else if (response == JOptionPane.CLOSED_OPTION) {
-	      System.out.println("JOptionPane closed");
-	    }
-	    if(payWithDice == false) {
-		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
-		Player locationOwner = curLocation.getOwner();
+		int response = JOptionPane.showConfirmDialog(null, promptMessage, "Reroll Dice",
+				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		if (response == JOptionPane.NO_OPTION) {
+			payWithDice =false;
+		} else if (response == JOptionPane.YES_OPTION) {
+			payWithDice = true;
+			payRentWithDice();
+		} else if (response == JOptionPane.CLOSED_OPTION) {
+			System.out.println("JOptionPane closed");
+		}
+		if(payWithDice == false) {
+			Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+			BuyableLocation curLocation = (BuyableLocation) LocationManager.getInstance().getPlayerLocation(curPlayer);
+			Player locationOwner = curLocation.getOwner();
 
-		// Process
-		LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
-		 JFrame f =new JFrame();  
-		 JOptionPane.showMessageDialog(f, "Your came to "+locationOwner.getName() + "'s location. You have to pay: " + curLocation.getRentValue() + " TL");  
-		// Update UI
-		BoardManager.getInstance().updateMap();
-		BoardManager.getInstance().updateInteractionArea();
-	    }
+			// Process
+			LocationManager.getInstance().deductRentValue(locationOwner, curPlayer, curLocation.getRentValue());
+			JFrame f =new JFrame();  
+			JOptionPane.showMessageDialog(f, "Your came to "+locationOwner.getName() + "'s location. You have to pay: " + curLocation.getRentValue() + " TL");  
+			// Update UI
+			BoardManager.getInstance().updateMap();
+			BoardManager.getInstance().updateInteractionArea();
+		}
 	}
 
 	//Controlling whether player passed starttile or not
 	public boolean checkPassingStartReward(int oldLocationId, int newLocationId){
-		
+
 		// TODO probably location Manager is a better place to do this?
 		boolean giveReward = false;
 		int distance = Math.abs(oldLocationId - newLocationId); // Just in case the player turns around the bord and end
-															// up in a location > old location (probably not possible)
+		// up in a location > old location (probably not possible)
 
 		if (distance > 40 || newLocationId < oldLocationId){
 			giveReward = true;
@@ -522,31 +522,31 @@ public class GameManager implements Serializable {
 				curPlayer.setUsableMoney(curPlayer.getUsableMoney() - upgradeCost);
 			}
 		} else {
-			// TODO give warning you cant update
+			// give warning when you cant update
 			JFrame f =new JFrame();
 			JOptionPane.showMessageDialog(f,"Unfortunately, you don't have enough money for the upgrade. Money needed: " + upgradeCost);
 		}
 
 		this.updateUI();
 	}
-	
+
 	/*
 	 * gets the name of the property to be upgraded and degrades it 
 	 */
 	public void degradeProperty(String nameOfProperty) {
 		Property aProperty = (Property) LocationManager.getInstance().getLocationByName(nameOfProperty);
 		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		int upgradeCost = aProperty.getUpgradeCost();
+		int degradeCost = aProperty.getUpgradeCost() / 2;
 
 		if (aProperty.degrade()){
-			curPlayer.setUsableMoney(curPlayer.getUsableMoney() + upgradeCost);
+			curPlayer.setUsableMoney(curPlayer.getUsableMoney() + degradeCost);
 		}
 
 		this.updateUI();
 	}
-	
+
 	/*
-	 * gets the name of the property to be upgraded and sells it 
+	 * gets the name of the property and sells it 
 	 */
 	public void sellProperty(String nameOfProperty) {
 		Property aProperty = (Property) LocationManager.getInstance().getLocationByName(nameOfProperty);
@@ -558,11 +558,27 @@ public class GameManager implements Serializable {
 			if (aProperty.getVendingMachinesNo() == 0 && !aProperty.hasStarbucks()){
 				aProperty.resetToDefault();
 				curPlayer.setUsableMoney(curPlayer.getUsableMoney() + price);
-				 JFrame f =new JFrame();  
-				 JOptionPane.showMessageDialog(f, "You sold "+aProperty.getName() + " and earned " + price+" TL");  
+				JFrame f =new JFrame();  
+				JOptionPane.showMessageDialog(f, "You sold "+aProperty.getName() + " and earned " + price+" TL");  
 			}
 		}
 	}
+
+	public void sellUtilityOrStation(String nameOfLocation) {
+		BuyableLocation loc = (BuyableLocation) LocationManager.getInstance().getLocationByName(nameOfLocation);
+		Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
+		int price = loc.getPrice();
+		price = (int)(0.8 * price);
+
+		if (loc.getOwner() != null && loc.getOwner().getName() == curPlayer.getName()){ // If player owns the location
+			loc.resetToDefault();
+			curPlayer.setUsableMoney(curPlayer.getUsableMoney() + price);
+			JFrame f =new JFrame();  
+			JOptionPane.showMessageDialog(f, "You sold "+ loc.getName() + " and earned " + price+" TL");  
+		}
+	}
+
+
 	public void useCardByName(String cardName) {
 		ArrayList<Card> deck = CardManager.getInstance().getCardDeck();
 		for(int i = 0; i < deck.size(); i++) {
@@ -571,7 +587,7 @@ public class GameManager implements Serializable {
 			}
 		}
 	}
-	
+
 	/*
 	 * gets the name of the card and executes it
 	 */
@@ -580,10 +596,10 @@ public class GameManager implements Serializable {
 		CardManager.getInstance().executeCardAction(card);
 		curPlayer.removeCard(card);
 	}
-	
+
 	public void checkForWin() {
 		if(PlayerManager.getInstance().getPlayers().size() == 1) {
-			
+
 			JDialog.setDefaultLookAndFeelDecorated(true);
 
 			String promptMessage = PlayerManager.getInstance().getCurrentPlayer().getName() + " won!\n";
