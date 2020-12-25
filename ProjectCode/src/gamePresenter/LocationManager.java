@@ -435,8 +435,12 @@ public class LocationManager implements Serializable {
         SoundManager.getInstance().playPayTaxSound();
         int taxValue = ((IncomeTaxTile)incomeTaxLoc).getTaxValue();
         Player currentPlayer = PlayerManager.getInstance().getCurrentPlayer();
-		JFrame f =new JFrame();  
-		JOptionPane.showMessageDialog(f, "Oops! You have to pay taxes: " + taxValue + " TL");  
+		JFrame f =new JFrame();
+		if (taxValue == 100)
+		    JOptionPane.showMessageDialog(f, "Oops! You have to pay your traffic fine: " + taxValue + " TL");
+		else
+            JOptionPane.showMessageDialog(f, "Oops! You were caught smoking on campus, pay the smoking fine: " + taxValue + " TL");
+
         PlayerManager.getInstance().deductMoneyFromPlayer(currentPlayer, taxValue);
         GameManager.getInstance().updateUI();
     }
