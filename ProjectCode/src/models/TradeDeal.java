@@ -402,7 +402,7 @@ public class TradeDeal implements Serializable {
 		toBeReturned += "Offerer= " + getOfferer().getName() + "\n";
 		toBeReturned += "Offered Locations= ";
 
-		if( getOfferedBuyables().get(0) != null)
+		if( getOfferedBuyables().size() != 0)
 			toBeReturned += getOfferedBuyables().get(0).getName();
 
 		for( int i = 1; i < getOfferedBuyables().size(); ++i)
@@ -412,7 +412,7 @@ public class TradeDeal implements Serializable {
 		toBeReturned +=	"\nOfferedMoney= " + getOfferedMoney() + "\n";
 		toBeReturned +=	"Requested Locations= ";
 		
-		if( getRequestedBuyables().get(0) != null)
+		if( getRequestedBuyables().size() != 0)
 			toBeReturned += getRequestedBuyables().get(0).getName();
 
 		for( int i = 1; i < getRequestedBuyables().size(); ++i)

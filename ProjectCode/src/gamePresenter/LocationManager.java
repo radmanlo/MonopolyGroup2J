@@ -255,7 +255,7 @@ public class LocationManager implements Serializable {
     	Player curPlayer = PlayerManager.getInstance().getCurrentPlayer();
  
 		Location loc = curPlayer.getLocation();
-		System.out.println(loc.getClass().toString());
+		//System.out.println(loc.getClass().toString());
 
 		switch(loc.getClass().toString()) {
 		case "class models.location.Property":
@@ -552,12 +552,11 @@ public class LocationManager implements Serializable {
         location.setOwner(player);
     }
 
-    public void freeAllLocationsOf(Player player){
-        //ArrayList<BuyableLocation> playersLocs = this.getAllLocationsOf(player);
-
-       // for (BuyableLocation loc : playersLocs){
-          //  loc.resetToDefault();
-        //}
+    public void freeAllLocationsOf(Player player){   	
+    	for( BuyableLocation loc : buyableLocations) {
+    		if(loc.getOwner() != null && loc.getOwner().getName() == player.getName())
+    			loc.resetToDefault();
+    	}
     }
 
     @Override
@@ -645,10 +644,17 @@ public class LocationManager implements Serializable {
 	    return propertiesOfPlayer;
     }
 	/*
-	 * Makes maanager ready for initialization load data
+	 * Makes manager ready for initialization load data
 	 */
 	public void readyForInitialize() {
 		this.buyableLocations = new ArrayList<BuyableLocation>();
 		this.nonBuyableLocations = new ArrayList<Location>();
+	}
+	
+	/*
+	 * Removes the player from the map, deletes its token
+	 */
+	public void removePlayerFromMap(Player player) {
+		player.getLocation().removePlayerFromHere(player);
 	}
 }

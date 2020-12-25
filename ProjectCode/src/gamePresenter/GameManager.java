@@ -217,18 +217,32 @@ public class GameManager implements Serializable {
 	 * Handles the EndTurn button, change the turn and handles new turn
 	 * checks if a player is in jail and update their jail status
 	 */
-	public void handleEndTurn(){
+	public boolean handleEndTurn(){
 		Player prevPlayer = PlayerManager.getInstance().getCurrentPlayer();
 
 		// Handle player bankruptcy situation
 		if (this.isBankrupt(prevPlayer)){
 			// TODO Give warning and ask whether to end turn and go bankrupt or continue and sell some property
-			boolean warningAns = false; // true to continue and try to sell stuff (probably to bank)
+			
+			JDialog.setDefaultLookAndFeelDecorated(true);
+			
+			boolean warningAns = false;// true to continue and try to sell stuff (probably to bank)
+			
+			String promptMessage = "You are going to be bankrupt.\nDo you want to try to save yourself by trading/selling?\n";
+			int response = JOptionPane.showConfirmDialog(null, promptMessage, "Bankruptcy",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (response == JOptionPane.NO_OPTION) {
+				warningAns = false;
+			} else if (response == JOptionPane.YES_OPTION) {
+				warningAns = true;
+			} else if (response == JOptionPane.CLOSED_OPTION) {
+				warningAns = false;
+			}
+
 			if (warningAns){
-				return;
+				return false;
 			} else {
 				this.declarePlayerBankrupt(prevPlayer);
-
 			}
 		}
 
@@ -248,6 +262,7 @@ public class GameManager implements Serializable {
 		checkForWin();
 		BoardManager.getInstance().updateMap();
 		BoardManager.getInstance().updateInteractionArea();
+		return true;
 	}
 
 	/**
@@ -264,9 +279,8 @@ public class GameManager implements Serializable {
 	//Declares someone bankrupt
 	public void declarePlayerBankrupt(Player player){
 		LocationManager.getInstance().freeAllLocationsOf(player);
+		LocationManager.getInstance().removePlayerFromMap(player);
 		PlayerManager.getInstance().playerBankrupt(player);
-		BoardManager.getInstance().updateMap();
-		BoardManager.getInstance().updateInteractionArea();
 	}
 
 	//Returns true if current player has deal
@@ -599,16 +613,11 @@ public class GameManager implements Serializable {
 
 	public void checkForWin() {
 		if(PlayerManager.getInstance().getPlayers().size() == 1) {
-
 			JDialog.setDefaultLookAndFeelDecorated(true);
-
-			String promptMessage = PlayerManager.getInstance().getCurrentPlayer().getName() + " won!\n";
-			int response = JOptionPane.showConfirmDialog(null, promptMessage, "Win", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
-			if (response == JOptionPane.YES_OPTION) {
-				MenuManager.getInstance().openMenu(5);
-			} else if (response == JOptionPane.CLOSED_OPTION) {
-				System.out.println("JOptionPane closed");
-			}
+			
+			JFrame f =new JFrame();  
+			JOptionPane.showMessageDialog(f, PlayerManager.getInstance().getCurrentPlayer().getName() + " won!\n"); 
+			MenuManager.getInstance().openMenu(5);
 		}
 	}
 
